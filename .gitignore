@@ -1,0 +1,7 @@
+# Ignore personal files such as todo lists, notes, etc.
+personal/
+
+# Ignore .env files
+.env
+.env.*
+!.env.example
