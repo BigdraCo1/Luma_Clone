@@ -1,6 +1,11 @@
 # Ignore personal files such as todo lists, notes, etc.
 personal/
 
+# Ignore binary and build related files
+bin/
+obj/Debug
+alma.sln
+
 # Ignore .env files
 .env
 .env.*
