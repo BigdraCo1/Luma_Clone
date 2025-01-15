@@ -6,4 +6,4 @@ mongosh ${MONGODB_DBNAME:-alma} \
   -u ${MONGO_INITDB_ROOT_USERNAME:-root} \
   -p ${MONGO_INITDB_ROOT_PASSWORD:-password} \
   --authenticationDatabase admin \
-  --eval "db.createUser({user: '${MONGODB_USERNAME:-alma}', pwd: '${MONGODB_PASSWORD:-password}', roles:[{role:'dbOwner', db: '${MONGODB_DBNAME:-alma}'}]});"
+  --eval "db.createUser({user: '${MONGODB_USERNAME:-alma}', pwd: '${MONGODB_PASSWORD:-password}', roles: [{role: 'dbOwner', db: '${MONGODB_DBNAME:-alma}'}]});"

@@ -10,14 +10,14 @@ services:
             mongodb:
                 condition: service_healthy
         environment:
-            - ASPNETCORE_ENVIRONMENT=Production
+            - ASPNETCORE_URLS=${ASPNETCORE_URLS:-http://*:5123}
             - MONGODB_HOST=mongodb
             - MONGODB_PORT=${MONGODB_PORT:-27017}
             - MONGODB_DBNAME=${MONGODB_DBNAME:-alma}
             - MONGODB_USERNAME=${MONGODB_USERNAME:-alma}
             - MONGODB_PASSWORD=${MONGODB_PASSWORD:-password}
         healthcheck:
-            test: "curl -I http://localhost:5123 || exit 1"
+            test: "wget --no-verbose --tries=1 --spider http://localhost:5123 || exit 1"
             start_period: 10s
             start_interval: 1s
         restart: unless-stopped
@@ -32,13 +32,13 @@ services:
             - ${MONGODB_PORT:-27017}
         environment:
             - MONGODB_PORT=${MONGODB_PORT:-27017}
-            - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME:-root}
-            - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD:-password}
+            - MONGO_INITDB_ROOT_USERNAME=${MONGODB_ROOT_USERNAME:-root}
+            - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD:-password}
             - MONGODB_DBNAME=${MONGODB_DBNAME:-alma}
             - MONGODB_USERNAME=${MONGODB_USERNAME:-alma}
             - MONGODB_PASSWORD=${MONGODB_PASSWORD:-password}
         healthcheck:
-            test: 'echo ''db.runCommand("ping").ok'' | mongosh mongodb://${MONGODB_USERNAME:-alma}:$MONGODB_PASSWORD:-password}@localhost:${MONGODB_PORT:-27017}/?authSource=${MONGODB_DBNAME:-alma} --quiet'
+            test: 'echo ''db.runCommand("ping").ok'' | mongosh mongodb://${MONGODB_USERNAME:-alma}:${MONGODB_PASSWORD:-password}@localhost:${MONGODB_PORT:-27017}/?authSource=${MONGODB_DBNAME:-alma} --quiet'
             start_period: 10s
             start_interval: 1s
         restart: unless-stopped

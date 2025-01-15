@@ -10,8 +10,9 @@ services:
         ports:
             - ${MONGODB_PORT:-27017}:${MONGODB_PORT:-27017}
         environment:
-            - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME:-root}
-            - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD:-password}
+            - MONGODB_PORT=${MONGODB_PORT:-27017}
+            - MONGO_INITDB_ROOT_USERNAME=${MONGODB_ROOT_USERNAME:-root}
+            - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD:-password}
             - MONGODB_DBNAME=${MONGODB_DBNAME:-alma}
             - MONGODB_USERNAME=${MONGODB_USERNAME:-alma}
             - MONGODB_PASSWORD=${MONGODB_PASSWORD:-password}
