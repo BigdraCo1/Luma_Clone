@@ -6,6 +6,9 @@ bin/
 obj/
 alma.sln
 
+# Ignore database files
+mongodb-data/*
+
 # Ignore .env files
 .env
 .env.*
