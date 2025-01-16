@@ -1,0 +1,15 @@
+# Ignore personal files such as todo lists, notes, etc.
+personal/
+
+# Ignore binary and build related files
+bin/
+obj/
+alma.sln
+
+# Ignore database files
+mongodb-data/*
+
+# Ignore .env files
+.env
+.env.*
+!.env.example

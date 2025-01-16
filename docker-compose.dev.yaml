@@ -1,0 +1,23 @@
+name: alma-dev
+
+services:
+    mongodb:
+        image: mongo:8-noble
+        container_name: alma-dev-mongodb
+        volumes:
+            - ./mongodb-entrypoint.sh:/docker-entrypoint-initdb.d/db-entrypoint.sh
+            - ./mongodb-data:/data/db
+        ports:
+            - ${MONGODB_PORT:-27017}:${MONGODB_PORT:-27017}
+        environment:
+            - MONGODB_PORT=${MONGODB_PORT:-27017}
+            - MONGO_INITDB_ROOT_USERNAME=${MONGODB_ROOT_USERNAME:-root}
+            - MONGO_INITDB_ROOT_PASSWORD=${MONGODB_ROOT_PASSWORD:-password}
+            - MONGODB_DBNAME=${MONGODB_DBNAME:-alma}
+            - MONGODB_USERNAME=${MONGODB_USERNAME:-alma}
+            - MONGODB_PASSWORD=${MONGODB_PASSWORD:-password}
+        healthcheck:
+            test: 'echo ''db.runCommand("ping").ok'' | mongosh mongodb://${MONGODB_USERNAME:-alma}:${MONGODB_PASSWORD:-password}@localhost:${MONGODB_PORT:-27017}/?authSource=${MONGODB_DBNAME:-alma} --quiet'
+            start_period: 10s
+            start_interval: 1s
+        restart: unless-stopped
