@@ -16,3 +16,13 @@ To run a development server, follow the steps outlined below
     3. run `dotnet restore` to install dotnet dependencies
     4. run `docker compose -f docker-compose.dev.yaml up -d --build` to start the developmen dependencies (this will not start the main application)
     5. run `dotnet run` or `dotnet watch` to start development server
+
+## Folders Structure
+    - Controllers: controllers: http request handler for pages
+    - Entities: database entities and their repositories (mobels)
+    - Interfaces: interfaces
+    - Pages: pages (views)
+    - Properties: launch config
+    - Resources: localization resources
+    - Services: services for controllers
+    - wwwroot: static files
