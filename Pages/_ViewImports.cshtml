@@ -1,3 +1,9 @@
 ﻿@using alma
 @namespace alma.Pages
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer Localizer
