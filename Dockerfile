@@ -15,4 +15,4 @@ WORKDIR /App
 COPY --from=build /App/out .
 
 ENV ASPNETCORE_ENVIRONMENT=Production
-ENTRYPOINT ["dotnet", "alma.dll"]
+CMD ["dotnet", "alma.dll"]
