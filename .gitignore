@@ -13,3 +13,7 @@ mongodb-data/*
 .env
 .env.*
 !.env.example
+
+# Ignore configuration files
+appsettings.json
+appsettings.Development.json
