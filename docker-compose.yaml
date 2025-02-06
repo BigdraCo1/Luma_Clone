@@ -10,7 +10,7 @@ services:
         ports:
             - 5123:5123
         environment:
-            - ASPNETCORE_URLS=${ASPNETCORE_URLS:-http://*:5123}
+            - ASPNETCORE_URLS=http://*:5123
         healthcheck:
             test: "wget --no-verbose --tries=1 --spider http://localhost:5123 || exit 1"
             start_period: 10s
