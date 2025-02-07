@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setting_event_page_desktop</title>
+    <link rel="stylesheet" href="Setting_event_page.css">
+
+    <!-- Production version -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <div class="image">
+                <img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Event banner" class="event-image">
+            </div>
+            <div class="event-info">
+                <h1 class="event-title">Bangkok Entrepreneur / Wantrepreneurs and Angel Investors Meetup</h1>
+                <div class="event-details">
+                    <span><i data-lucide="clock-3"></i> 14 มกราคม 18:00 - 19:00</span>
+                    <span><i data-lucide="globe"></i> สาธารณะ</span>
+                </div>
+                <div class="button-group">
+                    <a href="#" class="status" >กำลังเผยแพร่</a>
+                    <a href="#" class="page">ดูหน้ากิจกรรม</a>
+                </div>
+            </div>
+            <div class="share-box">
+                <button class="share-btn" >
+                    <p class="share-text">เเชร์กิจกรรม</p><i data-lucide="share-2"></i>
+                </button>
+            </div>
+        </div>
+        <div class="overview">
+            <div class="head">
+                <p>ภาพรวม</p>
+            </div>
+            <div class="detail">
+                <div class="container">
+                    <div class="information">
+                        <h2>ข้อมูลพื้นฐาน</h2>
+                        <div class="input-group">
+                            <label>ชื่อกิจกรรม</label>
+                            <input type="text" id="event-name" placeholder="ใส่ชื่อกิจกรรม">
+                        </div>
+                        <div class="input-group">
+                            <label>หมวดหมู่กิจกรรม</label>
+                            <div class="select-wrapper">
+                                <select >
+                                    <option>ศิลปะและวัฒนธรรม</option>
+                                    <option>ศิลปะและวัฒนธรรม</option>
+                                    <option>ศิลปะและวัฒนธรรม</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="time-section">
+                            <label>เวลากิจกรรม</label>
+                            <div class="time-group">
+                                <i data-lucide="circle-dot"></i>
+                                <span class="time-label">เริ่มต้น</span>
+                                <div class="input-wrapper">
+                                    <input type="date" class="date-input">
+                                    <i data-lucide="calendar" class="date-icon"></i> <!-- ไอคอนปฏิทิน -->
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="time" class="time-input">
+                                    <i data-lucide="clock-3" class="time-icon"></i> <!-- ไอคอนนาฬิกา -->
+                                </div>
+                            </div>
+                            <div class="time-group">
+                                <i data-lucide="circle-dot"></i>
+                                <span class="time-label">สิ้นสุด</span>
+                                <div class="input-wrapper">
+                                    <input type="date" class="date-input">
+                                    <i data-lucide="calendar" class="date-icon"></i> <!-- ไอคอนปฏิทิน -->
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="time" class="time-input">
+                                    <i data-lucide="clock-3" class="time-icon"></i> <!-- ไอคอนนาฬิกา -->
+                                </div>
+                            </div>                            
+                        </div>
+                    </div>
+                    <div class="image">
+                        <h2>รูปภาพ</h2>
+                        <div class="image-container">
+                            <div class="image-box">
+                                <img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Event banner" class="event-image">
+                            </div>
+                            <div class="upload-box">
+                                <p>อัปโหลดรูปภาพเพื่อเปลี่ยนรูป</p>
+                                <div class="upload">
+                                    <input class="input-file" type="file" name="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="eventdetail">
+                        <h2>รายละเอียดกิจกรรม</h2>
+                        <div class="input-group">
+                            <label>คำอธิบาย</label>
+                            <textarea class="textarea-detail" id="" ></textarea>
+                        </div>
+                    </div>
+                    <div class="location">
+                        <h2>รายละเอียดกิจกรรม</h2>
+                        <div class="input-group">
+                            <label>เมืองที่จัดงาน</label>
+                            <div class="select-wrapper">
+                                <select >
+                                    <option>กรุงเทพ</option>
+                                    <option>อุดรธานี</option>
+                                    <option>ชลบุรี</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>ลิ้งค์ Google Map</label>
+                            <input type="text" id="url_google_map" placeholder="ใส่ฝังแผนที่ Google map HTML code">
+                        </div>
+                        <div class="input-group">
+                            <label>ลายละเอียดสถานที่</label>
+                            <textarea class="textarea-location" id="" ></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="applicantion">
+            <div class="head">
+                <p>ผู้เข้าร่วมเเละการลงทะเบียน</p>
+            </div>
+            <div class="detail">
+                <div class="container">
+                    <!-- ภาพรวม เเละตั้งค่า-->
+                    <div class="setting">
+                        <h2>ภาพรวมผู้เข้าร่วม</h2>
+                        <div class="amount-people">
+                            <div class="progress-container">
+                                <div class="progress-info">
+                                  <span class="registered">20 ลงทะเบียนแล้ว</span>
+                                  <span class="limit">จำกัด 70</span>
+                                </div>
+                                <div class="progress-bar">
+                                  <div class="progress" style="width: 28.57%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="number-input-group">
+                            <label>จำนวนผู้เข้าร่วมงานสูงสุด</label>
+                            <div class="number-input">
+                                <input type="number" name="" id="">
+                                <i data-lucide="users"></i>
+                            </div>
+                        </div>
+                        <div class="switch-group">
+                            <label>เปิด-ปิด การลงทะเบียน</label>
+                            <div class="switch-container">
+                                <input type="radio" id="open" name="appicate" value="open" checked>
+                                <input type="radio" id="appicate" name="appicate" value="appicate">
+                                <div class="switch">
+                                    <label for="open" class="switch-option">เปิดลงทะเบียน</label>
+                                    <label for="appicate" class="switch-option">ปิดลงทะเบียน</label>
+                                    <span class="slider"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="switch-group">
+                            <label>รูปเเบบการลงทะเบียน</label>
+                            <div class="switch-container">
+                                <input type="radio" id="register" name="approval" value="register" checked>
+                                <input type="radio" id="approve" name="approval" value="approve">
+                                <div class="switch">
+                                    <label for="register" class="switch-option">ลงทะเบียนได้เลย</label>
+                                    <label for="approve" class="switch-option">ต้องได้รับการอนุมัติ</label>
+                                    <span class="slider"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <!-- คำถาม-->
+                    <div class="question">
+                        <h2>คำถามการลงทะเบียน</h2>
+                        <p>เราจะถามคำถามต่อไปนี้กับแขกเมื่อพวกเขาลงทะเบียนสำหรับงาน</p>
+                        <div class="question-box">
+                            <div class="question-item">
+                                <div class="question-container">
+                                    <label>คำถามที่ 1</label>
+                                    <input type="text" id="" placeholder="" value="Email (จำเป็น)" disabled>
+                                </div>
+                            </div>
+                            <div class="question-item">
+                                <div class="question-container">
+                                    <label>คำถามที่ 2</label>
+                                    <input type="text" id="" placeholder="" value="ชื่อ (จำเป็น)" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="add-btn">
+                            <button name="" id=""><i data-lucide="plus"></i> เพิ่ม</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <!-- รายชื่อผู้เข้าร่วม -->
+                    <div class="applicants">
+                        <h2>รายชื่อผู้เข้าร่วม</h2>
+                        <div class="applicants-table">
+                            <div class="head-table">
+                                <button class="btn-head active">
+                                    ทั้งหมด
+                                    <span class="count">0</span>
+                                </button>
+                                <button class="btn-head">
+                                    รอการอนุมัติ
+                                    <span class="count">0</span>
+                                </button>
+                                <button class="btn-head">
+                                    อนุมัติแล้ว
+                                    <span class="count">0</span>
+                                </button>
+                            </div>
+                            <ul class="applicants-list">
+                                <li class="applicant-item">
+                                    <a href="#"><img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Profile" class="profile-pic"></a>
+                                    <div class="applicant-info">
+                                        <span class="name">Bryan Flowers</span>
+                                        <span class="status wait">รอการอนุมัติ</span>
+                                    </div>
+                                    <div class="actions">
+                                        <button class="action-btn-accept">
+                                            <i data-lucide="circle-check"></i>
+                                        </button>
+                                        <button class="action-btn-reject">
+                                            <i data-lucide="circle-x"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                                <li class="applicant-item">
+                                    <a href="#"><img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Profile" class="profile-pic"></a>
+                                    <div class="applicant-info">
+                                        <span class="name">Bryan Flowers</span>
+                                        <span class="status wait">รอการอนุมัติ</span>
+                                    </div>
+                                    <div class="actions">
+                                        <button class="action-btn-accept">
+                                            <i data-lucide="circle-check"></i>
+                                        </button>
+                                        <button class="action-btn-reject">
+                                            <i data-lucide="circle-x"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                                <li class="applicant-item">
+                                    <a href="#"><img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Profile" class="profile-pic"></a>
+                                    <div class="applicant-info">
+                                        <span class="name">Bryan Flowers</span>
+                                        <span class="status wait">รอการอนุมัติ</span>
+                                    </div>
+                                    <div class="actions">
+                                        <button class="action-btn-accept">
+                                            <i data-lucide="circle-check"></i>
+                                        </button>
+                                        <button class="action-btn-reject">
+                                            <i data-lucide="circle-x"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                                <li class="applicant-item">
+                                    <a href="#"><img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Profile" class="profile-pic"></a>
+                                    <div class="applicant-info">
+                                        <span class="name">Bryan Flowers</span>
+                                        <span class="status wait">รอการอนุมัติ</span>
+                                    </div>
+                                    <div class="actions">
+                                        <button class="action-btn-accept">
+                                            <i data-lucide="circle-check"></i>
+                                        </button>
+                                        <button class="action-btn-reject">
+                                            <i data-lucide="circle-x"></i>
+                                        </button>
+                                    </div>
+                                </li>
+                                <li class="applicant-item">
+                                    <a href="#"><img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Profile" class="profile-pic"></a>
+                                    <div class="applicant-info">
+                                        <span class="name">Bryan Flowers</span>
+                                        <span class="status approved">อนุมัติแล้ว</span>
+                                    </div>
+                                </li>
+                                <li class="applicant-item">
+                                    <a href="#"><img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Profile" class="profile-pic"></a>
+                                    <div class="applicant-info">
+                                        <span class="name">Bryan Flowers</span>
+                                        <span class="status approved">อนุมัติแล้ว</span>
+                                    </div>
+                                </li>
+                                <li class="applicant-item">
+                                    <a href="#"><img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Profile" class="profile-pic"></a>
+                                    <div class="applicant-info">
+                                        <span class="name">Bryan Flowers</span>
+                                        <span class="status approved">อนุมัติแล้ว</span>
+                                    </div>
+                                </li>
+                                <li class="applicant-item">
+                                    <a href="#"><img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Profile" class="profile-pic"></a>
+                                    <div class="applicant-info">
+                                        <span class="name">Bryan Flowers</span>
+                                        <span class="status approved">อนุมัติแล้ว</span>
+                                    </div>
+                                </li>
+                                <li class="applicant-item">
+                                    <a href="#"><img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Profile" class="profile-pic"></a>
+                                    <div class="applicant-info">
+                                        <span class="name">Bryan Flowers</span>
+                                        <span class="status approved">อนุมัติแล้ว</span>
+                                    </div>
+                                </li>
+                                <li class="applicant-item">
+                                    <a href="#"><img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Profile" class="profile-pic"></a>
+                                    <div class="applicant-info">
+                                        <span class="name">Bryan Flowers</span>
+                                        <span class="status approved">อนุมัติแล้ว</span>
+                                    </div>
+                                </li>
+                                <li class="applicant-item">
+                                    <a href="#"><img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Profile" class="profile-pic"></a>
+                                    <div class="applicant-info">
+                                        <span class="name">Bryan Flowers</span>
+                                        <span class="status approved">อนุมัติแล้ว</span>
+                                    </div>
+                                </li>
+                                <li class="applicant-item">
+                                    <a href="#"><img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Profile" class="profile-pic"></a>
+                                    <div class="applicant-info">
+                                        <span class="name">Bryan Flowers</span>
+                                        <span class="status approved">อนุมัติแล้ว</span>
+                                    </div>
+                                </li>
+                                <li class="applicant-item">
+                                    <a href="#"><img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Profile" class="profile-pic"></a>
+                                    <div class="applicant-info">
+                                        <span class="name">Bryan Flowers</span>
+                                        <span class="status approved">อนุมัติแล้ว</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <a href="#">เปิดตารางรายชื่อทั้งหมด</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="contacts">
+            <div class="head">
+                <p>ส่งข้อความเเละการติดต่อ</p>
+            </div>
+            <div class="detail">
+                <div class="container">
+                    <div class="messages">
+                        <h2>ส่งข้อความ</h2>
+                        <p>ส่งข้อความไปยังอีเมลผู้เข้าร่วม</p>
+                        <div class="messages-box">
+                            <div class="send-option">
+                                <div class="item">
+                                    <input type="radio" value="all" name="send-mail-option" checked>
+                                    <button class="option-btn">ทั้งหมด</button>
+                                </div>
+                                <div class="item">
+                                    <input type="radio" value="wait" name="send-mail-option" >
+                                    <button class="option-btn">รอการอนุมัติ</button>
+                                </div>
+                                <div class="item">
+                                    <input type="radio" value="appove" name="send-mail-option" > 
+                                    <button class="option-btn">อนุมัติแล้ว</button>
+                                </div>
+                            </div>
+                            <input type="text" id="header-messages" placeholder="หัวข้อ">
+                            <textarea type="text" id="messages" placeholder="ข้อความ"></textarea>
+                            <button class="btn-submit" type="submit">ส่งข้อความ</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="contact">
+                        <h2>ข้อมูลติดต่อ</h2>
+                        <div class="contact-list">
+                            <div class="contact-item">
+                                <i data-lucide="phone"></i>
+                                <input type="text" id="" placeholder="Phone">
+                            </div>
+                            <div class="contact-item">
+                                <i data-lucide="facebook"></i>
+                                <input type="text" id="" placeholder="Facebook url">
+                            </div>
+                            <div class="contact-item">
+                                <i data-lucide="instagram"></i>
+                                <input type="text" id="" placeholder="Instagram url">
+                            </div>
+                            <div class="contact-item">
+                                <i data-lucide="chrome"></i>
+                                <input type="text" id="" placeholder="Website url">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="access">
+            <div class="head">
+                <p>การมองเห็นและการค้นพบ</p>
+            </div>
+            <div class="detail">
+                <h2>การมองเห็น</h2>
+                <p>ควบคุมวิธีที่ผู้คนสามารถค้นหางานอีเวนต์ของคุณ</p>
+                <div class="access-choose">
+                    <label class="access-item public">
+                        <input type="radio" name="access-level" value="public" checked/>
+                        <div class="content">
+                            <div class="icon"><i data-lucide="globe"></i></div>
+                            <div class="text">
+                                <h3>สาธารณะ</h3>
+                                <p>สามารถค้นหาชื่อหรือสถานที่ได้ แสดงอีเวนต์ได้โดยไม่มีข้อจำกัด</p>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="access-item private">
+                        <input type="radio" name="access-level" value="private" />
+                        <div class="content">
+                            <div class="icon"><i data-lucide="globe-lock"></i></div>
+                            <div class="text">
+                                <h3>ส่วนตัว</h3>
+                                <p>ไม่แสดงในรายการเฉพาะผู้ที่มีลิงก์เท่านั้นที่สามารถลงทะเบียนได้</p>
+                            </div>
+                        </div>
+                    </label>
+                    <label class="access-item restricted">
+                        <input type="radio" name="access-level" value="restricted" />
+                        <div class="content">
+                            <div class="icon"><i data-lucide="octagon-x"></i></div>
+                            <div class="text">
+                                <h3>ระงับ</h3>
+                                <p>ไม่สามารถค้นหาและลงทะเบียนได้ ทุกกรณี ปิดการมองเห็นทุกอย่าง</p>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="save">
+            <button class="save-btn">บันทึกการเเก้ไข</button>
+        </div>
+    </div>
+
+
+    <script>
+        lucide.createIcons();
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll(".btn-head");
+            const applicants = document.querySelectorAll(".applicant-item");
+        
+            function updateCounts() {
+                let totalCount = applicants.length;
+                let waitCount = 0;
+                let approvedCount = 0;
+        
+                applicants.forEach(applicant => {
+                    const status = applicant.querySelector(".status").innerText.trim();
+                    if (status === "รอการอนุมัติ") {
+                        waitCount++;
+                    } else if (status === "อนุมัติแล้ว") {
+                        approvedCount++;
+                    }
+                });
+        
+                // อัปเดตจำนวนใน <span class="count">
+                buttons[0].querySelector(".count").innerText = totalCount; // ทั้งหมด
+                buttons[1].querySelector(".count").innerText = waitCount;  // รอการอนุมัติ
+                buttons[2].querySelector(".count").innerText = approvedCount; // อนุมัติแล้ว
+            }
+        
+            function filterApplicants(filter) {
+                filter = filter.split(" ")[0]; // ตัดเลขท้ายออกจาก filter
+            
+                applicants.forEach(applicant => {
+                    const status = applicant.querySelector(".status").innerText.trim();
+            
+                    if (filter === "ทั้งหมด" || 
+                        (filter === "รอการอนุมัติ" && status === "รอการอนุมัติ") ||
+                        (filter === "อนุมัติแล้ว" && status === "อนุมัติแล้ว")) {
+                        applicant.style.display = "flex";
+                    } else {
+                        applicant.style.display = "none";
+                    }
+                });
+            }
+            
+        
+            buttons.forEach(button => {
+                button.addEventListener("click", function () {
+                    buttons.forEach(btn => btn.classList.remove("active"));
+                    this.classList.add("active");
+        
+                    const filter = this.innerText.split("\n")[0].trim(); 
+                    filterApplicants(filter);
+                });
+            });
+        
+            updateCounts(); 
+        });
+        
+        document.addEventListener("DOMContentLoaded", function () {
+            const addButton = document.querySelector(".add-btn button");
+            const questionBox = document.querySelector(".question-box");
+        
+            addButton.addEventListener("click", function () {
+                const questionCount = document.querySelectorAll(".question-item").length + 1;
+                
+                const questionItem = document.createElement("div");
+                questionItem.classList.add("question-item");
+                questionItem.innerHTML = `
+                    <div class="question-container">
+                        <label>คำถามที่ ${questionCount}</label>
+                        <input type="text" placeholder="กรอกคำถาม">
+                    </div>
+                    <div class="question-icon">
+                        <button class="delete-btn"><i class='bx bxs-trash'></i></button>
+                    </div>
+                `;
+        
+                questionBox.appendChild(questionItem);
+                updateDeleteButtons();
+            });
+        
+            function updateDeleteButtons() {
+                document.querySelectorAll(".delete-btn").forEach(button => {
+                    button.removeEventListener("click", deleteQuestion);
+                    button.addEventListener("click", deleteQuestion);
+                });
+            }
+        
+            function deleteQuestion(event) {
+                event.target.closest(".question-item").remove();
+                updateLabels();
+            }
+        
+            function updateLabels() {
+                document.querySelectorAll(".question-item").forEach((item, index) => {
+                    item.querySelector("label").textContent = `คำถามที่ ${index + 1}`;
+                });
+            }
+        
+            updateDeleteButtons();
+        });
+
+        
+        
+    </script>
+</body>
+</html>
