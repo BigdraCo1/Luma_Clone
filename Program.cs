@@ -11,13 +11,20 @@ var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(sup
     .AddSupportedCultures(supportedCultures)
     .AddSupportedUICultures(supportedCultures);
 
+builder.Services.AddControllersWithViews();
+
 var app = builder.Build();
 
-if (!app.Environment.IsDevelopment()) {
+if (!app.Environment.IsDevelopment())
+{
     app.UseExceptionHandler("/Error");
-} else {
+}
+else
+{
     app.UseDeveloperExceptionPage();
 }
+
+app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
@@ -29,5 +36,9 @@ app.UseAuthorization();
 app.UseRequestLocalization(localizationOptions);
 
 app.MapRazorPages();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

@@ -1,0 +1,24 @@
+@using alma.Helpers
+@inject Microsoft.AspNetCore.Hosting.IWebHostEnvironment Env
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link rel="stylesheet" href="~/css/Home/Index.css" />
+
+<div class="big-blox">
+    <div class="event-text">
+        <div class="svg-container">
+            @Html.InlineSvg("logo/alma.svg", Env)
+        </div>
+        <h1 class="plain-event-text">Delightful</h1>
+        <h1 class="plain-event-text">events</h1>
+        <h1 class="colorful-event-text">start here.</h1>
+        <p>Set up an event page, invite friends and sell tickets. Host a memorable event today.</p>
+        <a href="#" class="cta-button">Create Your First Event</a>
+    </div>
+    <div class="svg-big-container">
+        @Html.InlineSvg("logo/star.svg", Env)
+    </div>
+</div>
