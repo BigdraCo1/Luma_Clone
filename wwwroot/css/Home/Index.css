@@ -25,7 +25,6 @@ body {
     flex-direction: column;
     align-items: flex-start; /* Align content to the left */
     text-align: left;
-    gap: 10px;
 }
 
 /* Star SVG container */
@@ -33,12 +32,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 150px; /* Adjust size */
-    height: 150px;
+    width: 35%; /* Default percentage-based width for smaller screens */
+    height: auto;
+}
+
+@media (min-width: 1440px) { 
+    .svg-big-container {
+        width: 500px; /* Fixed width for larger screens */
+        height: 500px; /* Fixed height for larger screens */
+    }
 }
 
 .svg-big-container svg {
-    width: 100%; /* Ensure SVG scales properly */
+    width: 100%; 
     height: auto;
 }
 
@@ -48,16 +54,15 @@ body {
 }
 
 .svg-container svg {
-    width: 60px;
+    width: 100px;
     height: auto;
 }
 
 /* Headings styling */
 .event-text h1 {
     margin: 0;
-    font-size: 2.5rem;
+    font-size: 5rem;
     font-weight: bold;
-    line-height: 1.2;
 }
 
 /* Gradient text for 'start here' */
@@ -74,9 +79,9 @@ body {
 
 /* Paragraph styling */
 .event-text p {
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: #666;
-    margin: 10px 0;
+    margin: 30px 0;
 }
 
 /* Button styling */
@@ -100,7 +105,7 @@ body {
     box-shadow: 0 8px 15px rgba(255, 0, 122, 0.4);
 }
 
-/* Responsive design */
+/* Responsive */
 @media (max-width: 768px) {
     .big-blox {
         flex-direction: column;
@@ -110,12 +115,19 @@ body {
     }
 
     .svg-big-container {
-        width: 100px;
-        height: 100px;
+        width: 500px;
+        height: 500px;
+    }
+
+    .event-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center the text horizontally */
+        text-align: center;  /* Ensure the text inside aligns to the center */
     }
 
     .event-text h1 {
-        font-size: 2rem;
+        font-size: 5rem;
     }
 
     .event-text p {
