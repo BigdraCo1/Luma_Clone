@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>โปรไฟล์ของคุณ</title>
+    <link rel="stylesheet" href="Setting_profile.css">
+
+    <!-- Production version -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+    <div class="main">
+        <h1 class="title">โปรไฟล์ของคุณ</h1>
+        <p class="subtitle">เลือกวิธีที่คุณจะเเสดงเป็นเจ้าภาพหรือเเขก</p>
+
+        <div class="profile-container">
+            <!-- Left Form Section -->
+            <div class="form-section">
+                <div class="input-group">
+                    <label>ชื่อ</label>
+                    <input type="text" id="event-name" value="">
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="text" id="event-name" value="">
+                </div>
+                <div class="link-google">
+                    <i data-lucide="link"></i>
+                    <p>บัญชีนี้ได้ลงชื่อเข้าใช้ด้วย Google account</p>
+                </div>
+                <div class="form-group">
+                    <div class="contact">
+                        <label>ช่องทางติดต่อ</label>
+                        <div class="contact-list">
+                            <div class="contact-item">
+                                <i data-lucide="phone"></i>
+                                <input type="text" id="" placeholder="Phone">
+                            </div>
+                            <div class="contact-item">
+                                <i data-lucide="facebook"></i>
+                                <input type="text" id="" placeholder="Facebook url">
+                            </div>
+                            <div class="contact-item">
+                                <i data-lucide="instagram"></i>
+                                <input type="text" id="" placeholder="Instagram url">
+                            </div>
+                            <div class="contact-item">
+                                <i data-lucide="chrome"></i>
+                                <input type="text" id="" placeholder="Website url">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="save-btn">บันทึกการเปลี่ยนแปลง</button>
+                <div class="delete-section">
+                    <h3>ลบบัญชี</h3>
+                    <p>หากคุณไม่ต้องการใช้ alma อีกต่อไป คุณสามารถลบบัญชีของคุณได้ถาวร</p>
+                    <button class="delete-btn">ลบบัญชีผู้ใช้</button>
+                </div>
+            </div>
+
+
+            <div class="profile-picture-section">
+                <label>รูปโปรไฟล์</label>
+                <div class="image-container">
+                    <div class="image-box">
+                        <img src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg" alt="Event banner" class="event-image">
+                    </div>
+                    <div class="upload-box">
+                        <p>อัปโหลดรูปภาพเพื่อเปลี่ยนรูป</p>
+                        <div class="upload">
+                            <input class="input-file" type="file" name="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
