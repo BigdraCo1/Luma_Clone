@@ -10,12 +10,12 @@ body {
     height: 100vh; /* Full viewport height */
 }
 
-/* Main container */
+
 .big-blox {
     display: flex;
-    align-items: center; /* Center items vertically */
-    gap: 40px; /* Add space between the SVG and the text */
-    text-align: left; /* Align text to the left */
+    align-items: center; 
+    gap: 40px; 
+    text-align: left; 
     padding: 20px;
 }
 
@@ -68,7 +68,7 @@ body {
 
 /* Gradient text for 'start here' */
 .colorful-event-text {
-    background: linear-gradient(90deg, #ff007a, #ff9d00);
+    background: linear-gradient(90deg, #477cf5, #fe8031);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
