@@ -23,8 +23,9 @@ body {
 .event-text {
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align content to the left */
+    align-items: flex-start;
     text-align: left;
+    width: 475px;
 }
 
 /* Star SVG container */
@@ -111,31 +112,30 @@ body {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        gap: 20px;
     }
 
     .svg-big-container {
-        width: 500px;
-        height: 500px;
+        width: 300px;
+        height: auto;
     }
 
     .event-text {
         display: flex;
         flex-direction: column;
-        align-items: center; /* Center the text horizontally */
-        text-align: center;  /* Ensure the text inside aligns to the center */
+        align-items: center; 
+        text-align: center;  
     }
 
     .event-text h1 {
-        font-size: 5rem;
+        font-size: 4rem;
     }
 
     .event-text p {
-        font-size: 0.9rem;
+        font-size: 1.2rem;
     }
 
     .event-text .cta-button {
-        padding: 10px 20px;
-        font-size: 0.9rem;
+        padding: 15px 30px;
+        font-size: 1rem;
     }
 }
