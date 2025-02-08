@@ -37,7 +37,7 @@ label {
 }
 
 .main{
-    margin-top: 20px;
+    margin-top: 60px;
     max-width: 1300px;
     padding: 10px;
 }
@@ -1236,6 +1236,11 @@ input[type="time"]::-webkit-calendar-picker-indicator {
 }
 
 @media screen and (max-width: 480px) {
+
+    .header .image {
+        display: none;
+    }
+
     .header .image img{
         width: 100px;
         height: 100px;
