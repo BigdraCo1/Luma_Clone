@@ -48,6 +48,8 @@ a{
     text-decoration: none;
 }
 
+
+
 .main{
     margin-top: 20px;
     max-width: 1300px;
@@ -82,6 +84,24 @@ a{
 .input-group input:focus {
     border: 1px solid #2CDE47;
 }
+
+.input-group textarea:focus {
+    border: 1px solid #2CDE47;
+}
+
+.input-group textarea {
+    margin-top: 5px;
+    border-radius: 20px;
+    border: 1px solid #8D8D8D;
+    color: #8D8D8D;
+    background-color: transparent;
+    width: 100%;
+    resize: vertical;
+    padding: 10px;
+    outline: none;
+    min-height:100px;
+}
+
 
 /* Social Links */
 .social-links {
