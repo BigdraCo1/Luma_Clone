@@ -560,6 +560,22 @@
             updateDeleteButtons();
         });
 
+        document.addEventListener("DOMContentLoaded", function () {
+            // ฟังก์ชันสำหรับเปิด date picker เมื่อคลิกที่ไอคอนปฏิทิน
+            document.querySelectorAll(".date-icon").forEach(icon => {
+                icon.addEventListener("click", function () {
+                    this.previousElementSibling.showPicker();
+                });
+            });
+        
+            // ฟังก์ชันสำหรับเปิด time picker เมื่อคลิกที่ไอคอนนาฬิกา
+            document.querySelectorAll(".time-icon").forEach(icon => {
+                icon.addEventListener("click", function () {
+                    this.previousElementSibling.showPicker();
+                });
+            });
+        });
+
         
         
     </script>
