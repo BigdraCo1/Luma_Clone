@@ -1,0 +1,231 @@
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+body {
+    background-color: #000480;
+    height: 1000px;
+}
+ */
+
+.navbar {
+    width: 100%;
+    position: fixed;
+    height: 56px;
+    background-color: transparent;
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0); 
+    transition: border-bottom-color 0.3s ease-in-out; 
+    z-index: 1000;
+}
+
+.navbar.scrolled {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08); /* แสดงเส้นขอบเมื่อเลื่อนลง */
+}
+
+.navbar a{
+    text-decoration: none;
+}
+
+
+.navbar .logo {
+    color: white;
+    text-decoration: none;
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.navbar .logo img {
+    width: 60px;
+    
+}
+
+.navbar .nav-items {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.navbar .discover , .myevent{
+    color: #EAEAEA;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-size: 15px;
+}
+
+.navbar .discover-txt , .myevent-txt{
+    color: #EAEAEA;
+}
+
+.navbar .discover i{
+    font-size: 24px;
+}
+
+.navbar .btn {
+    padding: 0.4rem 1rem;
+    border: none;
+    font-size: 0.875rem;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.navbar .btn-login {
+    background-color: #FF2525;
+    color: #EAEAEA;
+    border-radius: 20px;
+    font-size: 15px;
+}
+
+
+/* creteevent */
+
+.navbar .creteevent {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-color: #EAEAEA;
+    border-radius: 20px;
+    gap: 5px;
+    height: 30px;
+    padding: 10px;
+    
+}
+
+.navbar .creteevent .creteevent-txt{
+    color: #000480;
+    font-weight: 500;
+}
+
+.navbar .creteevent i {
+    font-size: 20px;
+    color: #000480;
+    font-weight: 500;
+}
+
+.navbar .creteevent span {
+    margin-left: 5px;
+}
+
+/* profile */
+.navbar .profile{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.navbar .profile img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+/* test */
+.dropdown-menu {
+    position: absolute;
+    top: 56px;
+    right: 0;
+    background-color: #01004C ;
+    /* border: 1px solid rgba(255, 255, 255, 0.08);  */
+    border: 1px solid #8d8d8d;
+    border-radius: 8px;
+    display: none;
+    flex-direction: column;
+}
+
+.dropdown-menu ::after {    
+    content: "▲";  
+    position: absolute;    
+    right: 1rem;  
+    font-size: 8px;  
+    top: -3px;
+    right: 48px;
+    transform: translateY(-50%);    
+    color: #8d8d8d;    
+    pointer-events: none;
+}
+
+.dropdown-menu .profile-info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.08); */
+    border-bottom: 1px solid #8d8d8d;
+}
+
+.dropdown-menu .profile-info h3 {
+    color: #EAEAEA;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.dropdown-menu .profile-info p {
+    color: #8d8d8d;
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.dropdown-menu .link {
+   padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dropdown-menu .link a {
+    color: #EAEAEA;
+    font-weight: 500;
+}
+
+.profile.active .dropdown-menu {
+    display: flex;
+}
+
+@media (max-width: 650px) {
+    .navbar {
+        padding: 1rem;
+        backdrop-filter: blur(10px);
+    }
+
+    .dropdown-menu ::after {    
+        content: "▲";  
+        position: absolute;    
+        right: 1rem;  
+        font-size: 8px;  
+        top: -3px;
+        right: 32px;
+        transform: translateY(-50%);    
+        color: #8d8d8d;    
+        pointer-events: none;
+    }
+
+    .navbar .nav-items {
+        gap: 10px;
+    }
+    
+    .navbar .discover-txt , .myevent-txt {
+        display: none;
+    }
+
+    /* creteevent */
+    .navbar .creteevent span {
+        display: none;
+    }
+
+    .navbar .myevent {
+        display: none;
+    }
+    
+
+
+}
