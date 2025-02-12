@@ -279,14 +279,6 @@ textarea:focus {
     outline: none;
 }
 
-.time-section .time-group .input-wrapper i {
-    position: absolute;
-    right: 10px;
-    font-size: 18px;
-    color: #8D8D8D;
-    cursor: pointer;
-    pointer-events: none; /* ป้องกันไม่ให้ไอคอนมีผลต่อการคลิก */
-}
 
 
 input[type="date"]::-webkit-calendar-picker-indicator,
