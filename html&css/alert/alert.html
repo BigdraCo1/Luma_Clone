@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="alert.css">
+    <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+
+    
+
+    <div class="alert error">
+        <div class="alert-detail">
+            <i data-lucide="circle-x"></i>Indicates a dangerous or potentially negative action.
+        </div>
+        <span class="closebtn">&times;</span>  
+    </div>
+
+    <div class="alert success">
+        <div class="alert-detail">
+            <i data-lucide="circle-check"></i>Indicates a successful or positive action.
+        </div>
+        <span class="closebtn">&times;</span>
+    </div>
+
+    <div class="alert info">
+        <div class="alert-detail">
+            <i data-lucide="info"></i>Indicates a neutral informative change or action.
+        </div>
+        <span class="closebtn">&times;</span>  
+    </div>
+
+    <div class="alert warning">
+        <div class="alert-detail">
+            <i data-lucide="triangle-alert"></i>Indicates a warning that might need attention.
+        </div>
+        <span class="closebtn">&times;</span>  
+    </div>
+
+
+    
+    <script>
+
+        lucide.createIcons();
+
+        var close = document.getElementsByClassName("closebtn");
+        var i;
+
+        for (i = 0; i < close.length; i++) {
+        close[i].onclick = function(){
+            var div = this.parentElement;
+            div.style.opacity = "0";
+            setTimeout(function(){ div.style.display = "none"; }, 600);
+        }
+        }
+    </script>
+
+</body>
+</html>
