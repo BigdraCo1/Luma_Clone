@@ -1,0 +1,23 @@
+@page
+@model alma.Pages.User.IndexModel
+
+<h1>All Users and Their Event History</h1>
+
+<h3>Index</h3>
+<table class="table">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Phone</th>
+      </tr>
+  </thead>
+  <tbody>
+      @foreach(var user in Model.Users)
+      {
+        <tr>
+            <td>@user.Name</td>  
+            <td>@user.Phone</td>
+        </tr>
+      }
+  </tbody>
+</table>
