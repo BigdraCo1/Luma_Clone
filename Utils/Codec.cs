@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Authentication;
-
 namespace alma.Utils;
 
 /// <summary>
