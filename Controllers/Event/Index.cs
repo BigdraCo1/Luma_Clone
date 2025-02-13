@@ -6,11 +6,11 @@ using alma.Models;
 using alma.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using UserModel = alma.Models.User;
+using EventModel = alma.Models.Event;
 
-namespace alma.Pages.User
+namespace alma.Pages.Event
 {
-    public class IndexModel : PageModel, IUserList
+    public class IndexModel : PageModel, IEventList
     {
         private readonly DatabaseContext _context;
 
@@ -19,11 +19,11 @@ namespace alma.Pages.User
             _context = context;
         }
 
-        public IList<UserModel> Users { get; set; }
+        public IList<EventModel> Events { get; set; } = new List<EventModel>();
 
         public async Task<IActionResult> OnGetAsync()
         {
-            Users = await _context.Users.ToListAsync();
+            Events = await _context.Events.ToListAsync();
             return Page();
         }
     }

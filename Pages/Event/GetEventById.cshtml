@@ -1,0 +1,4 @@
+@page "{tuid}"
+@model alma.Pages.Event.GetEventByIdModel
+
+<img src="@Url.Page("GetEventById", "Image", new { tuid = Model.EventModel.Tuid })" alt="User Profile Picture" />

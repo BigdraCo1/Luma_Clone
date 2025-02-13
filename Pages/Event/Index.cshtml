@@ -1,0 +1,30 @@
+@page
+@model alma.Pages.Event.IndexModel
+
+<h3>Index</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Events != null)
+        {
+            foreach (var eventItem in Model.Events)
+            {
+                <tr>
+                    <td>@eventItem.Name</td>
+                    <td>@eventItem.Description</td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="2">No events available</td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using alma.Models;
 using UserModel = alma.Models.User;
 
+
 namespace alma.Data;
 
 public partial class DatabaseContext : DbContext

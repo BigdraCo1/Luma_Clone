@@ -1,0 +1,18 @@
+@page "{tuid}"
+@model alma.Pages.User.GetUserByIdModel
+
+<h3>Index</h3>
+<table class="table">
+  <thead>
+      <tr>
+          <th>Name</th>
+          <th>Phone</th>
+      </tr>
+  </thead>
+  <tbody>
+        <tr>
+            <td>@Model.UserModel.Name</td>  
+            <td>@Model.UserModel.Phone</td>
+        </tr>
+  </tbody>
+</table>
