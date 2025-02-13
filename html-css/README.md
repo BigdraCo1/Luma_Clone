@@ -14,8 +14,10 @@ min-height:
 
 ```css
 min-height: 100vh;
+
 ```
 
+"
 ## 3. Font Family
 
 ฟอนต์ที่ใช้ต้องเป็น:
@@ -35,7 +37,6 @@ padding: 10px;
 
 ## 5. Navbar Space
 
-ทุกเนื้อหาต้องมีพื้นที่ด้านบนไม่น้อยกว่า **60px** เพื่อรองรับ Navbar:
 
 ```css
 margin-top: 60px;

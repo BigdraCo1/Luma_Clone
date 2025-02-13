@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>สร้างกิจกรรม</title>
+    <link rel="stylesheet" href="create-event.css">   
+</head>
+<body>
+    <div class="main">
+        <div class="container">
+            <div class="left-section">
+                <div class="image-preview">
+                    <img src="imgAct.avif" alt="Event preview">
+                </div>
+                <div class="upload-section">
+                    <span class="upload-text">อัปโหลดรูปภาพเพื่อเปลี่ยนรูป</span>
+                    <button class="upload-btn">อัพโหลด</button>
+                </div>
+            </div>
+    
+            <div class="right-section">
+                <div class="form-group">
+                    <h2>ชื่อกิจกรรม</h2>
+                    <input type="text" placeholder="เวลากิจกรรม">
+                </div>
+    
+                <div class="form-group">
+                    <div class="time-selector">
+                        <div class="input-group">
+                            <span class="label">เริ่มต้น</span>
+                            <input type="text" value="18 มกราคม 2568">
+                        </div>
+                        <div class="input-group">
+                            <span class="label">เวลา</span>
+                            <input type="text" value="18:00">
+                        </div>
+                    </div>
+                    <div class="time-selector">
+                        <div class="input-group">
+                            <span class="label">สิ้นสุด</span>
+                            <input type="text" value="18 มกราคม 2568">
+                        </div>
+                        <div class="input-group">
+                            <span class="label">เวลา</span>
+                            <input type="text" value="19:00">
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <h2>เพิ่มสถานที่จัดงาน</h2>
+                    <select>
+                        <option>กรุงเทพ</option>
+                    </select>
+                    <div class="input-group">
+                        <span class="label">ลิ้งค์ Google Map</span>
+                        <input type="text" placeholder="https://maps.app.goo.gl/AMTyeNmS15SmWY596">
+                    </div>
+                    <div class="input-group">
+                        <span class="label">รายละเอียดสถานที่</span>
+                        <textarea rows="4" placeholder="ใส่รายละเอียดสถานที่จัดงานของคุณ"></textarea>
+                    </div>
+                </div>
+    
+                <div class="form-group">
+                    <h2>ตัวเลือกกิจกรรม</h2>
+                    <div class="options-group">
+                        <span>จำนวนผู้เข้าร่วมงานสูงสุด</span>
+                        <input type="number" min="1" class="participant-input" placeholder="จำนวน">
+                    </div>
+                    <div class="options-group">
+                        <span>เปิด-ปิด การลงทะเบียน</span>
+                        <div class="toggle-btn"></div>
+                    </div>      
+                    <div class="input-group">
+                        <span class="label">รูปแบบการลงทะเบียน</span>
+                        <div class="registration-options">
+                            <label class="radio-group">
+                                <input type="radio" name="registration" value="direct" checked>
+                                <span>ลงทะเบียนได้เลย</span>
+                            </label>
+                            <label class="radio-group">
+                                <input type="radio" name="registration" value="approval">
+                                <span>ต้องได้รับการอนุมัติ</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+    
+                <button class="create-btn">สร้างกิจกรรม</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
