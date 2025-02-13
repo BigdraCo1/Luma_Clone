@@ -1250,6 +1250,11 @@ input[type="time"]::-webkit-calendar-picker-indicator {
         font-size: 12px;
     }
 
+    /* input dropdown */
+    .select-wrapper {
+        width: 100%;
+    }
+
     .event-info .event-details span{
         display: flex;
         align-items: center;

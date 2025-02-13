@@ -183,7 +183,7 @@
                                     <img
                                         src="https://img.wongnai.com/p/1920x0/2018/06/18/2979c50de28b4137a3c0224591db4af5.jpg"
                                         alt="Event banner"
-                                        class="event-image" />
+                                        class="event-image-pre" />
                                 </div>
                                 <div class="upload-box">
                                     <p>อัปโหลดรูปภาพเพื่อเปลี่ยนรูป</p>
@@ -812,6 +812,18 @@
                     });
                 });
             });
+
+            document.querySelector('.input-file').addEventListener('change', function(event) {
+                const file = event.target.files[0]; // รับไฟล์ที่เลือก
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        document.querySelector('.event-image-pre').src = e.target.result; // เปลี่ยนรูปภาพตัวอย่าง
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+            
         </script>
     </body>
 </html>
