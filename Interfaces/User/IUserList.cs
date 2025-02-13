@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using UserModel = alma.Models.User; // Alias for the User class
+using UserModel = alma.Models.User;
 
 namespace alma.Interfaces
 {

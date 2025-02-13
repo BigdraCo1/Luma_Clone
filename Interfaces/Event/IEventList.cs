@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using EventModel = alma.Models.Event; // Alias for the User class
+using EventModel = alma.Models.Event;
 
 namespace alma.Interfaces
 {

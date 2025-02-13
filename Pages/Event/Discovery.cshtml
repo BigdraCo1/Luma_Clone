@@ -1,0 +1,85 @@
+@page
+@model alma.Pages.Event.DiscoveryModel
+
+<link rel="stylesheet" href="~/css/Event/Discovery.css">
+<script src="https://unpkg.com/lucide@latest" defer></script>
+<script src="~/js/Event/index.js" defer></script>
+
+<main class="main">
+    <section class="search-section">
+        <h1>ค้นหากิจกรรม</h1>
+            <div class="search-container">
+                <input type="search" placeholder="Search Event, page">
+                <button type="submit" class="search-icon"><i data-lucide="search"></i></button>
+            </div>
+    </section>
+    <section class="events-section">
+            <div class="section-header">
+                <div class="header-info">
+                    <h2>กิจกรรมยอดนิยม</h2>
+                    <p>Bangkok - กรุงเทพ</p>
+                </div>
+                <div class="header-btn">
+                    <a href="#" class="btn-seemore">เพิ่มเติม</a>
+                </div>
+            </div>
+            <div class="event-grid">
+                @foreach (var eventItem in Model.Events)
+                {
+                    <a href="#">
+                        <div class="event-card">
+                            <img src="@Url.Page("GetEventById", "Image", new { tuid = eventItem.Tuid })" alt="Event">
+                            <div class="event-info">
+                                <h3>@eventItem.Name</h3>
+                                <span>@(eventItem.Start.HasValue ? eventItem.Start.Value.ToString("ddd, MMM dd, hh:mm tt") : "No start date")</span>
+                                <span>@eventItem.LocationCity</span>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+    </section>
+    <section class="events-section">
+            <div class="section-header">
+                <div class="header-info">
+                    <h2>เร็วๆนี้</h2>
+                </div>
+                <div class="header-btn">
+                    <a href="#" class="btn-seemore">เพิ่มเติม</a>
+                </div>
+            </div>
+            <div class="event-grid">
+                @foreach (var eventItem in Model.Events)
+                {
+                    <a href="#">
+                        <div class="event-card">
+                            <img src="@Url.Page("GetEventById", "Image", new { tuid = eventItem.Tuid })" alt="Event">
+                            <div class="event-info">
+                                <h3>@eventItem.Name</h3>
+                                <span>@(eventItem.Start.HasValue ? eventItem.Start.Value.ToString("ddd, MMM dd, hh:mm tt") : "No start date")</span>
+                                <span>@eventItem.LocationCity</span>
+                            </div>
+                        </div>
+                    </a>
+                }
+            </div>
+    </section>
+    <section class="categories-section">
+        <h2>เลือกตามหมวดหมู่</h2>
+            <div class="category-grid">
+                @{
+                    var tagEventCounts = Model.GetTagEventCounts();
+                }
+                @foreach (var tagEventCount in tagEventCounts)
+                {
+                    <a href="#">
+                        <div class="category-card">
+                            <div class="icon"><i data-lucide="search"></i></div>
+                            <h3>@tagEventCount.Key</h3>
+                            <p>@tagEventCount.Value events</p>
+                        </div>
+                    </a>
+                }
+            </div>
+    </section>
+</main>

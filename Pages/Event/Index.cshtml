@@ -1,30 +1,46 @@
 @page
 @model alma.Pages.Event.IndexModel
 
-<h3>Index</h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model.Events != null)
-        {
-            foreach (var eventItem in Model.Events)
+<link rel="stylesheet" href="~/css/Event/Index.css">
+<script src="https://unpkg.com/lucide@latest" defer></script>
+<script src="~/js/Event/index.js" defer></script>
+
+<main class="main">
+    <section class="search-section">
+        <h1>ค้นหากิจกรรม</h1>
+        <div class="search-container">
+            <input type="search" placeholder="Search Event, page">
+            <button type="submit" class="search-icon"><i data-lucide="search"></i></button>
+        </div>
+    </section>
+    <section class="events-section">
+        <div class="section-header">
+            <div class="header-info">
+                <h2>กิจกรรมยอดนิยม</h2>
+                <p>Bangkok - กรุงเทพ</p>
+            </div>
+        </div>
+        <div class="event-grid">
+            @if (Model.Events != null)
             {
-                <tr>
-                    <td>@eventItem.Name</td>
-                    <td>@eventItem.Description</td>
-                </tr>
+                foreach (var eventItem in Model.Events)
+                {   
+                    <a href="#">
+                        <div class="event-card">
+                            <img src="@Url.Page("GetEventById", "Image", new { tuid = eventItem.Tuid })" alt="Event">
+                            <div class="event-info">
+                                <h3>@eventItem.Name</h3>
+                                <span>@(eventItem.Start.HasValue ? eventItem.Start.Value.ToString("ddd, MMM dd, hh:mm tt") : "No start date")</span>
+                                <span>@eventItem.LocationCity</span>
+                            </div>
+                        </div>
+                    </a>
+                }
             }
-        }
-        else
-        {
-            <tr>
-                <td colspan="2">No events available</td>
-            </tr>
-        }
-    </tbody>
-</table>
+            else
+            {
+                <p>No events available</p>
+            }
+        </div>
+    </section>
+</main>
