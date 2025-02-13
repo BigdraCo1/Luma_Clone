@@ -20,7 +20,6 @@ h1 {
     color: #ffff;
     font-size: 28px;
     font-weight: bold;
-    margin-bottom: 15px;
 }
 
 h2 {
@@ -50,62 +49,88 @@ a{
 }
 
 .main{
+    width: 100%;
     margin-top: 20px;
     max-width: 1300px;
     padding: 10px;
 }
 
 
-
- /* search */ 
-
-.search-section {
-   width: 100%; 
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
-.search-container {
-    position: relative;
+.profile-header {
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.search-container input {
+.profile-main {
     width: 100%;
-    height: 40px;
-    padding: 20px;
-    background: transparent;
-    border: 1px solid #8D8D8D;
-    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 20px;
+}
+
+.profile-group {
+    width: 100%;
+    display: flex;
+    gap: 20px;
+}
+
+.profile-image {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+.profile-role {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.profile-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #888;
     font-size: 14px;
-    border-radius: 20px;
-    color: #8D8D8D;
-    font-weight:bold;
-    outline: none;
 }
 
-.search-container input:focus{
-    border: 1px solid #2CDE47;
-}
-
-.search-container input::placeholder {
-    color: #8D8D8D;
-    font-weight:normal;
-}
-
-.search-icon {
+.follow-button {
     background-color: transparent;
-    border: none;
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
+    border: 1px solid #8D8D8D;
     color: #8D8D8D;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
 }
+
+
+.socoial {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.socoial a {
+    color: #8D8D8D;
+    font-size: 10px;
+}
+
 
 /* events-section */
-
 .events-section{
-    margin-top: 40px;
     padding-bottom: 40px;
-    border-bottom:1px solid rgba(255,255,255,0.2);
 }
 
 .section-header{
@@ -127,8 +152,6 @@ a{
     font-size: 14px;
     text-decoration: none;
 }
-
-
 
 /* event-grid */
 .event-grid{
@@ -180,58 +203,8 @@ a{
 }
 
 
-
-
-
-/* Categories section */
-
-.categories-section {
-    margin-top: 40px;
-}
-
-.categories-section h2{
-    margin-bottom: 20px;
-}
-
-.category-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-}
-
-.category-card {
-    
-    height: 100%;
-    background: linear-gradient(45deg, #000480,#A8007B );
-    padding: 1.5rem;
-    border-radius: 20px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.category-card:hover {
-    opacity: 0.9;
-}
-
-.category-card  .icon {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-    color: #8D8D8D;
-}
-
-.category-card h3 {
-    font-size: 16px;
-    margin-bottom: 0.25rem;
-}
-
-.category-card p {
-    font-size: 14px;
-    color: #8D8D8D;
-}
-
-@media screen and (max-width: 1100px) {
-    /* event-grid */
-    .event-grid{
+@media screen and (max-width: 1150px) {
+    .event-grid {
         display: grid;
         grid-template-columns: repeat(4, 1fr);
         gap: 20px;
@@ -246,11 +219,6 @@ a{
         gap: 20px;
     }
 
-    .category-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 1rem;
-    }
 }
 
 @media screen and (max-width: 700px) {
@@ -268,6 +236,7 @@ a{
         text-decoration: none;
         transition: top ease 0.3s;
     }
+    
     .event-card {
         width: 100%;
         display: flex;
@@ -299,10 +268,29 @@ a{
         color: #8D8D8D;
     }
 
-    .category-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+}
+
+@media (max-width: 600px) {
+    .profile-main {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
     }
 
+    .profile-group {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .profile-top {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .profile-stats {
+        align-items: center;
+    }
 }
