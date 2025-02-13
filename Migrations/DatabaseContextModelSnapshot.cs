@@ -164,7 +164,7 @@ namespace alma.Migrations
 
             modelBuilder.Entity("alma.Models.Session", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("Token")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ExpiresAt")
@@ -176,14 +176,10 @@ namespace alma.Migrations
                     b.Property<DateTime?>("LastUsedAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("Token");
 
                     b.HasIndex("UserId");
 

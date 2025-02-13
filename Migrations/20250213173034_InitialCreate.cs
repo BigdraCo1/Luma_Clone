@@ -78,16 +78,15 @@ namespace alma.Migrations
                 name: "Session",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "TEXT", nullable: false),
-                    UserId = table.Column<string>(type: "TEXT", nullable: true),
                     Token = table.Column<string>(type: "TEXT", nullable: false),
+                    UserId = table.Column<string>(type: "TEXT", nullable: true),
                     ExpiresAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     IssuedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     LastUsedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Session", x => x.Id);
+                    table.PrimaryKey("PK_Session", x => x.Token);
                     table.ForeignKey(
                         name: "FK_Session_User_UserId",
                         column: x => x.UserId,

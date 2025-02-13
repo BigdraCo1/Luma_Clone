@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -10,14 +9,15 @@ public class LoginModel : PageModel {
     public string State { get; set; } = default!;
 
     public IActionResult OnGet() {
-        var StateNounce = Tuid.Generate();
-        var RedirectTo = HttpContext.Request.Query["next"].ToString();
+        var stateNounce = Token.Generate(128);
+        var redirectTo = HttpContext.Request.Query["next"].ToString();
+        redirectTo = UrlEncoding.Decode(redirectTo);
 
-        if (RedirectTo.Length <= 0) {
-            RedirectTo = "/";
+        if (redirectTo.Length <= 0) {
+            redirectTo = "/";
         }
 
-        State = Base64UrlTextEncoder.Encode(System.Text.Encoding.UTF8.GetBytes($"{StateNounce}:{RedirectTo}"));
+        State = Base64Url.Encode($"{stateNounce}:{redirectTo}");
         HttpContext.Response.Cookies.Append("state", State, new CookieOptions {
             HttpOnly = true,
             Secure = true,

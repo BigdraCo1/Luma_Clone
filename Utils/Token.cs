@@ -21,14 +21,11 @@ public class Token {
             bytesCount++;
         }
 
-        byte[] randomBytes = new byte[bytesCount];
+        byte[] bytes = new byte[bytesCount];
         using (RandomNumberGenerator rng = RandomNumberGenerator.Create()) {
-            rng.GetBytes(randomBytes);
+            rng.GetBytes(bytes);
         }
 
-        return Convert.ToBase64String(randomBytes)
-            .Replace('+', '-')
-            .Replace('/', '_')
-            .TrimEnd('=');
+        return Base64Url.Encode(bytes);
     }
 }

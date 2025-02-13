@@ -16,17 +16,12 @@ public class Tuid {
     /// </summary>
     /// <returns>TUID as string</returns>
     public static string Generate() {
-        byte[] randomBytes = new byte[12];
+        byte[] bytes = new byte[12];
         using (RandomNumberGenerator rng = RandomNumberGenerator.Create()) {
-            rng.GetBytes(randomBytes);
+            rng.GetBytes(bytes);
         }
 
-        string base64 = Convert.ToBase64String(randomBytes)
-            .Replace('+', '-')
-            .Replace('/', '_')
-            .TrimEnd('=');
-
-        return base64[..16];
+        return Base64Url.Encode(bytes);
     }
 
     /// <summary>
@@ -34,7 +29,7 @@ public class Tuid {
     /// </summary>
     /// <param name="intString">Integer in the form of string</param>
     /// <returns>TUID as string</returns>
-    public static string GetFromIntString(string intString) {
+    public static string FromIntString(string intString) {
         BigInteger num = BigInteger.Parse(intString);
         byte[] bytes = num.ToByteArray();
 
@@ -48,11 +43,6 @@ public class Tuid {
         }
         bytes = [.. bytes.Reverse()];
 
-        var base64 = Convert.ToBase64String(bytes)
-            .Replace('+', '-')
-            .Replace('/', '_')
-            .TrimEnd('=');
-
-        return base64[..16];
+        return Base64Url.Encode(bytes);
     }
 }

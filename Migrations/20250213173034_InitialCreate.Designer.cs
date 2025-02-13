@@ -11,7 +11,7 @@ using alma.Contexts;
 namespace alma.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20250213095507_InitialCreate")]
+    [Migration("20250213173034_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -167,7 +167,7 @@ namespace alma.Migrations
 
             modelBuilder.Entity("alma.Models.Session", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<string>("Token")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("ExpiresAt")
@@ -179,14 +179,10 @@ namespace alma.Migrations
                     b.Property<DateTime?>("LastUsedAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Token")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
-                    b.HasKey("Id");
+                    b.HasKey("Token");
 
                     b.HasIndex("UserId");
 

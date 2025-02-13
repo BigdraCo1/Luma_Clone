@@ -1,82 +1,101 @@
 using System.Text.Json;
-using System.Web;
 
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using alma.Contexts;
+using alma.Enums;
 using alma.Models;
+using alma.Services;
 using alma.Utils;
 
 namespace alma.Controllers.Auth;
 
-public class OauthRedirectModel(IConfiguration configuration, DatabaseContext context, HttpClient client) : PageModel {
-    private readonly IConfiguration _configuration = configuration;
+public class OauthRedirectModel(IConfiguration config, DatabaseContext context, ISessionService sessionService, HttpClient client) : PageModel {
+    private readonly IConfiguration _config = config;
     private readonly DatabaseContext _context = context;
+    private readonly ISessionService _sessionService = sessionService;
     private readonly HttpClient _client = client;
 
     public async Task<IActionResult> OnGetAsync() {
-        var CookieState = HttpContext.Request.Cookies["state"];
-        var QueryState = HttpContext.Request.Query["state"].ToString();
-        var AuthorizationCode = HttpContext.Request.Query["code"].ToString();
+        var cookieState = HttpContext.Request.Cookies["state"];
+        var queryState = HttpContext.Request.Query["state"].ToString();
+        var authorizationCode = HttpContext.Request.Query["code"].ToString();
 
-        if (CookieState is null || QueryState is null ||
-            CookieState.Length <= 0 || QueryState.Length <= 0 ||
-            CookieState != QueryState) {
-            return Redirect($"/error?message={HttpUtility.UrlEncode("Invalid state.")}");
+        if (cookieState is null || queryState is null ||
+            cookieState.Length <= 0 || queryState.Length <= 0 ||
+            cookieState != queryState) {
+            var queryString = Toast.GenerateQueryString(
+                "Authentication failed: Invalid state",
+                "The authentication URL is invalid, please try again.",
+                ToastTypes.Error);
+            return Redirect($"/auth/login?{queryString}");
         }
 
-        var State = System.Text.Encoding.UTF8.GetString(Base64UrlTextEncoder.Decode(CookieState));
-        var StateParts = State.Split(':');
-        var RedirectTo = StateParts[1];
+        var state = Base64Url.DecodeToString(cookieState);
+        var stateParts = state.Split(':');
+        var redirectTo = stateParts[1];
 
-        if (!RedirectTo.StartsWith('/')) {
-            RedirectTo = $"/{RedirectTo}";
+        if (!redirectTo.StartsWith('/')) {
+            redirectTo = $"/{redirectTo}";
         }
 
-        var Data = new Dictionary<string, string> {
-            { "client_id", _configuration.GetSection("GoogleOAuth")["ClientId"]! },
-            { "client_secret", _configuration.GetSection("GoogleOAuth")["ClientSecret"]! },
-            { "code", AuthorizationCode },
-            { "redirect_uri", _configuration.GetSection("GoogleOAuth")["RedirectUri"]! },
+        var data = new Dictionary<string, string> {
+            { "client_id", _config.GetSection("GoogleOAuth")["ClientId"]! },
+            { "client_secret", _config.GetSection("GoogleOAuth")["ClientSecret"]! },
+            { "code", authorizationCode },
+            { "redirect_uri", _config.GetSection("GoogleOAuth")["RedirectUri"]! },
             { "grant_type", "authorization_code" }
         };
 
-        var TokenResponse = await _client.PostAsync("https://oauth2.googleapis.com/token", new FormUrlEncodedContent(Data));
-        var TokenResponseString = await TokenResponse.Content.ReadAsStringAsync();
-        var TokenResponseData = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(TokenResponseString);
+        var tokenResponse = await _client.PostAsync("https://oauth2.googleapis.com/token", new FormUrlEncodedContent(data));
+        var tokenResponseString = await tokenResponse.Content.ReadAsStringAsync();
+        var tokenResponseData = Json.Deserialize<Dictionary<string, JsonElement>>(tokenResponseString);
 
-        var UserInfoJwt = TokenResponseData!["id_token"].GetString();
-        var UserInfoBase64 = UserInfoJwt!.Split('.')[1];
-        var UserInfoString = System.Text.Encoding.UTF8.GetString(Base64UrlTextEncoder.Decode(UserInfoBase64));
-        var UserInfo = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(UserInfoString);
+        var userInfoJwt = tokenResponseData!["id_token"].GetString();
+        var userInfoBase64Url = userInfoJwt!.Split('.')[1];
+        var userInfoString = Base64Url.DecodeToString(userInfoBase64Url);
+        var userInfo = Json.Deserialize<Dictionary<string, JsonElement>>(userInfoString);
 
-        var UserId = Tuid.GetFromIntString(UserInfo!["sub"].GetString()!);
+        var userId = Tuid.FromIntString(userInfo!["sub"].GetString()!);
+        var user = await _context.User.FindAsync(userId);
 
-        var User = await _context.User.FindAsync(UserId);
+        var isNewUser = false;
 
-        // TODO: Implement session management
+        if (user is null) {
+            isNewUser = true;
 
-        if (User is not null) {
-            return Redirect(RedirectTo);
+            var profilePictureResponse = await _client.GetAsync(userInfo!["picture"].GetString()!);
+            var profilePicture = await profilePictureResponse.Content.ReadAsByteArrayAsync();
+
+            var newUser = new User {
+                Id = userId,
+                Email = userInfo!["email"].GetString()!,
+                Name = userInfo!["name"].GetString()!,
+                Username = Formatter.Slugify(userInfo!["name"].GetString()!),
+                ProfilePicture = profilePicture,
+                CreatedAt = DateTime.Now
+            };
+
+            await _context.User.AddAsync(newUser);
+            await _context.SaveChangesAsync();
+
+            user = newUser;
         }
 
-        var profilePictureResponse = await _client.GetAsync(UserInfo!["picture"].GetString()!);
-        var profilePicture = await profilePictureResponse.Content.ReadAsByteArrayAsync();
+        var session = await _sessionService.GenerateAsync(user);
 
-        var NewUser = new User {
-            Id = UserId,
-            Email = UserInfo!["email"].GetString()!,
-            Name = UserInfo!["name"].GetString()!,
-            Username = Formatter.Slugify(UserInfo!["name"].GetString()!),
-            ProfilePicture = profilePicture,
-            CreatedAt = DateTime.Now
-        };
+        HttpContext.Response.Cookies.Append("session", session.Token, new CookieOptions {
+            HttpOnly = true,
+            Secure = true,
+            SameSite = SameSiteMode.Strict,
+            Expires = session.ExpiresAt.AddYears(1) // Add 1 year extra to track whether user have logged in before or not
+                                                    // Even after the session expired on the server side
+        });
 
-        await _context.User.AddAsync(NewUser);
-        await _context.SaveChangesAsync();
-
-        return Redirect($"/register?next={HttpUtility.UrlEncode(RedirectTo)}");
+        if (isNewUser) {
+            return Redirect($"/register?next={UrlEncoding.Encode(redirectTo)}");
+        }
+        return Redirect(redirectTo);
     }
 }
