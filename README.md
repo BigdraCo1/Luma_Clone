@@ -6,6 +6,7 @@
 -   [C# Dev Kit](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csdevkit)
 -   [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 -   [Razor / Blazor CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=kevin-chatham.aspnetcorerazor-html-css-class-completion)
+-   [C# Format Usings With Code Action](https://github.com/Nat-thapas/vscode-csharp-format-usings/releases) (This is a custom extension. Download the .vsix file and use the install from VSIX option)
 
 ## Running
 
@@ -19,14 +20,3 @@ To run a development server, follow the steps outlined below
 4. run `dotnet tool restore` to install dotnet tools
 5. run `dotnet ef database update` do apply database migrations
 6. run `dotnet run` or `dotnet watch` to start development server
-
-## Folders Structure
-
--   Controllers: controllers: http request handler for pages
--   Entities: database entities and their repositories (mobels)
--   Interfaces: interfaces
--   Pages: pages (views)
--   Properties: launch config
--   Resources: localization resources
--   Services: services for controllers
--   wwwroot: static files

@@ -10,35 +10,49 @@ namespace alma.Utils;
 /// Encoded in 16 digits base64url.
 /// </summary>
 public class Tuid {
+
     /// <summary>
     /// Generates a TUID.
     /// </summary>
     /// <returns>TUID as string</returns>
     public static string Generate() {
-        byte[] RandomBytes = new byte[12];
-        using (RandomNumberGenerator Rng = RandomNumberGenerator.Create()) {
-            Rng.GetBytes(RandomBytes);
+        byte[] randomBytes = new byte[12];
+        using (RandomNumberGenerator rng = RandomNumberGenerator.Create()) {
+            rng.GetBytes(randomBytes);
         }
-        string Base64 = Convert.ToBase64String(RandomBytes)
+
+        string base64 = Convert.ToBase64String(randomBytes)
             .Replace('+', '-')
             .Replace('/', '_')
             .TrimEnd('=');
-        return Base64[..16];
+
+        return base64[..16];
     }
 
     /// <summary>
     /// Converts an integer string to a TUID.
     /// </summary>
-    /// <param name="IntString">Integer in the form of string</param>
+    /// <param name="intString">Integer in the form of string</param>
     /// <returns>TUID as string</returns>
-    public static string GetFromIntString(string IntString) {
-        BigInteger Int = BigInteger.Parse(IntString);
-        byte[] Bytes = Int.ToByteArray();
-        Bytes = [.. Bytes.Reverse()];
-        var Id = Convert.ToBase64String(Bytes)
+    public static string GetFromIntString(string intString) {
+        BigInteger num = BigInteger.Parse(intString);
+        byte[] bytes = num.ToByteArray();
+
+        if (bytes.Length > 12) {
+            bytes = bytes[..12];
+        }
+        if (bytes.Length < 12) {
+            byte[] paddedBytes = new byte[12];
+            bytes.CopyTo(paddedBytes, 0);
+            bytes = paddedBytes;
+        }
+        bytes = [.. bytes.Reverse()];
+
+        var base64 = Convert.ToBase64String(bytes)
             .Replace('+', '-')
             .Replace('/', '_')
             .TrimEnd('=');
-        return Id.PadLeft(16, '0');
+
+        return base64[..16];
     }
 }

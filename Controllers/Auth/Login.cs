@@ -1,7 +1,8 @@
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+
 using alma.Utils;
-using Microsoft.AspNetCore.Authentication;
 
 namespace alma.Controllers.Auth;
 
@@ -11,15 +12,18 @@ public class LoginModel : PageModel {
     public IActionResult OnGet() {
         var StateNounce = Tuid.Generate();
         var RedirectTo = HttpContext.Request.Query["next"].ToString();
+
         if (RedirectTo.Length <= 0) {
             RedirectTo = "/";
         }
+
         State = Base64UrlTextEncoder.Encode(System.Text.Encoding.UTF8.GetBytes($"{StateNounce}:{RedirectTo}"));
         HttpContext.Response.Cookies.Append("state", State, new CookieOptions {
             HttpOnly = true,
             Secure = true,
             SameSite = SameSiteMode.Lax
         });
+
         return Page();
     }
 

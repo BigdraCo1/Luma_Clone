@@ -1,5 +1,5 @@
 # Ignore personal files such as todo lists, notes, etc.
-personal/
+Personal/
 
 # Ignore binary and build related files
 bin/
