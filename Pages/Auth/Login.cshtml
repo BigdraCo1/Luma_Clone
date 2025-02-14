@@ -1,0 +1,21 @@
+@page
+@model alma.Controllers.Auth.LoginModel
+
+@using alma.Utils
+
+@inject IConfiguration Config
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login with Google Account</h1>
+<hr />
+<p>state =@Model.State</p>
+<a href="https://accounts.google.com/o/oauth2/v2/auth
+?client_id=@Config.GetSection("GoogleOAuth")["ClientID"]
+&redirect_uri=@UrlEncoder.Encode(Config.GetSection("GoogleOAuth")["RedirectUri"]!)
+&scope=@UrlEncoder.Encode(Config.GetSection("GoogleOAuth")["Scope"]!)
+&state=@Model.State
+&access_type=offline
+&response_type=code">Login</a>

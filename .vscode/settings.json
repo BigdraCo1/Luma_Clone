@@ -1,10 +1,8 @@
 {
-    "js/ts.implicitProjectConfig.checkJs": true,
-    "editor.formatOnSave": true,
-    "[html]": {
+    "[css]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    "[css]": {
+    "[html]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
     "[javascript]": {
@@ -12,5 +10,10 @@
     },
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
-    }
+    },
+    "editor.codeActionsOnSave": {
+        "source.organizeImports": "explicit"
+    },
+    "editor.formatOnSave": true,
+    "js/ts.implicitProjectConfig.checkJs": true
 }

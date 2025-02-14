@@ -1,5 +1,5 @@
 # Ignore personal files such as todo lists, notes, etc.
-personal/
+Personal/
 
 # Ignore binary and build related files
 bin/
@@ -7,9 +7,14 @@ obj/
 alma.sln
 
 # Ignore database files
-mongodb-data/*
+Databases/*
+!Databases/.gitkeep
 
 # Ignore .env files
 .env
 .env.*
 !.env.example
+
+# Ignore configuration files
+appsettings.json
+appsettings.Development.json

@@ -1,5 +1,14 @@
+# Ignore self
+.dockerignore
+
 # Ignore personal files such as todo lists, notes, etc.
 personal/
+
+# Ignore editor files
+.vscode/
+.editorconfig
+.prettierrc
+.priettierignore
 
 # Ignore binary and build related files
 bin/
@@ -7,9 +16,18 @@ obj/
 alma.sln
 
 # Ignore database files
-mongodb-data/*
+Databases/
 
 # Ignore .env files
 .env
 .env.*
 !.env.example
+
+# Ignore example files
+appsettings.example.json
+appsettings.Development.example.json
+
+# Ignore git and human files
+.git/
+.git*
+*.md
