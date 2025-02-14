@@ -65,15 +65,19 @@ public class OauthRedirectModel(IConfiguration config, DatabaseContext context, 
         if (user is null) {
             isNewUser = true;
 
-            var profilePictureResponse = await _client.GetAsync(userInfo!["picture"].GetString()!);
-            var profilePicture = await profilePictureResponse.Content.ReadAsByteArrayAsync();
+            var avatarResponse = await _client.GetAsync(userInfo!["picture"].GetString()!);
+            var avatar = await avatarResponse.Content.ReadAsByteArrayAsync();
+            var avatarType = avatarResponse.Content.Headers.ContentType!.MediaType!;
 
             var newUser = new User {
                 Id = userId,
                 Email = userInfo!["email"].GetString()!,
                 Name = userInfo!["name"].GetString()!,
                 Username = Formatter.Slugify(userInfo!["name"].GetString()!),
-                ProfilePicture = profilePicture,
+                PhoneNumber = "",
+                Avatar = avatar,
+                AvatarType = avatarType,
+                Bio = "",
                 CreatedAt = DateTime.Now
             };
 

@@ -1,4 +1,8 @@
+using System.Globalization;
+
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 
 using alma.Contexts;
@@ -9,7 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("Main") ?? throw new InvalidOperationException("Connection string not found.")));
 
-builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services.AddLocalization(options => options.ResourcesPath = "");
 builder.Services.AddRazorPages().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
     .AddDataAnnotationsLocalization();
 
@@ -18,9 +22,22 @@ var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(sup
     .AddSupportedCultures(supportedCultures)
     .AddSupportedUICultures(supportedCultures);
 
+localizationOptions.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(async context => {
+    var userLang = context.Request.Cookies["lang"];
+
+    if (!string.IsNullOrEmpty(userLang) && supportedCultures.Contains(userLang)) {
+        var culture = new CultureInfo(userLang);
+        return new ProviderCultureResult(culture.Name, culture.Name);
+    }
+
+    return await Task.FromResult(new ProviderCultureResult(supportedCultures[0], supportedCultures[0]));
+}));
+
 builder.Services.AddHttpClient();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<ISessionService, SessionService>();
+builder.Services.AddScoped<IIconService, IconService>();
 
 var app = builder.Build();
 
@@ -30,7 +47,11 @@ if (!app.Environment.IsDevelopment()) {
     app.UseDeveloperExceptionPage();
 }
 
-app.UseStaticFiles();
+var provider = new FileExtensionContentTypeProvider();
+provider.Mappings[".avif"] = "image/avif";
+app.UseStaticFiles(new StaticFileOptions {
+    ContentTypeProvider = provider
+});
 
 app.UseRouting();
 

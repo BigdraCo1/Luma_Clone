@@ -19,12 +19,12 @@ public class Formatter {
             if (allowedChars.Contains(c)) {
                 output += c;
             } else if (c == ' ') {
-                output += '_';
+                output += '-';
             }
         }
 
         if (output.Length == 0) {
-            // generate a random slug
+            // generate a random slug if the input can't be converted
             return Token.Generate(128);
         }
 

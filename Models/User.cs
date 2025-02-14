@@ -16,11 +16,17 @@ public class User {
     [Required]
     public required string Username { get; set; }
 
-    public string? PhoneNumber { get; set; }
+    [Required]
+    public required string PhoneNumber { get; set; }
 
-    public byte[]? ProfilePicture { get; set; }
+    [Required]
+    public required byte[] Avatar { get; set; }
 
-    public string? Bio { get; set; }
+    [Required]
+    public required string AvatarType { get; set; }
+
+    [Required]
+    public required string Bio { get; set; }
 
     [Required]
     public required DateTime CreatedAt { get; set; }
@@ -34,6 +40,8 @@ public class User {
     public ICollection<User> Following { get; } = [];
 
     public ICollection<User> Followers { get; } = [];
+
+    public ICollection<Tag> FollowedTags { get; } = [];
 
     public ICollection<Session> Sessions { get; } = [];
 

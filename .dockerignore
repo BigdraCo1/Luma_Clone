@@ -9,6 +9,7 @@ personal/
 .editorconfig
 .prettierrc
 .priettierignore
+tailwind.config.js
 
 # Ignore binary and build related files
 bin/

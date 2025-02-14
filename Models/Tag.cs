@@ -10,5 +10,16 @@ public class Tag {
     [Required]
     public required string Name { get; set; }
 
+    [Required]
+    public required string Description { get; set; }
+
+    [Required]
+    public required byte[] Image { get; set; }
+
+    [Required]
+    public required string ImageType { get; set; }
+
     public ICollection<Event> Events { get; } = [];
+
+    public ICollection<User> Followers { get; } = [];
 }

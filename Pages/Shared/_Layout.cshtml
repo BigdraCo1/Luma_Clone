@@ -1,3 +1,17 @@
+@using alma.Services
+
+@inject IHttpContextAccessor HttpContext
+@inject IIconService Icon
+@inject ISessionService Session
+@inject IViewLocalizer Localizer
+
+@{
+    var user = HttpContext.HttpContext!.Request.Cookies["session"] is not null
+    ? Session.GetUser(HttpContext.HttpContext.Request.Cookies["session"]!)
+    : null;
+    var avatarUrl = user is not null ? @Url.Page("/Users/Avatar", "Avatar", new { id = user.Id }) : null;
+}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,15 +19,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
-    <meta property="og:title" content="Alma" />
-    <meta property="og:description" content="Alma event management platform" />
-    <meta name="description" content="Alma event management platform" />
+    <meta property="og:title" content="alma" />
+    <meta property="og:description" content="alma event management platform" />
+    <meta name="description" content="alma event management platform" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="@Configuration.GetSection("Public")["Origin"]/" />
-    <meta property="og:image" content="@Configuration.GetSection("Public")["Origin"]/logo-256x256.png" />
+    <meta property="og:url" content="@Config.GetSection("Public")["Origin"]/" />
+    <meta property="og:image" content="@Config.GetSection("Public")["Origin"]/logo-256x256.png" />
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="stylesheet" href="/css/alma.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    @RenderSection("Head", required: false)
+    @RenderSection("Styles", required: false)
+    @RenderSection("Scripts", required: false)
 </head>
 
 <body>
+    <nav class="flex items-center justify-between pb-4 mx-4 my-3 sm:mx-8 sm:my-6">
+        <a href="/" class="block">
+            <img src="/images/banner/banner-272x99.avif" width="75" height="27" alt="alma">
+        </a>
+        @if (user is not null)
+        {
+            <div class="flex items-center gap-4 sm:gap-8">
+                <a href="/events"
+                    class="flex items-center gap-1 text-sm font-medium text-white no-underline transition-all hover:scale-105">
+                    @Icon.Inline("search")
+                    <span class="hidden sm:inline">@Localizer["Discover"]</span>
+                </a>
+                <a href="/events/my-events"
+                    class="items-center hidden gap-1 text-sm font-medium text-white no-underline transition-all hover:scale-105 sm:flex">
+                    @Icon.Inline("ticket")
+                    @Localizer["MyEvents"]
+                </a>
+                <a href="/events/create"
+                    class="flex items-center gap-1 py-1 pl-2 pr-4 text-sm font-medium no-underline transition-all bg-white rounded-full hover:scale-105 text-darkblue">
+                    @Icon.Inline("plus")
+                    <span class="hidden sm:inline">@Localizer["CreateEvent"]</span>
+                    <span class="sm:hidden">@Localizer["Create"]</span>
+                </a>
+                <div class="flex items-center user-action-trigger" tabindex="0">
+                    <img src="@avatarUrl" width="40px" height="40px" class="transition-all rounded-full hover:scale-105"
+                        alt="user avatar">
+                    <div class="user-action-content">
+                        <div class="relative flex items-center gap-3 p-3 border-b border-b-gray-400">
+                            <img src="@avatarUrl" width="40px" height="40px" class="rounded-full" alt="user avatar">
+                            <div class="overflow-hidden">
+                                <span
+                                    class="block text-sm font-medium text-white overflow-ellipsis text-nowrap">@user.Name</span>
+                                <span class="block text-xs text-gray-400 text-nowrap overflow-ellipsis">@user.Email</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-5 px-3 py-4">
+                            <a href="events/my-events" class="text-gray-400 no-underline">@Localizer["MyEvents"]</a>
+                            <a href="users/profile/edit" class="text-gray-400 no-underline">@Localizer["Profile"]</a>
+                            @* Implement language setting here *@
+                            <a href="/auth/logout" class="text-gray-400 no-underline">@Localizer["Logout"]</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="flex items-center gap-4 sm:gap-8">
+                <a href="/events"
+                    class="flex items-center gap-1 text-sm font-medium text-white no-underline transition-all hover:scale-105">
+                    @Localizer["Discover"]
+                    @Icon.Inline("arrow-up-right")
+                </a>
+                <a href="/auth/login?next=@HttpContext.HttpContext.Request.Path"
+                    class="px-4 py-2 text-sm font-medium text-white no-underline transition-all rounded-full hover:scale-105 bg-bright-red">@Localizer["Login"]</a>
+            </div>
+        }
+    </nav>
     @RenderBody()
 </body>
 

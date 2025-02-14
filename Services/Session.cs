@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 using alma.Contexts;
 using alma.Models;
 using alma.Utils;
@@ -6,7 +8,9 @@ namespace alma.Services;
 
 public interface ISessionService {
     Task<Session> GenerateAsync(User user);
+    Session Generate(User user);
     Task<User?> GetUserAsync(string token);
+    User? GetUser(string token);
 }
 
 /// <summary>
@@ -38,6 +42,25 @@ public class SessionService(IConfiguration config, DatabaseContext context) : IS
     }
 
     /// <summary>
+    /// Generates a session for a user.
+    /// </summary>
+    /// <param name="user">The user to generate a session for</param>
+    /// <returns>The generated ession</returns>
+    public Session Generate(User user) {
+        var session = new Session {
+            Token = Token.Generate(_config.GetValue<int>("Session:Entropy")),
+            User = user,
+            ExpiresAt = DateTime.Now.AddSeconds(_config.GetValue<int>("Session:Lifetime")),
+            IssuedAt = DateTime.Now
+        };
+
+        _context.Session.Add(session);
+        _context.SaveChanges();
+
+        return session;
+    }
+
+    /// <summary>
     /// Gets a user from a token.
     /// </summary>
     /// <param name="token">The session token</param>
@@ -56,6 +79,33 @@ public class SessionService(IConfiguration config, DatabaseContext context) : IS
 
         session.LastUsedAt = DateTime.Now;
         await _context.SaveChangesAsync();
+
+        await _context.Entry(session).Reference(s => s.User).LoadAsync();
+
+        return session.User;
+    }
+
+    /// <summary>
+    /// Gets a user from a token.
+    /// </summary>
+    /// <param name="token">The session token</param>
+    /// <returns>The user associated with the session if it is valid, null otherwise</returns>
+    public User? GetUser(string token) {
+        var session = _context.Session.Find(token);
+        if (session is null) {
+            return null;
+        }
+
+        if (session.ExpiresAt < DateTime.Now) {
+            _context.Session.Remove(session);
+            _context.SaveChanges();
+            return null;
+        }
+
+        session.LastUsedAt = DateTime.Now;
+        _context.SaveChanges();
+
+        _context.Entry(session).Reference(s => s.User).Load();
 
         return session.User;
     }

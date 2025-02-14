@@ -16,7 +16,10 @@ namespace alma.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", nullable: false)
+                    Name = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Image = table.Column<byte[]>(type: "BLOB", nullable: false),
+                    ImageType = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,9 +34,10 @@ namespace alma.Migrations
                     Email = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
                     Username = table.Column<string>(type: "TEXT", nullable: false),
-                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: true),
-                    ProfilePicture = table.Column<byte[]>(type: "BLOB", nullable: true),
-                    Bio = table.Column<string>(type: "TEXT", nullable: true),
+                    PhoneNumber = table.Column<string>(type: "TEXT", nullable: false),
+                    Avatar = table.Column<byte[]>(type: "BLOB", nullable: false),
+                    AvatarType = table.Column<string>(type: "TEXT", nullable: false),
+                    Bio = table.Column<string>(type: "TEXT", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -47,8 +51,9 @@ namespace alma.Migrations
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     Name = table.Column<string>(type: "TEXT", nullable: false),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
-                    Image = table.Column<byte[]>(type: "BLOB", nullable: true),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Image = table.Column<byte[]>(type: "BLOB", nullable: false),
+                    ImageType = table.Column<string>(type: "TEXT", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     StartAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     EndAt = table.Column<DateTime>(type: "TEXT", nullable: false),
@@ -109,6 +114,30 @@ namespace alma.Migrations
                     table.ForeignKey(
                         name: "FK_Social_User_UserId",
                         column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TagUser",
+                columns: table => new
+                {
+                    FollowedTagsId = table.Column<string>(type: "TEXT", nullable: false),
+                    FollowersId = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TagUser", x => new { x.FollowedTagsId, x.FollowersId });
+                    table.ForeignKey(
+                        name: "FK_TagUser_Tag_FollowedTagsId",
+                        column: x => x.FollowedTagsId,
+                        principalTable: "Tag",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_TagUser_User_FollowersId",
+                        column: x => x.FollowersId,
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -267,6 +296,11 @@ namespace alma.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_TagUser_FollowersId",
+                table: "TagUser",
+                column: "FollowersId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_UserAttendEvent_UserId",
                 table: "UserAttendEvent",
                 column: "UserId");
@@ -291,6 +325,9 @@ namespace alma.Migrations
 
             migrationBuilder.DropTable(
                 name: "Social");
+
+            migrationBuilder.DropTable(
+                name: "TagUser");
 
             migrationBuilder.DropTable(
                 name: "UserAttendEvent");
