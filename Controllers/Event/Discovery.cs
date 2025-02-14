@@ -34,7 +34,9 @@ namespace alma.Pages.Event
 
         public Dictionary<string, int> GetTagEventCounts()
         {
-            return Tags.ToDictionary(tag => tag.Name, tag => tag.EventTus.Count);
+            return Tags
+                .Where(tag => !string.IsNullOrEmpty(tag.Name))
+                .ToDictionary(tag => tag.Name!, tag => tag.EventTus.Count);
         }
     }
 }

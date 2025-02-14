@@ -18,7 +18,7 @@ namespace alma.Pages.Event
             _context = context;
         }
 
-        public EventModel EventModel { get; set; }
+        public EventModel? EventModel { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string tuid)
         {

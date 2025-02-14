@@ -18,7 +18,7 @@ namespace alma.Pages.User
             _context = context;
         }
 
-        public UserModel UserModel { get; set; }
+        public UserModel? UserModel { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string tuid)
         {
