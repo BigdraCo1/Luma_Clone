@@ -159,6 +159,10 @@ body {
     max-width: 60rem;
 }
 
+.max-w-260 {
+    max-width: 65rem;
+}
+
 .text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
