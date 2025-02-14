@@ -11,7 +11,7 @@ public class LoginModel : PageModel {
     public IActionResult OnGet() {
         var stateNounce = Token.Generate(128);
         var redirectTo = HttpContext.Request.Query["next"].ToString();
-        redirectTo = UrlEncoding.Decode(redirectTo);
+        redirectTo = UrlEncoder.Decode(redirectTo);
 
         if (redirectTo.Length <= 0) {
             redirectTo = "/";

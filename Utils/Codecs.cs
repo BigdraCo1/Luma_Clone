@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication;
+
 namespace alma.Utils;
 
 /// <summary>
@@ -54,10 +56,7 @@ public class Base64Url {
     /// <param name="input">Byte array to encode</param>
     /// <returns>Base64url string</returns>
     public static string Encode(byte[] input) {
-        return Base64.Encode(input)
-            .Replace('+', '-')
-            .Replace('/', '_')
-            .TrimEnd('=');
+        return Base64UrlTextEncoder.Encode(input);
     }
 
     /// <summary>
@@ -75,10 +74,7 @@ public class Base64Url {
     /// <param name="input">Base64url string to decode</param>
     /// <returns>Decoded byte array</returns>
     public static byte[] Decode(string input) {
-        return Base64.Decode(
-            input.Replace('-', '+').Replace('_', '/') +
-            new string('=', (4 - input.Length % 4) % 4)
-        );
+        return Base64UrlTextEncoder.Decode(input);
     }
 
     /// <summary>
@@ -94,7 +90,7 @@ public class Base64Url {
 /// <summary>
 /// A utility class for encoding and decoding URL/percent encoding.
 /// </summary>
-public class UrlEncoding {
+public class UrlEncoder {
 
     /// <summary>
     /// Encodes a string to a URL encoded string.

@@ -16,8 +16,8 @@ public class Toast {
     /// <param name="type">Type of the toast, must be one of <see cref="ToastTypes"/></param>
     /// <returns>Query string for the toast, with no '?' at the start or '&amp;' at the end</returns>
     public static string GenerateQueryString(string message, string description, string type) {
-        message = UrlEncoding.Encode(message);
-        description = UrlEncoding.Encode(description);
+        message = UrlEncoder.Encode(message);
+        description = UrlEncoder.Encode(description);
         return $"message={message}&description={description}&type={type}";
     }
 }

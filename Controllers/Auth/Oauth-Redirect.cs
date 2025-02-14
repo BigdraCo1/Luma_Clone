@@ -94,7 +94,7 @@ public class OauthRedirectModel(IConfiguration config, DatabaseContext context, 
         });
 
         if (isNewUser) {
-            return Redirect($"/register?next={UrlEncoding.Encode(redirectTo)}");
+            return Redirect($"/register?next={UrlEncoder.Encode(redirectTo)}");
         }
         return Redirect(redirectTo);
     }
