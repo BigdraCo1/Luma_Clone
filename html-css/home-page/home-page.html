@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>กิจกรรมของฉัน</title>
+    <link rel="stylesheet" href="home-page.css">
+</head>
+<body>
+    <div class="main">
+        <header class="header">
+            <h1>กิจกรรมของฉัน</h1>
+            <div class="header-buttons">
+                <button class="header-btn">วันนี้</button>
+                <button class="header-btn">กำลังจะมาถึง</button>
+                <button class="header-btn">ที่ผ่านมา</button>
+            </div>
+        </header>
+
+        <div class="event-list">
+            <!-- Event Card 1 -->
+            <div class="event-card" data-status="upcoming">
+                <div class="date-section normal">
+                    <div class="date-number">24</div>
+                    <div class="date-month">Jan</div>
+                </div>
+                <div class="event-content">
+                    <div class="event-image">
+                        <img src="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/event-covers/sl/db950831-4883-4112-9a1d-e0ce4662a9fc.png" alt="Mammothon event">
+                    </div>
+                    <div class="event-details">
+                        <div class="event-time">12:00 - 13:00</div>
+                        <h2 class="event-title">Bangkok Entrepreneur / Wantrepreneurs and Angel Investors Meetup</h2>
+                        <div class="event-location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+                            Radisson Blu Plaza Hotel, Bangkok
+                        </div>
+                        <div class="event-attendees">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            24 คน
+                        </div>
+                        <div>
+                            <a href="#" class="action-btn comingsoon">กำลังจะมาถึง</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Card 2 -->
+            <div class="event-card" data-status="now">
+                <div class="date-section owner">
+                    <div class="date-number">24</div>
+                    <div class="date-month">Jan</div>
+                </div>
+                <div class="event-content">
+                    <div class="event-image">
+                        <img src="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/event-covers/nb/12312ea8-dfc5-4539-ac3d-4a9d0d736c8a.jpg" alt="Mammothon event">
+                    </div>
+                    <div class="event-details">
+                        <div class="event-time">12:00 - 13:00</div>
+                        <h2 class="event-title">Bangkok Entrepreneur / Wantrepreneurs and Angel Investors Meetup</h2>
+                        <div class="event-location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+                            Radisson Blu Plaza Hotel, Bangkok
+                        </div>
+                        <div class="event-attendees">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            24 คน
+                        </div>
+                        <div>
+                            <a href="#" class="action-btn now">วันนี้</a>
+                            <a href="#" class="action-btn config">จัดการกิจกรรม</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Event Card 3 -->
+            <div class="event-card" data-status="past">
+                <div class="date-section normal">
+                    <div class="date-number">24</div>
+                    <div class="date-month">Jan</div>
+                </div>
+                <div class="event-content">
+                    <div class="event-image">
+                        <img src="https://images.lumacdn.com/cdn-cgi/image/format=auto,fit=cover,dpr=2,background=white,quality=75,width=400,height=400/event-covers/wf/4ca81764-0968-4b1c-b693-af17315bce1a" alt="Mammothon event">
+                    </div>
+                    <div class="event-details">
+                        <div class="event-time">12:00 - 13:00</div>
+                        <h2 class="event-title">Bangkok Entrepreneur / Wantrepreneurs and Angel Investors Meetup</h2>
+                        <div class="event-location">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
+                            Radisson Blu Plaza Hotel, Bangkok
+                        </div>
+                        <div class="event-attendees">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-users"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                            24 คน
+                        </div>
+                        <div>
+                            <a href="#" class="action-btn past">จบเเล้ว</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const buttons = document.querySelectorAll(".header-btn");
+            const eventCards = document.querySelectorAll(".event-card");
+        
+            buttons.forEach((button) => {
+                button.addEventListener("click", function () {
+                    // เปลี่ยนปุ่ม active
+                    buttons.forEach((btn) => btn.classList.remove("active"));
+                    this.classList.add("active");
+        
+                    // กำหนดประเภทของปุ่มที่ถูกเลือก
+                    let filterType = "";
+                    if (this.textContent.trim() === "วันนี้") {
+                        filterType = "now";
+                    } else if (this.textContent.trim() === "กำลังจะมาถึง") {
+                        filterType = "upcoming";
+                    } else {
+                        filterType = "past";
+                    }
+        
+                    // กรองกิจกรรม
+                    eventCards.forEach((card) => {
+                        if (card.dataset.status === filterType) {
+                            card.style.display = "flex"; // แสดง
+                        } else {
+                            card.style.display = "none"; // ซ่อน
+                        }
+                    });
+                });
+            });
+        });
+        
+        
+    </script>
+</body>
+</html>

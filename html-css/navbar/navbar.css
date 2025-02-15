@@ -1,4 +1,4 @@
-/* * {
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -9,7 +9,7 @@ body {
     background-color: #000480;
     height: 1000px;
 }
- */
+
 
 .navbar {
     width: 100%;
@@ -66,9 +66,7 @@ body {
     color: #EAEAEA;
 }
 
-.navbar .discover i{
-    font-size: 24px;
-}
+
 
 .navbar .btn {
     padding: 0.4rem 1rem;
