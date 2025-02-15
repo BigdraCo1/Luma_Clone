@@ -14,6 +14,39 @@
     background-color: rgb(255 37 37);
 }
 
+.bg-gray-200 {
+    background-color: rgb(229 231 235);
+}
+
+.bg-gray-300 {
+    background-color: rgb(209 213 219);
+}
+
+.bg-gray-700 {
+    background-color: rgb(55 65 81);
+}
+
+.bg-gray-800 {
+    background-color: rgb(31 41 55);
+}
+
+.bg-gray-900 {
+    background-color: rgb(17 24 39);
+}
+
+.bg-rainbow {
+    background: radial-gradient(
+        circle at top left,
+        #099ef1 0%,
+        #6863f8 18.82%,
+        #d84ffa 32.6%,
+        #f058c5 52.83%,
+        #ff4f90 68.03%,
+        #ff6558 87.66%,
+        #ff891f 100%
+    );
+}
+
 .bg-red-500 {
     background-color: rgb(239 68 68);
 }
@@ -33,6 +66,10 @@
         #ff6558 87.66%,
         #ff891f 100%
     );
+}
+
+.bg-transparent {
+    background-color: transparent;
 }
 
 .bg-white {
@@ -59,6 +96,14 @@
 
 .border-gray-400 {
     border-color: rgb(156 163 175);
+}
+
+.border-none {
+    border-style: none;
+}
+
+.cursor-pointer {
+    cursor: pointer;
 }
 
 .flex {
@@ -129,6 +174,10 @@
     height: auto;
 }
 
+.h-fit {
+    height: fit-content;
+}
+
 .hidden {
     display: none;
 }
@@ -147,6 +196,18 @@
 
 .justify-center {
     justify-content: center;
+}
+
+.login-offset-logo {
+    position: absolute;
+    top: -1rem;
+    left: -2rem;
+    width: 4rem;
+    height: 4rem;
+}
+
+.m-0 {
+    margin: 0;
 }
 
 .m-1 {
@@ -197,6 +258,14 @@
     margin-bottom: 2rem;
 }
 
+.ml-2 {
+    margin-left: 0.5rem;
+}
+
+.mr-auto {
+    margin-right: auto;
+}
+
 .mt-0 {
     margin-top: 0;
 }
@@ -211,6 +280,10 @@
 
 .mt-4 {
     margin-top: 1rem;
+}
+
+.mt-8 {
+    margin-top: 2rem;
 }
 
 .mx-4 {
@@ -249,6 +322,18 @@ body {
     overflow: hidden;
 }
 
+.p-0 {
+    padding: 0;
+}
+
+.p-12 {
+    padding: 3rem;
+}
+
+.p-16 {
+    padding: 4rem;
+}
+
 .p-2 {
     padding: 0.5rem;
 }
@@ -261,8 +346,24 @@ body {
     padding: 1rem;
 }
 
+.p-4 {
+    padding: 1rem;
+}
+
+.p-8 {
+    padding: 2rem;
+}
+
+.pb-12 {
+    padding-bottom: 3rem;
+}
+
 .pb-4 {
     padding-bottom: 1rem;
+}
+
+.pb-8 {
+    padding-bottom: 2rem;
 }
 
 .pl-1 {
@@ -291,6 +392,11 @@ body {
 
 .pt-4 {
     padding-top: 1rem;
+}
+
+.px-12 {
+    padding-right: 3rem;
+    padding-left: 3rem;
 }
 
 .px-16 {
@@ -328,6 +434,11 @@ body {
     padding-bottom: 0.5rem;
 }
 
+.py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+}
+
 .py-4 {
     padding-top: 1rem;
     padding-bottom: 1rem;
@@ -337,12 +448,9 @@ body {
     position: relative;
 }
 
-:root {
-    font-style: normal;
-    font-weight: 400;
-    font-family: "Roboto", "Noto Sans Thai", Arial, Helvetica, sans-serif;
-    font-optical-sizing: auto;
-    font-variation-settings: "wdth" 100;
+.rounded-b-3xl {
+    border-bottom-right-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
 }
 
 .rounded-full {
@@ -353,24 +461,18 @@ body {
     border-radius: 0.5rem;
 }
 
-.rounded-xl {
-    border-radius: 1rem;
+.rounded-t-3xl {
+    border-top-right-radius: 1.5rem;
+    border-top-left-radius: 1.5rem;
 }
 
-.subtitle-rainbow {
-    background: radial-gradient(
-        circle at top left,
-        #099ef1 0%,
-        #6863f8 18.82%,
-        #d84ffa 32.6%,
-        #f058c5 52.83%,
-        #ff4f90 68.03%,
-        #ff6558 87.66%,
-        #ff891f 100%
-    );
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
+.rounded-t-xl {
+    border-top-right-radius: 0.75rem;
+    border-top-left-radius: 0.75rem;
+}
+
+.rounded-xl {
+    border-radius: 1rem;
 }
 
 .text-4xl {
@@ -391,6 +493,15 @@ body {
 .text-8xl {
     font-size: 6rem;
     line-height: 1;
+}
+
+.text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.text-black {
+    color: rgb(0 0 0);
 }
 
 .text-center {
@@ -414,6 +525,22 @@ body {
     text-wrap: nowrap;
 }
 
+.text-rainbow {
+    background: radial-gradient(
+        circle at top left,
+        #099ef1 0%,
+        #6863f8 18.82%,
+        #d84ffa 32.6%,
+        #f058c5 52.83%,
+        #ff4f90 68.03%,
+        #ff6558 87.66%,
+        #ff891f 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 .text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -431,6 +558,55 @@ body {
 .text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
+}
+
+.toast {
+    backdrop-filter: blur(0.5rem);
+    margin-bottom: 1rem;
+    border-radius: 0.75rem;
+    padding: 0.75rem;
+    width: 16rem;
+    color: rgb(255 255 255);
+}
+
+.toast-body {
+    font-size: 0.925rem;
+    line-height: 1.25rem;
+}
+
+.toast-close {
+    border-style: none;
+    background-color: transparent;
+}
+
+#toast-container {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 1000;
+}
+
+.toast-error {
+    background-color: #ff2600c0;
+}
+
+.toast-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-weight: 500;
+}
+
+.toast-info {
+    background-color: #268adcc0;
+}
+
+.toast-success {
+    background-color: #54a71dc0;
+}
+
+.toast-warning {
+    background-color: #ff9800c0;
 }
 
 .transition-all {
@@ -451,7 +627,7 @@ body {
     transition: scale 0.2s ease, opacity 0.2s ease;
     border: 1px solid rgb(156 163 175);
     border-radius: 0.5rem;
-    background: linear-gradient(180deg, #00000060 0%, #00000030 100%);
+    background: linear-gradient(180deg, #000000a0 0%, #00000080 100%);
     width: 12rem;
 }
 
@@ -466,6 +642,42 @@ body {
 .user-action-trigger:focus-within .user-action-content {
     scale: 1;
     opacity: 1;
+}
+
+button {
+    cursor: pointer;
+}
+
+:root {
+    font-style: normal;
+    font-weight: 400;
+    font-family: "Roboto", "Noto Sans Thai", Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings: "wdth" 100;
+}
+
+input {
+    font-style: normal;
+    font-weight: 400;
+    font-family: "Roboto", "Noto Sans Thai", Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings: "wdth" 100;
+}
+
+textarea {
+    font-style: normal;
+    font-weight: 400;
+    font-family: "Roboto", "Noto Sans Thai", Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings: "wdth" 100;
+}
+
+button {
+    font-style: normal;
+    font-weight: 400;
+    font-family: "Roboto", "Noto Sans Thai", Arial, Helvetica, sans-serif;
+    font-optical-sizing: auto;
+    font-variation-settings: "wdth" 100;
 }
 
 .w-0 {
@@ -538,6 +750,16 @@ body {
         line-height: 1.75rem;
     }
 
+    .md\:text-2xl {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+
+    .md\:text-xl {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+    }
+
     .md\:flex-row {
         flex-direction: row;
     }
@@ -545,6 +767,10 @@ body {
     .md\:px-16 {
         padding-right: 4rem;
         padding-left: 4rem;
+    }
+
+    .md\:p-12 {
+        padding: 3rem;
     }
 
     .md\:w-80 {
@@ -562,6 +788,10 @@ body {
 
     .md\:w-64 {
         width: 16rem;
+    }
+
+    .md\:flex-grow {
+        flex-grow: 1;
     }
 }
 
@@ -596,7 +826,45 @@ body {
         gap: 2rem;
     }
 
+    .sm\:pb-12 {
+        padding-bottom: 3rem;
+    }
+
+    .sm\:p-8 {
+        padding: 2rem;
+    }
+
+    .sm\:p-12 {
+        padding: 3rem;
+    }
+
+    .sm\:text-2xl {
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+
+    .sm\:text-3xl {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+    }
+
+    .sm\:mt-8 {
+        margin-top: 2rem;
+    }
+
     .user-action-content {
         width: 16rem;
+    }
+
+    .login-offset-logo {
+        position: absolute;
+        top: -4rem;
+        left: -6rem;
+        width: 12rem;
+        height: 12rem;
+    }
+
+    .toast {
+        width: 24rem;
     }
 }

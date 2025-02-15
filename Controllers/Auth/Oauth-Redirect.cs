@@ -92,7 +92,7 @@ public class OauthRedirectModel(IConfiguration config, DatabaseContext context, 
         HttpContext.Response.Cookies.Append("session", session.Token, new CookieOptions {
             HttpOnly = true,
             Secure = true,
-            SameSite = SameSiteMode.Strict,
+            SameSite = SameSiteMode.Lax,
             Expires = session.ExpiresAt.AddYears(1) // Add 1 year extra to track whether user have logged in before or not
                                                     // Even after the session expired on the server side
         });

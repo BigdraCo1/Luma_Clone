@@ -1,15 +1,19 @@
+@using System.Globalization;
+
 @using alma.Services
 
-@inject IHttpContextAccessor HttpContext
-@inject IIconService Icon
-@inject ISessionService Session
+@inject IHttpContextAccessor ContextAccessor
 @inject IViewLocalizer Localizer
+@inject ISessionService Session
+@inject IIconService Icon
 
 @{
-    var user = HttpContext.HttpContext!.Request.Cookies["session"] is not null
-    ? Session.GetUser(HttpContext.HttpContext.Request.Cookies["session"]!)
+    var user = ContextAccessor.HttpContext!.Request.Cookies["session"] is not null
+    ? Session.GetUser(ContextAccessor.HttpContext.Request.Cookies["session"]!)
     : null;
     var avatarUrl = user is not null ? @Url.Page("/Users/Avatar", "Avatar", new { id = user.Id }) : null;
+
+    var currentCulture = CultureInfo.CurrentCulture.Name;
 }
 
 <!DOCTYPE html>
@@ -30,12 +34,19 @@
     <link rel="shortcut icon" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="stylesheet" href="/css/alma.css" />
+    <link rel="stylesheet" href="/styles/alma.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+    <script>
+        function setCulture(culture) {
+            document.cookie = `lang=${culture};path=/;max-age=31536000`; // 1 year
+            location.reload();
+        }
+    </script>
+    <script src="/scripts/toast.js" defer></script>
     @RenderSection("Head", required: false)
     @RenderSection("Styles", required: false)
     @RenderSection("Scripts", required: false)
@@ -78,10 +89,26 @@
                             </div>
                         </div>
                         <div class="flex flex-col gap-5 px-3 py-4">
-                            <a href="events/my-events" class="text-gray-400 no-underline">@Localizer["MyEvents"]</a>
-                            <a href="users/profile/edit" class="text-gray-400 no-underline">@Localizer["Profile"]</a>
-                            @* Implement language setting here *@
+                            <a href="/events/my-events" class="text-gray-400 no-underline">@Localizer["MyEvents"]</a>
+                            <a href="/users/edit-profile" class="text-gray-400 no-underline">@Localizer["Profile"]</a>
+                            <div class="flex items-center gap-2">
+                                @if (currentCulture == "th")
+                                {
+                                    <button class="p-0 text-base text-gray-400 bg-transparent border-none cursor-pointer"
+                                        onclick="setCulture('en')">
+                                        Switch to English
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button class="p-0 text-base text-gray-400 bg-transparent border-none cursor-pointer"
+                                        onclick="setCulture('th')">
+                                        เปลี่ยนเป็นภาษาไทย
+                                    </button>
+                                }
+                            </div>
                             <a href="/auth/logout" class="text-gray-400 no-underline">@Localizer["Logout"]</a>
+                            <a href="/auth/logout-all" class="text-gray-400 no-underline">@Localizer["LogoutAll"]</a>
                         </div>
                     </div>
                 </div>
@@ -95,12 +122,13 @@
                     @Localizer["Discover"]
                     @Icon.Inline("arrow-up-right")
                 </a>
-                <a href="/auth/login?next=@HttpContext.HttpContext.Request.Path"
+                <a href="/auth/login?next=@ContextAccessor.HttpContext.Request.Path"
                     class="px-4 py-2 text-sm font-medium text-white no-underline transition-all rounded-full hover:scale-105 bg-bright-red">@Localizer["Login"]</a>
             </div>
         }
     </nav>
     @RenderBody()
+    <div id="toast-container"></div>
 </body>
 
 </html>

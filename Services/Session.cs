@@ -11,6 +11,10 @@ public interface ISessionService {
     Session Generate(User user);
     Task<User?> GetUserAsync(string token);
     User? GetUser(string token);
+    Task DeleteSessionAsync(string token);
+    void DeleteSession(string token);
+    Task DeleteSessionsForUserAsync(User user);
+    void DeleteSessionsForUser(User user);
 }
 
 /// <summary>
@@ -108,5 +112,57 @@ public class SessionService(IConfiguration config, DatabaseContext context) : IS
         _context.Entry(session).Reference(s => s.User).Load();
 
         return session.User;
+    }
+
+    /// <summary>
+    /// Deletes a session.
+    /// </summary>
+    /// <param name="token">The session token</param>
+    /// <returns></returns>
+    public async Task DeleteSessionAsync(string token) {
+        var session = await _context.Session.FindAsync(token);
+        if (session is null) {
+            return;
+        }
+
+        _context.Session.Remove(session);
+        await _context.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Deletes a session.
+    /// </summary>
+    /// <param name="token">The session token</param>
+    /// <returns></returns>
+    public void DeleteSession(string token) {
+        var session = _context.Session.Find(token);
+        if (session is null) {
+            return;
+        }
+
+        _context.Session.Remove(session);
+        _context.SaveChanges();
+    }
+
+    /// <summary>
+    /// Deletes all sessions for a user.
+    /// </summary>
+    /// <param name="user">The user to delete sessions for</param>
+    /// <returns></returns>
+    public async Task DeleteSessionsForUserAsync(User user) {
+        var sessions = await _context.Session.Where(s => s.User == user).ToListAsync();
+        _context.Session.RemoveRange(sessions);
+        await _context.SaveChangesAsync();
+    }
+
+    /// <summary>
+    /// Deletes all sessions for a user.
+    /// </summary>
+    /// <param name="user">The user to delete sessions for</param>
+    /// <returns></returns>
+    public void DeleteSessionsForUser(User user) {
+        var sessions = _context.Session.Where(s => s.User == user).ToList();
+        _context.Session.RemoveRange(sessions);
+        _context.SaveChanges();
     }
 }

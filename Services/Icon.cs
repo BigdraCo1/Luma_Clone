@@ -7,6 +7,7 @@ namespace alma.Services;
 public interface IIconService {
     IHtmlContent Inline(
         string name,
+        string lib = "lucide",
         string classes = "",
         string size = "",
         string fill = "",
@@ -38,6 +39,7 @@ public class IconService(IWebHostEnvironment env) : IIconService {
     /// <returns>HTML string of the icon for inline embedding.</returns>
     public IHtmlContent Inline(
         string name,
+        string lib = "lucide",
         string classes = "",
         string size = "",
         string fill = "",
@@ -47,7 +49,7 @@ public class IconService(IWebHostEnvironment env) : IIconService {
         string strokeLinejoin = ""
     ) {
         var fileName = $"{name}.svg";
-        var filePath = Path.Combine(_env.WebRootPath, "lib", "lucide", fileName);
+        var filePath = Path.Combine(_env.WebRootPath, "lib", lib, fileName);
         var svg = new Svg(filePath);
 
         if (classes.Length > 0) {

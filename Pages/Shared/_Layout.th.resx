@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <data name="Discover" xml:space="preserve">
-      <value>สำรวจ</value>
-    </data>
-    <data name="CreateEvent" xml:space="preserve">
-      <value>สร้างกิจกรรม</value>
-    </data>
-    <data name="Create" xml:space="preserve">
-      <value>สร้าง</value>
-    </data>
-    <data name="MyEvents" xml:space="preserve">
-      <value>กิจกรรมของฉัน</value>
-    </data>
-    <data name="Profile" xml:space="preserve">
-      <value>แก้ไขโปรไฟล์</value>
-    </data>
-    <data name="Logout" xml:space="preserve">
-      <value>ออกจากระบบ</value>
-    </data>
-    <data name="Login" xml:space="preserve">
-      <value>เข้าสู่ระบบ</value>
-    </data>
+  <data name="Culture" xml:space="preserve">
+    <value>th</value>
+  </data>
+  <data name="Discover" xml:space="preserve">
+    <value>สำรวจ</value>
+  </data>
+  <data name="CreateEvent" xml:space="preserve">
+    <value>สร้างกิจกรรม</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>สร้าง</value>
+  </data>
+  <data name="MyEvents" xml:space="preserve">
+    <value>กิจกรรมของฉัน</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>แก้ไขโปรไฟล์</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>ออกจากระบบ</value>
+  </data>
+  <data name="LogoutAll" xml:space="preserve">
+    <value>ออกจากระบบบนทุกเครื่อง</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>เข้าสู่ระบบ</value>
+  </data>
 </root>
