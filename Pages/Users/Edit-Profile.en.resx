@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="YourProfile" xml:space="preserve">
+      <value>Your Profile</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+      <value>Choose how you are displayed as a host or guest.</value>
+    </data>
+    <data name="Name" xml:space="preserve">
+      <value>Name</value>
+    </data>
+    <data name="Username" xml:space="preserve">
+      <value>Username</value>
+    </data>
+    <data name="Bio" xml:space="preserve">
+      <value>Bio</value>
+    </data>
+</root>

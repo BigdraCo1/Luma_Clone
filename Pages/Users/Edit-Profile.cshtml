@@ -1,2 +1,25 @@
 @page
 @model alma.Controllers.Users.EditProfileModel
+
+@{
+    ViewData["Title"] = "Your Profile";
+}
+
+<div class="max-w-240">
+    <h1>@Localizer["YourProfile"]</h1>
+    <p>@Localizer["Description"]</p>
+    <div>
+        <div>
+            <img src="@Url.Page("/Users/Avatar", "Avatar", new { id = Model.CurrentUser.Id })" alt="Your avatar"
+                class="rounded-full">
+        </div>
+        <div>
+            <label for="name">@Localizer["Name"]</label>
+            <input type="text" id="name" name="name" value="@Model.CurrentUser.Name" />
+            <label for="username">@Localizer["Username"]</label>
+            <input type="text" id="username" name="username" value="@Model.CurrentUser.Username" />
+            <label for="bio">@Localizer["Bio"]</label>
+            <textarea id="bio" name="bio">@Model.CurrentUser.Bio</textarea>
+        </div>
+    </div>
+</div>

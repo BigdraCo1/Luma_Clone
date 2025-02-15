@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="YourProfile" xml:space="preserve">
+      <value>โปรไฟล์ของคุณ</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+      <value>เลือกวิธีทีโปรไฟล์ของคุณจะถูกแสดง</value>
+    </data>
+    <data name="Name" xml:space="preserve">
+      <value>ชื่อที่แสดง</value>
+    </data>
+    <data name="Username" xml:space="preserve">
+      <value>ชื่อผู้ใช้</value>
+    </data>
+    <data name="Bio" xml:space="preserve">
+      <value>ชีวประวัติ</value>
+    </data>
+</root>

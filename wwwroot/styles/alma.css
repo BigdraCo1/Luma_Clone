@@ -1,3 +1,25 @@
+@keyframes fade-scale-in {
+    from {
+        scale: 0.5;
+        opacity: 0;
+    }
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
+
+@keyframes fade-scale-out {
+    from {
+        scale: 1;
+        opacity: 1;
+    }
+    to {
+        scale: 0.5;
+        opacity: 0;
+    }
+}
+
 .-mr-8 {
     margin-right: -2rem;
 }
@@ -311,8 +333,8 @@ input {
 body {
     margin: 0;
     background: linear-gradient(180deg, #000480 0%, #01004c 17%, #060212 65%);
-    min-height: 100vh;
-    overflow: hidden;
+    padding-bottom: 1rem;
+    min-height: calc(100vh - 1rem);
 }
 
 .overflow-ellipsis {
@@ -391,6 +413,10 @@ body {
 
 .pt-2 {
     padding-top: 0.5rem;
+}
+
+.pt-3 {
+    padding-top: 0.75rem;
 }
 
 .pt-4 {
@@ -572,6 +598,7 @@ body {
 }
 
 .toast {
+    z-index: 999;
     backdrop-filter: blur(0.5rem);
     animation: fade-scale-in 0.25s ease;
     margin-bottom: 1rem;
@@ -579,32 +606,6 @@ body {
     padding: 0.75rem;
     width: 16rem;
     color: rgb(255 255 255);
-}
-
-.toast.removing {
-    animation: fade-scale-out 0.25s ease;
-}
-
-@keyframes fade-scale-in {
-    from {
-        scale: 0.5;
-        opacity: 0;
-    }
-    to {
-        scale: 1;
-        opacity: 1;
-    }
-}
-
-@keyframes fade-scale-out {
-    from {
-        scale: 1;
-        opacity: 1;
-    }
-    to {
-        scale: 0.5;
-        opacity: 0;
-    }
 }
 
 .toast-body {
@@ -645,6 +646,10 @@ body {
 
 .toast-warning {
     background-color: #ff9800c0;
+}
+
+.toast.removing {
+    animation: fade-scale-out 0.25s ease;
 }
 
 .transition-all {
@@ -818,6 +823,11 @@ button {
     .sm\:my-6 {
         margin-top: 1.5rem;
         margin-bottom: 1.5rem;
+    }
+
+    .sm\:py-6 {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
     }
 
     .sm\:inline {

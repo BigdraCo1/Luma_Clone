@@ -12,6 +12,7 @@ if (toastContainerInit === null) {
     document.body.appendChild(toastContainerInit);
 }
 
+const body = document.body;
 const toastContainer = toastContainerInit;
 
 const toasts = [];
@@ -48,7 +49,6 @@ function flipEnd() {
  * Play the flip animation
  */
 function flipPlay() {
-    console.log(rects);
     for (const toast of toasts) {
         const rect = rects[toast.id];
         if (!rect || !rect.start || !rect.end) {
@@ -56,7 +56,6 @@ function flipPlay() {
         }
         const dx = rect.start.x - rect.end.x;
         const dy = rect.start.y - rect.end.y;
-        console.log(toast.id, dx, dy);
         toast.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: "none" }], {
             duration: 250,
             easing: "ease-out",
@@ -76,8 +75,9 @@ function generateId() {
 /**
  * Remove a toast message
  * @param {string} id ID of the toast to remove
+ * @param {boolean} onclick Whether the toast was removed by clicking the close button
  */
-function removeToast(id) {
+function removeToast(id, onclick = false) {
     const toast = document.getElementById(id);
     if (!toast) {
         if (toasts.includes(toast)) {
@@ -85,29 +85,55 @@ function removeToast(id) {
         }
         return;
     }
-    if (toast.matches(":hover")) {
-        setTimeout(() => {
-            removeToast(id);
-        }, 1000);
+    if (!toasts.includes(toast)) {
         return;
     }
+    if (toast.matches(":hover") && !onclick) {
+        if (toast.classList.contains("expired")) {
+            return;
+        }
+        toast.classList.add("expired");
+        toast.addEventListener("mouseleave", () => {
+            setTimeout(() => {
+                removeToast(id);
+            }, 1000);
+        });
+        return;
+    }
+    toasts.splice(toasts.indexOf(toast), 1);
+    const toastRect = toast.getBoundingClientRect();
+    const toastX = toastRect.x;
+    const toastY = toastRect.y;
+    flipStart();
+    toastContainer.removeChild(toast);
+    toast.style.position = "fixed";
+    toast.style.left = `${toastX}px`;
+    toast.style.top = `${toastY}px`;
+    body.appendChild(toast);
+    flipEnd();
+    flipPlay();
     toast.classList.add("removing");
     toast.addEventListener("animationend", () => {
-        flipStart();
-        toasts.splice(toasts.indexOf(toast), 1);
         toast.remove();
-        flipEnd();
-        flipPlay();
     });
 }
 
 /**
  * Show a toast message
  * @param {string} message Message to display
- * @param {string} description Description to display
- * @param {string} type Type of toast (info, success, warning, error)
+ * @param {string?} description Description to display
+ * @param {string?} type Type of toast (info, success, warning, error)
  */
 function showToast(message, description, type) {
+    if (!message) {
+        return;
+    }
+    if (!description) {
+        description = "";
+    }
+    if (!type) {
+        type = "info";
+    }
     const toast = document.createElement("div");
     toast.classList.add("toast", `toast-${type}`);
     const id = generateId();
@@ -126,7 +152,7 @@ function showToast(message, description, type) {
         <div class="toast-header">
             ${icon}
             <span class="mr-auto ml-2">${message}</span>
-            <button type="button" class="toast-close" onclick="removeToast('${id}')">
+            <button type="button" class="toast-close" onclick="removeToast('${id}', true)">
                 ${closeIcon}
             </button>
         </div>
