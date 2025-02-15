@@ -14,6 +14,66 @@ if (toastContainerInit === null) {
 
 const toastContainer = toastContainerInit;
 
+const toasts = [];
+
+const rects = {};
+
+function flipStart() {
+    for (const toast of toasts) {
+        const rect = toast.getBoundingClientRect();
+        if (!rects[toast.id]) {
+            rects[toast.id] = {};
+        }
+        rects[toast.id].start = rect;
+    }
+}
+
+function flipEnd() {
+    for (const toast of toasts) {
+        const rect = toast.getBoundingClientRect();
+        if (!rects[toast.id]) {
+            continue;
+        }
+        rects[toast.id].end = rect;
+    }
+}
+
+function flipPlay() {
+    console.log(rects);
+    for (const toast of toasts) {
+        const rect = rects[toast.id];
+        if (!rect || !rect.start || !rect.end) {
+            continue;
+        }
+        const dx = rect.start.x - rect.end.x;
+        const dy = rect.start.y - rect.end.y;
+        console.log(toast.id, dx, dy);
+        toast.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: "none" }], {
+            duration: 250,
+            easing: "ease-out",
+            fill: "both"
+        });
+    }
+}
+
+function generateId() {
+    return Math.random().toString(36).substring(2, 9);
+}
+
+function removeToast(id) {
+    const toast = document.getElementById(id);
+    if (toast) {
+        toast.classList.add("removing");
+        toast.addEventListener("animationend", () => {
+            flipStart();
+            toasts.splice(toasts.indexOf(toast), 1);
+            toast.remove();
+            flipEnd();
+            flipPlay();
+        });
+    }
+}
+
 /**
  * Show a toast message
  * @param {string} message Message to display
@@ -23,6 +83,8 @@ const toastContainer = toastContainerInit;
 function showToast(message, description, type) {
     const toast = document.createElement("div");
     toast.classList.add("toast", `toast-${type}`);
+    const id = generateId();
+    toast.id = id;
     const icon =
         type === "info"
             ? infoIcon
@@ -37,7 +99,7 @@ function showToast(message, description, type) {
         <div class="toast-header">
             ${icon}
             <span class="mr-auto ml-2">${message}</span>
-            <button type="button" class="toast-close" onclick="this.parentElement.parentElement.remove()">
+            <button type="button" class="toast-close" onclick="removeToast('${id}')">
                 ${closeIcon}
             </button>
         </div>
@@ -45,9 +107,13 @@ function showToast(message, description, type) {
             ${description}
         </div>
     `;
+    flipStart();
+    toasts.push(toast);
     toastContainer.appendChild(toast);
+    flipEnd();
+    flipPlay();
     setTimeout(() => {
-        toast.remove();
+        removeToast(id);
     }, 5000);
 }
 
@@ -71,5 +137,9 @@ if (urlParams.has("message")) {
         window.location.pathname +
         "?" +
         urlParams.toString();
-    window.history.replaceState({ path: newUrl }, "", newUrl);
+    window.history.replaceState(null, "", newUrl);
 }
+
+setTimeout(() => {
+    showToast("Welcome to the website!", "This is a toast message.", "info");
+}, 1000);

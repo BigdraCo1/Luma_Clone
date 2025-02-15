@@ -55,19 +55,6 @@
     background-color: rgb(220 38 38);
 }
 
-.bg-red-pink-gradient {
-    background: radial-gradient(
-        circle at top left,
-        #099ef1 0%,
-        #6863f8 18.82%,
-        #d84ffa 32.6%,
-        #f058c5 52.83%,
-        #ff4f90 68.03%,
-        #ff6558 87.66%,
-        #ff891f 100%
-    );
-}
-
 .bg-transparent {
     background-color: transparent;
 }
@@ -586,11 +573,38 @@ body {
 
 .toast {
     backdrop-filter: blur(0.5rem);
+    animation: fade-scale-in 0.25s ease;
     margin-bottom: 1rem;
     border-radius: 0.75rem;
     padding: 0.75rem;
     width: 16rem;
     color: rgb(255 255 255);
+}
+
+.toast.removing {
+    animation: fade-scale-out 0.25s ease;
+}
+
+@keyframes fade-scale-in {
+    from {
+        scale: 0.5;
+        opacity: 0;
+    }
+    to {
+        scale: 1;
+        opacity: 1;
+    }
+}
+
+@keyframes fade-scale-out {
+    from {
+        scale: 1;
+        opacity: 1;
+    }
+    to {
+        scale: 0.5;
+        opacity: 0;
+    }
 }
 
 .toast-body {
