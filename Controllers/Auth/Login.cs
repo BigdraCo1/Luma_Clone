@@ -35,8 +35,8 @@ public class LoginModel : PageModel {
     //         return Page();
     //     }
 
-    //     _context.User.Add(User);
-    //     await _context.SaveChangesAsync();
+    //     _database.User.Add(User);
+    //     await _database.SaveChangesAsync();
 
     //     return RedirectToPage("./Index");
     // }

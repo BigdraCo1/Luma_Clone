@@ -1,15 +1,15 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-using alma.Contexts;
+using alma.Services;
 
 namespace alma.Controllers.Users;
 
-public class AvatarModel(DatabaseContext context) : PageModel {
-    private readonly DatabaseContext _context = context;
+public class AvatarModel(DatabaseContext database) : PageModel {
+    private readonly DatabaseContext _database = database;
 
     public async Task<IActionResult> OnGetAvatarAsync(string id) {
-        var user = await _context.User.FindAsync(id);
+        var user = await _database.User.FindAsync(id);
         if (user is null) {
             return NotFound();
         }

@@ -18,6 +18,9 @@ const toasts = [];
 
 const rects = {};
 
+/**
+ * Start recording the initial position of the toasts
+ */
 function flipStart() {
     for (const toast of toasts) {
         const rect = toast.getBoundingClientRect();
@@ -28,6 +31,9 @@ function flipStart() {
     }
 }
 
+/**
+ * End recording the final position of the toasts
+ */
 function flipEnd() {
     for (const toast of toasts) {
         const rect = toast.getBoundingClientRect();
@@ -38,6 +44,9 @@ function flipEnd() {
     }
 }
 
+/**
+ * Play the flip animation
+ */
 function flipPlay() {
     console.log(rects);
     for (const toast of toasts) {
@@ -56,22 +65,40 @@ function flipPlay() {
     }
 }
 
+/**
+ * Generate a random ID
+ * @returns {string} Random ID
+ */
 function generateId() {
     return Math.random().toString(36).substring(2, 9);
 }
 
+/**
+ * Remove a toast message
+ * @param {string} id ID of the toast to remove
+ */
 function removeToast(id) {
     const toast = document.getElementById(id);
-    if (toast) {
-        toast.classList.add("removing");
-        toast.addEventListener("animationend", () => {
-            flipStart();
+    if (!toast) {
+        if (toasts.includes(toast)) {
             toasts.splice(toasts.indexOf(toast), 1);
-            toast.remove();
-            flipEnd();
-            flipPlay();
-        });
+        }
+        return;
     }
+    if (toast.matches(":hover")) {
+        setTimeout(() => {
+            removeToast(id);
+        }, 1000);
+        return;
+    }
+    toast.classList.add("removing");
+    toast.addEventListener("animationend", () => {
+        flipStart();
+        toasts.splice(toasts.indexOf(toast), 1);
+        toast.remove();
+        flipEnd();
+        flipPlay();
+    });
 }
 
 /**
@@ -139,7 +166,3 @@ if (urlParams.has("message")) {
         urlParams.toString();
     window.history.replaceState(null, "", newUrl);
 }
-
-setTimeout(() => {
-    showToast("Welcome to the website!", "This is a toast message.", "info");
-}, 1000);

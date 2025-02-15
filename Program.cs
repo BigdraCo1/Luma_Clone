@@ -5,7 +5,6 @@ using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 
-using alma.Contexts;
 using alma.Services;
 
 var builder = WebApplication.CreateBuilder(args);

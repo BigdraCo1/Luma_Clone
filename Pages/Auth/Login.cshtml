@@ -5,18 +5,6 @@
     ViewData["Title"] = "Login";
 }
 
-@* <h1>Login with Google Account</h1>
-<hr />
-<p>state =@Model.State</p>
-<a href="https://accounts.google.com/o/oauth2/v2/auth
-?client_id=@Config.GetSection("GoogleOAuth")["ClientID"]
-&redirect_uri=@UrlEncoder.Encode(Config.GetSection("GoogleOAuth")["RedirectUri"]!)
-&scope=@UrlEncoder.Encode(Config.GetSection("GoogleOAuth")["Scope"]!)
-&state=@Model.State
-&access_type=offline
-&response_type=code">Login</a> *@
-
-
 <div style="height: calc(100vh - 12rem);" class="flex flex-col justify-center mx-auto w-fit">
     <div class="relative w-fit h-fit">
         <img src="/images/logo/logo-256x256.avif" class="login-offset-logo" />
@@ -25,9 +13,9 @@
         <div class="p-4 pb-8 bg-gray-900 sm:p-8 sm:pb-12 rounded-b-3xl">
             <p class="m-0 text-xl font-medium text-center text-white">@Localizer["Prompt"]</p>
             <a href="https://accounts.google.com/o/oauth2/v2/auth
-?client_id=@Config.GetSection("GoogleOAuth")["ClientID"]
-&redirect_uri=@UrlEncoder.Encode(Config.GetSection("GoogleOAuth")["RedirectUri"]!)
-&scope=@UrlEncoder.Encode(Config.GetSection("GoogleOAuth")["Scope"]!)
+?client_id=@(Config.GetValue<string>("GoogleOAuth:ClientID"))
+&redirect_uri=@UrlEncoder.Encode(Config.GetValue<string>("GoogleOAuth:RedirectUri")!)
+&scope=@UrlEncoder.Encode(Config.GetValue<string>("GoogleOAuth:Scope")!)
 &state=@Model.State
 &access_type=offline
 &response_type=code"

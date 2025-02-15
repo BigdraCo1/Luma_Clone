@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="InvalidState" xml:space="preserve">
+      <value>Authentication Failed</value>
+    </data>
+    <data name="InvalidStateDescription" xml:space="preserve">
+      <value>The authentication URL state is invalid, please try again</value>
+    </data>
+</root>

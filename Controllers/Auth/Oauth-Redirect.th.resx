@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="InvalidState" xml:space="preserve">
+      <value>การยืนยันตัวตนไม่สำเร็จ</value>
+    </data>
+    <data name="InvalidStateDescription" xml:space="preserve">
+      <value>สถานะของ URL การตรวจสอบสิทธิ์ไม่ถูกต้อง โปรดลองอีกครั้ง</value>
+    </data>
+</root>

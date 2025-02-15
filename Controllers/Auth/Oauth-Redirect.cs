@@ -2,8 +2,8 @@ using System.Text.Json;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.Extensions.Localization;
 
-using alma.Contexts;
 using alma.Enums;
 using alma.Models;
 using alma.Services;
@@ -11,9 +11,10 @@ using alma.Utils;
 
 namespace alma.Controllers.Auth;
 
-public class OauthRedirectModel(IConfiguration config, DatabaseContext context, ISessionService sessionService, HttpClient client) : PageModel {
+public class OauthRedirectModel(IConfiguration config, IStringLocalizer<OauthRedirectModel> localizer, DatabaseContext database, ISessionService sessionService, HttpClient client) : PageModel {
     private readonly IConfiguration _config = config;
-    private readonly DatabaseContext _context = context;
+    private readonly IStringLocalizer _localizer = localizer;
+    private readonly DatabaseContext _database = database;
     private readonly ISessionService _sessionService = sessionService;
     private readonly HttpClient _client = client;
 
@@ -26,8 +27,8 @@ public class OauthRedirectModel(IConfiguration config, DatabaseContext context, 
             cookieState.Length <= 0 || queryState.Length <= 0 ||
             cookieState != queryState) {
             var queryString = Toast.GenerateQueryString(
-                "Authentication failed: Invalid state",
-                "The authentication URL is invalid, please try again.",
+                _localizer["InvalidState"],
+                _localizer["InvalidStateDescription"],
                 ToastTypes.Error);
             return Redirect($"/auth/login?{queryString}");
         }
@@ -41,10 +42,10 @@ public class OauthRedirectModel(IConfiguration config, DatabaseContext context, 
         }
 
         var data = new Dictionary<string, string> {
-            { "client_id", _config.GetSection("GoogleOAuth")["ClientId"]! },
-            { "client_secret", _config.GetSection("GoogleOAuth")["ClientSecret"]! },
+            { "client_id", _config.GetValue<string>("GoogleOAuth:ClientId")! },
+            { "client_secret", _config.GetValue<string>("GoogleOAuth:ClientSecret")! },
             { "code", authorizationCode },
-            { "redirect_uri", _config.GetSection("GoogleOAuth")["RedirectUri"]! },
+            { "redirect_uri", _config.GetValue<string>("GoogleOAuth:RedirectUri")! },
             { "grant_type", "authorization_code" }
         };
 
@@ -58,13 +59,9 @@ public class OauthRedirectModel(IConfiguration config, DatabaseContext context, 
         var userInfo = Json.Deserialize<Dictionary<string, JsonElement>>(userInfoString);
 
         var userId = Tuid.FromIntString(userInfo!["sub"].GetString()!);
-        var user = await _context.User.FindAsync(userId);
-
-        var isNewUser = false;
+        var user = await _database.User.FindAsync(userId);
 
         if (user is null) {
-            isNewUser = true;
-
             var avatarResponse = await _client.GetAsync(userInfo!["picture"].GetString()!);
             var avatar = await avatarResponse.Content.ReadAsByteArrayAsync();
             var avatarType = avatarResponse.Content.Headers.ContentType!.MediaType!;
@@ -81,8 +78,8 @@ public class OauthRedirectModel(IConfiguration config, DatabaseContext context, 
                 CreatedAt = DateTime.Now
             };
 
-            await _context.User.AddAsync(newUser);
-            await _context.SaveChangesAsync();
+            await _database.User.AddAsync(newUser);
+            await _database.SaveChangesAsync();
 
             user = newUser;
         }
@@ -97,9 +94,6 @@ public class OauthRedirectModel(IConfiguration config, DatabaseContext context, 
                                                     // Even after the session expired on the server side
         });
 
-        if (isNewUser) {
-            return Redirect($"/register?next={UrlEncoder.Encode(redirectTo)}");
-        }
         return Redirect(redirectTo);
     }
 }

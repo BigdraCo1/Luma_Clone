@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 
-using alma.Contexts;
 using alma.Models;
+using alma.Services;
 using alma.Utils;
 
 namespace alma.Services;
@@ -21,10 +21,10 @@ public interface ISessionService {
 /// A service for managing sessions.
 /// </summary>
 /// <param name="config">Injectable configuration</param>
-/// <param name="context">Injectable database context</param>
-public class SessionService(IConfiguration config, DatabaseContext context) : ISessionService {
+/// <param name="database">Injectable database context</param>
+public class SessionService(IConfiguration config, DatabaseContext database) : ISessionService {
     private readonly IConfiguration _config = config;
-    private readonly DatabaseContext _context = context;
+    private readonly DatabaseContext _database = database;
 
     /// <summary>
     /// Generates a session for a user.
@@ -39,8 +39,8 @@ public class SessionService(IConfiguration config, DatabaseContext context) : IS
             IssuedAt = DateTime.Now
         };
 
-        await _context.Session.AddAsync(session);
-        await _context.SaveChangesAsync();
+        await _database.Session.AddAsync(session);
+        await _database.SaveChangesAsync();
 
         return session;
     }
@@ -58,8 +58,8 @@ public class SessionService(IConfiguration config, DatabaseContext context) : IS
             IssuedAt = DateTime.Now
         };
 
-        _context.Session.Add(session);
-        _context.SaveChanges();
+        _database.Session.Add(session);
+        _database.SaveChanges();
 
         return session;
     }
@@ -70,21 +70,21 @@ public class SessionService(IConfiguration config, DatabaseContext context) : IS
     /// <param name="token">The session token</param>
     /// <returns>The user associated with the session if it is valid, null otherwise</returns>
     public async Task<User?> GetUserAsync(string token) {
-        var session = await _context.Session.FindAsync(token);
+        var session = await _database.Session.FindAsync(token);
         if (session is null) {
             return null;
         }
 
         if (session.ExpiresAt < DateTime.Now) {
-            _context.Session.Remove(session);
-            await _context.SaveChangesAsync();
+            _database.Session.Remove(session);
+            await _database.SaveChangesAsync();
             return null;
         }
 
         session.LastUsedAt = DateTime.Now;
-        await _context.SaveChangesAsync();
+        await _database.SaveChangesAsync();
 
-        await _context.Entry(session).Reference(s => s.User).LoadAsync();
+        await _database.Entry(session).Reference(s => s.User).LoadAsync();
 
         return session.User;
     }
@@ -95,21 +95,21 @@ public class SessionService(IConfiguration config, DatabaseContext context) : IS
     /// <param name="token">The session token</param>
     /// <returns>The user associated with the session if it is valid, null otherwise</returns>
     public User? GetUser(string token) {
-        var session = _context.Session.Find(token);
+        var session = _database.Session.Find(token);
         if (session is null) {
             return null;
         }
 
         if (session.ExpiresAt < DateTime.Now) {
-            _context.Session.Remove(session);
-            _context.SaveChanges();
+            _database.Session.Remove(session);
+            _database.SaveChanges();
             return null;
         }
 
         session.LastUsedAt = DateTime.Now;
-        _context.SaveChanges();
+        _database.SaveChanges();
 
-        _context.Entry(session).Reference(s => s.User).Load();
+        _database.Entry(session).Reference(s => s.User).Load();
 
         return session.User;
     }
@@ -120,13 +120,13 @@ public class SessionService(IConfiguration config, DatabaseContext context) : IS
     /// <param name="token">The session token</param>
     /// <returns></returns>
     public async Task DeleteSessionAsync(string token) {
-        var session = await _context.Session.FindAsync(token);
+        var session = await _database.Session.FindAsync(token);
         if (session is null) {
             return;
         }
 
-        _context.Session.Remove(session);
-        await _context.SaveChangesAsync();
+        _database.Session.Remove(session);
+        await _database.SaveChangesAsync();
     }
 
     /// <summary>
@@ -135,13 +135,13 @@ public class SessionService(IConfiguration config, DatabaseContext context) : IS
     /// <param name="token">The session token</param>
     /// <returns></returns>
     public void DeleteSession(string token) {
-        var session = _context.Session.Find(token);
+        var session = _database.Session.Find(token);
         if (session is null) {
             return;
         }
 
-        _context.Session.Remove(session);
-        _context.SaveChanges();
+        _database.Session.Remove(session);
+        _database.SaveChanges();
     }
 
     /// <summary>
@@ -150,9 +150,9 @@ public class SessionService(IConfiguration config, DatabaseContext context) : IS
     /// <param name="user">The user to delete sessions for</param>
     /// <returns></returns>
     public async Task DeleteSessionsForUserAsync(User user) {
-        var sessions = await _context.Session.Where(s => s.User == user).ToListAsync();
-        _context.Session.RemoveRange(sessions);
-        await _context.SaveChangesAsync();
+        var sessions = await _database.Session.Where(s => s.User == user).ToListAsync();
+        _database.Session.RemoveRange(sessions);
+        await _database.SaveChangesAsync();
     }
 
     /// <summary>
@@ -161,8 +161,8 @@ public class SessionService(IConfiguration config, DatabaseContext context) : IS
     /// <param name="user">The user to delete sessions for</param>
     /// <returns></returns>
     public void DeleteSessionsForUser(User user) {
-        var sessions = _context.Session.Where(s => s.User == user).ToList();
-        _context.Session.RemoveRange(sessions);
-        _context.SaveChanges();
+        var sessions = _database.Session.Where(s => s.User == user).ToList();
+        _database.Session.RemoveRange(sessions);
+        _database.SaveChanges();
     }
 }

@@ -19,6 +19,7 @@
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
         "*.cshtml": "${capture}.*.resx, ${capture}.cshtml.cs, ${capture}.cshtml.css, ${capture}.cshtml.js",
+        "*.cs": "${capture}.*.resx",
         "*.sqlite": "${capture}.${extname}-*"
     },
     "files.associations": {

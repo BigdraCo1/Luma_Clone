@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 using alma.Models;
 
-namespace alma.Contexts;
+namespace alma.Services;
 
 public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbContext(options) {
     public DbSet<Answer> Answer { get; set; }

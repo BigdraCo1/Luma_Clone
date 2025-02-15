@@ -1,6 +1,7 @@
 @using System.Globalization;
 
-@using alma.Services
+@using alma.Services;
+@using alma.Utils;
 
 @inject IHttpContextAccessor ContextAccessor
 @inject IViewLocalizer Localizer
@@ -27,8 +28,8 @@
     <meta property="og:description" content="alma event management platform" />
     <meta name="description" content="alma event management platform" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="@Config.GetSection("Public")["Origin"]/" />
-    <meta property="og:image" content="@Config.GetSection("Public")["Origin"]/logo-256x256.png" />
+    <meta property="og:url" content="@(Config.GetValue<string>("Public:Origin"))/" />
+    <meta property="og:image" content="@(Config.GetValue<string>("Public:Origin"))/logo-256x256.png" />
     <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="shortcut icon" href="/favicon.ico" />
@@ -42,7 +43,7 @@
         rel="stylesheet">
     <script>
         function setCulture(culture) {
-            document.cookie = `lang=${culture};path=/;max-age=31536000`; // 1 year
+            document.cookie = `lang=${culture};path=/;max-age=31536000;SameSite=Lax`;
             location.reload();
         }
     </script>
@@ -122,7 +123,7 @@
                     @Localizer["Discover"]
                     @Icon.Inline("arrow-up-right")
                 </a>
-                <a href="/auth/login?next=@ContextAccessor.HttpContext.Request.Path"
+                <a href="/auth/login?next=@UrlEncoder.Encode(ContextAccessor.HttpContext.Request.Path)"
                     class="px-4 py-2 text-sm font-medium text-white no-underline transition-all rounded-full hover:scale-105 bg-bright-red">@Localizer["Login"]</a>
             </div>
         }

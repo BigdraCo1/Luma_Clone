@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using alma.Contexts;
+using alma.Services;
 
 #nullable disable
 
 namespace alma.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20250214152900_InitialCreate")]
+    [Migration("20250215152844_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
