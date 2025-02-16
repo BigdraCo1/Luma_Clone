@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using alma.Utils;
 
-namespace alma.Controllers.Auth;
+namespace alma.Pages.Auth;
 
 public class LoginModel : PageModel {
     public string State { get; set; } = default!;

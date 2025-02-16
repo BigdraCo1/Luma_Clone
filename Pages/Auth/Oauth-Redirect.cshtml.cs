@@ -9,7 +9,7 @@ using alma.Models;
 using alma.Services;
 using alma.Utils;
 
-namespace alma.Controllers.Auth;
+namespace alma.Pages.Auth;
 
 public class OauthRedirectModel(IConfiguration config, IStringLocalizer<OauthRedirectModel> localizer, DatabaseContext database, ISessionService sessionService, HttpClient client) : PageModel {
     private readonly IConfiguration _config = config;

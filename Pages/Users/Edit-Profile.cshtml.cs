@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using alma.Models;
 using alma.Services;
 
-namespace alma.Controllers.Users;
+namespace alma.Pages.Users;
 
 public class EditProfileModel(ISessionService sessionService) : PageModel {
     private readonly ISessionService _sessionService = sessionService;

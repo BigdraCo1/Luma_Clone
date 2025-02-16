@@ -18,8 +18,7 @@
     "js/ts.implicitProjectConfig.checkJs": true,
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
-        "*.cshtml": "${capture}.*.resx, ${capture}.cshtml.cs, ${capture}.cshtml.css, ${capture}.cshtml.js",
-        "*.cs": "${capture}.*.resx",
+        "*.cshtml": "${capture}.cshtml.cs, ${capture}.cshtml.css, ${capture}.cshtml.js, ${capture}.*.resx",
         "*.sqlite": "${capture}.${extname}-*"
     },
     "files.associations": {

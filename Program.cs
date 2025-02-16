@@ -21,6 +21,7 @@ var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(sup
     .AddSupportedCultures(supportedCultures)
     .AddSupportedUICultures(supportedCultures);
 
+#pragma warning disable CS1998 // CustomRequestCultureProvider want async method, but nothing have to be done asynchronously
 localizationOptions.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(async context => {
     var userLang = context.Request.Cookies["lang"];
 
@@ -29,7 +30,7 @@ localizationOptions.RequestCultureProviders.Insert(0, new CustomRequestCulturePr
         return new ProviderCultureResult(culture.Name, culture.Name);
     }
 
-    return await Task.FromResult(new ProviderCultureResult(supportedCultures[0], supportedCultures[0]));
+    return new ProviderCultureResult(supportedCultures[0], supportedCultures[0]);
 }));
 
 builder.Services.AddHttpClient();

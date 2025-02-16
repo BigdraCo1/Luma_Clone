@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using alma.Services;
 
-namespace alma.Controllers.Users;
+namespace alma.Pages.Users;
 
 public class AvatarModel(DatabaseContext database) : PageModel {
     private readonly DatabaseContext _database = database;

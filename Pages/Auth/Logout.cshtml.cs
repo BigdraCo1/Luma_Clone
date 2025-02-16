@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 using alma.Services;
 
-namespace alma.Controllers.Auth;
+namespace alma.Pages.Auth;
 
 public class LogoutModel(ISessionService sessionService) : PageModel {
     private readonly ISessionService _sessionService = sessionService;
