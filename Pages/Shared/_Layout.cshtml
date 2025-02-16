@@ -41,13 +41,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
-    <script>
-        function setCulture(culture) {
-            document.cookie = `lang=${culture};path=/;max-age=31536000;SameSite=Lax`;
-            location.reload();
-        }
-    </script>
-    <script src="/scripts/toast.js" defer></script>
+    <script src="/scripts/alma.js" defer></script>
     @RenderSection("Head", required: false)
     @RenderSection("Styles", required: false)
     @RenderSection("Scripts", required: false)
@@ -96,14 +90,14 @@
                                 @if (currentCulture == "th")
                                 {
                                     <button class="p-0 text-base text-gray-400 bg-transparent border-none cursor-pointer"
-                                        onclick="setCulture('en')">
+                                        onclick="setLanguage('en')">
                                         Switch to English
                                     </button>
                                 }
                                 else
                                 {
                                     <button class="p-0 text-base text-gray-400 bg-transparent border-none cursor-pointer"
-                                        onclick="setCulture('th')">
+                                        onclick="setLanguage('th')">
                                         เปลี่ยนเป็นภาษาไทย
                                     </button>
                                 }

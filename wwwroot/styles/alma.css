@@ -1,15 +1,15 @@
-@keyframes fade-scale-in {
+@keyframes fly-fade-in {
     from {
-        scale: 0.5;
+        transform: translateY(100%);
         opacity: 0;
     }
     to {
-        scale: 1;
+        transform: "none";
         opacity: 1;
     }
 }
 
-@keyframes fade-scale-out {
+@keyframes scale-fade-out {
     from {
         scale: 1;
         opacity: 1;
@@ -599,7 +599,7 @@ body {
 
 .toast {
     backdrop-filter: blur(0.5rem);
-    animation: fade-scale-in 0.25s ease;
+    animation: fly-fade-in 0.25s ease;
     margin-bottom: 1rem;
     border-radius: 0.75rem;
     padding: 0.75rem;
@@ -647,7 +647,7 @@ body {
 
 .toast.removing {
     z-index: 999;
-    animation: fade-scale-out 0.25s ease;
+    animation: scale-fade-out 0.25s ease;
 }
 
 .transition-all {
@@ -661,9 +661,9 @@ body {
     position: absolute;
     top: calc(100% + 0.5rem);
     right: calc(100% - 3rem);
-    scale: 0;
+    scale: 0.5;
     opacity: 0;
-    z-index: 100;
+    z-index: -999;
     backdrop-filter: blur(0.5rem);
     transition: scale 0.2s ease, opacity 0.2s ease;
     border: 1px solid rgb(156 163 175);
@@ -683,6 +683,7 @@ body {
 .user-action-trigger:focus-within .user-action-content {
     scale: 1;
     opacity: 1;
+    z-index: 100;
 }
 
 button {

@@ -1,3 +1,31 @@
+///////////////////////////////////////
+//             Languages             //
+///////////////////////////////////////
+
+/**
+ * @type Record<string, string>
+ */
+const messages = {
+    en: "Language set to English",
+    th: "เปลี่ยนเป็นภาษาไทย"
+};
+
+/**
+ * Set the language and reload the page
+ * @param {string} language The language to set
+ */
+function setLanguage(language) {
+    document.cookie = `lang=${language};path=/;max-age=31536000;SameSite=Lax`;
+    const url = new URL(window.location.href);
+    url.searchParams.set("message", messages[language]);
+    url.searchParams.set("type", "success");
+    location.replace(url);
+}
+
+///////////////////////////////////////
+//               Toasts              //
+///////////////////////////////////////
+
 const infoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`;
 const successIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>`;
 const warningIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`;
@@ -15,8 +43,14 @@ if (toastContainerInit === null) {
 const body = document.body;
 const toastContainer = toastContainerInit;
 
+/**
+ * @type {HTMLElement[]}
+ */
 const toasts = [];
 
+/**
+ * @type Record<string, { start?: DOMRect, end?: DOMRect }>
+ */
 let rects = {};
 
 /**
@@ -59,7 +93,7 @@ function flipPlay() {
         const dy = rect.start.y - rect.end.y;
         toast.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: "none" }], {
             duration: 250,
-            easing: "ease-out",
+            easing: "ease",
             fill: "both"
         });
     }
@@ -89,8 +123,9 @@ function toastOnMouseLeave() {
 function removeToast(id, onclick = false) {
     const toast = document.getElementById(id);
     if (!toast) {
-        if (toasts.includes(toast)) {
-            toasts.splice(toasts.indexOf(toast), 1);
+        const toastIndex = toasts.findIndex((t) => t.id === id);
+        if (toastIndex !== -1) {
+            toasts.splice(toastIndex, 1);
         }
         return;
     }
@@ -136,7 +171,7 @@ function showToast(message, description, type) {
     if (!description) {
         description = "";
     }
-    if (!type) {
+    if (!["info", "success", "warning", "error"].includes(type || "")) {
         type = "info";
     }
     const toast = document.createElement("div");
@@ -182,23 +217,31 @@ function showToast(message, description, type) {
 const urlParams = new URLSearchParams(window.location.search);
 
 if (urlParams.has("message")) {
-    const message = urlParams.get("message") || "Error: Toast message not found";
-    const description = urlParams.get("description") || "";
+    let message = urlParams.get("message");
+    let description = urlParams.get("description") || "";
     const type = urlParams.get("type") || "info";
 
-    showToast(message, description, type);
-
-    urlParams.delete("message");
-    urlParams.delete("description");
-    urlParams.delete("type");
-
-    const newParams = urlParams.toString();
-
-    let newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-
-    if (newParams) {
-        newUrl += "?" + newParams;
+    if (!message) {
+        message = description;
+        description = "";
     }
 
-    window.history.replaceState(null, "", newUrl);
+    if (message) {
+        showToast(message, description, type);
+
+        urlParams.delete("message");
+        urlParams.delete("description");
+        urlParams.delete("type");
+
+        const newParams = urlParams.toString();
+
+        let newUrl =
+            window.location.protocol + "//" + window.location.host + window.location.pathname;
+
+        if (newParams) {
+            newUrl += "?" + newParams;
+        }
+
+        window.history.replaceState(null, "", newUrl);
+    }
 }
