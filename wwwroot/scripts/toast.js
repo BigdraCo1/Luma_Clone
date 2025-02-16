@@ -17,12 +17,13 @@ const toastContainer = toastContainerInit;
 
 const toasts = [];
 
-const rects = {};
+let rects = {};
 
 /**
  * Start recording the initial position of the toasts
  */
 function flipStart() {
+    rects = {};
     for (const toast of toasts) {
         const rect = toast.getBoundingClientRect();
         if (!rects[toast.id]) {
@@ -72,6 +73,14 @@ function generateId() {
     return Math.random().toString(36).substring(2, 9);
 }
 
+function toastOnMouseLeave() {
+    this.classList.remove("removal-queued");
+    this.removeEventListener("mouseleave", toastOnMouseLeave);
+    setTimeout(() => {
+        removeToast(this.id);
+    }, 1000);
+}
+
 /**
  * Remove a toast message
  * @param {string} id ID of the toast to remove
@@ -89,15 +98,11 @@ function removeToast(id, onclick = false) {
         return;
     }
     if (toast.matches(":hover") && !onclick) {
-        if (toast.classList.contains("expired")) {
+        if (toast.classList.contains("removal-queued")) {
             return;
         }
-        toast.classList.add("expired");
-        toast.addEventListener("mouseleave", () => {
-            setTimeout(() => {
-                removeToast(id);
-            }, 1000);
-        });
+        toast.classList.add("removal-queued");
+        toast.addEventListener("mouseleave", toastOnMouseLeave);
         return;
     }
     toasts.splice(toasts.indexOf(toast), 1);
@@ -156,10 +161,14 @@ function showToast(message, description, type) {
                 ${closeIcon}
             </button>
         </div>
-        <div class="toast-body">
-            ${description}
-        </div>
     `;
+    if (description) {
+        toast.innerHTML += `
+            <div class="toast-body">
+                ${description}
+            </div>
+        `;
+    }
     flipStart();
     toasts.push(toast);
     toastContainer.appendChild(toast);
@@ -183,12 +192,13 @@ if (urlParams.has("message")) {
     urlParams.delete("description");
     urlParams.delete("type");
 
-    const newUrl =
-        window.location.protocol +
-        "//" +
-        window.location.host +
-        window.location.pathname +
-        "?" +
-        urlParams.toString();
+    const newParams = urlParams.toString();
+
+    let newUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
+
+    if (newParams) {
+        newUrl += "?" + newParams;
+    }
+
     window.history.replaceState(null, "", newUrl);
 }

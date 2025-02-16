@@ -598,7 +598,6 @@ body {
 }
 
 .toast {
-    z-index: 999;
     backdrop-filter: blur(0.5rem);
     animation: fade-scale-in 0.25s ease;
     margin-bottom: 1rem;
@@ -609,8 +608,7 @@ body {
 }
 
 .toast-body {
-    font-size: 0.925rem;
-    line-height: 1.25rem;
+    margin-top: 0.75rem;
 }
 
 .toast-close {
@@ -632,7 +630,6 @@ body {
 .toast-header {
     display: flex;
     align-items: center;
-    margin-bottom: 0.75rem;
     font-weight: 500;
 }
 
@@ -649,6 +646,7 @@ body {
 }
 
 .toast.removing {
+    z-index: 999;
     animation: fade-scale-out 0.25s ease;
 }
 

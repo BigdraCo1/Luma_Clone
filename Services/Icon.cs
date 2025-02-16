@@ -80,6 +80,6 @@ public class IconService(IWebHostEnvironment env) : IIconService {
             svg.SetProperty("stroke-linejoin", strokeLinejoin);
         }
 
-        return new HtmlString(svg.ToString());
+        return new HtmlString(svg.ToMinifiedString());
     }
 }

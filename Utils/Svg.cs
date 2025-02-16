@@ -67,4 +67,13 @@ public class Svg(string path) {
         return SvgContent;
     }
 
+    /// <summary>
+    /// Get the minified SVG content.
+    /// Note: Minification is not perfect.
+    /// </summary>
+    /// <returns>Minified SVG content</returns>
+    public string ToMinifiedString() {
+        var commentRegex = new Regex(@"<!--(.*?)-->", RegexOptions.Multiline);
+        return commentRegex.Replace(SvgContent, "").Replace("\r\n", " ").Replace("\n", " ").Replace("  ", "");
+    }
 }
