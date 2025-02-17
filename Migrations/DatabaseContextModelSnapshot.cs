@@ -3,7 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using alma.Contexts;
+using alma.Services;
 
 #nullable disable
 
@@ -30,6 +30,21 @@ namespace alma.Migrations
                     b.HasIndex("TagsId");
 
                     b.ToTable("EventTag");
+                });
+
+            modelBuilder.Entity("TagUser", b =>
+                {
+                    b.Property<string>("FollowedTagsId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FollowersId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("FollowedTagsId", "FollowersId");
+
+                    b.HasIndex("FollowersId");
+
+                    b.ToTable("TagUser");
                 });
 
             modelBuilder.Entity("UserUser", b =>
@@ -84,6 +99,7 @@ namespace alma.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("EndAt")
@@ -94,7 +110,12 @@ namespace alma.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<byte[]>("Image")
+                        .IsRequired()
                         .HasColumnType("BLOB");
+
+                    b.Property<string>("ImageType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Location")
                         .IsRequired()
@@ -186,36 +207,32 @@ namespace alma.Migrations
                     b.ToTable("Session");
                 });
 
-            modelBuilder.Entity("alma.Models.Social", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Platform")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Social");
-                });
-
             modelBuilder.Entity("alma.Models.Tag", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("DescriptionEN")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DescriptionTH")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
+                    b.Property<string>("ImageType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NameEN")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NameTH")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -229,7 +246,16 @@ namespace alma.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
+                    b.Property<byte[]>("Avatar")
+                        .IsRequired()
+                        .HasColumnType("BLOB");
+
+                    b.Property<string>("AvatarType")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Bio")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")
@@ -239,18 +265,34 @@ namespace alma.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("InstagramUsername")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LinkedinHandle")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<byte[]>("ProfilePicture")
-                        .HasColumnType("BLOB");
+                    b.Property<string>("TikTokUsername")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TwitterUsername")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
                         .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("WebsiteUrl")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("YoutubeUsername")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -288,6 +330,21 @@ namespace alma.Migrations
                     b.HasOne("alma.Models.Tag", null)
                         .WithMany()
                         .HasForeignKey("TagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TagUser", b =>
+                {
+                    b.HasOne("alma.Models.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("FollowedTagsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("alma.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("FollowersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -353,17 +410,6 @@ namespace alma.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("alma.Models.Social", b =>
-                {
-                    b.HasOne("alma.Models.User", "User")
-                        .WithMany("Socials")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("alma.Models.UserAttendEvent", b =>
                 {
                     b.HasOne("alma.Models.Event", null)
@@ -396,8 +442,6 @@ namespace alma.Migrations
                     b.Navigation("HostedEvents");
 
                     b.Navigation("Sessions");
-
-                    b.Navigation("Socials");
                 });
 #pragma warning restore 612, 618
         }
