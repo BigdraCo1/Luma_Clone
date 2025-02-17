@@ -15,4 +15,22 @@
     <data name="Bio" xml:space="preserve">
       <value>ชีวประวัติ</value>
     </data>
+    <data name="Email" xml:space="preserve">
+      <value>อีเมล</value>
+    </data>
+    <data name="Phone" xml:space="preserve">
+      <value>เบอร์โทรศัพท์</value>
+    </data>
+    <data name="SaveChanges" xml:space="preserve">
+      <value>บันทึกการเปลี่ยนแปลง</value>
+    </data>
+    <data name="DeleteAccount" xml:space="preserve">
+      <value>ลบบัญชีผู้ใช้</value>
+    </data>
+    <data name="DeleteAccountDescription" xml:space="preserve">
+      <value>หากคุณไม่ต้องการใช้ alma อีกต่อไป คุณสามารถลบบัญชีผู้ใช่ของคุณแบบถาวรได้</value>
+    </data>
+    <data name="DeleteAccountCta" xml:space="preserve">
+      <value>ลบบัญชีผู้ใช้ของฉัน</value>
+    </data>
 </root>

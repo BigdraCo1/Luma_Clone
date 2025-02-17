@@ -15,4 +15,22 @@
     <data name="Bio" xml:space="preserve">
       <value>Bio</value>
     </data>
+    <data name="Email" xml:space="preserve">
+      <value>Email</value>
+    </data>
+    <data name="Phone" xml:space="preserve">
+      <value>Phone Number</value>
+    </data>
+    <data name="SaveChanges" xml:space="preserve">
+      <value>Save Changes</value>
+    </data>
+    <data name="DeleteAccount" xml:space="preserve">
+      <value>Delete Account</value>
+    </data>
+    <data name="DeleteAccountDescription" xml:space="preserve">
+      <value>If you no longer wish to use alma, you can permanently delete your account.</value>
+    </data>
+    <data name="DeleteAccountCta" xml:space="preserve">
+      <value>Delete My Account</value>
+    </data>
 </root>

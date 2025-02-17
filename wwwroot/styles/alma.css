@@ -512,6 +512,18 @@ body {
     border-radius: 1rem;
 }
 
+.sr-only {
+    position: absolute;
+    margin: -1px;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border-width: 0;
+    white-space: nowrap;
+}
+
 .text-4xl {
     font-size: 2.25rem;
     line-height: 2.5rem;
@@ -688,9 +700,6 @@ body {
 
 button {
     cursor: pointer;
-}
-
-button {
     font-style: normal;
     font-weight: 400;
     font-family: "Roboto", "Noto Sans Thai", Arial, Helvetica, sans-serif;

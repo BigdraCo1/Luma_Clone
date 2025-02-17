@@ -22,4 +22,69 @@
             <textarea id="bio" name="bio">@Model.CurrentUser.Bio</textarea>
         </div>
     </div>
+    <div>
+        <div>
+            @Icon.Inline("instagram")
+            <div>
+                <label for="instagram">instagram.com/</label>
+                <input type="text" id="instagram" name="instagram" value="@Model.CurrentUser.InstagramUsername" />
+            </div>
+        </div>
+        <div>
+            @Icon.Inline("twitter", lib: "external", size: "24")
+            <div>
+                <label for="twitter">x.com/</label>
+                <input type="text" id="twitter" name="twitter" value="@Model.CurrentUser.TwitterUsername" />
+            </div>
+        </div>
+        <div>
+            @Icon.Inline("youtube")
+            <div>
+                <label for="youtube">youtube.com/@@</label>
+                <input type="text" id="youtube" name="youtube" value="@Model.CurrentUser.YoutubeUsername" />
+            </div>
+        </div>
+        <div>
+            @Icon.Inline("tiktok", lib: "external", size: "24")
+            <div>
+                <label for="tiktok">tiktok.com/@@</label>
+                <input type="text" id="tiktok" name="tiktok" value="@Model.CurrentUser.TikTokUsername" />
+            </div>
+        </div>
+        <div>
+            @Icon.Inline("linkedin")
+            <div>
+                <label for="linkedin">linkedin.com/in/</label>
+                <input type="text" id="linkedin" name="linkedin" value="@Model.CurrentUser.LinkedinHandle" />
+            </div>
+        </div>
+        <div>
+            @Icon.Inline("globe")
+            <div>
+                <label for="website" class="sr-only">Your website</label>
+                <input type="text" id="website" name="website" value="@Model.CurrentUser.WebsiteUrl" />
+            </div>
+        </div>
+    </div>
+    <div>
+        <label for="email">@Localizer["Email"]</label>
+        <input type="email" id="email" name="email" value="@Model.CurrentUser.Email" readonly />
+        <span>@Localizer["AccountLinkedWithGoogle"]</span>
+    </div>
+    <div>
+        <label for="phone">@Localizer["Phone"]</label>
+        <input type="tel" id="phone" name="phone" value="@Model.CurrentUser.PhoneNumber" />
+    </div>
+    <button>
+        @Icon.Inline("save")
+        @Localizer["SaveChanges"]
+    </button>
+    <div>
+        <span>@Localizer["DeleteAccount"]</span>
+        <span>@Localizer["DeleteAccountDescription"]</span>
+        <button>
+            @Icon.Inline("trash-2")
+            @Localizer["DeleteAccountCta"]
+        </button>
+    </div>
 </div>
