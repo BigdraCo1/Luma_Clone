@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace alma.Models;
 
@@ -10,14 +10,9 @@ public class Event {
     [Required]
     public required string Name { get; set; }
 
-    [Required]
-    public required string Description { get; set; }
+    public string? Description { get; set; }
 
-    [Required]
-    public required byte[] Image { get; set; }
-
-    [Required]
-    public required string ImageType { get; set; }
+    public byte[]? Image { get; set; }
 
     [Required]
     public required DateTime CreatedAt { get; set; }
