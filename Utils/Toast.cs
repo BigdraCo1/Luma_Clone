@@ -18,6 +18,6 @@ public class Toast {
     public static string GenerateQueryString(string message, string description, string type) {
         message = UrlEncoder.Encode(message);
         description = UrlEncoder.Encode(description);
-        return $"message={message}&description={description}&type={type}";
+        return $"toast-message={message}&toast-description={description}&toast-type={type}";
     }
 }

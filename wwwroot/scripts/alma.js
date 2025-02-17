@@ -93,8 +93,7 @@ function flipPlay() {
         const dy = rect.start.y - rect.end.y;
         toast.animate([{ transform: `translate(${dx}px, ${dy}px)` }, { transform: "none" }], {
             duration: 250,
-            easing: "ease",
-            fill: "both"
+            easing: "ease"
         });
     }
 }
@@ -188,21 +187,32 @@ function showToast(message, description, type) {
             : type === "error"
             ? errorIcon
             : infoIcon;
-    toast.innerHTML = `
-        <div class="toast-header">
-            ${icon}
-            <span class="mr-auto ml-2">${message}</span>
-            <button type="button" class="toast-close" onclick="removeToast('${id}', true)">
-                ${closeIcon}
-            </button>
-        </div>
-    `;
+
+    const parser = new DOMParser();
+    const typeIconElement = parser.parseFromString(icon, "image/svg+xml").documentElement;
+    const closeIconElement = parser.parseFromString(closeIcon, "image/svg+xml").documentElement;
+
+    const header = document.createElement("div");
+    header.classList.add("toast-header");
+    header.appendChild(typeIconElement);
+    const messageSpan = document.createElement("span");
+    messageSpan.classList.add("mr-auto", "ml-2");
+    messageSpan.textContent = message;
+    header.appendChild(messageSpan);
+    const closeButton = document.createElement("button");
+    closeButton.classList.add("toast-close");
+    closeButton.appendChild(closeIconElement);
+    closeButton.addEventListener("click", () => {
+        removeToast(id, true);
+    });
+    header.appendChild(closeButton);
+    toast.appendChild(header);
+
     if (description) {
-        toast.innerHTML += `
-            <div class="toast-body">
-                ${description}
-            </div>
-        `;
+        const descriptionDiv = document.createElement("div");
+        descriptionDiv.classList.add("toast-body");
+        descriptionDiv.textContent = description;
+        toast.appendChild(descriptionDiv);
     }
     flipStart();
     toasts.push(toast);
@@ -216,10 +226,10 @@ function showToast(message, description, type) {
 
 const urlParams = new URLSearchParams(window.location.search);
 
-if (urlParams.has("message")) {
-    let message = urlParams.get("message");
-    let description = urlParams.get("description") || "";
-    const type = urlParams.get("type") || "info";
+if (urlParams.has("toast-message") || urlParams.has("toast-description")) {
+    let message = urlParams.get("toast-message");
+    let description = urlParams.get("toast-description") || "";
+    const type = urlParams.get("toast-type") || "info";
 
     if (!message) {
         message = description;
@@ -229,18 +239,10 @@ if (urlParams.has("message")) {
     if (message) {
         showToast(message, description, type);
 
-        urlParams.delete("message");
-        urlParams.delete("description");
-        urlParams.delete("type");
-
-        const newParams = urlParams.toString();
-
-        let newUrl =
-            window.location.protocol + "//" + window.location.host + window.location.pathname;
-
-        if (newParams) {
-            newUrl += "?" + newParams;
-        }
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.delete("toast-message");
+        newUrl.searchParams.delete("toast-description");
+        newUrl.searchParams.delete("toast-type");
 
         window.history.replaceState(null, "", newUrl);
     }
