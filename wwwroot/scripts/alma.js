@@ -173,6 +173,7 @@ function showToast(message, description, type) {
     if (!["info", "success", "warning", "error"].includes(type || "")) {
         type = "info";
     }
+
     const toast = document.createElement("div");
     toast.classList.add("toast", `toast-${type}`);
     const id = generateId();
@@ -207,13 +208,13 @@ function showToast(message, description, type) {
     });
     header.appendChild(closeButton);
     toast.appendChild(header);
-
     if (description) {
         const descriptionDiv = document.createElement("div");
         descriptionDiv.classList.add("toast-body");
         descriptionDiv.textContent = description;
         toast.appendChild(descriptionDiv);
     }
+
     flipStart();
     toasts.push(toast);
     toastContainer.appendChild(toast);
