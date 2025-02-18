@@ -11,6 +11,9 @@
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "[xml]": {
+        "editor.tabSize": 4
+    },
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit"
     },

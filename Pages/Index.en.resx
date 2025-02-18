@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <data name="Title-1" xml:space="preserve">
-    <value>Delightful events</value>
-  </data>
-  <data name="Title-2" xml:space="preserve">
-    <value>start here.</value>
-  </data>
-  <data name="Description" xml:space="preserve">
-    <value>Set up an event page, invite friends and sell tickets. Host a memorable event today.</value>
-  </data>
-  <data name="Cta" xml:space="preserve">
-    <value>Create Your First Event</value>
-  </data>
-  <data name="Discover" xml:space="preserve">
-    <value>Discover Events</value>
-  </data>
+    <data name="Title-1" xml:space="preserve">
+        <value>Delightful events</value>
+    </data>
+    <data name="Title-2" xml:space="preserve">
+        <value>start here.</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+        <value>Set up an event page, invite friends and sell tickets. Host a memorable event today.</value>
+    </data>
+    <data name="Cta" xml:space="preserve">
+        <value>Create Your First Event</value>
+    </data>
+    <data name="Discover" xml:space="preserve">
+        <value>Discover Events</value>
+    </data>
 </root>

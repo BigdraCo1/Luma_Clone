@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
     <data name="YourProfile" xml:space="preserve">
-      <value>โปรไฟล์ของคุณ</value>
+        <value>โปรไฟล์ของคุณ</value>
     </data>
     <data name="Description" xml:space="preserve">
-      <value>เลือกวิธีทีโปรไฟล์ของคุณจะถูกแสดง</value>
+        <value>เลือกวิธีทีโปรไฟล์ของคุณจะถูกแสดง</value>
     </data>
     <data name="Name" xml:space="preserve">
-      <value>ชื่อที่แสดง</value>
+        <value>ชื่อที่แสดง</value>
     </data>
     <data name="Username" xml:space="preserve">
-      <value>ชื่อผู้ใช้</value>
+        <value>ชื่อผู้ใช้</value>
     </data>
     <data name="Bio" xml:space="preserve">
-      <value>ชีวประวัติ</value>
+        <value>ชีวประวัติ</value>
     </data>
     <data name="Email" xml:space="preserve">
-      <value>อีเมล</value>
+        <value>อีเมล</value>
     </data>
     <data name="Phone" xml:space="preserve">
-      <value>เบอร์โทรศัพท์</value>
+        <value>เบอร์โทรศัพท์</value>
     </data>
     <data name="SaveChanges" xml:space="preserve">
-      <value>บันทึกการเปลี่ยนแปลง</value>
+        <value>บันทึกการเปลี่ยนแปลง</value>
     </data>
     <data name="DeleteAccount" xml:space="preserve">
-      <value>ลบบัญชีผู้ใช้</value>
+        <value>ลบบัญชีผู้ใช้</value>
     </data>
     <data name="DeleteAccountDescription" xml:space="preserve">
-      <value>หากคุณไม่ต้องการใช้ alma อีกต่อไป คุณสามารถลบบัญชีผู้ใช่ของคุณแบบถาวรได้</value>
+        <value>หากคุณไม่ต้องการใช้ alma อีกต่อไป คุณสามารถลบบัญชีผู้ใช่ของคุณแบบถาวรได้</value>
     </data>
     <data name="DeleteAccountCta" xml:space="preserve">
-      <value>ลบบัญชีผู้ใช้ของฉัน</value>
+        <value>ลบบัญชีผู้ใช้ของฉัน</value>
     </data>
 </root>

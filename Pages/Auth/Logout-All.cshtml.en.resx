@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="NotLoggedIn" xml:space="preserve">
+      <value>Sign out failed: Not signed in</value>
+    </data>
+    <data name="NotLoggedInDescription" xml:space="preserve">
+      <value>You're not signed in, your session have expired, or you've already signed out.</value>
+    </data>
+    <data name="LoggedOut" xml:space="preserve">
+      <value>Signed out of all devices successfully</value>
+    </data>
+</root>

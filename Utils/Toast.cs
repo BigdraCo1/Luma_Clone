@@ -1,3 +1,5 @@
+using System.Web;
+
 using alma.Enums;
 
 namespace alma.Utils;
@@ -7,17 +9,36 @@ namespace alma.Utils;
 /// from the backend side.
 /// </summary>
 public class Toast {
-
     /// <summary>
-    /// Generates a query string for a toast.
+    /// Appends a toast query string to a URL.
+    /// This replaces existing toast query strings.
     /// </summary>
+    /// <param name="url">The URL to append to</param>
     /// <param name="message">The message to display</param>
     /// <param name="description">The description to display</param>
     /// <param name="type">Type of the toast, must be one of <see cref="ToastTypes"/></param>
-    /// <returns>Query string for the toast, with no '?' at the start or '&amp;' at the end</returns>
-    public static string GenerateQueryString(string message, string description, string type) {
-        message = UrlEncoder.Encode(message);
-        description = UrlEncoder.Encode(description);
-        return $"toast-message={message}&toast-description={description}&toast-type={type}";
+    /// <returns>A new URL with the toast query strings appended</returns>
+    public static string AppendQueryString(string url, string message, string? description, string? type) {
+        // TODO: Fix whatever this mess is
+        UriBuilder uriBuilder;
+        bool isAbsoluteUri;
+        if (Uri.TryCreate(url, UriKind.Absolute, out var absoluteUri)) {
+            isAbsoluteUri = true;
+            uriBuilder = new UriBuilder(absoluteUri);
+        } else {
+            isAbsoluteUri = false;
+            uriBuilder = new UriBuilder {
+                Path = url,
+                Scheme = "http",
+                Host = "localhost"
+            };
+        }
+
+        var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+        query.Set("toast-message", message);
+        if (description is not null) query.Set("toast-description", description);
+        if (type is not null) query.Set("toast-type", type);
+        uriBuilder.Query = query.ToString();
+        return isAbsoluteUri ? uriBuilder.ToString() : uriBuilder.Path + uriBuilder.Query;
     }
 }

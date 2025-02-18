@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
     <data name="InvalidState" xml:space="preserve">
-      <value>Authentication Failed</value>
+        <value>Authentication Failed</value>
     </data>
     <data name="InvalidStateDescription" xml:space="preserve">
-      <value>The authentication URL state is invalid, please try again</value>
+        <value>The authentication URL state is invalid, please try again</value>
+    </data>
+    <data name="LoginSuccess" xml:space="preserve">
+        <value>Signed in successfully</value>
     </data>
 </root>

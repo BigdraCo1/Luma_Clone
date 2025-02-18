@@ -26,11 +26,7 @@ public class OauthRedirectModel(IConfiguration config, IStringLocalizer<OauthRed
         if (cookieState is null || queryState is null ||
             cookieState.Length <= 0 || queryState.Length <= 0 ||
             cookieState != queryState) {
-            var queryString = Toast.GenerateQueryString(
-                _localizer["InvalidState"],
-                _localizer["InvalidStateDescription"],
-                ToastTypes.Error);
-            return Redirect($"/auth/login?{queryString}");
+            return Redirect(Toast.AppendQueryString("/auth/login", _localizer["InvalidState"], _localizer["InvalidStateDescription"], ToastTypes.Error));
         }
 
         var state = Base64Url.DecodeToString(cookieState);
@@ -94,6 +90,6 @@ public class OauthRedirectModel(IConfiguration config, IStringLocalizer<OauthRed
                                                     // Even after the session expired on the server side
         });
 
-        return Redirect(redirectTo);
+        return Redirect(Toast.AppendQueryString(redirectTo, _localizer["LoginSuccess"], null, ToastTypes.Success));
     }
 }
