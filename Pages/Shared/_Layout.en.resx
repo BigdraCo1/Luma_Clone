@@ -16,10 +16,10 @@
         <value>Profile</value>
     </data>
     <data name="Logout" xml:space="preserve">
-        <value>Logout</value>
+        <value>Sign out</value>
     </data>
     <data name="LogoutAll" xml:space="preserve">
-        <value>Logout on all devices</value>
+        <value>Sign out on all devices</value>
     </data>
     <data name="Login" xml:space="preserve">
         <value>Login</value>
