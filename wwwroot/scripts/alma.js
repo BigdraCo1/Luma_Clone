@@ -7,7 +7,7 @@
  */
 const messages = {
     en: "Language set to English",
-    th: "เปลี่ยนเป็นภาษาไทย"
+    th: "เปลี่ยนเป็นภาษาไทยเรียบร้อยแล้ว"
 };
 
 /**
@@ -17,8 +17,8 @@ const messages = {
 function setLanguage(language) {
     document.cookie = `lang=${language};path=/;max-age=31536000;SameSite=Lax`;
     const url = new URL(window.location.href);
-    url.searchParams.set("message", messages[language]);
-    url.searchParams.set("type", "success");
+    url.searchParams.set("toast-message", messages[language]);
+    url.searchParams.set("toast-type", "success");
     location.replace(url);
 }
 

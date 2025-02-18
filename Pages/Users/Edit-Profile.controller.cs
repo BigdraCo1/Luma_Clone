@@ -14,7 +14,7 @@ public class EditProfileModel(ISessionService sessionService) : PageModel {
     public async Task<IActionResult> OnGetAsync() {
         var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
         if (currentUser is null) {
-            return Redirect("/auth/login?next=/users/edit-profile");
+            return Redirect("/auth/sign-in?next=/users/edit-profile");
         }
         CurrentUser = currentUser;
         return Page();

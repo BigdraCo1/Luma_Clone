@@ -18,13 +18,13 @@
     <data name="Profile" xml:space="preserve">
         <value>แก้ไขโปรไฟล์</value>
     </data>
-    <data name="Logout" xml:space="preserve">
+    <data name="SignOut" xml:space="preserve">
         <value>ออกจากระบบ</value>
     </data>
-    <data name="LogoutAll" xml:space="preserve">
+    <data name="SignOutAll" xml:space="preserve">
         <value>ออกจากระบบบนทุกเครื่อง</value>
     </data>
-    <data name="Login" xml:space="preserve">
+    <data name="SignIn" xml:space="preserve">
         <value>เข้าสู่ระบบ</value>
     </data>
 </root>

@@ -7,7 +7,7 @@ using alma.Utils;
 
 namespace alma.Pages.Auth;
 
-public class LogoutModel(IStringLocalizer<LogoutModel> localizer, ISessionService sessionService) : PageModel {
+public class SignOutModel(IStringLocalizer<SignOutModel> localizer, ISessionService sessionService) : PageModel {
     private readonly IStringLocalizer _localizer = localizer;
     private readonly ISessionService _sessionService = sessionService;
 

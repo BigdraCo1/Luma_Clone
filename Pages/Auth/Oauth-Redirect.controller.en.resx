@@ -6,7 +6,7 @@
     <data name="InvalidStateDescription" xml:space="preserve">
         <value>The authentication URL state is invalid, please try again</value>
     </data>
-    <data name="LoginSuccess" xml:space="preserve">
+    <data name="SignInSuccess" xml:space="preserve">
         <value>Signed in successfully</value>
     </data>
 </root>

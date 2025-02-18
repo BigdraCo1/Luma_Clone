@@ -6,7 +6,7 @@
     <data name="InvalidStateDescription" xml:space="preserve">
         <value>สถานะของ URL การตรวจสอบสิทธิ์ไม่ถูกต้อง โปรดลองอีกครั้ง</value>
     </data>
-    <data name="LoginSuccess" xml:space="preserve">
+    <data name="SignInSuccess" xml:space="preserve">
         <value>เข้าสู่ระบบเรียบร้อยแล้ว</value>
     </data>
 </root>

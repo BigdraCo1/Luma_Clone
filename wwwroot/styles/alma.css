@@ -215,7 +215,7 @@ textarea {
     justify-content: center;
 }
 
-.login-offset-logo {
+.sign-in-offset-logo {
     position: absolute;
     top: -1rem;
     left: -2rem;
@@ -888,7 +888,7 @@ button {
         width: 16rem;
     }
 
-    .login-offset-logo {
+    .sign-in-offset-logo {
         position: absolute;
         top: -4rem;
         left: -6rem;

@@ -5,7 +5,7 @@ using alma.Utils;
 
 namespace alma.Pages.Auth;
 
-public class LoginModel : PageModel {
+public class SignInModel : PageModel {
     public string State { get; set; } = default!;
 
     public IActionResult OnGet() {

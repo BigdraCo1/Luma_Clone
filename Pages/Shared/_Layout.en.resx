@@ -15,13 +15,13 @@
     <data name="Profile" xml:space="preserve">
         <value>Profile</value>
     </data>
-    <data name="Logout" xml:space="preserve">
+    <data name="SignOut" xml:space="preserve">
         <value>Sign out</value>
     </data>
-    <data name="LogoutAll" xml:space="preserve">
+    <data name="SignOutAll" xml:space="preserve">
         <value>Sign out on all devices</value>
     </data>
-    <data name="Login" xml:space="preserve">
-        <value>Login</value>
+    <data name="SignIn" xml:space="preserve">
+        <value>Sign In</value>
     </data>
 </root>
