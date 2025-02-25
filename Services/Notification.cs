@@ -43,7 +43,7 @@ public class EmailService
 
         if (!string.IsNullOrEmpty(icsContent))
         {
-            var attachment = new Attachment(new MemoryStream(Encoding.UTF8.GetBytes(icsContent)), "event.ics");
+            var attachment = new Attachment(new MemoryStream(Encoding.UTF8.GetBytes(icsContent)), "event.ics", "text/calendar");
             mailMessage.Attachments.Add(attachment);
         }
 
