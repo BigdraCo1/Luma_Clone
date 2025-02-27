@@ -6,6 +6,9 @@
     <data name="Description" xml:space="preserve">
         <value>Choose how you are displayed as a host or guest.</value>
     </data>
+    <data name="ProfilePicture" xml:space="preserve">
+        <value>Profile Picture</value>
+    </data>
     <data name="Name" xml:space="preserve">
         <value>Name</value>
     </data>
@@ -15,11 +18,17 @@
     <data name="Bio" xml:space="preserve">
         <value>Bio</value>
     </data>
+    <data name="BioPlaceholder" xml:space="preserve">
+        <value>Share a little about your background and interests.</value>
+    </data>
+    <data name="SocialLinks" xml:space="preserve">
+        <value>Socials</value>
+    </data>
     <data name="Email" xml:space="preserve">
         <value>Email</value>
     </data>
-    <data name="Phone" xml:space="preserve">
-        <value>Phone Number</value>
+    <data name="AccountLinkedWithGoogle" xml:space="preserve">
+        <value>This email is linked to your Google account</value>
     </data>
     <data name="SaveChanges" xml:space="preserve">
         <value>Save Changes</value>

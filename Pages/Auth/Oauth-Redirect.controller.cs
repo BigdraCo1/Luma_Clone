@@ -67,7 +67,6 @@ public class OauthRedirectModel(IConfiguration config, IStringLocalizer<OauthRed
                 Email = userInfo!["email"].GetString()!,
                 Name = userInfo!["name"].GetString()!,
                 Username = Formatter.Slugify(userInfo!["name"].GetString()!),
-                PhoneNumber = "",
                 Avatar = avatar,
                 AvatarType = avatarType,
                 Bio = "",

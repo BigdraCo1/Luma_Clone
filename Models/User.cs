@@ -17,9 +17,6 @@ public class User {
     public required string Username { get; set; }
 
     [Required]
-    public required string PhoneNumber { get; set; }
-
-    [Required]
     public required byte[] Avatar { get; set; }
 
     [Required]

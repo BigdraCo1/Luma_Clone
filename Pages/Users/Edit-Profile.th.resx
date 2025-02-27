@@ -6,6 +6,9 @@
     <data name="Description" xml:space="preserve">
         <value>เลือกวิธีทีโปรไฟล์ของคุณจะถูกแสดง</value>
     </data>
+    <data name="ProfilePicture" xml:space="preserve">
+        <value>รูปโปรไฟล์</value>
+    </data>
     <data name="Name" xml:space="preserve">
         <value>ชื่อที่แสดง</value>
     </data>
@@ -15,11 +18,17 @@
     <data name="Bio" xml:space="preserve">
         <value>ชีวประวัติ</value>
     </data>
+    <data name="BioPlaceholder" xml:space="preserve">
+        <value>เเบ่งปันเรื่องราวและความสนใจของคุณสักหน่อย</value>
+    </data>
+    <data name="SocialLinks" xml:space="preserve">
+        <value>สื่อโซเชียล</value>
+    </data>
     <data name="Email" xml:space="preserve">
         <value>อีเมล</value>
     </data>
-    <data name="Phone" xml:space="preserve">
-        <value>เบอร์โทรศัพท์</value>
+    <data name="AccountLinkedWithGoogle" xml:space="preserve">
+        <value>อีเมลนี้ถูกเชื่อมอยู่กับบัญชี Google ของคุณ</value>
     </data>
     <data name="SaveChanges" xml:space="preserve">
         <value>บันทึกการเปลี่ยนแปลง</value>
@@ -28,7 +37,7 @@
         <value>ลบบัญชีผู้ใช้</value>
     </data>
     <data name="DeleteAccountDescription" xml:space="preserve">
-        <value>หากคุณไม่ต้องการใช้ alma อีกต่อไป คุณสามารถลบบัญชีผู้ใช่ของคุณแบบถาวรได้</value>
+        <value>หากคุณไม่ต้องการใช้ alma อีกต่อไป คุณสามารถลบบัญชีผู้ใช้ของคุณแบบถาวรได้</value>
     </data>
     <data name="DeleteAccountCta" xml:space="preserve">
         <value>ลบบัญชีผู้ใช้ของฉัน</value>

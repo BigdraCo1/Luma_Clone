@@ -248,3 +248,23 @@ if (urlParams.has("toast-message") || urlParams.has("toast-description")) {
         window.history.replaceState(null, "", newUrl);
     }
 }
+
+///////////////////////////////////////
+//               Utils               //
+///////////////////////////////////////
+
+/**
+ * Encode raw bytes data to base64 data URL
+ * @param {Uint8Array} bytes The data to encode
+ * @param {string} type The mimetype of the data
+ * @returns Base64 data URL string
+ */
+async function bytesToBase64DataUrl(bytes, type = "application/octet-stream") {
+    return await new Promise((resolve, reject) => {
+        const reader = Object.assign(new FileReader(), {
+            onload: () => resolve(reader.result),
+            onerror: () => reject(reader.error)
+        });
+        reader.readAsDataURL(new File([bytes], "", { type }));
+    });
+}

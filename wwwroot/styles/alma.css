@@ -24,6 +24,14 @@
     margin-right: -2rem;
 }
 
+.-top-0\.5 {
+    top: -0.125rem;
+}
+
+.absolute {
+    position: absolute;
+}
+
 .aspect-square {
     aspect-ratio: 1 / 1;
 }
@@ -32,8 +40,16 @@
     background-color: rgb(0 0 0);
 }
 
+.bg-blend-multiply {
+    background-blend-mode: multiply;
+}
+
 .bg-bright-red {
     background-color: rgb(255 37 37);
+}
+
+.bg-clip-text {
+    background-clip: text;
 }
 
 .bg-gray-200 {
@@ -42,6 +58,18 @@
 
 .bg-gray-300 {
     background-color: rgb(209 213 219);
+}
+
+.bg-gray-400 {
+    background-color: rgb(156 163 175);
+}
+
+.bg-gray-500 {
+    background-color: rgb(107 114 128);
+}
+
+.bg-gray-600 {
+    background-color: rgb(75 85 99);
 }
 
 .bg-gray-700 {
@@ -54,6 +82,18 @@
 
 .bg-gray-900 {
     background-color: rgb(17 24 39);
+}
+
+.bg-green-600 {
+    background-color: rgb(22 163 74);
+}
+
+.bg-green-700 {
+    background-color: rgb(21 128 61);
+}
+
+.bg-lime-600 {
+    background-color: rgb(101 163 13);
 }
 
 .bg-rainbow {
@@ -77,6 +117,14 @@
     background-color: rgb(220 38 38);
 }
 
+.bg-red-600 {
+    background-color: rgb(220 38 38);
+}
+
+.bg-red-700 {
+    background-color: rgb(185 28 28);
+}
+
 .bg-transparent {
     background-color: transparent;
 }
@@ -94,6 +142,11 @@
     border-style: solid;
 }
 
+.border-2 {
+    border-width: 2px;
+    border-style: solid;
+}
+
 .border-b {
     border-bottom-width: 1px;
     border-bottom-style: solid;
@@ -103,12 +156,24 @@
     border-bottom-color: rgb(156 163 175);
 }
 
+.border-black {
+    border-color: rgb(0 0 0);
+}
+
 .border-gray-400 {
     border-color: rgb(156 163 175);
 }
 
 .border-none {
     border-style: none;
+}
+
+.border-r-0 {
+    border-right-width: 0px;
+}
+
+.border-solid {
+    border-style: solid;
 }
 
 .cursor-pointer {
@@ -121,6 +186,10 @@ textarea {
     font-family: "Roboto", "Noto Sans Thai", Arial, Helvetica, sans-serif;
     font-optical-sizing: auto;
     font-variation-settings: "wdth" 100;
+}
+
+textarea:focus {
+    outline: none;
 }
 
 .flex {
@@ -143,6 +212,10 @@ textarea {
     flex-wrap: wrap;
 }
 
+.focus\:border-gray-200:focus {
+    border-color: rgb(229 231 235);
+}
+
 .font-bold {
     font-weight: 700;
 }
@@ -153,6 +226,10 @@ textarea {
 
 .font-medium {
     font-weight: 500;
+}
+
+.font-semibold {
+    font-weight: 600;
 }
 
 .gap-1 {
@@ -183,6 +260,26 @@ textarea {
     gap: 2rem;
 }
 
+.h-10 {
+    height: 2.5rem;
+}
+
+.h-16 {
+    height: 4rem;
+}
+
+.h-32 {
+    height: 8rem;
+}
+
+.h-8 {
+    height: 2rem;
+}
+
+.h-9 {
+    height: 2.25rem;
+}
+
 .h-96 {
     height: 24rem;
 }
@@ -195,12 +292,32 @@ textarea {
     height: fit-content;
 }
 
+.h-full {
+    height: 100%;
+}
+
 .hidden {
     display: none;
 }
 
+.hover\:bg-white:hover {
+    background-color: rgb(255 255 255);
+}
+
 .hover\:scale-105:hover {
     transform: scale(1.05);
+}
+
+.inline {
+    display: inline;
+}
+
+.inline-block {
+    display: inline-block;
+}
+
+.items-baseline {
+    align-items: baseline;
 }
 
 .items-center {
@@ -215,12 +332,8 @@ textarea {
     justify-content: center;
 }
 
-.sign-in-offset-logo {
-    position: absolute;
-    top: -1rem;
-    left: -2rem;
-    width: 4rem;
-    height: 4rem;
+.left-24 {
+    left: 6rem;
 }
 
 .m-0 {
@@ -239,8 +352,16 @@ textarea {
     margin: 1rem;
 }
 
-.m-4 {
-    margin: 1rem;
+.m-8 {
+    margin: 2rem;
+}
+
+.max-w-160 {
+    max-width: 40rem;
+}
+
+.max-w-200 {
+    max-width: 50rem;
 }
 
 .max-w-240 {
@@ -273,6 +394,10 @@ textarea {
 
 .mb-8 {
     margin-bottom: 2rem;
+}
+
+.ml-16 {
+    margin-left: 4rem;
 }
 
 .ml-2 {
@@ -328,6 +453,10 @@ input {
     font-family: "Roboto", "Noto Sans Thai", Arial, Helvetica, sans-serif;
     font-optical-sizing: auto;
     font-variation-settings: "wdth" 100;
+}
+
+input:focus {
+    outline: none;
 }
 
 body {
@@ -395,8 +524,16 @@ body {
     padding-left: 0.25rem;
 }
 
+.pl-16 {
+    padding-left: 4rem;
+}
+
 .pl-2 {
     padding-left: 0.5rem;
+}
+
+.pl-3 {
+    padding-left: 0.75rem;
 }
 
 .pr-2 {
@@ -423,9 +560,19 @@ body {
     padding-top: 1rem;
 }
 
+.px-1 {
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+}
+
 .px-12 {
     padding-right: 3rem;
     padding-left: 3rem;
+}
+
+.px-16 {
+    padding-right: 4rem;
+    padding-left: 4rem;
 }
 
 .px-16 {
@@ -477,6 +624,10 @@ body {
     position: relative;
 }
 
+.resize-none {
+    resize: none;
+}
+
 :root {
     font-style: normal;
     font-weight: 400;
@@ -494,8 +645,18 @@ body {
     border-radius: 9999px;
 }
 
+.rounded-l-xl {
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+}
+
 .rounded-lg {
     border-radius: 0.5rem;
+}
+
+.rounded-r-xl {
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
 }
 
 .rounded-t-3xl {
@@ -510,6 +671,14 @@ body {
 
 .rounded-xl {
     border-radius: 1rem;
+}
+
+.sign-in-offset-logo {
+    position: absolute;
+    top: -1rem;
+    left: -2rem;
+    width: 4rem;
+    height: 4rem;
 }
 
 .sr-only {
@@ -553,12 +722,28 @@ body {
     color: rgb(0 0 0);
 }
 
+.text-blue-900 {
+    color: rgb(30 58 138);
+}
+
+.text-blue-950 {
+    color: rgb(23 37 84);
+}
+
 .text-center {
     text-align: center;
 }
 
 .text-darkblue {
     color: rgb(0 4 128);
+}
+
+.text-gray-200 {
+    color: rgb(229 231 235);
+}
+
+.text-gray-300 {
+    color: rgb(209 213 219);
 }
 
 .text-gray-400 {
@@ -593,6 +778,10 @@ body {
 .text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
+}
+
+.text-transparent {
+    color: transparent;
 }
 
 .text-white {
@@ -662,6 +851,10 @@ body {
     animation: scale-fade-out 0.25s ease;
 }
 
+.top-24 {
+    top: 6rem;
+}
+
 .transition-all {
     transition-duration: 150ms;
     transition-property: all;
@@ -711,6 +904,18 @@ button {
     width: 0;
 }
 
+.w-10 {
+    width: 2.5rem;
+}
+
+.w-12 {
+    width: 3rem;
+}
+
+.w-32 {
+    width: 8rem;
+}
+
 .w-5 {
     width: 1.25rem;
 }
@@ -721,6 +926,10 @@ button {
 
 .w-64 {
     width: 16rem;
+}
+
+.w-8 {
+    width: 2rem;
 }
 
 .w-80 {
@@ -850,8 +1059,16 @@ button {
         display: flex;
     }
 
+    .sm\:flex-row-reverse {
+        flex-direction: row-reverse;
+    }
+
     .sm\:hidden {
         display: none;
+    }
+
+    .sm\:w-0 {
+        width: 0px;
     }
 
     .sm\:gap-8 {
@@ -870,6 +1087,11 @@ button {
         padding: 3rem;
     }
 
+    .sm\:px-16 {
+        padding-right: 4rem;
+        padding-left: 4rem;
+    }
+
     .sm\:text-2xl {
         font-size: 1.5rem;
         line-height: 2rem;
@@ -882,6 +1104,14 @@ button {
 
     .sm\:mt-8 {
         margin-top: 2rem;
+    }
+
+    .sm\:ml-16 {
+        margin-left: 4rem;
+    }
+
+    .sm\:mr-0 {
+        margin-right: 0;
     }
 
     .user-action-content {

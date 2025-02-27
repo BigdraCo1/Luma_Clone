@@ -28,7 +28,7 @@
 		"prefix": "<d",
 		"body": [
 			"<data name=\"${1:name}\" xml:space=\"preserve\">",
-			"  <value>${2:value}</value>",
+			"    <value>${2:value}</value>",
 			"</data>$0",
 		],
 		"description": "Add localizer data in XML format"

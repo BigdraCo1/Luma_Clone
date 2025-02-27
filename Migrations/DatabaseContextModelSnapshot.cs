@@ -275,10 +275,6 @@ namespace alma.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<string>("TikTokUsername")
                         .HasColumnType("TEXT");
 
