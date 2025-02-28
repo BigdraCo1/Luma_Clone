@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="ProfileUpdateSuccessful" xml:space="preserve">
+        <value>Profile updated successfully</value>
+    </data>
+</root>

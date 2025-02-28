@@ -109,6 +109,10 @@
     );
 }
 
+.text-red-500 {
+    color: rgb(239 68 68);
+}
+
 .bg-red-500 {
     background-color: rgb(239 68 68);
 }
@@ -426,6 +430,10 @@ textarea:focus {
 
 .mt-8 {
     margin-top: 2rem;
+}
+
+.empty\:mt-0:empty {
+    margin-top: 0px;
 }
 
 .mx-4 {
@@ -839,7 +847,7 @@ body {
 }
 
 .toast-success {
-    background-color: #54a71dc0;
+    background-color: #16a34ac0;
 }
 
 .toast-warning {

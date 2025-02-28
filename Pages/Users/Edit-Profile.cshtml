@@ -7,7 +7,7 @@
 
 <span id="avatar-update-success-text" class="hidden">@Localizer["AvatarUpdateSuccess"]</span>
 <span id="avatar-update-fail-text" class="hidden">@Localizer["AvatarUpdateFail"]</span>
-<div method="POST" class="px-4 mx-auto sm:px-16 max-w-200">
+<form method="POST" class="px-4 mx-auto sm:px-16 max-w-200">
     <h1 class="mb-0 text-white">@Localizer["YourProfile"]</h1>
     <p class="mt-0 text-gray-300">@Localizer["Description"]</p>
     <div class="flex flex-col sm:flex-row-reverse">
@@ -27,25 +27,28 @@
         </div>
         <div class="flex flex-col flex-grow sm:w-0">
             <label for="name" class="mb-2 text-white">@Localizer["Name"]</label>
-            <input type="text" id="name" name="name"
-                class="px-4 py-2 mb-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200"
-                value="@Model.CurrentUser.Name" />
+            <input type="text" id="name" asp-for="UpdatedUser.Name"
+                class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200"
+                value="@Model.UpdatedUser.Name" />
+            <span asp-validation-for="UpdatedUser.Name" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <label for="username" class="mb-2 text-white">@Localizer["Username"]</label>
-            <div class="flex items-center w-full h-10 mb-4">
+            <div class="flex items-center w-full h-10">
                 <div
                     class="flex items-center h-full py-0 pl-3 pr-2 m-0 text-base font-semibold bg-gray-400 text-blue-950 rounded-l-xl">
                     <div class="relative -top-0.5">
                                                 @@
                     </div>
                 </div>
-                <input type="text" id="username" name="username"
+                <input type="text" id="username" asp-for="UpdatedUser.Username"
                     class="flex-grow py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
-                    value="@Model.CurrentUser.Username" />
+                    value="@Model.UpdatedUser.Username" />
             </div>
+            <span asp-validation-for="UpdatedUser.Username" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <label for="bio" class="mb-2 text-white">@Localizer["Bio"]</label>
-            <textarea id="bio" name="bio"
+            <textarea id="bio" asp-for="UpdatedUser.Bio"
                 class="h-16 px-4 py-2 mb-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 resize-none rounded-xl focus:border-gray-200"
-                placeholder="@Localizer["BioPlaceholder"]">@Model.CurrentUser.Bio</textarea>
+                placeholder="@Localizer["BioPlaceholder"]">@Model.UpdatedUser.Bio</textarea>
+            <span asp-validation-for="UpdatedUser.Bio" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
         </div>
     </div>
     <p class="text-white">@Localizer["SocialLinks"]</p>
@@ -53,72 +56,80 @@
         <div class="flex items-center flex-grow gap-2 w-96 max-w-160">
             @Icon.Inline("instagram", stroke: "rgb(156 163 175)")
             <div class="flex items-center flex-grow w-0 h-10">
-                <label for="instagram"
-                    class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">instagram.com/</label>
-                <input type="text" id="instagram" name="instagram"
+                <label for="instagram-username"
+                    class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">instagrsam.com/</label>
+                <input type="text" id="instagram-username" asp-for="UpdatedUser.InstagramUsername"
                     class="flex-grow w-0 py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
-                    placeholder="username" value="@Model.CurrentUser.InstagramUsername" />
+                    placeholder="username" value="@Model.UpdatedUser.InstagramUsername" />
+                <span asp-validation-for="UpdatedUser.InstagramUsername"
+                    class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             </div>
         </div>
         <div class="flex items-center flex-grow gap-2 w-96 max-w-160">
             @Icon.Inline("twitter", lib: "external", size: "24", fill: "rgb(156 163 175)")
             <div class="flex items-center flex-grow w-0 h-10">
-                <label for="twitter"
+                <label for="twitter-username"
                     class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">x.com/</label>
-                <input type="text" id="twitter" name="twitter"
+                <input type="text" id="twitter-username" asp-for="UpdatedUser.TwitterUsername"
                     class="flex-grow w-0 py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
-                    placeholder="username" value="@Model.CurrentUser.TwitterUsername" />
+                    placeholder="username" value="@Model.UpdatedUser.TwitterUsername" />
+                <span asp-validation-for="UpdatedUser.TwitterUsername" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             </div>
         </div>
         <div class="flex items-center flex-grow gap-2 w-96 max-w-160">
             @Icon.Inline("youtube", stroke: "rgb(156 163 175)")
             <div class="flex items-center flex-grow w-0 h-10">
-                <label for="youtube"
+                <label for="youtube-username"
                     class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">youtube.com/@@</label>
-                <input type="text" id="youtube" name="youtube"
+                <input type="text" id="youtube-username" asp-for="UpdatedUser.YoutubeUsername"
                     class="flex-grow w-0 py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
-                    placeholder="username" value="@Model.CurrentUser.YoutubeUsername" />
+                    placeholder="username" value="@Model.UpdatedUser.YoutubeUsername" />
+                <span asp-validation-for="UpdatedUser.YoutubeUsername" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             </div>
         </div>
         <div class="flex items-center flex-grow gap-2 w-96 max-w-160">
             @Icon.Inline("tiktok", lib: "external", size: "24", fill: "rgb(156 163 175)")
             <div class="flex items-center flex-grow w-0 h-10">
-                <label for="tiktok"
+                <label for="tiktok-username"
                     class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">tiktok.com/@@</label>
-                <input type="text" id="tiktok" name="tiktok"
+                <input type="text" id="tiktok-username" asp-for="UpdatedUser.TikTokUsername"
                     class="flex-grow w-0 py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
-                    placeholder="username" value="@Model.CurrentUser.TikTokUsername" />
+                    placeholder="username" value="@Model.UpdatedUser.TikTokUsername" />
+                <span asp-validation-for="UpdatedUser.TikTokUsername" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             </div>
         </div>
         <div class="flex items-center flex-grow gap-2 w-96 max-w-160">
             @Icon.Inline("linkedin", stroke: "rgb(156 163 175)")
             <div class="flex items-center flex-grow w-0 h-10">
-                <label for="linkedin"
+                <label for="linkedin-handle"
                     class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">linkedin.com/in/</label>
-                <input type="text" id="linkedin" name="linkedin"
+                <input type="text" id="linkedin-handle" asp-for="UpdatedUser.LinkedinHandle"
                     class="flex-grow w-0 py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
-                    placeholder="handle" value="@Model.CurrentUser.LinkedinHandle" />
+                    placeholder="handle" value="@Model.UpdatedUser.LinkedinHandle" />
+                <span asp-validation-for="UpdatedUser.LinkedinHandle" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             </div>
         </div>
         <div class="flex items-center flex-grow gap-2 w-96 max-w-160">
             @Icon.Inline("globe", stroke: "rgb(156 163 175)")
             <div class="flex items-center flex-grow w-0 h-10">
-                <label for="website" class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">
+                <label for="website-url"
+                    class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">
                     https://</label>
-                <input type="text" id="website" name="website"
+                <input type="text" id="website-url" asp-for="UpdatedUser.WebsiteUrl"
                     class="flex-grow w-0 py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
-                    placeholder="example.com" value="@Model.CurrentUser.WebsiteUrl" />
+                    placeholder="example.com" value="@Model.UpdatedUser.WebsiteUrl" />
+                <span asp-validation-for="UpdatedUser.WebsiteUrl" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             </div>
         </div>
     </div>
     <div class="w-full mb-4">
-        <label for="email" class="block mb-2 text-white">@Localizer["Email"]</label>
-        <input type="email" id="email" name="email"
+        <label for="Email" class="block mb-2 text-white">@Localizer["Email"]</label>
+        <input type="email" id="Email" name="Email"
             class="block w-64 px-4 py-2 mb-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200"
             value="@Model.CurrentUser.Email" readonly />
         <span class="text-gray-300">@Localizer["AccountLinkedWithGoogle"]</span>
     </div>
-    <button
+    <button type="submit" asp-page-handler="UpdateProfile"
         class="flex items-center gap-2 px-4 py-2 mb-4 text-base text-white transition-all bg-green-600 border-none hover:scale-105 rounded-xl">
         @Icon.Inline("save")
         @Localizer["SaveChanges"]
@@ -132,4 +143,4 @@
             @Localizer["DeleteAccountCta"]
         </button>
     </div> *@
-</div>
+</form>

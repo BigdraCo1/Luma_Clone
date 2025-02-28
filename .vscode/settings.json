@@ -22,6 +22,7 @@
     "explorer.fileNesting.enabled": true,
     "explorer.fileNesting.patterns": {
         "*.cshtml": "${capture}.controller.cs, ${capture}.cshtml.css, ${capture}.cshtml.js, ${capture}.*.resx",
+        "*.cs": "${capture}.*.resx",
         "*.sqlite": "${capture}.${extname}-*"
     },
     "files.associations": {

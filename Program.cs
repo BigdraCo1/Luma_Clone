@@ -1,10 +1,12 @@
 using System.Globalization;
+using System.Reflection;
 
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 
+using alma;
 using alma.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +16,17 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 
 builder.Services.AddLocalization(options => options.ResourcesPath = "");
 builder.Services.AddRazorPages().AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
-    .AddDataAnnotationsLocalization();
+    .AddDataAnnotationsLocalization(options => {
+        options.DataAnnotationLocalizerProvider =
+            (type, factory) => {
+                var assemblyName =
+                    new AssemblyName(
+                        typeof(SharedResource)
+                                .GetTypeInfo()
+                                .Assembly.FullName!);
+                return factory.Create("SharedResource", assemblyName.Name!);
+            };
+    });
 
 var supportedCultures = new[] { "en", "th" };
 var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(supportedCultures[0])
