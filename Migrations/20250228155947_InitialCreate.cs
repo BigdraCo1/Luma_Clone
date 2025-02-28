@@ -38,7 +38,7 @@ namespace alma.Migrations
                     Username = table.Column<string>(type: "TEXT", nullable: false),
                     Avatar = table.Column<byte[]>(type: "BLOB", nullable: false),
                     AvatarType = table.Column<string>(type: "TEXT", nullable: false),
-                    Bio = table.Column<string>(type: "TEXT", nullable: false),
+                    Bio = table.Column<string>(type: "TEXT", nullable: true),
                     InstagramUsername = table.Column<string>(type: "TEXT", nullable: true),
                     TwitterUsername = table.Column<string>(type: "TEXT", nullable: true),
                     YoutubeUsername = table.Column<string>(type: "TEXT", nullable: true),

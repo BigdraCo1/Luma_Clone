@@ -3,4 +3,7 @@
     <data name="ProfileUpdateSuccessful" xml:space="preserve">
         <value>Profile updated successfully</value>
     </data>
+    <data name="UsernameTakenError" xml:space="preserve">
+        <value>Username already taken</value>
+    </data>
 </root>

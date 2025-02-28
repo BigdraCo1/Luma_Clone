@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="RequiredError" xml:space="preserve">
+        <value>จำเป็นต้องมี{0}</value>
+    </data>
+    <data name="MinLengthError" xml:space="preserve">
+        <value>{0}ต้องยาวอย่างน้อย {1} ตัวอักษร</value>
+    </data>
+    <data name="MaxLengthError" xml:space="preserve">
+        <value>{0}ต้องยาวไม่เกิน {1} ตัวอักษร</value>
+    </data>
+    <data name="AlphanumericFormatError" xml:space="preserve">
+        <value>{0}ต้องมีแค่ตัวอักษร A-Z, a-z, - และ _</value>
+    </data>
+    <data name="DisplayName" xml:space="preserve">
+        <value>ชื่อที่แสดง</value>
+    </data>
+    <data name="Username" xml:space="preserve">
+        <value>ชื่อผู้ใช้</value>
+    </data>
+    <data name="Bio" xml:space="preserve">
+        <value>ชีวประวัติ</value>
+    </data>
+</root>

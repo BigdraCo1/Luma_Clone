@@ -21,10 +21,10 @@ builder.Services.AddRazorPages().AddViewLocalization(LanguageViewLocationExpande
             (type, factory) => {
                 var assemblyName =
                     new AssemblyName(
-                        typeof(SharedResource)
+                        typeof(DataAnnotationsLocalizer)
                                 .GetTypeInfo()
                                 .Assembly.FullName!);
-                return factory.Create("SharedResource", assemblyName.Name!);
+                return factory.Create("Services.DataAnnotationsLocalizer", assemblyName.Name!);
             };
     });
 

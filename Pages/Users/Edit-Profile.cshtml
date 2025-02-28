@@ -46,12 +46,12 @@
             <span asp-validation-for="UpdatedUser.Username" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <label for="bio" class="mb-2 text-white">@Localizer["Bio"]</label>
             <textarea id="bio" asp-for="UpdatedUser.Bio"
-                class="h-16 px-4 py-2 mb-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 resize-none rounded-xl focus:border-gray-200"
+                class="h-16 px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 resize-none rounded-xl focus:border-gray-200"
                 placeholder="@Localizer["BioPlaceholder"]">@Model.UpdatedUser.Bio</textarea>
             <span asp-validation-for="UpdatedUser.Bio" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
         </div>
     </div>
-    <p class="text-white">@Localizer["SocialLinks"]</p>
+    <p class="mt-0 mb-2 text-white">@Localizer["SocialLinks"]</p>
     <div class="flex flex-wrap gap-4 mb-4">
         <div class="flex items-center flex-grow gap-2 w-96 max-w-160">
             @Icon.Inline("instagram", stroke: "rgb(156 163 175)")
@@ -130,7 +130,7 @@
         <span class="text-gray-300">@Localizer["AccountLinkedWithGoogle"]</span>
     </div>
     <button type="submit" asp-page-handler="UpdateProfile"
-        class="flex items-center gap-2 px-4 py-2 mb-4 text-base text-white transition-all bg-green-600 border-none hover:scale-105 rounded-xl">
+        class="flex items-center gap-2 px-4 py-2 mb-4 text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl">
         @Icon.Inline("save")
         @Localizer["SaveChanges"]
     </button>

@@ -255,7 +255,6 @@ namespace alma.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Bio")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")

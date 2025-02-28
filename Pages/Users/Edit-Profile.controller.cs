@@ -24,16 +24,17 @@ public class EditProfileModel(IStringLocalizer<EditProfileModel> localizer, Data
         if (currentUser is null) {
             return Redirect("/auth/sign-in?next=/users/edit-profile");
         }
-        UpdatedUser = new UpdateUserModel();
-        UpdatedUser.Name = currentUser.Name;
-        UpdatedUser.Username = currentUser.Username;
-        UpdatedUser.Bio = currentUser.Bio;
-        UpdatedUser.InstagramUsername = currentUser.InstagramUsername;
-        UpdatedUser.TwitterUsername = currentUser.TwitterUsername;
-        UpdatedUser.YoutubeUsername = currentUser.YoutubeUsername;
-        UpdatedUser.TikTokUsername = currentUser.TikTokUsername;
-        UpdatedUser.LinkedinHandle = currentUser.LinkedinHandle;
-        UpdatedUser.WebsiteUrl = currentUser.WebsiteUrl;
+        UpdatedUser = new UpdateUserModel {
+            Name = currentUser.Name,
+            Username = currentUser.Username,
+            Bio = currentUser.Bio,
+            InstagramUsername = currentUser.InstagramUsername,
+            TwitterUsername = currentUser.TwitterUsername,
+            YoutubeUsername = currentUser.YoutubeUsername,
+            TikTokUsername = currentUser.TikTokUsername,
+            LinkedinHandle = currentUser.LinkedinHandle,
+            WebsiteUrl = currentUser.WebsiteUrl
+        };
         CurrentUser = currentUser;
         return Page();
     }
@@ -54,9 +55,18 @@ public class EditProfileModel(IStringLocalizer<EditProfileModel> localizer, Data
             return Page();
         }
 
+        if (currentUser.Username != UpdatedUser.Username) {
+            var existingUsersWithUsername = _database.User.Where(user => user.Username == UpdatedUser.Username);
+            if (existingUsersWithUsername.Any()) {
+                ModelState.AddModelError("UpdatedUser.Username", _localizer["UsernameTakenError"]);
+                CurrentUser = currentUser;
+                return Page();
+            }
+        }
+
         currentUser.Name = UpdatedUser.Name;
         currentUser.Username = UpdatedUser.Username;
-        currentUser.Bio = UpdatedUser.Bio ?? "";
+        currentUser.Bio = UpdatedUser.Bio;
         currentUser.InstagramUsername = UpdatedUser.InstagramUsername;
         currentUser.TwitterUsername = UpdatedUser.TwitterUsername;
         currentUser.YoutubeUsername = UpdatedUser.YoutubeUsername;
@@ -71,18 +81,23 @@ public class EditProfileModel(IStringLocalizer<EditProfileModel> localizer, Data
 }
 
 public class UpdateUserModel() {
-    [Display(Name = "display name")]
-    [MinLength(3, ErrorMessage = "DisplayNameMinLength")]
-    [MaxLength(255)]
+    [Display(Name = "DisplayName")]
+    [Required(ErrorMessage = "RequiredError")]
+    [MinLength(3, ErrorMessage = "MinLengthError")]
+    [MaxLength(255, ErrorMessage = "MaxLengthError")]
     public string Name { get; set; } = default!;
 
-    [Display(Name = "username")]
-    [RegularExpression(@"^[a-zA-Z0-9\-_]+$")]
-    [MinLength(3)]
-    [MaxLength(255)]
+    [Display(Name = "Username")]
+    [Required(ErrorMessage = "RequiredError")]
+    [RegularExpression(@"^[a-zA-Z0-9\-_]+$", ErrorMessage = "AlphanumericFormatError")]
+    [MinLength(3, ErrorMessage = "MinLengthError")]
+    [MaxLength(255, ErrorMessage = "MaxLengthError")]
     public string Username { get; set; } = default!;
 
+    [Display(Name = "Bio")]
+    [MaxLength(65535, ErrorMessage = "MaxLengthError")]
     public string? Bio { get; set; }
+
     public string? InstagramUsername { get; set; }
     public string? TwitterUsername { get; set; }
     public string? YoutubeUsername { get; set; }

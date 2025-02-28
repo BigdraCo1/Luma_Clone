@@ -22,8 +22,7 @@ public class User {
     [Required]
     public required string AvatarType { get; set; }
 
-    [Required]
-    public required string Bio { get; set; }
+    public string? Bio { get; set; }
 
     public string? InstagramUsername { get; set; }
 

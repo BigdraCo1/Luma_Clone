@@ -3,4 +3,7 @@
     <data name="ProfileUpdateSuccessful" xml:space="preserve">
         <value>อัปเดตโปรไฟล์สำเร็จแล้ว</value>
     </data>
+    <data name="UsernameTakenError" xml:space="preserve">
+        <value>มีชื่อผู้ใช้นั้นอยู่แล้ว</value>
+    </data>
 </root>

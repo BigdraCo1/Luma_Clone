@@ -11,7 +11,7 @@ using alma.Services;
 namespace alma.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20250227155012_InitialCreate")]
+    [Migration("20250228155947_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -258,7 +258,6 @@ namespace alma.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Bio")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreatedAt")

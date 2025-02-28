@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="RequiredError" xml:space="preserve">
+        <value>{0} is required</value>
+    </data>
+    <data name="MinLengthError" xml:space="preserve">
+        <value>{0} must be at least {1} characters long</value>
+    </data>
+    <data name="MaxLengthError" xml:space="preserve">
+        <value>{0} must be at most {1} characters long</value>
+    </data>
+    <data name="AlphanumericFormatError" xml:space="preserve">
+        <value>{0} must only contains alphanumeric characters, hyphen and underscore</value>
+    </data>
+    <data name="DisplayName" xml:space="preserve">
+        <value>Display name</value>
+    </data>
+    <data name="Username" xml:space="preserve">
+        <value>Username</value>
+    </data>
+    <data name="Bio" xml:space="preserve">
+        <value>Bio</value>
+    </data>
+</root>
