@@ -42,4 +42,10 @@
     <data name="DeleteAccountCta" xml:space="preserve">
         <value>ลบบัญชีผู้ใช้ของฉัน</value>
     </data>
+    <data name="AvatarUpdateSuccess" xml:space="preserve">
+        <value>อัปเดตรูปโปรไฟล์เรียบร้อยแล้ว</value>
+    </data>
+    <data name="AvatarUpdateFail" xml:space="preserve">
+        <value>การอัปเดตรูปโปรไฟล์ไม่สำเร็จ</value>
+    </data>
 </root>

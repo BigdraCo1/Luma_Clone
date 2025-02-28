@@ -42,6 +42,8 @@
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
     <script src="/scripts/alma.js" defer></script>
+    <script src="/scripts/ajax-fetch.js" defer></script>
+    <script asp-src-include="@(ViewContext.View.Path).js" defer></script>
     @RenderSection("Head", required: false)
     @RenderSection("Styles", required: false)
     @RenderSection("Scripts", required: false)
@@ -72,11 +74,12 @@
                     <span class="sm:hidden">@Localizer["Create"]</span>
                 </a>
                 <div class="flex items-center user-action-trigger" tabindex="0">
-                    <img src="@avatarUrl" width="40px" height="40px" class="transition-all rounded-full hover:scale-105"
-                        alt="user avatar">
+                    <img src="@avatarUrl" width="40px" height="40px"
+                        class="object-cover transition-all rounded-full hover:scale-105" alt="user avatar">
                     <div class="user-action-content">
                         <div class="relative flex items-center gap-3 p-3 border-b border-b-gray-400">
-                            <img src="@avatarUrl" width="40px" height="40px" class="rounded-full" alt="user avatar">
+                            <img src="@avatarUrl" width="40px" height="40px" class="object-cover rounded-full"
+                                alt="user avatar">
                             <div class="overflow-hidden">
                                 <span
                                     class="block text-sm font-medium text-white overflow-ellipsis text-nowrap">@user.Name</span>

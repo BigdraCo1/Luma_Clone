@@ -851,6 +851,10 @@ body {
     animation: scale-fade-out 0.25s ease;
 }
 
+.object-cover {
+    object-fit: cover;
+}
+
 .top-24 {
     top: 6rem;
 }

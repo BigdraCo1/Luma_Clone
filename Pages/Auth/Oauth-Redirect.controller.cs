@@ -81,6 +81,8 @@ public class OauthRedirectModel(IConfiguration config, IStringLocalizer<OauthRed
 
         var session = await _sessionService.GenerateAsync(user);
 
+        HttpContext.Response.Cookies.Delete("state");
+
         HttpContext.Response.Cookies.Append("session", session.Token, new CookieOptions {
             HttpOnly = true,
             Secure = true,

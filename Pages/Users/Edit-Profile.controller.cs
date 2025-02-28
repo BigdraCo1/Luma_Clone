@@ -20,4 +20,7 @@ public class EditProfileModel(ISessionService sessionService) : PageModel {
         return Page();
     }
 
+    public async Task<IActionResult> OnPostUpdateProfileAsync() {
+        return new OkResult();
+    }
 }
