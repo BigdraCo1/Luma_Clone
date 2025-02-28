@@ -109,10 +109,6 @@
     );
 }
 
-.text-red-500 {
-    color: rgb(239 68 68);
-}
-
 .bg-red-500 {
     background-color: rgb(239 68 68);
 }
@@ -182,6 +178,10 @@
 
 .cursor-pointer {
     cursor: pointer;
+}
+
+.empty\:mt-0:empty {
+    margin-top: 0px;
 }
 
 textarea {
@@ -432,10 +432,6 @@ textarea:focus {
     margin-top: 2rem;
 }
 
-.empty\:mt-0:empty {
-    margin-top: 0px;
-}
-
 .mx-4 {
     margin-right: 1rem;
     margin-left: 1rem;
@@ -465,6 +461,10 @@ input {
 
 input:focus {
     outline: none;
+}
+
+.object-cover {
+    object-fit: cover;
 }
 
 body {
@@ -783,6 +783,10 @@ body {
     -webkit-text-fill-color: transparent;
 }
 
+.text-red-500 {
+    color: rgb(239 68 68);
+}
+
 .text-sm {
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -857,10 +861,6 @@ body {
 .toast.removing {
     z-index: 999;
     animation: scale-fade-out 0.25s ease;
-}
-
-.object-cover {
-    object-fit: cover;
 }
 
 .top-24 {

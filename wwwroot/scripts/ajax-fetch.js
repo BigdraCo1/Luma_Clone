@@ -49,6 +49,7 @@ class AjaxHeaders {
         } else if (init && typeof init === "object") {
             for (const key in init) {
                 if (Object.hasOwnProperty.call(init, key)) {
+                    // @ts-expect-error
                     this._headers[key.toLowerCase()] = String(init[key]);
                 }
             }

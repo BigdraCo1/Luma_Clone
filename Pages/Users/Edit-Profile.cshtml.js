@@ -30,6 +30,6 @@ async function avatarUpload() {
         url.searchParams.set("toast-type", "success");
         location.replace(url);
     } catch (err) {
-        showToast(updateAvatarFailText, err, "error");
+        showToast(updateAvatarFailText, String(err), "error");
     }
 }

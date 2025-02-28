@@ -106,6 +106,9 @@ function generateId() {
     return Math.random().toString(36).substring(2, 9);
 }
 
+/**
+ * @this {HTMLDivElement}
+ */
 function toastOnMouseLeave() {
     this.classList.remove("removal-queued");
     this.removeEventListener("mouseleave", toastOnMouseLeave);
@@ -161,7 +164,7 @@ function removeToast(id, onclick = false) {
  * Show a toast message
  * @param {string} message Message to display
  * @param {string?} description Description to display
- * @param {string?} type Type of toast (info, success, warning, error)
+ * @param {"info" | "success" | "warning" | "error" | undefined} type Type of toast (info, success, warning, error)
  */
 function showToast(message, description, type) {
     if (!message) {
@@ -238,6 +241,7 @@ if (urlParams.has("toast-message") || urlParams.has("toast-description")) {
     }
 
     if (message) {
+        // @ts-expect-error
         showToast(message, description, type);
 
         const newUrl = new URL(window.location.href);
@@ -257,7 +261,7 @@ if (urlParams.has("toast-message") || urlParams.has("toast-description")) {
  * Encode raw bytes data to base64 data URL
  * @param {Uint8Array} bytes The data to encode
  * @param {string} type The mimetype of the data
- * @returns Base64 data URL string
+ * @returns {Promise<string | ArrayBuffer | null>} Base64 data URL string
  */
 async function bytesToBase64DataUrl(bytes, type = "application/octet-stream") {
     return await new Promise((resolve, reject) => {
