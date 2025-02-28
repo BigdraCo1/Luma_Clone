@@ -33,7 +33,9 @@ var localizationOptions = new RequestLocalizationOptions().SetDefaultCulture(sup
     .AddSupportedCultures(supportedCultures)
     .AddSupportedUICultures(supportedCultures);
 
-#pragma warning disable CS1998 // CustomRequestCultureProvider want async method, but nothing have to be done asynchronously
+// Disable warning about async method not containing any await operators because
+// CustomRequestCultureProvider requires an async method but nothing have to be done asynchronously
+#pragma warning disable CS1998 
 localizationOptions.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(async context => {
     var userLang = context.Request.Cookies["lang"];
 
