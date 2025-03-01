@@ -17,21 +17,6 @@ namespace alma.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.1");
 
-            modelBuilder.Entity("EventTag", b =>
-                {
-                    b.Property<string>("EventsId")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("TagsId")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("EventsId", "TagsId");
-
-                    b.HasIndex("TagsId");
-
-                    b.ToTable("EventTag");
-                });
-
             modelBuilder.Entity("TagUser", b =>
                 {
                     b.Property<string>("FollowedTagsId")
@@ -121,11 +106,7 @@ namespace alma.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("LocationCity")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("LocationGmapsUrl")
+                    b.Property<string>("LocationGMapUrl")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -153,9 +134,15 @@ namespace alma.Migrations
                     b.Property<DateTime>("StartAt")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("TagId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.HasKey("Id");
 
                     b.HasIndex("HostId");
+
+                    b.HasIndex("TagId");
 
                     b.ToTable("Event");
                 });
@@ -314,21 +301,6 @@ namespace alma.Migrations
                     b.ToTable("UserAttendEvent");
                 });
 
-            modelBuilder.Entity("EventTag", b =>
-                {
-                    b.HasOne("alma.Models.Event", null)
-                        .WithMany()
-                        .HasForeignKey("EventsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("alma.Models.Tag", null)
-                        .WithMany()
-                        .HasForeignKey("TagsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("TagUser", b =>
                 {
                     b.HasOne("alma.Models.Tag", null)
@@ -382,7 +354,15 @@ namespace alma.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("alma.Models.Tag", "Tag")
+                        .WithMany("Events")
+                        .HasForeignKey("TagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Host");
+
+                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("alma.Models.Question", b =>
@@ -428,6 +408,11 @@ namespace alma.Migrations
             modelBuilder.Entity("alma.Models.Question", b =>
                 {
                     b.Navigation("Answers");
+                });
+
+            modelBuilder.Entity("alma.Models.Tag", b =>
+                {
+                    b.Navigation("Events");
                 });
 
             modelBuilder.Entity("alma.Models.User", b =>

@@ -16,7 +16,7 @@ public class EditProfileModel(IStringLocalizer<EditProfileModel> localizer, Data
     private readonly ISessionService _sessionService = sessionService;
 
     [BindProperty]
-    public UpdateUserModel UpdatedUser { get; set; } = default!;
+    public UpdateUserDto UpdatedUser { get; set; } = default!;
     public User CurrentUser { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync() {
@@ -24,7 +24,7 @@ public class EditProfileModel(IStringLocalizer<EditProfileModel> localizer, Data
         if (currentUser is null) {
             return Redirect("/auth/sign-in?next=/users/edit-profile");
         }
-        UpdatedUser = new UpdateUserModel {
+        UpdatedUser = new UpdateUserDto {
             Name = currentUser.Name,
             Username = currentUser.Username,
             Bio = currentUser.Bio,
@@ -46,11 +46,6 @@ public class EditProfileModel(IStringLocalizer<EditProfileModel> localizer, Data
         }
 
         if (!ModelState.IsValid) {
-            foreach (var modelState in ModelState.Values) {
-                foreach (var error in modelState.Errors) {
-                    Console.WriteLine(error.ErrorMessage);
-                }
-            }
             CurrentUser = currentUser;
             return Page();
         }
@@ -80,7 +75,7 @@ public class EditProfileModel(IStringLocalizer<EditProfileModel> localizer, Data
     }
 }
 
-public class UpdateUserModel() {
+public class UpdateUserDto() {
     [Display(Name = "DisplayName")]
     [Required(ErrorMessage = "RequiredError")]
     [MinLength(3, ErrorMessage = "MinLengthError")]
@@ -98,10 +93,27 @@ public class UpdateUserModel() {
     [MaxLength(65535, ErrorMessage = "MaxLengthError")]
     public string? Bio { get; set; }
 
+    [Display(Name = "InstagramUsername")]
+    [MaxLength(255, ErrorMessage = "MaxLengthError")]
     public string? InstagramUsername { get; set; }
+
+    [Display(Name = "TwitterUsername")]
+    [MaxLength(255, ErrorMessage = "MaxLengthError")]
     public string? TwitterUsername { get; set; }
+
+    [Display(Name = "YoutubeUsername")]
+    [MaxLength(255, ErrorMessage = "MaxLengthError")]
     public string? YoutubeUsername { get; set; }
+
+    [Display(Name = "TikTokUsername")]
+    [MaxLength(255, ErrorMessage = "MaxLengthError")]
     public string? TikTokUsername { get; set; }
+
+    [Display(Name = "LinkedinHandle")]
+    [MaxLength(255, ErrorMessage = "MaxLengthError")]
     public string? LinkedinHandle { get; set; }
+
+    [Display(Name = "WebsiteUrl")]
+    [MaxLength(255, ErrorMessage = "MaxLengthError")]
     public string? WebsiteUrl { get; set; }
 }

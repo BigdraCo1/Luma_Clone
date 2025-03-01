@@ -296,8 +296,28 @@ textarea:focus {
     height: fit-content;
 }
 
+input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .h-full {
     height: 100%;
+}
+
+.my-4 {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.gap-y-4 {
+    row-gap: 1rem;
 }
 
 .hidden {
@@ -449,6 +469,10 @@ textarea:focus {
 
 .no-underline {
     text-decoration-line: none;
+}
+
+.flex-wrap-reverse {
+    flex-wrap: wrap-reverse;
 }
 
 input {
@@ -912,6 +936,31 @@ button {
     font-variation-settings: "wdth" 100;
 }
 
+input:checked + .radio-selected\:outline-2 {
+    outline-style: solid;
+    outline-width: 2px;
+}
+
+input:checked + .radio-selected\:outline-green-500 {
+    outline-color: rgb(34 197 94);
+}
+
+input:checked + .radio-selected\:outline-amber-500 {
+    outline-color: rgb(245 158 11);
+}
+
+input:checked + .radio-selected\:outline-red-500 {
+    outline-color: rgb(239, 68, 68);
+}
+
+input:checked + .radio-selected\:bg-gray-700 {
+    background-color: rgb(55 65 81);
+}
+
+.hover\:bg-gray-800:hover {
+    background-color: rgb(31 41 55);
+}
+
 .w-0 {
     width: 0;
 }
@@ -940,8 +989,20 @@ button {
     width: 16rem;
 }
 
+.w-4 {
+    width: 1rem;
+}
+
 .w-8 {
     width: 2rem;
+}
+
+.w-16 {
+    width: 4rem;
+}
+
+.mr-16 {
+    margin-right: 4rem;
 }
 
 .w-80 {
@@ -962,6 +1023,30 @@ button {
 
 .w-full {
     width: 100%;
+}
+
+.w-48 {
+    width: 12rem;
+}
+
+.gap-16 {
+    gap: 4rem;
+}
+
+.\-bottom-4 {
+    bottom: -1rem;
+}
+
+.\-right-4 {
+    right: -1rem;
+}
+
+.min-h-64 {
+    min-height: 16rem;
+}
+
+.gap-x-16 {
+    column-gap: 4rem;
 }
 
 @media (width >= 64rem) {
@@ -1071,6 +1156,10 @@ button {
         display: flex;
     }
 
+    .sm\:items-center {
+        align-items: center;
+    }
+
     .sm\:flex-row-reverse {
         flex-direction: row-reverse;
     }
@@ -1124,6 +1213,10 @@ button {
 
     .sm\:mr-0 {
         margin-right: 0;
+    }
+
+    .sm\:mb-4 {
+        margin-bottom: 1rem;
     }
 
     .user-action-content {

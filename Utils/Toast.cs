@@ -20,25 +20,16 @@ public class Toast {
     /// <returns>A new URL with the toast query strings appended</returns>
     public static string AppendQueryString(string url, string message, string? description, string? type) {
         // TODO: Fix whatever this mess is
-        UriBuilder uriBuilder;
-        bool isAbsoluteUri;
-        if (Uri.TryCreate(url, UriKind.Absolute, out var absoluteUri)) {
-            isAbsoluteUri = true;
-            uriBuilder = new UriBuilder(absoluteUri);
-        } else {
-            isAbsoluteUri = false;
-            uriBuilder = new UriBuilder {
-                Path = url,
-                Scheme = "http",
-                Host = "localhost"
-            };
-        }
-
+        var uriBuilder = new UriBuilder {
+            Path = url,
+            Scheme = "http",
+            Host = "localhost"
+        };
         var query = HttpUtility.ParseQueryString(uriBuilder.Query);
         query.Set("toast-message", message);
         if (description is not null) query.Set("toast-description", description);
         if (type is not null) query.Set("toast-type", type);
         uriBuilder.Query = query.ToString();
-        return isAbsoluteUri ? uriBuilder.ToString() : uriBuilder.Path + uriBuilder.Query;
+        return uriBuilder.Path + uriBuilder.Query;
     }
 }

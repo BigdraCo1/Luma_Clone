@@ -22,7 +22,7 @@
                     @Icon.Inline("upload")
                 </button>
             </div>
-            <input type="file" accept="image/png, image/jpeg, image/avif, image/bmp" id="avatar-file-input"
+            <input type="file" accept="@(Config.GetValue<string>("Public:AcceptImageTypes"))" id="avatar-file-input"
                 onchange="avatarUpload()" class="hidden">
         </div>
         <div class="flex flex-col flex-grow sm:w-0">

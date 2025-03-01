@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="CreateEvent" xml:space="preserve">
+        <value>สร้างกิจกรรม</value>
+    </data>
+    <data name="EventImage" xml:space="preserve">
+        <value>ภาพกิจกรรม</value>
+    </data>
+    <data name="Name" xml:space="preserve">
+        <value>ชื่อ</value>
+    </data>
+    <data name="Tag" xml:space="preserve">
+        <value>หมวดหมู่</value>
+    </data>
+    <data name="EventDatetime" xml:space="preserve">
+        <value>วันและเวลากิจกรรม</value>
+    </data>
+    <data name="EventStartAt" xml:space="preserve">
+        <value>เริ่มต้น</value>
+    </data>
+    <data name="EventEndAt" xml:space="preserve">
+        <value>สิ้นสุด</value>
+    </data>
+    <data name="RegistrationDatetime" xml:space="preserve">
+        <value>วันและเวลาการลงทะเบียน</value>
+    </data>
+    <data name="RegistrationStartAt" xml:space="preserve">
+        <value>เริ่มต้น</value>
+    </data>
+    <data name="RegistrationEndAt" xml:space="preserve">
+        <value>สิ้นสุด</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+        <value>รายละเอียด</value>
+    </data>
+    <data name="Location" xml:space="preserve">
+        <value>สถานที่</value>
+    </data>
+    <data name="LocationTitle" xml:space="preserve">
+        <value>ชื่อ</value>
+    </data>
+    <data name="LocationSubtitle" xml:space="preserve">
+        <value>เมือง</value>
+    </data>
+    <data name="LocationDescription" xml:space="preserve">
+        <value>รายละเอียด</value>
+    </data>
+    <data name="LocationGMapUrl" xml:space="preserve">
+        <value>Google Maps embed URL</value>
+    </data>
+    <data name="Visibility" xml:space="preserve">
+        <value>การมองเห็น</value>
+    </data>
+    <data name="VisibilityPublic" xml:space="preserve">
+        <value>สาธารณะ</value>
+    </data>
+    <data name="VisibilityPublicDescription" xml:space="preserve">
+        <value>กิจกรรมนี้แสดงเป็นสาธารณะ สามารถถูกดูและค้นหาได้โดยทุกคน</value>
+    </data>
+    <data name="VisibilityHidden" xml:space="preserve">
+        <value>ซ่อน</value>
+    </data>
+    <data name="VisibilityHiddenDescription" xml:space="preserve">
+        <value>กิจกรรมนี้ไม่แสดงเป็นสาธารณะและไม่สามารถค้นหาได้ แต่ยังสามารถเข้าถึงได้ผ่าน URL</value>
+    </data>
+    <data name="VisibilityPrivate" xml:space="preserve">
+        <value>ส่วนตัว</value>
+    </data>
+    <data name="VisibilityPrivateDescription" xml:space="preserve">
+        <value>กิจกรรมนี้จะถูกเข้าถึงได้โดยเจ้าของกิจกรรม (คุณ) เท่านั้น</value>
+    </data>
+    <data name="ApprovalType" xml:space="preserve">
+        <value>รูปแบบการอนุมัติ</value>
+    </data>
+    <data name="ApprovalTypeAutomatic" xml:space="preserve">
+        <value>อนุมัติอัตโนมัติ</value>
+    </data>
+    <data name="ApprovalTypeManual" xml:space="preserve">
+        <value>อนุมัติเอง</value>
+    </data>
+    <data name="MaxParticipants" xml:space="preserve">
+        <value>จำนวนผู้เข้าร่วมสูงสุด</value>
+    </data>
+    <data name="MaxParticipantsUnit" xml:space="preserve">
+        <value>คน</value>
+    </data>
+    <data name="QuestionCountLimitReached" xml:space="preserve">
+        <value>ไม่สามารถมีคำถามมากกว่า 8 คำถามได้</value>
+    </data>
+    <data name="QuestionPlaceholder" xml:space="preserve">
+        <value>คำถาม</value>
+    </data>
+    <data name="RegistrationQuestions" xml:space="preserve">
+        <value>คำถามก่อนการลงทะเบียน</value>
+    </data>
+    <data name="AddQuestion" xml:space="preserve">
+        <value>เพิ่มคำถาม</value>
+    </data>
+    <data name="EventNamePlaceholder" xml:space="preserve">
+        <value>กิจกรรมซ่อนหาที่ดีที่สุดในศตวรรษที่ 20</value>
+    </data>
+    <data name="EventDescriptionPlaceholder" xml:space="preserve">
+        <value>ในกิจกรรมจะมีอะไรเกิดขึ้นบ้าง, ตารางงาน, ความต้องการ, การเตรียมตัว และอื่น ๆ</value>
+    </data>
+    <data name="LocationTitlePlaceholder" xml:space="preserve">
+        <value>โถง A ที่เมกาบางนา</value>
+    </data>
+    <data name="LocationSubtitlePlaceholder" xml:space="preserve">
+        <value>กรุงเทพ</value>
+    </data>
+    <data name="LocationDescriptionPlaceholder" xml:space="preserve">
+        <value>38, 38/1-3, 39 หมู่ที่ 6 ถนนบางนา-ตราด ตำบลบางแก้ว อำเภอบางพลี จังหวัดสมุทรปราการ 10540</value>
+    </data>
+    <data name="LocationGMapUrlPlaceholder" xml:space="preserve">
+        <value>&lt;iframe...</value>
+    </data>
+</root>
