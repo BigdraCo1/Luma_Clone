@@ -92,7 +92,7 @@
             <label for="location-description" class="mb-2 text-white">@Localizer["LocationDescription"]</label>
             <textarea id="location-description" asp-for="Event.LocationDescription"
                 placeholder="@Localizer["LocationDescriptionPlaceholder"]"
-                class="h-32 px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 resize-none rounded-xl focus:border-gray-200"></textarea>
+                class="h-16 px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 resize-none rounded-xl focus:border-gray-200"></textarea>
             <span asp-validation-for="Event.LocationDescription" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <label for="location-gmap-url" class="mb-2 text-white">@Localizer["LocationGMapUrl"]</label>
             <input type="text" id="location-gmap-url" asp-for="Event.LocationGMapUrl"
