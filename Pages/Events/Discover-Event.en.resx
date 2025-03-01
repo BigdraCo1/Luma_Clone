@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="Search-Event" xml:space="preserve">
+        <value>Search for events</value>
+    </data>
+    <data name="Popular-Event" xml:space="preserve">
+        <value>Popular events</value>
+    </data>
+    <data name="Bangkok" xml:space="preserve">
+        <value>Bangkok</value>
+    </data>
+    <data name="Coming-soon" xml:space="preserve">
+    <value>Coming soon</value>
+    </data>
+    <data name="View-all" xml:space="preserve">
+    <value>View all</value>
+    </data>
+</root>

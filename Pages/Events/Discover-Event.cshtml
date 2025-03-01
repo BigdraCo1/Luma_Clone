@@ -1,0 +1,133 @@
+@page
+@model alma.Pages.Events.DiscoveryEventModel
+
+@using System.Globalization;
+
+@{
+    ViewData["Title"] = "Discover Event";
+    var currentCulture = CultureInfo.CurrentCulture.Name;
+}
+
+<main class="main" style="margin-top: 20px; max-width: 1300px; padding: 10px;">
+    <section class="search-section" style="width: 100%;">
+        <h1 style="color: #ffff; font-size: 28px; font-weight: bold; margin-bottom: 15px;">@Localizer["Search-Event"]
+        </h1>
+        <div class="search-container" style="position: relative;">
+            <input type="search" placeholder=@Localizer["Search-Event"]
+                style="width: 100%; height: 40px; padding: 20px; background: transparent; border: 1px solid #8D8D8D; border-radius: 20px; font-size: 14px; color: #8D8D8D; font-weight: bold; outline: none;">
+            <button type="submit" class="search-icon"
+                style="background-color: transparent; border: none; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: #8D8D8D; cursor: pointer;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-search">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="m21 21-4.3-4.3" />
+                </svg>
+            </button>
+        </div>
+    </section>
+    <section class="events-section"
+        style="margin-top: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+        <div class="section-header" style="margin-bottom: 25px; display: flex; justify-content: space-between;">
+            <div class="header-info">
+                <h2 style="color: #ffff; font-size: 20px; font-weight: 500;">@Localizer["Popular-Event"]</h2>
+                <p style="color: #8D8D8D;">@Localizer["Bangkok"]</p>
+            </div>
+            <div class="header-btn" style="align-self: flex-end;">
+                <a href="#" class="btn-seemore"
+                    style="background-color: transparent; border-radius: 20px; border: 1px solid #8D8D8D; padding: 5px 10px; color: #8D8D8D; font-size: 14px; text-decoration: none;">@Localizer["View-all"]</a>
+            </div>
+        </div>
+        <div class="event-grid"
+            style="display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: 1fr; gap: 40px;">
+            @foreach (var eventItem in Model.Events)
+            {
+                <a href="#"
+                    style="position: relative; top: 0; width: 200px; text-decoration: none; transition: top ease 0.3s;">
+                    <div class="event-card" style="width: 100%; display: flex; flex-direction: column;">
+                        <img src="@Url.Page("Discover-Event", "Image", new { tuid = eventItem.Id })" alt="Event"
+                            style="width: 200px; height: 200px; border-radius: 20px; object-fit: cover;">
+                        <div class="event-info"
+                            style="display: flex; flex-direction: column; width: 100%; margin-top: 5px;">
+                            <h3
+                                style="color: #EAEAEA; font-size: 16px; font-weight: 500; margin-top: 5px; margin-bottom: 5px;">
+                                @eventItem.Name</h3>
+                            <span style="color: #8D8D8D;">@eventItem.StartAt.ToString("ddd MMM dd, hh:mm tt")</span>
+                            <span style="color: #8D8D8D;">@eventItem.LocationCity</span>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </section>
+    <section class="events-section"
+        style="margin-top: 40px; padding-bottom: 40px; border-bottom: 1px solid rgba(255,255,255,0.2);">
+        <div class="section-header" style="margin-bottom: 25px; display: flex; justify-content: space-between;">
+            <div class="header-info">
+                <h2 style="color: #ffff; font-size: 20px; font-weight: 500;">@Localizer["Coming-soon"]</h2>
+            </div>
+            <div class="header-btn" style="align-self: flex-end;">
+                <a href="#" class="btn-seemore"
+                    style="background-color: transparent; border-radius: 20px; border: 1px solid #8D8D8D; padding: 5px 10px; color: #8D8D8D; font-size: 14px; text-decoration: none;">@Localizer["View-all"]</a>
+            </div>
+        </div>
+        <div class="event-grid"
+            style="display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: 1fr; gap: 40px;">
+            @foreach (var eventItem in Model.UpcomingEvents)
+            {
+                <a href="#"
+                    style="position: relative; top: 0; width: 200px; text-decoration: none; transition: top ease 0.3s;">
+                    <div class="event-card" style="width: 100%; display: flex; flex-direction: column;">
+                        <img src="@Url.Page("Discover-Event", "Image", new { tuid = eventItem.Id })" alt="Event"
+                            style="width: 200px; height: 200px; border-radius: 20px; object-fit: cover;">
+                        <div class="event-info"
+                            style="display: flex; flex-direction: column; width: 100%; margin-top: 5px;">
+                            <h3
+                                style="color: #EAEAEA; font-size: 16px; font-weight: 500; margin-top: 5px; margin-bottom: 5px;">
+                                @eventItem.Name</h3>
+                            <span style="color: #8D8D8D;">@eventItem.StartAt.ToString("ddd MMM dd, hh:mm tt")</span>
+                            <span style="color: #8D8D8D;">@eventItem.LocationCity</span>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </section>
+    <section class="categories-section" style="margin-top: 40px;">
+        <h2 style="color: #ffff; font-size: 20px; font-weight: 500; margin-bottom: 20px;">เลือกตามหมวดหมู่</h2>
+        <div class="category-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+            @foreach (var Tag in Model.Tags)
+            {
+                <a href="#" style="text-decoration: none;">
+                    <div class="category-card"
+                        style="height: 100%; background: linear-gradient(45deg, #000480,#A8007B ); padding: 1.5rem; border-radius: 20px; cursor: pointer; transition: 0.3s;">
+                        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem; color: #8D8D8D;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-ship">
+                                <path d="M12 10.189V14" />
+                                <path d="M12 2v3" />
+                                <path d="M19 13V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v6" />
+                                <path
+                                    d="M19.38 20A11.6 11.6 0 0 0 21 14l-8.188-3.639a2 2 0 0 0-1.624 0L3 14a11.6 11.6 0 0 0 2.81 7.76" />
+                                <path
+                                    d="M2 21c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1s1.2 1 2.5 1c2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" />
+                            </svg>
+                        </div>
+                        @if (currentCulture == "th")
+                        {
+                            <h3 style="color: #EAEAEA; font-size: 16px; font-weight: 500; margin-bottom: 0.25rem;">
+                                @Tag.NameTH</h3>
+                        }
+                        else
+                        {
+                            <h3 style="color: #EAEAEA; font-size: 16px; font-weight: 500; margin-bottom: 0.25rem;">
+                                @Tag.NameEN</h3>
+                        }
+                        <p style="color: #8D8D8D; font-size: 14px;">@Tag.Events.Count Event</p>
+                    </div>
+                </a>
+            }
+        </div>
+    </section>
+</main>
