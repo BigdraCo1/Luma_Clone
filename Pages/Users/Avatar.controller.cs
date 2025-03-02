@@ -13,7 +13,7 @@ public class AvatarModel(DatabaseContext database, ISessionService sessionServic
     private readonly DatabaseContext _database = database;
     private readonly ISessionService _sessionService = sessionService;
 
-    public async Task<IActionResult> OnGetAvatarAsync(string id) {
+    public async Task<IActionResult> OnGetAsync(string id) {
         var user = await _database.User.FindAsync(id);
         if (user is null) {
             return NotFound();
@@ -22,7 +22,7 @@ public class AvatarModel(DatabaseContext database, ISessionService sessionServic
         return File(user.Avatar, user.AvatarType);
     }
 
-    public async Task<IActionResult> OnPostUpdateAvatarAsync([FromBody] AvatarUpdateRequest request) {
+    public async Task<IActionResult> OnPostAsync([FromBody] UpdateAvatarDto request) {
         var user = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
         if (user is null) {
             return NotFound();
@@ -36,14 +36,13 @@ public class AvatarModel(DatabaseContext database, ISessionService sessionServic
         user.AvatarType = match.Groups["type"].Value;
         user.Avatar = Base64.Decode(match.Groups["data"].Value);
 
-        _database.User.Update(user);
         await _database.SaveChangesAsync();
 
         return new OkResult();
     }
 }
 
-public class AvatarUpdateRequest {
+public class UpdateAvatarDto {
     public required string AvatarDataUrl { get; set; }
 }
 

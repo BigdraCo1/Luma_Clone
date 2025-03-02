@@ -12,7 +12,7 @@
     var user = ContextAccessor.HttpContext!.Request.Cookies["session"] is not null
     ? Session.GetUser(ContextAccessor.HttpContext.Request.Cookies["session"]!)
     : null;
-    var avatarUrl = user is not null ? @Url.Page("/Users/Avatar", "Avatar", new { id = user.Id }) : null;
+    var avatarUrl = user is not null ? $"/users/avatar?id={user.Id}" : null;
 
     var currentCulture = CultureInfo.CurrentCulture.Name;
 }

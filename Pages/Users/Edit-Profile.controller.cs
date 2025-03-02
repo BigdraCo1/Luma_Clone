@@ -39,7 +39,7 @@ public class EditProfileModel(IStringLocalizer<EditProfileModel> localizer, Data
         return Page();
     }
 
-    public async Task<IActionResult> OnPostUpdateProfileAsync() {
+    public async Task<IActionResult> OnPostAsync() {
         var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
         if (currentUser is null) {
             return Redirect("/auth/sign-in?next=/users/edit-profile");
@@ -71,7 +71,7 @@ public class EditProfileModel(IStringLocalizer<EditProfileModel> localizer, Data
 
         await _database.SaveChangesAsync();
 
-        return Redirect(Toast.AppendQueryString("/Users/Edit-Profile", _localizer["ProfileUpdateSuccessful"], null, "success"));
+        return Redirect(Toast.AppendQueryString("/users/edit-profile", _localizer["ProfileUpdateSuccessful"], null, "success"));
     }
 }
 

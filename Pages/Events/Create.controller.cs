@@ -34,7 +34,7 @@ public class CreateEventModel(DatabaseContext database, ISessionService sessionS
         return Page();
     }
 
-    public async Task<IActionResult> OnPostCreateEventAsync() {
+    public async Task<IActionResult> OnPostAsync() {
         var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
         if (currentUser is null) {
             return Redirect("/auth/sign-in?next=/events/create");
@@ -144,7 +144,7 @@ public class CreateEventDto() {
 
     [Display(Name = "LocationGMapUrl")]
     [Required(ErrorMessage = "RequiredError")]
-    [RegularExpression(@"<iframe src=""https://www.google.com/maps/embed\?pb=([^""]+)"" width=""600"" height=""450"" style=""border:0;"" allowfullscreen=""loading""></iframe>", ErrorMessage = "GMapUrlFormatError")]
+    [RegularExpression(@"<iframe src=""https://www.google.com/maps/embed\?pb=([^""]+)"".*?></iframe>", ErrorMessage = "GMapUrlFormatError")]
     public string LocationGMapUrl { get; set; } = default!;
 
     public string QuestionIds { get; set; } = default!;
