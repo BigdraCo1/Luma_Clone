@@ -9,7 +9,7 @@ const updateAvatarFailText =
     document.querySelector("#avatar-update-fail-text")?.textContent ?? "Failed to update avatar:";
 
 /**
- * @param {SubmitEvent} event
+ * @param {MouseEvent} event
  */
 function avatarSelect(event) {
     event.preventDefault();

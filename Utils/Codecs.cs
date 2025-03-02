@@ -1,4 +1,8 @@
+using System.Text.RegularExpressions;
+
 using Microsoft.AspNetCore.Authentication;
+
+using Newtonsoft.Json;
 
 namespace alma.Utils;
 
@@ -133,5 +137,42 @@ public class Json {
     /// <returns>Deserialized object</returns>
     public static T Deserialize<T>(string json) {
         return System.Text.Json.JsonSerializer.Deserialize<T>(json)!;
+    }
+}
+
+public record class Data() {
+    public required byte[] Bytes { get; init; }
+    public required string Type { get; init; }
+}
+
+/// <summary>
+/// A utility class for parsing and creating data URLs.
+/// </summary>
+public class DataUrl {
+
+    /// <summary>
+    /// Parses a data URL to a tuple of data and type
+    /// </summary>
+    /// <param name="dataUrl">Data URL to parse</param>
+    /// <returns>A Data instance containing the bytes and the type</returns>
+    public static Data Parse(string dataUrl) {
+        var match = Regex.Match(dataUrl, @"data:(?<type>.+?);base64,(?<data>.+)");
+        if (!match.Success) {
+            throw new ArgumentException("Invalid data URL format.");
+        }
+        return new Data {
+            Bytes = Base64.Decode(match.Groups["data"].Value),
+            Type = match.Groups["type"].Value
+        };
+    }
+
+    /// <summary>
+    /// Creates a data URL from a type and data
+    /// </summary>
+    /// <param name="data">Data to encode</param>
+    /// <param name="type">Type of the data</param>
+    /// <returns>Data URL</returns>
+    public static string Create(byte[] data, string type) {
+        return $"data:{type};base64,{Base64.Encode(data)}";
     }
 }

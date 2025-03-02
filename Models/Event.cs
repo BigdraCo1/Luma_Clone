@@ -32,7 +32,7 @@ public class Event {
     public required string Visibility { get; set; }
 
     [Required]
-    public required string RegistrationStatus { get; set; }
+    public required bool RegistrationOpen { get; set; }
 
     [Required]
     public required DateTime RegistrationStartAt { get; set; }

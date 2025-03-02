@@ -28,13 +28,13 @@ public class AvatarModel(DatabaseContext database, ISessionService sessionServic
             return NotFound();
         }
 
-        var match = Regex.Match(request.AvatarDataUrl, @"data:(?<type>.+?);base64,(?<data>.+)");
-        if (!match.Success) {
+        try {
+            var avatar = DataUrl.Parse(request.AvatarDataUrl);
+            user.Avatar = avatar.Bytes;
+            user.AvatarType = avatar.Type;
+        } catch (Exception) {
             return BadRequest("Invalid data URL format.");
         }
-
-        user.AvatarType = match.Groups["type"].Value;
-        user.Avatar = Base64.Decode(match.Groups["data"].Value);
 
         await _database.SaveChangesAsync();
 

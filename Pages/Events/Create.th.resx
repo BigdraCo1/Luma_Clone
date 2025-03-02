@@ -114,4 +114,16 @@
     <data name="LocationGMapUrlPlaceholder" xml:space="preserve">
         <value>&lt;iframe...</value>
     </data>
+    <data name="MaxParticipantsPlaceholder" xml:space="preserve">
+        <value>ถ้าไม่จำกัดให้ไส่ 0</value>
+    </data>
+    <data name="MaxParticipantsPattern" xml:space="preserve">
+        <value>ข้อมูลต้องเป็นตัวเลขตั้งแต่ 0 - 999999</value>
+    </data>
+    <data name="NoQuestionAdded" xml:space="preserve">
+        <value>ยังไม่มีคำถาม</value>
+    </data>
+    <data name="LocationGMapUrlPattern" xml:space="preserve">
+        <value>ข้อมูลต้องเป็น Google Maps embed URL</value>
+    </data>
 </root>

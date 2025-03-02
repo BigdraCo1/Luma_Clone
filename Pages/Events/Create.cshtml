@@ -7,12 +7,13 @@
 
 <span id="question-count-limit-reached-text" class="hidden">@Localizer["QuestionCountLimitReached"]</span>
 <span id="question-placeholder" class="hidden">@Localizer["QuestionPlaceholder"]</span>
-<div class="px-4 mx-auto sm:px-16 max-w-240">
+<form method="POST" class="px-4 mx-auto sm:px-16 max-w-240">
     <h1 class="text-white">@Localizer["CreateEvent"]</h1>
     <div class="flex flex-wrap-reverse gap-x-16">
         <div class="flex flex-col flex-grow w-64 mb-4">
             <label for="name" class="mb-2 text-white">@Localizer["Name"]</label>
-            <input type="text" id="name" asp-for="Event.Name" placeholder="@Localizer["EventNamePlaceholder"]"
+            <input type="text" id="name" asp-for="Event.Name" required minlength="3" maxlength="255"
+                placeholder="@Localizer["EventNamePlaceholder"]"
                 class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
             <span asp-validation-for="Event.Name" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <label for="tag" class="mb-2 text-white">@Localizer["Tag"]</label>
@@ -23,14 +24,14 @@
             <div class="flex items-center gap-2">
                 @Icon.Inline("clock", stroke: "rgb(229 231 235)")
                 <span class="w-12 text-gray-200">@Localizer["EventStartAt"]</span>
-                <input type="datetime-local" asp-for="Event.StartAt"
+                <input type="datetime-local" asp-for="Event.StartAt" required
                     class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
             </div>
             <span asp-validation-for="Event.StartAt" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <div class="flex items-center gap-2">
                 @Icon.Inline("clock", stroke: "rgb(229 231 235)")
                 <span class="w-12 text-gray-200">@Localizer["EventEndAt"]</span>
-                <input type="datetime-local" asp-for="Event.EndAt"
+                <input type="datetime-local" asp-for="Event.EndAt" required
                     class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
             </div>
             <span asp-validation-for="Event.EndAt" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
@@ -38,14 +39,14 @@
             <div class="flex items-center gap-2">
                 @Icon.Inline("clock", stroke: "rgb(229 231 235)")
                 <span class="w-12 text-gray-200">@Localizer["RegistrationStartAt"]</span>
-                <input type="datetime-local" asp-for="Event.RegistrationStartAt"
+                <input type="datetime-local" asp-for="Event.RegistrationStartAt" required
                     class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
             </div>
             <span asp-validation-for="Event.RegistrationStartAt" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <div class="flex items-center gap-2">
                 @Icon.Inline("clock", stroke: "rgb(229 231 235)")
                 <span class="w-12 text-gray-200">@Localizer["RegistrationEndAt"]</span>
-                <input type="datetime-local" asp-for="Event.RegistrationEndAt"
+                <input type="datetime-local" asp-for="Event.RegistrationEndAt" required
                     class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
             </div>
             <span asp-validation-for="Event.RegistrationEndAt" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
@@ -57,22 +58,20 @@
                     id="image-preview" class="object-cover" />
                 <button
                     class="absolute flex items-center justify-center w-10 h-10 transition-all bg-gray-300 border-none rounded-full -right-4 -bottom-4 hover:scale-105 hover:bg-white"
-                    onclick="imageSelect()">
+                    onclick="imageSelect(event)">
                     @Icon.Inline("upload")
                 </button>
                 <input type="file" accept="@(Config.GetValue<string>("Public:AcceptImageTypes"))" id="image-file-input"
                     onchange="imageUpload()" class="hidden">
-                <input type="text" asp-for="Event.Image" id="form-image-input" hidden />
-                <input type="text" asp-for="Event.ImageType" id="form-image-type-input" hidden />
-                <span asp-validation-for="Event.Image" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
-                <span asp-validation-for="Event.ImageType" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             </div>
+            <input type="text" asp-for="Event.Image" id="form-image-input" hidden />
+            <span asp-validation-for="Event.Image" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
         </div>
     </div>
     <div class="flex flex-wrap gap-x-16">
         <div class="flex flex-col flex-grow w-64">
             <label for="description" class="block mb-2 text-white">@Localizer["Description"]</label>
-            <textarea id="description" asp-for="Event.Description"
+            <textarea id="description" asp-for="Event.Description" required minlength="3" maxlength="65535"
                 placeholder="@Localizer["EventDescriptionPlaceholder"]"
                 class="flex-grow h-auto px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 resize-none min-h-64 rounded-xl focus:border-gray-200"></textarea>
             <span asp-validation-for="Event.Description" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
@@ -80,23 +79,24 @@
         <div class="flex flex-col flex-grow w-64">
             <p class="font-bold text-white">@Localizer["Location"]</p>
             <label for="location-title" class="mb-2 text-white">@Localizer["LocationTitle"]</label>
-            <input type="text" id="location-title" asp-for="Event.LocationTitle"
+            <input type="text" id="location-title" asp-for="Event.LocationTitle" required maxlength="255"
                 placeholder="@Localizer["LocationTitlePlaceholder"]"
                 class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
             <span asp-validation-for="Event.LocationTitle" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <lable for="location-subtitle" class="mb-2 text-white">@Localizer["LocationSubtitle"]</lable>
-            <input type="text" id="location-subtitle" asp-for="Event.LocationSubtitle"
+            <input type="text" id="location-subtitle" asp-for="Event.LocationSubtitle" required maxlength="255"
                 placeholder="@Localizer["LocationSubtitlePlaceholder"]"
                 class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
             <span asp-validation-for="Event.LocationSubtitle" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <label for="location-description" class="mb-2 text-white">@Localizer["LocationDescription"]</label>
-            <textarea id="location-description" asp-for="Event.LocationDescription"
+            <textarea id="location-description" asp-for="Event.LocationDescription" required maxlength="65535"
                 placeholder="@Localizer["LocationDescriptionPlaceholder"]"
                 class="h-16 px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 resize-none rounded-xl focus:border-gray-200"></textarea>
             <span asp-validation-for="Event.LocationDescription" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <label for="location-gmap-url" class="mb-2 text-white">@Localizer["LocationGMapUrl"]</label>
-            <input type="text" id="location-gmap-url" asp-for="Event.LocationGMapUrl"
-                placeholder="@Localizer["LocationGMapUrlPlaceholder"]"
+            <input type="text" id="location-gmap-url" asp-for="Event.LocationGMapUrl" required
+                pattern="<iframe src=&quot;https://www.google.com/maps/embed?pb=[^&quot;]+&quot;.*?></iframe>"
+                title="@Localizer["LocationGMapUrlPattern"]" placeholder="@Localizer["LocationGMapUrlPlaceholder"]"
                 class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
             <span asp-validation-for="Event.LocationGMapUrl" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
         </div>
@@ -105,7 +105,7 @@
         <p class="text-white">@Localizer["Visibility"]</p>
         <div class="flex flex-wrap gap-4">
             <div class="flex-grow w-48">
-                <input type="radio" id="visibility-public" name="visibility" value="public" asp-for="Event.Visibility"
+                <input type="radio" id="visibility-public" asp-for="Event.Visibility" value="public" required checked
                     required checked hidden />
                 <label for="visibility-public"
                     class="flex flex-col gap-2 p-4 transition-all bg-gray-900 cursor-pointer radio-selected:outline-2 radio-selected:outline-green-500 rounded-xl hover:bg-gray-800">
@@ -115,8 +115,7 @@
                 </label>
             </div>
             <div class="flex-grow w-64">
-                <input type="radio" id="visibility-hidden" name="visibility" value="hidden" asp-for="Event.Visibility"
-                    required hidden />
+                <input type="radio" id="visibility-hidden" asp-for="Event.Visibility" value="hidden" required hidden />
                 <label for="visibility-hidden"
                     class="flex flex-col gap-2 p-4 transition-all bg-gray-900 cursor-pointer radio-selected:outline-2 radio-selected:outline-amber-500 rounded-xl hover:bg-gray-800">
                     @Icon.Inline("globe-lock", stroke: "rgb(229 231 235)")
@@ -125,8 +124,8 @@
                 </label>
             </div>
             <div class="flex-grow w-48">
-                <input type="radio" id="visibility-private" name="visibility" value="private" asp-for="Event.Visibility"
-                    required hidden />
+                <input type="radio" id="visibility-private" asp-for="Event.Visibility" value="private" required required
+                    hidden />
                 <label for="visibility-private"
                     class="flex flex-col gap-2 p-4 transition-all bg-gray-900 cursor-pointer radio-selected:outline-2 radio-selected:outline-red-500 rounded-xl hover:bg-gray-800">
                     @Icon.Inline("octagon-x", stroke: "rgb(229 231 235)")
@@ -136,37 +135,48 @@
             </div>
         </div>
     </div>
-    <div class="flex flex-wrap mb-8 gap-x-16 gap-y-4">
+    <div class="flex flex-wrap mb-4 gap-x-16 gap-y-4">
         <div class="flex-grow w-64">
             <p class="mb-4 text-white">@Localizer["ApprovalType"]</label>
             <div class="flex bg-gray-900 w-fit rounded-xl">
-                <input type="radio" id="approval-type-automatic" name="eventApprovalType" value="automatic"
-                    asp-for="Event.ApprovalType" required checked hidden />
+                <input type="radio" id="approval-type-automatic" asp-for="Event.ApprovalType" value="automatic" required
+                    checked hidden />
                 <label for="approval-type-automatic"
                     class="px-4 py-3 text-white transition-all cursor-pointer radio-selected:bg-gray-700 rounded-xl">@Localizer["ApprovalTypeAutomatic"]</label>
-                <input type="radio" id="approval-type-manual" name="eventApprovalType" value="manual"
-                    asp-for="Event.ApprovalType" required hidden />
+                <input type="radio" id="approval-type-manual" asp-for="Event.ApprovalType" value="manual" required
+                    hidden />
                 <label for="approval-type-manual"
                     class="px-4 py-3 text-white transition-all cursor-pointer radio-selected:bg-gray-700 rounded-xl">@Localizer["ApprovalTypeManual"]</label>
             </div>
         </div>
-        <div class="flex-grow w-64">
+        <div class="flex flex-col flex-grow w-64">
             <label class="block my-4 text-white">@Localizer["MaxParticipants"]</label>
             <div class="flex items-center gap-2">
-                <input type="number" id="max-participants" asp-for="Event.MaxParticipants" value="10"
+                <input type="string" id="max-participants" asp-for="Event.MaxParticipants" required
+                    placeholder="@Localizer["MaxParticipantsPlaceholder"]" pattern="[0-9]{1,6}"
+                    title="@Localizer["MaxParticipantsPattern"]"
                     class="block w-32 px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
                 <span class="text-white">@Localizer["MaxParticipantsUnit"]</span>
             </div>
+            <span asp-validation-for="Event.MaxParticipants" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
         </div>
     </div>
-    <div>
-        <p class="text-white">@Localizer["RegistrationQuestions"]</p>
-        <button
-            class="flex items-center gap-2 px-4 py-2 mb-4 transition-all bg-gray-900 border-2 border-gray-400 rounded-xl hover:bg-gray-800 hover:scale-105"
-            onclick="addQuestion()">
-            @Icon.Inline("plus", stroke: "rgb(229 231 235)")
-            <span class="text-white">@Localizer["AddQuestion"]</span>
-        </button>
-        <div id="event-registration-questions" class="flex flex-col gap-2"></div>
+    <div class="mb-8">
+        <div class="flex items-center gap-4 mb-2">
+            <p class="text-white">@Localizer["RegistrationQuestions"]</p>
+            <button
+                class="flex items-center gap-2 px-4 py-2 transition-all bg-gray-900 border-2 border-gray-400 rounded-xl hover:bg-gray-800 hover:scale-105"
+                onclick="addQuestion(event)">
+                @Icon.Inline("plus", stroke: "rgb(229 231 235)")
+                <span class="text-white">@Localizer["AddQuestion"]</span>
+            </button>
+        </div>
+        <div id="event-registration-questions" class="flex flex-col gap-2 mb-4 empty:mb-0"></div>
+        <span class="hidden mt-2 text-gray-400 prev-child-empty:block">@Localizer["NoQuestionAdded"]</span>
     </div>
-</div>
+    <button type="submit"
+        class="flex items-center gap-2 px-4 py-2 mb-4 text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl">
+        @Icon.Inline("plus", stroke: "rgb(229 231 235)")
+        <span>@Localizer["CreateEvent"]</span>
+    </button>
+</form>

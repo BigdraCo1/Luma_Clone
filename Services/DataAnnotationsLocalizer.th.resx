@@ -13,10 +13,13 @@
         <value>{0}ต้องมีแค่ตัวอักษร A-Z, a-z, - และ _</value>
     </data>
     <data name="RangeError" xml:space="preserve">
-        <value>{0} ต้องมีค่าระหว่าง {1} และ {2}</value>
+        <value>{0}ต้องมีค่าระหว่าง {1} และ {2}</value>
     </data>
     <data name="ImageTypeFormatError" xml:space="preserve">
         <value>{0}มีรูปแบบที่ไม่ถูกต้อง</value>
+    </data>
+    <data name="NumberFormatError" xml:space="preserve">
+        <value>{0}ต้องเป็นตัวเลข</value>
     </data>
     <data name="DisplayName" xml:space="preserve">
         <value>ชื่อที่แสดง</value>
@@ -86,5 +89,11 @@
     </data>
     <data name="EventImageType" xml:space="preserve">
         <value>ชนิดของภาพสำหรับกิจกรรม</value>
+    </data>
+    <data name="EventTag" xml:space="preserve">
+        <value>หมวดหมู่ของกิจกรรม</value>
+    </data>
+    <data name="EventRegistrationQuestions" xml:space="preserve">
+        <value>คำถามก่อนการลงทะเบียนกิจกรรม</value>
     </data>
 </root>

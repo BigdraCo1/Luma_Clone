@@ -27,7 +27,7 @@
         </div>
         <div class="flex flex-col flex-grow sm:w-0">
             <label for="name" class="mb-2 text-white">@Localizer["Name"]</label>
-            <input type="text" id="name" asp-for="UpdatedUser.Name"
+            <input type="text" id="name" asp-for="UpdatedUser.Name" required minlength="3" maxlength="255"
                 class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200"
                 value="@Model.UpdatedUser.Name" />
             <span asp-validation-for="UpdatedUser.Name" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
@@ -39,13 +39,13 @@
                                                 @@
                     </div>
                 </div>
-                <input type="text" id="username" asp-for="UpdatedUser.Username"
+                <input type="text" id="username" asp-for="UpdatedUser.Username" required minlength="3" maxlength="255"
                     class="flex-grow py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
                     value="@Model.UpdatedUser.Username" />
             </div>
             <span asp-validation-for="UpdatedUser.Username" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <label for="bio" class="mb-2 text-white">@Localizer["Bio"]</label>
-            <textarea id="bio" asp-for="UpdatedUser.Bio"
+            <textarea id="bio" asp-for="UpdatedUser.Bio" maxlength="65535"
                 class="h-16 px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 resize-none rounded-xl focus:border-gray-200"
                 placeholder="@Localizer["BioPlaceholder"]">@Model.UpdatedUser.Bio</textarea>
             <span asp-validation-for="UpdatedUser.Bio" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
@@ -58,7 +58,7 @@
             <div class="flex items-center flex-grow w-0 h-10">
                 <label for="instagram-username"
                     class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">instagrsam.com/</label>
-                <input type="text" id="instagram-username" asp-for="UpdatedUser.InstagramUsername"
+                <input type="text" id="instagram-username" asp-for="UpdatedUser.InstagramUsername" maxlength="255"
                     class="flex-grow w-0 py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
                     placeholder="username" value="@Model.UpdatedUser.InstagramUsername" />
                 <span asp-validation-for="UpdatedUser.InstagramUsername"
@@ -70,7 +70,7 @@
             <div class="flex items-center flex-grow w-0 h-10">
                 <label for="twitter-username"
                     class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">x.com/</label>
-                <input type="text" id="twitter-username" asp-for="UpdatedUser.TwitterUsername"
+                <input type="text" id="twitter-username" asp-for="UpdatedUser.TwitterUsername" maxlength="255"
                     class="flex-grow w-0 py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
                     placeholder="username" value="@Model.UpdatedUser.TwitterUsername" />
                 <span asp-validation-for="UpdatedUser.TwitterUsername" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
@@ -81,7 +81,7 @@
             <div class="flex items-center flex-grow w-0 h-10">
                 <label for="youtube-username"
                     class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">youtube.com/@@</label>
-                <input type="text" id="youtube-username" asp-for="UpdatedUser.YoutubeUsername"
+                <input type="text" id="youtube-username" asp-for="UpdatedUser.YoutubeUsername" maxlength="255"
                     class="flex-grow w-0 py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
                     placeholder="username" value="@Model.UpdatedUser.YoutubeUsername" />
                 <span asp-validation-for="UpdatedUser.YoutubeUsername" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
@@ -92,7 +92,7 @@
             <div class="flex items-center flex-grow w-0 h-10">
                 <label for="tiktok-username"
                     class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">tiktok.com/@@</label>
-                <input type="text" id="tiktok-username" asp-for="UpdatedUser.TikTokUsername"
+                <input type="text" id="tiktok-username" asp-for="UpdatedUser.TikTokUsername" maxlength="255"
                     class="flex-grow w-0 py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
                     placeholder="username" value="@Model.UpdatedUser.TikTokUsername" />
                 <span asp-validation-for="UpdatedUser.TikTokUsername" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
@@ -103,7 +103,7 @@
             <div class="flex items-center flex-grow w-0 h-10">
                 <label for="linkedin-handle"
                     class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">linkedin.com/in/</label>
-                <input type="text" id="linkedin-handle" asp-for="UpdatedUser.LinkedinHandle"
+                <input type="text" id="linkedin-handle" asp-for="UpdatedUser.LinkedinHandle" maxlength="255"
                     class="flex-grow w-0 py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
                     placeholder="handle" value="@Model.UpdatedUser.LinkedinHandle" />
                 <span asp-validation-for="UpdatedUser.LinkedinHandle" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
@@ -115,7 +115,7 @@
                 <label for="website-url"
                     class="flex items-center h-full pl-3 pr-2 bg-gray-400 text-blue-950 rounded-l-xl">
                     https://</label>
-                <input type="text" id="website-url" asp-for="UpdatedUser.WebsiteUrl"
+                <input type="text" id="website-url" asp-for="UpdatedUser.WebsiteUrl" maxlength="255"
                     class="flex-grow w-0 py-2 pl-2 pr-4 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-r-xl focus:border-gray-200"
                     placeholder="example.com" value="@Model.UpdatedUser.WebsiteUrl" />
                 <span asp-validation-for="UpdatedUser.WebsiteUrl" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>

@@ -184,6 +184,14 @@
     margin-top: 0px;
 }
 
+.empty\:mb-0:empty {
+    margin-bottom: 0px;
+}
+
+*:empty + .prev-child-empty\:block {
+    display: block;
+}
+
 textarea {
     font-style: normal;
     font-weight: 400;

@@ -12,10 +12,6 @@ const imagePreviewElement = document.querySelector("#image-preview");
 // @ts-expect-error
 const formImageInput = document.querySelector("#form-image-input");
 
-/** @type {HTMLInputElement} */
-// @ts-expect-error
-const formImageTypeInput = document.querySelector("#form-image-type-input");
-
 /** @type {HTMLDivElement} */
 // @ts-expect-error
 const questionsContainer = document.querySelector("#event-registration-questions");
@@ -31,7 +27,11 @@ const questionPlaceholder =
 
 let currentQuestionCount = 0;
 
-function imageSelect() {
+/**
+ * @param {MouseEvent} event
+ */
+function imageSelect(event) {
+    event.preventDefault();
     fileInput.click();
 }
 
@@ -42,10 +42,13 @@ async function imageUpload() {
     const dataUrl = await bytesToBase64DataUrl(new Uint8Array(await file.arrayBuffer()), file.type);
     imagePreviewElement.setAttribute("src", String(dataUrl));
     formImageInput.value = String(dataUrl);
-    formImageTypeInput.value = file.type;
 }
 
-function addQuestion() {
+/**
+ * @param {MouseEvent} event
+ */
+function addQuestion(event) {
+    event.preventDefault();
     if (currentQuestionCount >= 8) {
         showToast(questionCountLimitReachedText, "", "error");
         return;
@@ -56,7 +59,7 @@ function addQuestion() {
     const questionText = document.createElement("input");
     questionText.setAttribute("type", "text");
     questionText.setAttribute("placeholder", questionPlaceholder);
-    questionText.setAttribute("name", "questions");
+    questionText.setAttribute("name", "Event.Questions");
     questionText.setAttribute("required", "required");
     questionText.classList.add(
         "px-4",

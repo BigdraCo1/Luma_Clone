@@ -114,4 +114,16 @@
     <data name="LocationGMapUrlPlaceholder" xml:space="preserve">
         <value>&lt;iframe...</value>
     </data>
+    <data name="MaxParticipantsPlaceholder" xml:space="preserve">
+        <value>0 for unlimited</value>
+    </data>
+    <data name="MaxParticipantsPattern" xml:space="preserve">
+        <value>Input must be a number between 0 - 999999</value>
+    </data>
+    <data name="NoQuestionAdded" xml:space="preserve">
+        <value>No question added yet</value>
+    </data>
+    <data name="LocationGMapUrlPattern" xml:space="preserve">
+        <value>Input must be a Google Maps embed URL</value>
+    </data>
 </root>

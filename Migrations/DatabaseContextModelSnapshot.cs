@@ -102,11 +102,19 @@ namespace alma.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Location")
+                    b.Property<string>("LocationDescription")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("LocationGMapUrl")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LocationSubtitle")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LocationTitle")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -117,24 +125,23 @@ namespace alma.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Publicity")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
                     b.Property<DateTime>("RegistrationEndAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("RegistrationStartAt")
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("RegistrationOpen")
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("RegistrationStatus")
-                        .IsRequired()
+                    b.Property<DateTime>("RegistrationStartAt")
                         .HasColumnType("TEXT");
 
                     b.Property<DateTime>("StartAt")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("TagId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Visibility")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -155,9 +162,6 @@ namespace alma.Migrations
                     b.Property<string>("EventId")
                         .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<bool>("Required")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Text")
                         .IsRequired()

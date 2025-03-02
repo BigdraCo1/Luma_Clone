@@ -1,14 +1,15 @@
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
+using System.Text.RegularExpressions;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
-using alma.Enums;
 using alma.Models;
 using alma.Services;
+using alma.Utils;
 
 namespace alma.Pages.Events;
 
@@ -40,7 +41,17 @@ public class CreateEventModel(DatabaseContext database, ISessionService sessionS
             return Redirect("/auth/sign-in?next=/events/create");
         }
 
+        Tags = await _database.Tag.Select(tag => new SelectListItem {
+            Value = tag.Id,
+            Text = CultureInfo.CurrentCulture.Name == "th" ? tag.NameTH : tag.NameEN
+        }).ToListAsync();
+
         if (!ModelState.IsValid) {
+            foreach (var modelState in ModelState.Values) {
+                foreach (var error in modelState.Errors) {
+                    Console.WriteLine(error.ErrorMessage);
+                }
+            }
             return Page();
         }
 
@@ -50,29 +61,42 @@ public class CreateEventModel(DatabaseContext database, ISessionService sessionS
             return Page();
         }
 
+        var imageData = DataUrl.Parse(Event.Image);
+
+        var googleMapEmbedUrlMatch = Regex.Match(Event.LocationGMapUrl, @"<iframe src=""(?<url>https://www.google.com/maps/embed\?pb=[^""]+)"".*?></iframe>");
+        var googleMapEmbedUrl = googleMapEmbedUrlMatch.Groups["url"].Value;
+
         var newEvent = new Event {
-            Id = Guid.NewGuid().ToString(),
+            Id = Tuid.Generate(),
             Name = Event.Name,
             Description = Event.Description,
-            Image = Convert.FromBase64String(Event.Image),
-            ImageType = Event.ImageType,
+            Image = imageData.Bytes,
+            ImageType = imageData.Type,
             CreatedAt = DateTime.Now,
             StartAt = DateTime.Parse(Event.StartAt),
             EndAt = DateTime.Parse(Event.EndAt),
             Visibility = Event.Visibility,
-            RegistrationStatus = RegistrationStatus.Pending,
+            RegistrationOpen = true,
             RegistrationStartAt = DateTime.Parse(Event.RegistrationStartAt),
             RegistrationEndAt = DateTime.Parse(Event.RegistrationEndAt),
             ApprovalType = Event.ApprovalType,
-            MaxParticipants = Event.MaxParticipants,
+            MaxParticipants = Event.MaxParticipants == "0" ? null : int.Parse(Event.MaxParticipants),
             LocationTitle = Event.LocationTitle,
             LocationSubtitle = Event.LocationSubtitle,
             LocationDescription = Event.LocationDescription,
-            LocationGMapUrl = Event.LocationGMapUrl,
+            LocationGMapUrl = googleMapEmbedUrl,
             Tag = tag,
             Host = currentUser,
             HostId = currentUser.Id
         };
+
+        foreach (var question in Event.Questions) {
+            await _database.Question.AddAsync(new Question {
+                Id = Tuid.Generate(),
+                Text = question,
+                Event = newEvent
+            });
+        }
 
         await _database.Event.AddAsync(newEvent);
         await _database.SaveChangesAsync();
@@ -99,11 +123,6 @@ public class CreateEventDto() {
     [RegularExpression(@"^data:image/[^;]+;base64,[a-zA-Z0-9+/]+={0,2}$", ErrorMessage = "FormatError")]
     public string Image { get; set; } = default!;
 
-    [Display(Name = "EventImageType")]
-    [Required(ErrorMessage = "RequiredError")]
-    [RegularExpression(@"^image/[^;]+$", ErrorMessage = "FormatError")]
-    public string ImageType { get; set; } = default!;
-
     [Display(Name = "EventStartAt")]
     [Required(ErrorMessage = "RequiredError")]
     public string StartAt { get; set; } = default!;
@@ -125,27 +144,34 @@ public class CreateEventDto() {
     public string ApprovalType { get; set; } = default!;
 
     [Display(Name = "MaxParticipants")]
-    [Range(1, 1000000, ErrorMessage = "RangeError")]
-    public int? MaxParticipants;
+    [Required(ErrorMessage = "RequiredError")]
+    [RegularExpression(@"^[0-9]{1,6}$", ErrorMessage = "NumberFormatError")]
+    public string MaxParticipants { get; set; } = default!;
 
     [Display(Name = "EventLocationTitle")]
     [Required(ErrorMessage = "RequiredError")]
+    [MaxLength(255, ErrorMessage = "MaxLengthError")]
     public string LocationTitle { get; set; } = default!;
 
     [Display(Name = "EventLocationSubtitle")]
     [Required(ErrorMessage = "RequiredError")]
+    [MaxLength(255, ErrorMessage = "MaxLengthError")]
     public string LocationSubtitle { get; set; } = default!;
 
     [Display(Name = "EventLocationDescription")]
     [Required(ErrorMessage = "RequiredError")]
+    [MaxLength(65535, ErrorMessage = "MaxLengthError")]
     public string LocationDescription { get; set; } = default!;
 
+    [Display(Name = "EventTag")]
+    [Required(ErrorMessage = "RequiredError")]
     public string TagId { get; set; } = default!;
 
     [Display(Name = "LocationGMapUrl")]
     [Required(ErrorMessage = "RequiredError")]
-    [RegularExpression(@"<iframe src=""https://www.google.com/maps/embed\?pb=([^""]+)"".*?></iframe>", ErrorMessage = "GMapUrlFormatError")]
+    [RegularExpression(@"<iframe src=""https://www.google.com/maps/embed\?pb=[^""]+"".*?></iframe>", ErrorMessage = "GMapUrlFormatError")]
     public string LocationGMapUrl { get; set; } = default!;
 
-    public string QuestionIds { get; set; } = default!;
+    [Display(Name = "EventRegistrationQuestions")]
+    public string[] Questions { get; set; } = default!;
 }
