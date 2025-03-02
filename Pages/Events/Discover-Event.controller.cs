@@ -53,6 +53,8 @@ namespace alma.Pages.Events
                     .Include(e => e.Host)
                     .Where(e => e.EndAt > DateTime.Now)
                     .OrderBy(e => e.StartAt)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
                     .ToListAsync();
 
                 Tags = await _database.Tag
