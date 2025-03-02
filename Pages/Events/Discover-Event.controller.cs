@@ -22,11 +22,23 @@ namespace alma.Pages.Events
         public IList<Event> UpcomingEvents { get; set; } = new List<Event>();
         public IList<Tag> Tags { get; set; } = new List<Tag>();
 
-        public async Task<IActionResult> OnGetAsync(int page = 1, int pageSize = 10)
+        public async Task<IActionResult> OnGetAsync(string search = "", int page = 1, int pageSize = 10)
         {
             try
             {
-                Events = await _database.Event
+                if (!string.IsNullOrEmpty(search))
+                {
+                    Events = await _database.Event
+                    .Include(e => e.Tags)
+                    .Include(e => e.Host)
+                    .Where(e => e.EndAt > DateTime.Now)
+                    .Where(e => e.Name.Contains(search) || e.Description.Contains(search))
+                    .OrderByDescending(e => e.Attendees.Count)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+                } else {
+                    Events = await _database.Event
                     .Include(e => e.Tags)
                     .Include(e => e.Host)
                     .Where(e => e.EndAt > DateTime.Now)
@@ -34,6 +46,7 @@ namespace alma.Pages.Events
                     .Skip((page - 1) * pageSize)
                     .Take(pageSize)
                     .ToListAsync();
+                }
 
                 UpcomingEvents = await _database.Event
                     .Include(e => e.Tags)
