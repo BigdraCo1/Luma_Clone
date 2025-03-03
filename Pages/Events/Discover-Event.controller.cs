@@ -29,23 +29,35 @@ namespace alma.Pages.Events
                 if (!string.IsNullOrEmpty(search))
                 {
                     Events = await _database.Event
-                    .Include(e => e.Tags)
-                    .Include(e => e.Host)
-                    .Where(e => e.EndAt > DateTime.Now)
-                    .Where(e => e.Name.Contains(search) || e.Description.Contains(search))
-                    .OrderByDescending(e => e.Attendees.Count)
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToListAsync();
-                } else {
+                        .Include(e => e.Tags)
+                        .Include(e => e.Host)
+                        .Include(e => e.Attendees.Where(u =>
+                            _database.UserAttendEvent.Any(uae =>
+                                uae.UserId == u.Id &&
+                                uae.EventId == e.Id &&
+                                uae.Status == "GOING")))
+                        .Where(e => e.EndAt > DateTime.Now)
+                        .Where(e => e.Name.Contains(search) || e.Description.Contains(search))
+                        .OrderByDescending(e => e.Attendees.Count)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToListAsync();
+                }
+                else
+                {
                     Events = await _database.Event
-                    .Include(e => e.Tags)
-                    .Include(e => e.Host)
-                    .Where(e => e.EndAt > DateTime.Now)
-                    .OrderByDescending(e => e.Attendees.Count)
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToListAsync();
+                        .Include(e => e.Tags)
+                        .Include(e => e.Host)
+                        .Include(e => e.Attendees.Where(u =>
+                            _database.UserAttendEvent.Any(uae =>
+                                uae.UserId == u.Id &&
+                                uae.EventId == e.Id &&
+                                uae.Status == "GOING")))
+                        .Where(e => e.EndAt > DateTime.Now)
+                        .OrderByDescending(e => e.Attendees.Count)
+                        .Skip((page - 1) * pageSize)
+                        .Take(pageSize)
+                        .ToListAsync();
                 }
 
                 UpcomingEvents = await _database.Event

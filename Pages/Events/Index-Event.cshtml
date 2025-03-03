@@ -1,180 +1,225 @@
 @page
 @model alma.Pages.Events.IndexEventModel
 
+@using System.Globalization;
+
 @{
     ViewData["Title"] = "Index";
+    var Event = Model.currentEvent;
+    var host = Event.Host;
+    var goingAttendees = Model.GoingAttendees;
+    var displayAttendees = Model.DisplayAttendees;
+    var currentCulture = CultureInfo.CurrentCulture.Name;
 }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Event Layout</title>
-    <link rel="stylesheet" href="event_info.css">
-
-</head>
-<body>
-    <div class="main">
-        <!-- Image section -->
-        <div class="image-section">
-            <img src="Model.currentEvent" alt="Event poster" class="event-image">
-            <div class="socoial">
-                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-globe"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg></a>
-                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
-                <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a> 
-            </div>
+<div class="main" style="max-width: 1300px; margin-top: 60px; padding: 10px; display: grid; gap: 20px;">
+    <!-- Image section -->
+    <div class="image-section" style="grid-column: 1; grid-row: 1; overflow: hidden;">
+        <img src="@Url.Page("Index-Event", "Image", new { tuid = Event.Id })" alt="Event poster" class="event-image"
+            style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 20px;">
+        <div class="socoial" style="margin: 15px 0px 10px 20px;">
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-globe">
+                    <circle cx="12" cy="12" r="10" />
+                    <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                    <path d="M2 12h20" />
+                </svg></a>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-facebook">
+                    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+                </svg></a>
+            <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="lucide lucide-instagram">
+                    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+                </svg></a>
         </div>
+    </div>
 
-        <!-- amount of people section -->
-        <div class="amount-people-section">
-            <div class="Host">
-                <p>โฮสต์โดย</p>
-            </div>
-            <div class="organizer">
-                <div class="profile">
-                    <div class="organizer-avatar">
-                        <img src="8491C590-118D-4CD7-99BA-6E842FBC8146.jpeg" alt="รูปโปรไฟล์">
-                    </div>
-                    <p>Mew Sup</p>
-                </div>
-                <button class="follow">Follow</button>
-            </div>
-            <div class="registration-status">
-                <div class="Host">
-                    <p>ลงทะเบียนแล้ว <strong>20 คน</strong></p>
-                </div>
-                <div class="attendees">
-                    <div class="profile-stack">
-                        <img src="8491C590-118D-4CD7-99BA-6E842FBC8146.jpeg" alt="Attendee 1" class="profile-image">
-                        <img src="8491C590-118D-4CD7-99BA-6E842FBC8146.jpeg" alt="Attendee 2" class="profile-image">
-                        <img src="8491C590-118D-4CD7-99BA-6E842FBC8146.jpeg" alt="Attendee 3" class="profile-image">
-                        <img src="8491C590-118D-4CD7-99BA-6E842FBC8146.jpeg" alt="Attendee 4" class="profile-image">
-                    </div>
-                    <span class="others-text">และคนอื่นๆ อีก 20คน</span>
-                </div>
-            </div>
-        
+    <!-- amount of people section -->
+    <div class="amount-people-section" style="grid-column: 1; grid-row: 2; border-radius: 12px;">
+        <div class="Host"
+            style="padding-bottom: 5px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px;">
+            <p style="color: #EAEAEA;">@Localizer["Hosted-By"]</p>
         </div>
-
-        <!-- Right column -->
-        <div class="right-column">
-            <div class="title">
-                <h1 class="event-title">Bangkok Entrepreneur / Wantrepreneurs and Angel Investors Meetup</h1>
+        <div class="organizer" style="padding: 10px;">
+            <div class="profile" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <div class="organizer-avatar"
+                    style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <img src="@Url.Page("/Users/Avatar", "Avatar", new { id = host.Id })" alt="รูปโปรไฟล์"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+                <p style="color: #EAEAEA;">@host.Username</p>
             </div>
-            <div class="event-details-header">
-                <div class="date">
-                    <div class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar-check-2"><path d="M8 2v4"/><path d="M16 2v4"/><path d="M21 14V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8"/><path d="M3 10h18"/><path d="m16 20 2 2 4-4"/></svg>
-                    </div>
-                    <div class="info">
-                        <p style="color: #EAEAEA;">วันอังคารที่ 14 พฤษภาคม</p>
-                        <p>18:00 - 22:00</p>
-                    </div>
-                </div>
-                <div class="place">
-                    <div class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/></svg>
-                    </div>
-                    <div class="info">
-                        <p style="color: #EAEAEA;">Radisson Blu Plaza Hotel</p>
-                        <p>Bangkok</p>
-                    </div>
-                </div>
+            <button class="follow"
+                style="background-color: transparent; border: 1px solid #8d8d8d; color: #8d8d8d; padding: 6px 18px; border-radius: 20px; cursor: pointer;">Follow</button>
+        </div>
+        <div class="registration-status">
+            <div class="Host"
+                style="padding-bottom: 5px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px;">
+                @if (currentCulture == "th")
+                {
+                    <p style="color:#EAEAEA;">ลงทะเบียนแล้ว <strong>@goingAttendees.Count คน</strong></p>
+                }
+                else
+                {
+                    <p style="color:#EAEAEA;"><strong>@goingAttendees.Count </strong>going</p>
+                }
             </div>
-            <div class="register">
-                <!-- ต้องได้รับการยืนยัน -->
-                <div class="top">
-                    <h4>การลงทะเบียน</h4>
-                    <p>ลงทะเบียนเเล้ว 20 คน | ว่าง 50 คน</p>
+            <div class="attendees" style="display: flex; align-items: center; gap: 12px;">
+                <div class="profile-stack" style="display: flex; margin: 10px;">
+                    @foreach (var displayAttendee in displayAttendees)
+                    {
+                        <img src="@Url.Page("/Users/Avatar", "Avatar", new { id = displayAttendee.Id })" alt="Attendee 1"
+                            class="profile-image"
+                            style="width: 32px; height: 32px; border-radius: 50%; border: 2px solid #0a0a2e; margin-right: -8px;">
+                    }
                 </div>
-                <div class="mid">
-                    <div class="icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user-round-check"><path d="M2 21a8 8 0 0 1 13.292-6"/><circle cx="10" cy="8" r="5"/><path d="m16 19 2 2 4-4"/></svg>
-                    </div>
-                    <div class="info">
-                        <h3>ต้องได้รับการอนุมัติ</h3>
-                        <p>การลงทะเบียนของคุณต้องได้รับการอนุมัติจากผู้จัดงาน</p>
-                    </div>
-                </div>
-                <div class="bottom">
-                    <p>ยินดีต้อนรับ! ในการเข้าร่วมงาน กรุณาลงทะเบียนด้านล่าง</p>
-                    <button class="button">ลงทะเบียน</button>
-                </div>
-
-                <!-- ไม่ต้องยืนยัน -->
-                <!-- <div class="top">
-                    <h4>การลงทะเบียน</h4>
-                    <p>ลงทะเบียนเเล้ว 20 คน | ว่าง 50 คน</p>
-                </div>
-                <div class="bottom">
-                    <p>ยินดีต้อนรับ! ในการเข้าร่วมงาน กรุณาลงทะเบียนด้านล่าง</p>
-                    <button class="button">ลงทะเบียน</button>
-                </div> -->
-            </div>
-            <div class="map-container">
-                <div class="aboutevent">
-                    <p>เกี่ยวกับกิจกรรม</p>
-                </div>
-                <div class="details" >
-                    <textarea id="eventDetails" class="info-text">​It's just a social. There is no set theme or requirements to stand up and speak. Just come along and introduce yourself. Ask for Bryan Flowers, Patrick, Jack or Julian. (we are a team organising this event)
-
-​The event is free, but please buy at least a drink because we are using a restaurant/bar.
-                        
-​Please no direct sales. You can ask/give advice or ask for or give connections. Anyone pressuring or trying to sell won't be welcome.
-                        
-You are welcome to tell people you need investments, (for your own business) providing it's a real business not MLM/scam/pyramid/trading/trading bots.
-                        
-​Please do not waste people's time by coming to ask our members what to do on holiday and where to hang out. We are trying to meet serious people, and our time is valuable.
-                        
-​If you are one of these people that go to every meetup event to hang out. This probably isn't the group for you. We prefer smaller numbers and real entrepreneurs and investors.
-                        
-​We have around 20-40 people coming weekly, and around 50% of them are new faces and passing through. Many people have told us that our group has the best people to meet. It's worth coming often to meet new people and get worldwide connections. I don't think there are many entrepreneur groups that have so many nationalities travelling through; we are blessed to be in Bangkok.
-                        
-​Sorry for all the rules, but we are trying to protect our members who value time.
-                        
-​My WhatsApp is +66844656959 (Bryan)
-</textarea>
-                </div>
-                <div class="event-place">
-                    <div class="aboutevent">
-                        <p>สถานที่</p>
-                    </div>
-                    <textarea id="eventLocation" class="info-text">
-Radisson Blu Plaza Hotel, Bangkok
-
-489 Sukhumvit Rd, Klongtoey, Watthana, Krung Thep Maha Nakhon 10110, Thailand
-Floor 29 at Radisson Blu Hotel
-Radisson Blu Plaza Hotel, Bangkok
-                    </textarea>
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d35249.771860365094!2d100.77660083073675!3d13.70248007182537!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d664988a1bedf%3A0xcc678f180e221cd0!2z4Liq4LiW4Liy4Lia4Lix4LiZ4LmA4LiX4LiE4LmC4LiZ4LmC4Lil4Lii4Li14Lie4Lij4Liw4LiI4Lit4Lih4LmA4LiB4Lil4LmJ4Liy4LmA4LiI4LmJ4Liy4LiE4Li44LiT4LiX4Lir4Liy4Lij4Lil4Liy4LiU4LiB4Lij4Liw4Lia4Lix4LiH!5e1!3m2!1sth!2sth!4v1739508677071!5m2!1sth!2sth" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                </div>
+                @if (goingAttendees.Count < 7) {
+                <span class="others-text" style="color: #9ca3af; font-size: 14px;">@string.Join(", ", displayAttendees.Select(u => u.Username))</span>
+                } else {
+                    @if (currentCulture == "th") {
+                <span class="others-text" style="color: #9ca3af; font-size: 14px;">@string.Join(", ", displayAttendees.Select(u => u.Username)) และคนอื่นๆ อีก @(goingAttendees.Count - displayAttendees.Count) คน</span>
+                    } else {
+                <span class="others-text" style="color: #9ca3af; font-size: 14px;">@string.Join(", ", displayAttendees.Select(u => u.Username)) and @(goingAttendees.Count - displayAttendees.Count) others</span>
+                    }
+                }
             </div>
         </div>
     </div>
-    <script>
 
-        function autoResize(textarea) {
-            textarea.style.height = 'auto';
-            textarea.style.height = textarea.scrollHeight + 'px';
-        }
+    <!-- Right column -->
+    <div class="right-column" style="grid-column: 2; grid-row: 1 / span 3; border-radius: 12px; padding: 10px;">
+        <div class="title">
+            <h1 class="event-title" style="font-size: 48px; color: #EAEAEA;">@Event.Name</h1>
+        </div>
+        <div class="event-details-header" style="display: flex; justify-content: space-between;">
+            <div class="date"
+                style="display: flex; padding: 10px; justify-content: start; align-items: center; width: 50%;">
+                <div class="icon" style="padding: 15px; color: #8d8d8d;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-calendar-check-2">
+                        <path d="M8 2v4" />
+                        <path d="M16 2v4" />
+                        <path d="M21 14V6a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h8" />
+                        <path d="M3 10h18" />
+                        <path d="m16 20 2 2 4-4" />
+                    </svg>
+                </div>
+                <div class="info">
+                    <p style="color: #EAEAEA;">@Event.StartAt.ToString("dddd, MMMM dd")</p>
+                    <p style="color: #EAEAEA;">@Event.StartAt.ToString("HH:mm") - @Event.EndAt.ToString("HH:mm")</p>
+                </div>
+            </div>
+            <div class="place"
+                style="display: flex; padding: 10px; justify-content: start; align-items: center; width: 50%;">
+                <div class="icon" style="padding: 15px; color: #8d8d8d;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-map-pin">
+                        <path
+                            d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                </div>
+                <div class="info">
+                    <p style="color: #EAEAEA;">@Event.Location</p>
+                    <p style="color: #EAEAEA;">@Event.LocationCity</p>
+                </div>
+            </div>
+        </div>
+        <div class="register" style="border: solid #eaeaea 1px; border-radius: 20px; overflow: hidden;">
+            @if (Event.ApprovalType == "Required") {
+                <!-- ต้องได้รับการยืนยัน -->
+                <div class="top"
+                    style="display: flex; color: #000480; justify-content: space-between; padding: 5px 20px; background-color: #eaeaea;">
+                    <h4>@Localizer["Registration"]</h4>
+                </div>
+                <div class="mid"
+                    style="display: flex; justify-content: start; align-items: center; padding: 10px; border-bottom: solid #eaeaea 1px;">
+                    <div class="icon" style="margin: 0px 20px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                            class="lucide lucide-user-round-check">
+                            <path d="M2 21a8 8 0 0 1 13.292-6" />
+                            <circle cx="10" cy="8" r="5" />
+                            <path d="m16 19 2 2 4-4" />
+                        </svg>
+                    </div>
+                    <div class="info">
+                        <h3 style="color: #eaeaea;">@Localizer["Approval-Required"]</h3>
+                        <p style="color: #eaeaea;">@Localizer["Approval-text"]</p>
+                    </div>
+                </div>
+                <div class="bottom" style="padding: 10px;">
+                    <p style="padding: 0px 5px 10px 15px; color: #eaeaea;">@Localizer["Welcome!"]</p>
+                    <button class="button"
+                        style="background: linear-gradient(to right, #a8007b, #ff2525); background-size: 200% auto; color: #eaeaea; padding: 12px; border-radius: 15px; text-align: center; cursor: pointer; border: none; width: 100%; font-size: 16px; transition: background-position 0.3s ease-in-out;">@Localizer["Register"]</button>
+                </div>
+            }
+            else
+            {
+                <div class="top"
+                    style="display: flex; color: #000480; justify-content: space-between; padding: 5px 20px; background-color: #eaeaea;">
+                    <h4>@Localizer["Registration"]</h4>
+                </div>
+                <div class="bottom" style="padding: 10px;">
+                    <p style="padding: 0px 5px 10px 15px; color: #eaeaea;">@Localizer["Welcome!"]</p>
+                    <button class="button"
+                        style="background: linear-gradient(to right, #a8007b, #ff2525); background-size: 200% auto; color: #eaeaea; padding: 12px; border-radius: 15px; text-align: center; cursor: pointer; border: none; width: 100%; font-size: 16px; transition: background-position 0.3s ease-in-out;">@Localizer["Register"]</button>
+                </div>
+            }
+        </div>
+        <div class="map-container" style="width: 100%; border-radius: 8px; margin-top: 30px;">
+            <div class="aboutevent"
+                style="padding-bottom: 5px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px;">
+                <p style="color: #EAEAEA;">@Localizer["About-Event"]</p>
+            </div>
+            <div class="details">
+                <textarea id="eventDetails" class="info-text"
+                    style="width: 100%; min-height: 50px; resize: none; overflow-y: hidden; background-color: transparent; color: #eaeaea; border: none; padding: 10px; outline: none; pointer-events: none; font-size: 14px;">@Event.Description</textarea>
+            </div>
+            <div class="event-place">
+                <div class="aboutevent"
+                    style="padding-bottom: 5px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px;">
+                    <p style="color: #EAEAEA;">@Localizer["Location"]</p>
+                </div>
+                <textarea id="eventLocation" class="info-text"
+                    style="width: 100%; min-height: 50px; resize: none; overflow-y: hidden; background-color: transparent; color: #eaeaea; border: none; padding: 10px; outline: none; pointer-events: none; font-size: 14px;">@Event.Location</textarea>
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d35249.771860365094!2d100.77660083073675!3d13.70248007182537!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d664988a1bedf%3A0xcc678f180e221cd0!2z4Liq4LiW4Liy4Lia4Lix4LiZ4LmA4LiX4LiE4LmC4LiZ4LmC4Lil4Lii4Li14Lie4Lij4Liw4LiI4Lit4Lih4LmA4LiB4Lil4LmJ4Liy4LmA4LiI4LmJ4Liy4LiE4Li44LiT4LiX4Lir4Liy4Lij4Lil4Liy4LiU4LiB4Lij4Liw4Lia4Lix4LiH!5e1!3m2!1sth!2sth!4v1739508677071!5m2!1sth!2sth"
+                    width="600" height="450" style="border:0; margin-bottom: 10px; border-radius: 20px;"
+                    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
 
-        const textareas = document.querySelectorAll('.info-text');
-        
-        textareas.forEach(textarea => {
-            // Initial resize
-            autoResize(textarea);
+<script>
+    function autoResize(textarea) {
+        textarea.style.height = 'auto';
+        textarea.style.height = textarea.scrollHeight + 'px';
+    }
 
-            // Resize on input
-            textarea.addEventListener('input', function() {
-                autoResize(this);
-            });
+    const textareas = document.querySelectorAll('.info-text');
+
+    textareas.forEach(textarea => {
+        // Initial resize
+        autoResize(textarea);
+
+        // Resize on input
+        textarea.addEventListener('input', function () {
+            autoResize(this);
         });
+    });
 
-        // Resize on window resize
-        window.addEventListener('resize', function() {
-            textareas.forEach(autoResize);
-        });
-    </script>
-</body>
-</html>
+    // Resize on window resize
+    window.addEventListener('resize', function () {
+        textareas.forEach(autoResize);
+    });
+</script>

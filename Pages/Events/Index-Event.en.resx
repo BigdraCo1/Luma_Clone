@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <data name="Search-Event" xml:space="preserve">
-        <value>Search for events</value>
+    <data name="Hosted-By" xml:space="preserve">
+        <value>Hosted By</value>
     </data>
-    <data name="Popular-Event" xml:space="preserve">
-        <value>Popular events</value>
+    <data name="About-Event" xml:space="preserve">
+        <value>About Event</value>
     </data>
-    <data name="Bangkok" xml:space="preserve">
-        <value>Bangkok</value>
+    <data name="Location" xml:space="preserve">
+        <value>Location</value>
     </data>
-    <data name="Coming-soon" xml:space="preserve">
-    <value>Coming soon</value>
+    <data name="Registration" xml:space="preserve">
+    <value>Registration</value>
     </data>
-    <data name="View-all" xml:space="preserve">
-    <value>View all</value>
+    <data name="Welcome!" xml:space="preserve">
+    <value>Welcome! To join the event, please register below.</value>
+    </data>
+        <data name="Register" xml:space="preserve">
+    <value>Register</value>
+    </data>
+            <data name="Approval-Required" xml:space="preserve">
+    <value>Approval Required</value>
+    </data>
+                <data name="Approval-text" xml:space="preserve">
+    <value>Your registration is subject to approval by the host.</value>
     </data>
 </root>

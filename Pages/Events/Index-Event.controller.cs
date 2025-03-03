@@ -5,6 +5,7 @@ using alma.Models;
 using alma.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace alma.Pages.Events
@@ -19,15 +20,44 @@ namespace alma.Pages.Events
         }
 
         public Event currentEvent { get; set; }
+        public IList<User> GoingAttendees { get; set; } = new List<User>();
+        public IList<User> DisplayAttendees { get; set; } = new List<User>();
 
         public async Task<IActionResult> OnGetAsync(string tuid)
         {
-            currentEvent = await _database.Event.FirstOrDefaultAsync(i => i.Id == tuid);
+            // Load the event with related data
+            currentEvent = await _database.Event
+                .Include(e => e.Tags)
+                .Include(e => e.Host)
+                .Include(e => e.Attendees)
+                .FirstOrDefaultAsync(i => i.Id == tuid);
 
             if (currentEvent == null)
             {
                 return NotFound();
             }
+
+            // Filter attendees with "GOING" status and limit to first 6
+            GoingAttendees = await _database.UserAttendEvent
+                .Where(uae => uae.EventId == tuid && uae.Status == "GOING")
+                .Join(
+                    _database.User,
+                    uae => uae.UserId,
+                    user => user.Id,
+                    (uae, user) => user
+                )
+                .ToListAsync();
+
+            DisplayAttendees = await _database.UserAttendEvent
+                .Where(uae => uae.EventId == tuid && uae.Status == "GOING")
+                .Join(
+                    _database.User,
+                    uae => uae.UserId,
+                    user => user.Id,
+                    (uae, user) => user
+                )
+                .Take(6)
+                .ToListAsync();
 
             return Page();
         }

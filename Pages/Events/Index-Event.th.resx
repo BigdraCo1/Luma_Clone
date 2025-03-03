@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <data name="Search-Event" xml:space="preserve">
-        <value>ค้นหากิจกรรม</value>
+    <data name="Hosted-By" xml:space="preserve">
+        <value>โฮสต์โดย</value>
     </data>
-    <data name="Popular-Event" xml:space="preserve">
-        <value>กิจกรรมยอดนิยม</value>
+    <data name="About-Event" xml:space="preserve">
+        <value>เกี่ยวกับกิจกรรม</value>
     </data>
-    <data name="Bangkok" xml:space="preserve">
-        <value>กรุงเทพ</value>
+    <data name="Location" xml:space="preserve">
+        <value>สถานที่</value>
     </data>
-    <data name="Coming-soon" xml:space="preserve">
-    <value>เร็วๆนี้</value>
+    <data name="Registration" xml:space="preserve">
+    <value>การลงทะเบียน
+</value>
     </data>
-    <data name="View-all" xml:space="preserve">
-    <value>เพิ่มเติม</value>
+    <data name="Welcome!" xml:space="preserve">
+    <value>ยินดีต้อนรับ! ในการเข้าร่วมงาน กรุณาลงทะเบียนด้านล่าง</value>
+    </data>
+            <data name="Register" xml:space="preserve">
+    <value>ลงทะเบียน</value>
+    </data>
+                <data name="Approval-Required" xml:space="preserve">
+    <value>ต้องได้รับการอนุมัติ</value>
+    </data>
+    <data name="Approval-text" xml:space="preserve">
+    <value>การลงทะเบียนของคุณต้องได้รับการอนุมัติจากผู้จัดงาน</value>
     </data>
 </root>
