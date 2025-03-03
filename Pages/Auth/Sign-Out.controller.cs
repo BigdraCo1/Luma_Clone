@@ -16,8 +16,6 @@ public class SignOutModel(IStringLocalizer<SignOutModel> localizer, ISessionServ
 
         HttpContext.Response.Cookies.Delete("session");
 
-        var url = Toast.AppendQueryString("/", _localizer["LoggedOut"], null, "success");
-
-        return Redirect(url);
+        return Redirect(Toast.AppendQueryString("/", _localizer["LoggedOut"], null, "success"));
     }
 }
