@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="JoinedAt" xml:space="preserve">
+        <value>เข้าร่วมเมื่อ</value>
+    </data>
+    <data name="FollowerCountPrefix" xml:space="preserve">
+        <value>ผู้ติดตาม</value>
+    </data>
+    <data name="FollowerCountSuffix" xml:space="preserve">
+        <value>คน</value>
+    </data>
+    <data name="AttendingEventCountPrefix" xml:space="preserve">
+        <value>เข้าร่วมแล้ว</value>
+    </data>
+    <data name="AttendingEventCountSuffix" xml:space="preserve">
+        <value>กิจกรรม</value>
+    </data>
+</root>

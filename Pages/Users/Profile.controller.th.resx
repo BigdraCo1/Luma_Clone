@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="YouMustSignIn" xml:space="preserve">
+        <value>ไม่มีสิทธิ์เข้าถัง</value>
+    </data>
+    <data name="YouMustSignInDescription" xml:space="preserve">
+        <value>คุณต้องเข้าสู่ระบบก่อนถึงจะเข้าถึงหน้านี้ได้</value>
+    </data>
+</root>

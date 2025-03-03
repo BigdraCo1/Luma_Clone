@@ -228,6 +228,10 @@ textarea:focus {
     border-color: rgb(229 231 235);
 }
 
+.hover\:scale-110:hover {
+    transform: scale(1.1);
+}
+
 .font-bold {
     font-weight: 700;
 }
@@ -390,6 +394,10 @@ input::-webkit-inner-spin-button {
 
 .m-8 {
     margin: 2rem;
+}
+
+.w-24 {
+    width: 6rem;
 }
 
 .max-w-160 {
@@ -742,6 +750,11 @@ body {
     line-height: 2.5rem;
 }
 
+.text-5xl {
+    font-size: 3rem;
+    line-height: 1;
+}
+
 .text-6xl {
     font-size: 3.75rem;
     line-height: 1;
@@ -794,6 +807,11 @@ body {
     color: rgb(156 163 175);
 }
 
+.text-3xl {
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+}
+
 .text-lg {
     font-size: 1.125rem;
     line-height: 1.75rem;
@@ -844,6 +862,14 @@ body {
 .text-xs {
     font-size: 0.75rem;
     line-height: 1rem;
+}
+
+.mb-1 {
+    margin-bottom: 0.25rem;
+}
+
+.flex-shrink {
+    flex-shrink: 1;
 }
 
 .toast {
@@ -973,6 +999,10 @@ input:checked + .radio-selected\:bg-gray-700 {
     background-color: rgb(31 41 55);
 }
 
+.h-48 {
+    height: 12rem;
+}
+
 .w-0 {
     width: 0;
 }
@@ -1019,6 +1049,10 @@ input:checked + .radio-selected\:bg-gray-700 {
 
 .w-80 {
     width: 20rem;
+}
+
+.w-40 {
+    width: 10rem;
 }
 
 .w-96 {
@@ -1182,6 +1216,14 @@ input:checked + .radio-selected\:bg-gray-700 {
 
     .sm\:w-0 {
         width: 0px;
+    }
+
+    .sm\:w-48 {
+        width: 12rem;
+    }
+
+    .sm\:h-48 {
+        height: 12rem;
     }
 
     .sm\:gap-8 {
