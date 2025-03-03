@@ -18,6 +18,20 @@ namespace alma.Pages.Events
             _database = database;
         }
 
+        public Event currentEvent { get; set; }
+
+        public async Task<IActionResult> OnGetAsync(string tuid)
+        {
+            currentEvent = await _database.Event.FirstOrDefaultAsync(i => i.Id == tuid);
+
+            if (currentEvent == null)
+            {
+                return NotFound();
+            }
+
+            return Page();
+        }
+
         public async Task<IActionResult> OnGetImageAsync(string tuid)
         {
             if (string.IsNullOrEmpty(tuid))
