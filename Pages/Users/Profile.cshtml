@@ -2,17 +2,17 @@
 @model alma.Pages.Users.ProfileModel
 
 @{
-    ViewData["Title"] = $"Profile - {@Model.ViewingUser.Name}";
+    ViewData["Title"] = $"Profile - {@Model.DisplayedUser.Name}";
 }
 
 <div class="px-4 mx-auto max-w-240 sm:px-16">
     <div class="flex gap-8 mb-8">
         <div class="flex flex-col items-center w-24 gap-4 sm:w-48">
-            <img src="@($"/users/avatar?id={Model.ViewingUser.Id}")" alt="Avatar" class="w-24 h-24 rounded-full sm:w-48 sm:h-48" />
-            @if (@Model.CurrentUser != @Model.ViewingUser || true)
+            <img src="@($"/users/avatar?id={Model.DisplayedUser.Id}")" alt="Avatar" class="w-24 h-24 rounded-full sm:w-48 sm:h-48" />
+            @if (Model.CurrentUser != Model.DisplayedUser || true)
             {
                 <div class="flex items-center sm:hidden">
-                    @if (Model.CurrentUser.Following.Contains(Model.ViewingUser))
+                    @if (Model.CurrentUser.Following.Contains(Model.DisplayedUser))
                     {
                         <button class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Unfollow"]</button>
                     }
@@ -25,29 +25,29 @@
         </div>
         <div class="flex flex-wrap flex-grow w-40 gap-8">
             <div class="flex flex-col flex-grow w-64 gap-3 overflow-hidden">
-                <h1 class="mt-0 mb-1 text-lg text-white sm:text-2xl">@Model.ViewingUser.Name</h1>
-                <span class="text-gray-300 break-all">@@@Model.ViewingUser.Username</span>
+                <h1 class="mt-0 mb-1 text-lg text-white sm:text-2xl">@Model.DisplayedUser.Name</h1>
+                <span class="text-gray-300 break-all">@@@Model.DisplayedUser.Username</span>
                 <div class="flex items-center gap-2">
                     @Icon.Inline("calendar-arrow-down", size: "20", stroke: "rgb(209 213 219)")
                     <span class="text-gray-300">@Localizer["JoinedAt"]
-                        @Model.ViewingUser.CreatedAt.ToShortDateString()</span>
+                        @Model.DisplayedUser.CreatedAt.ToShortDateString()</span>
                 </div>
                 <div class="flex items-center gap-2">
                     @Icon.Inline("users", size: "20", stroke: "rgb(209 213 219)")
-                    <span class="text-gray-300">@Localizer["FollowerCountPrefix"] @Model.ViewingUser.Followers.Count
+                    <span class="text-gray-300">@Localizer["FollowerCountPrefix"] @Model.DisplayedUser.Followers.Count
                         @Localizer["FollowerCountSuffix"]</span>
                 </div>
                 <div class="flex items-center gap-2">
                     @Icon.Inline("ticket", size: "20", stroke: "rgb(209 213 219)")
                     <span class="text-gray-300">@Localizer["AttendingEventCountPrefix"]
-                        @Model.ViewingUser.AttendingEvents.Count
+                        @Model.DisplayedUser.AttendingEvents.Count
                         @Localizer["AttendingEventCountSuffix"]</span>
                 </div>
             </div>
-            @if (@Model.CurrentUser != @Model.ViewingUser || true)
+            @if (Model.CurrentUser != Model.DisplayedUser || true)
             {
                 <div class="items-center hidden sm:flex">
-                    @if (Model.CurrentUser.Following.Contains(Model.ViewingUser))
+                    @if (Model.CurrentUser.Following.Contains(Model.DisplayedUser))
                     {
                         <button class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Unfollow"]</button>
                     }
@@ -60,12 +60,24 @@
         </div>
     </div>
     <div class="flex items-center gap-2">
-        <a href="https://instagram.com/@Model.ViewingUser.InstagramUsername" class="transition-all hover:scale-110">@Icon.Inline("instagram", stroke: "rgb(209 213 219)")</a>
-        <a href="https://x.com/@Model.ViewingUser.TwitterUsername" class="transition-all hover:scale-110">@Icon.Inline("twitter", lib: "external", size: "24", fill: "rgb(209 213 219)")</a>
-        <a href="https://youtube.com/@@@Model.ViewingUser.YoutubeUsername" class="transition-all hover:scale-110">@Icon.Inline("youtube", size: "28", stroke: "rgb(209 213 219)")</a>
-        <a href="https://tiktok.com/@@@Model.ViewingUser.TikTokUsername" class="transition-all hover:scale-110">@Icon.Inline("tiktok", lib: "external", size: "22", fill: "rgb(209 213 219)")</a>
-        <a href="https://linkedin.com/in/@Model.ViewingUser.LinkedinHandle" class="transition-all hover:scale-110">@Icon.Inline("linkedin", stroke: "rgb(209 213 219)")</a>
-        <a href="https://@Model.ViewingUser.WebsiteUrl" class="transition-all hover:scale-110">@Icon.Inline("globe", stroke: "rgb(209 213 219)")</a>
+        @if (Model.DisplayedUser.InstagramUsername is not null) {
+            <a href="https://instagram.com/@Model.DisplayedUser.InstagramUsername" class="transition-all hover:scale-110">@Icon.Inline("instagram", stroke: "rgb(209 213 219)")</a>
+        }
+        @if (Model.DisplayedUser.TwitterUsername is not null) {
+            <a href="https://x.com/@Model.DisplayedUser.TwitterUsername" class="transition-all hover:scale-110">@Icon.Inline("twitter", lib: "external", size: "24", fill: "rgb(209 213 219)")</a>
+        }
+        @if (Model.DisplayedUser.YoutubeUsername is not null) {
+            <a href="https://youtube.com/@@@Model.DisplayedUser.YoutubeUsername" class="transition-all hover:scale-110">@Icon.Inline("youtube", size: "28", stroke: "rgb(209 213 219)")</a>
+        }
+        @if (Model.DisplayedUser.TikTokUsername is not null) {
+            <a href="https://tiktok.com/@@@Model.DisplayedUser.TikTokUsername" class="transition-all hover:scale-110">@Icon.Inline("tiktok", lib: "external", size: "22", fill: "rgb(209 213 219)")</a>
+        }
+        @if (Model.DisplayedUser.LinkedinHandle is not null) {
+            <a href="https://linkedin.com/in/@Model.DisplayedUser.LinkedinHandle" class="transition-all hover:scale-110">@Icon.Inline("linkedin", stroke: "rgb(209 213 219)")</a>
+        }
+        @if (Model.DisplayedUser.WebsiteUrl is not null) {
+            <a href="https://@Model.DisplayedUser.WebsiteUrl" class="transition-all hover:scale-110">@Icon.Inline("globe", stroke: "rgb(209 213 219)")</a>
+        }
     </div>
     <hr>
 </div>

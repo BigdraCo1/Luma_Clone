@@ -15,7 +15,7 @@ public class ProfileModel(IStringLocalizer<ProfileModel> localizer, DatabaseCont
     private readonly ISessionService _sessionService = sessionService;
 
     public User CurrentUser { get; set; } = default!;
-    public User ViewingUser { get; set; } = default!;
+    public User DisplayedUser { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(string id) {
         var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
@@ -23,11 +23,11 @@ public class ProfileModel(IStringLocalizer<ProfileModel> localizer, DatabaseCont
             return Redirect(Toast.AppendQueryString("/auth/sign-in", _localizer["YouMustSignIn"], _localizer["YouMustSignInDescription"], ToastTypes.Error));
         }
         CurrentUser = currentUser;
-        var viewingUser = await _database.User.FindAsync(id);
-        if (viewingUser is null) {
+        var displayedUser = await _database.User.FindAsync(id);
+        if (displayedUser is null) {
             return NotFound();
         }
-        ViewingUser = viewingUser;
+        DisplayedUser = displayedUser;
         return Page();
     }
 }
