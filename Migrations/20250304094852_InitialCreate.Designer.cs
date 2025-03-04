@@ -11,7 +11,7 @@ using alma.Services;
 namespace alma.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20250302103632_InitialCreate")]
+    [Migration("20250304094852_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />

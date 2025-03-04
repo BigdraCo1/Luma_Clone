@@ -54,6 +54,8 @@ function addQuestion(event) {
         return;
     }
     currentQuestionCount++;
+    const questionListElement = document.createElement("li");
+    questionListElement.classList.add("flex-grow");
     const question = document.createElement("div");
     question.classList.add("flex", "items-center", "gap-2", "flex-grow");
     const questionText = document.createElement("input");
@@ -62,9 +64,10 @@ function addQuestion(event) {
     questionText.setAttribute("name", "Event.Questions");
     questionText.setAttribute("required", "required");
     questionText.classList.add(
+        "flex-grow",
         "px-4",
         "py-2",
-        "flex-grow",
+        "ml-2",
         "max-w-160",
         "text-sm",
         "text-gray-200",
@@ -80,7 +83,7 @@ function addQuestion(event) {
     questionDeleteButton.innerHTML = trashIcon;
     questionDeleteButton.addEventListener("click", () => {
         currentQuestionCount--;
-        question.remove();
+        questionListElement.remove();
     });
     questionDeleteButton.classList.add(
         "flex",
@@ -94,5 +97,10 @@ function addQuestion(event) {
         "border-none"
     );
     question.appendChild(questionDeleteButton);
-    questionsContainer.appendChild(question);
+    questionListElement.appendChild(question);
+    questionsContainer.appendChild(questionListElement);
+}
+
+if (formImageInput.value) {
+    imagePreviewElement.setAttribute("src", formImageInput.value);
 }

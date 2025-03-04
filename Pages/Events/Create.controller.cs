@@ -6,14 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Localization;
 
+using alma.Enums;
 using alma.Models;
 using alma.Services;
 using alma.Utils;
 
 namespace alma.Pages.Events;
 
-public class CreateEventModel(DatabaseContext database, ISessionService sessionService) : PageModel {
+public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer, IStringLocalizer<CreateEventModel> localizer, DatabaseContext database, ISessionService sessionService) : PageModel {
+    private readonly IStringLocalizer _sharedLocalizer = sharedLocalizer;
+    private readonly IStringLocalizer _localizer = localizer;
     private readonly DatabaseContext _database = database;
     private readonly ISessionService _sessionService = sessionService;
 
@@ -24,7 +28,7 @@ public class CreateEventModel(DatabaseContext database, ISessionService sessionS
     public async Task<IActionResult> OnGetAsync() {
         var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
         if (currentUser is null) {
-            return Redirect("/auth/sign-in?next=/events/create");
+            return Redirect(Toast.AppendQueryString("/auth/sign-in?next=/events/create", _sharedLocalizer["YouMustSignIn"], _sharedLocalizer["YouMustSignInDescription"], ToastTypes.Error));
         }
 
         Tags = await _database.Tag.Select(tag => new SelectListItem {
@@ -38,7 +42,7 @@ public class CreateEventModel(DatabaseContext database, ISessionService sessionS
     public async Task<IActionResult> OnPostAsync() {
         var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
         if (currentUser is null) {
-            return Redirect("/auth/sign-in?next=/events/create");
+            return Redirect(Toast.AppendQueryString("/auth/sign-in?next=/events/create", _sharedLocalizer["YouMustSignIn"], _sharedLocalizer["YouMustSignInDescription"], ToastTypes.Error));
         }
 
         Tags = await _database.Tag.Select(tag => new SelectListItem {
@@ -47,11 +51,6 @@ public class CreateEventModel(DatabaseContext database, ISessionService sessionS
         }).ToListAsync();
 
         if (!ModelState.IsValid) {
-            foreach (var modelState in ModelState.Values) {
-                foreach (var error in modelState.Errors) {
-                    Console.WriteLine(error.ErrorMessage);
-                }
-            }
             return Page();
         }
 
@@ -73,12 +72,12 @@ public class CreateEventModel(DatabaseContext database, ISessionService sessionS
             Image = imageData.Bytes,
             ImageType = imageData.Type,
             CreatedAt = DateTime.Now,
-            StartAt = DateTime.Parse(Event.StartAt),
-            EndAt = DateTime.Parse(Event.EndAt),
-            Visibility = Event.Visibility,
+            StartAt = Event.StartAt,
+            EndAt = Event.EndAt,
             RegistrationOpen = true,
-            RegistrationStartAt = DateTime.Parse(Event.RegistrationStartAt),
-            RegistrationEndAt = DateTime.Parse(Event.RegistrationEndAt),
+            RegistrationStartAt = Event.RegistrationStartAt,
+            RegistrationEndAt = Event.RegistrationEndAt,
+            Visibility = Event.Visibility,
             ApprovalType = Event.ApprovalType,
             MaxParticipants = Event.MaxParticipants == "0" ? null : int.Parse(Event.MaxParticipants),
             LocationTitle = Event.LocationTitle,
@@ -101,7 +100,7 @@ public class CreateEventModel(DatabaseContext database, ISessionService sessionS
         await _database.Event.AddAsync(newEvent);
         await _database.SaveChangesAsync();
 
-        return Redirect($"/events/{newEvent.Id}");
+        return Redirect(Toast.AppendQueryString($"/events/{newEvent.Id}", _localizer["CreateEventSuccessful"], null, "success"));
     }
 }
 
@@ -125,21 +124,21 @@ public class CreateEventDto() {
 
     [Display(Name = "EventStartAt")]
     [Required(ErrorMessage = "RequiredError")]
-    public string StartAt { get; set; } = default!;
+    public DateTime StartAt { get; set; } = default!;
 
     [Display(Name = "EventEndAt")]
     [Required(ErrorMessage = "RequiredError")]
-    public string EndAt { get; set; } = default!;
-
-    public string Visibility { get; set; } = default!;
+    public DateTime EndAt { get; set; } = default!;
 
     [Display(Name = "RegistrationStartAt")]
     [Required(ErrorMessage = "RequiredError")]
-    public string RegistrationStartAt { get; set; } = default!;
+    public DateTime RegistrationStartAt { get; set; } = default!;
 
     [Display(Name = "RegistrationEndAt")]
     [Required(ErrorMessage = "RequiredError")]
-    public string RegistrationEndAt { get; set; } = default!;
+    public DateTime RegistrationEndAt { get; set; } = default!;
+
+    public string Visibility { get; set; } = default!;
 
     public string ApprovalType { get; set; } = default!;
 
@@ -163,14 +162,14 @@ public class CreateEventDto() {
     [MaxLength(65535, ErrorMessage = "MaxLengthError")]
     public string LocationDescription { get; set; } = default!;
 
-    [Display(Name = "EventTag")]
-    [Required(ErrorMessage = "RequiredError")]
-    public string TagId { get; set; } = default!;
-
     [Display(Name = "LocationGMapUrl")]
     [Required(ErrorMessage = "RequiredError")]
     [RegularExpression(@"<iframe src=""https://www.google.com/maps/embed\?pb=[^""]+"".*?></iframe>", ErrorMessage = "GMapUrlFormatError")]
     public string LocationGMapUrl { get; set; } = default!;
+
+    [Display(Name = "EventTag")]
+    [Required(ErrorMessage = "RequiredError")]
+    public string TagId { get; set; } = default!;
 
     [Display(Name = "EventRegistrationQuestions")]
     public string[] Questions { get; set; } = default!;

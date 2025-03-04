@@ -4,70 +4,76 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Localization;
 
+using alma.Enums;
 using alma.Models;
 using alma.Services;
 using alma.Utils;
 
 namespace alma.Pages.Users;
 
-public class EditProfileModel(IStringLocalizer<EditProfileModel> localizer, DatabaseContext database, ISessionService sessionService) : PageModel {
+public class EditProfileModel(IStringLocalizer<SharedResources> sharedLocalizer, IStringLocalizer<EditProfileModel> localizer, DatabaseContext database, ISessionService sessionService) : PageModel {
+    private readonly IStringLocalizer _sharedLocalizer = sharedLocalizer;
     private readonly IStringLocalizer _localizer = localizer;
     private readonly DatabaseContext _database = database;
     private readonly ISessionService _sessionService = sessionService;
 
+    public User ExistingUser { get; set; } = default!;
+
     [BindProperty]
     public UpdateUserDto UpdatedUser { get; set; } = default!;
-    public User CurrentUser { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync() {
-        var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
-        if (currentUser is null) {
-            return Redirect("/auth/sign-in?next=/users/edit-profile");
+        var existingUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
+        if (existingUser is null) {
+            return Redirect(Toast.AppendQueryString("/auth/sign-in?next=/users/edit-profile", _sharedLocalizer["YouMustSignIn"], _sharedLocalizer["YouMustSignInDescription"], ToastTypes.Error));
         }
+
+        ExistingUser = existingUser;
+
         UpdatedUser = new UpdateUserDto {
-            Name = currentUser.Name,
-            Username = currentUser.Username,
-            Bio = currentUser.Bio,
-            InstagramUsername = currentUser.InstagramUsername,
-            TwitterUsername = currentUser.TwitterUsername,
-            YoutubeUsername = currentUser.YoutubeUsername,
-            TikTokUsername = currentUser.TikTokUsername,
-            LinkedinHandle = currentUser.LinkedinHandle,
-            WebsiteUrl = currentUser.WebsiteUrl
+            Name = existingUser.Name,
+            Username = existingUser.Username,
+            Bio = existingUser.Bio,
+            InstagramUsername = existingUser.InstagramUsername,
+            TwitterUsername = existingUser.TwitterUsername,
+            YoutubeUsername = existingUser.YoutubeUsername,
+            TikTokUsername = existingUser.TikTokUsername,
+            LinkedinHandle = existingUser.LinkedinHandle,
+            WebsiteUrl = existingUser.WebsiteUrl
         };
-        CurrentUser = currentUser;
+
         return Page();
     }
 
     public async Task<IActionResult> OnPostAsync() {
-        var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
-        if (currentUser is null) {
-            return Redirect("/auth/sign-in?next=/users/edit-profile");
+        var existingUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
+        if (existingUser is null) {
+            return Redirect(Toast.AppendQueryString("/auth/sign-in?next=/users/edit-profile", _sharedLocalizer["YouMustSignIn"], _sharedLocalizer["YouMustSignInDescription"], ToastTypes.Error));
         }
 
         if (!ModelState.IsValid) {
-            CurrentUser = currentUser;
+            ExistingUser = existingUser;
             return Page();
         }
 
-        if (currentUser.Username != UpdatedUser.Username) {
+        if (existingUser.Username != UpdatedUser.Username) {
             var existingUsersWithUsername = _database.User.Where(user => user.Username == UpdatedUser.Username);
             if (existingUsersWithUsername.Any()) {
                 ModelState.AddModelError("UpdatedUser.Username", _localizer["UsernameTakenError"]);
-                CurrentUser = currentUser;
+                ExistingUser = existingUser;
                 return Page();
             }
         }
 
-        currentUser.Name = UpdatedUser.Name;
-        currentUser.Username = UpdatedUser.Username;
-        currentUser.Bio = UpdatedUser.Bio;
-        currentUser.InstagramUsername = UpdatedUser.InstagramUsername;
-        currentUser.TwitterUsername = UpdatedUser.TwitterUsername;
-        currentUser.YoutubeUsername = UpdatedUser.YoutubeUsername;
-        currentUser.TikTokUsername = UpdatedUser.TikTokUsername;
-        currentUser.LinkedinHandle = UpdatedUser.LinkedinHandle;
-        currentUser.WebsiteUrl = UpdatedUser.WebsiteUrl;
+        existingUser.Name = UpdatedUser.Name;
+        existingUser.Username = UpdatedUser.Username;
+        existingUser.Bio = UpdatedUser.Bio;
+        existingUser.InstagramUsername = UpdatedUser.InstagramUsername;
+        existingUser.TwitterUsername = UpdatedUser.TwitterUsername;
+        existingUser.YoutubeUsername = UpdatedUser.YoutubeUsername;
+        existingUser.TikTokUsername = UpdatedUser.TikTokUsername;
+        existingUser.LinkedinHandle = UpdatedUser.LinkedinHandle;
+        existingUser.WebsiteUrl = UpdatedUser.WebsiteUrl;
 
         await _database.SaveChangesAsync();
 

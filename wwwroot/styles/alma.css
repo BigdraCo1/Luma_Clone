@@ -28,8 +28,8 @@
     top: -0.125rem;
 }
 
-*:empty + .prev-child-empty\:block {
-    display: block;
+*:not(:has(*)) + .prev-child-empty\:block {
+    display: block !important;
 }
 
 .\-bottom-4 {
@@ -192,12 +192,12 @@
     cursor: pointer;
 }
 
-.empty\:mb-0:empty {
-    margin-bottom: 0px;
+.empty\:mb-0:not(:has(*)) {
+    margin-bottom: 0px !important;
 }
 
-.empty\:mt-0:empty {
-    margin-top: 0px;
+.empty\:mt-0:not(:has(*)) {
+    margin-top: 0px !important;
 }
 
 textarea {
@@ -298,6 +298,10 @@ textarea:focus {
 
 .gap-y-4 {
     row-gap: 1rem;
+}
+
+.h-2 {
+    height: 0.5rem;
 }
 
 .h-10 {
@@ -412,6 +416,10 @@ textarea:focus {
     margin: 2rem;
 }
 
+.max-w-120 {
+    max-width: 30rem;
+}
+
 .max-w-160 {
     max-width: 40rem;
 }
@@ -504,6 +512,11 @@ textarea:focus {
 .mx-auto {
     margin-right: auto;
     margin-left: auto;
+}
+
+.my-0 {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .my-3 {
@@ -760,6 +773,27 @@ body {
 
 .rounded-lg {
     border-radius: 0.5rem;
+}
+
+.rounded-full::-webkit-progress-bar {
+    border-radius: 9999px;
+}
+
+.rounded-full::-webkit-progress-value {
+    border-top-left-radius: 9999px;
+    border-bottom-left-radius: 9999px;
+}
+
+.bg-gray-800::-webkit-progress-bar {
+    background-color: rgb(31 41 55);
+}
+
+.text-gray-200::-webkit-progress-value {
+    background-color: rgb(229 231 235);
+}
+
+.text-gray-200::-moz-progress-bar {
+    background-color: rgb(229 231 235);
 }
 
 .rounded-r-xl {

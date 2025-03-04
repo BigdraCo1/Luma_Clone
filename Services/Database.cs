@@ -17,11 +17,11 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
 
         modelBuilder.Entity<User>()
             .HasMany(u => u.AttendingEvents)
-            .WithMany(e => e.Attendees)
+            .WithMany(e => e.Participants)
             .UsingEntity<UserAttendEvent>();
 
         modelBuilder.Entity<Event>()
-            .HasMany(e => e.Attendees)
+            .HasMany(e => e.Participants)
             .WithMany(u => u.AttendingEvents)
             .UsingEntity<UserAttendEvent>();
 

@@ -29,9 +29,6 @@ public class Event {
     public required DateTime EndAt { get; set; }
 
     [Required]
-    public required string Visibility { get; set; }
-
-    [Required]
     public required bool RegistrationOpen { get; set; }
 
     [Required]
@@ -39,6 +36,9 @@ public class Event {
 
     [Required]
     public required DateTime RegistrationEndAt { get; set; }
+
+    [Required]
+    public required string Visibility { get; set; }
 
     [Required]
     public required string ApprovalType { get; set; }
@@ -65,7 +65,7 @@ public class Event {
 
     public required User Host { get; set; }
 
-    public ICollection<User> Attendees { get; } = [];
+    public ICollection<User> Participants { get; } = [];
 
     public ICollection<Question> Questions { get; } = [];
 }

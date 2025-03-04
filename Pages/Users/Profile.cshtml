@@ -30,7 +30,7 @@
                 <div class="flex items-center gap-2">
                     @Icon.Inline("calendar-arrow-down", size: "20", stroke: "rgb(209 213 219)")
                     <span class="text-gray-300">@Localizer["JoinedAt"]
-                        @Model.DisplayedUser.CreatedAt.ToShortDateString()</span>
+                        @Formatter.FormatDate(Model.DisplayedUser.CreatedAt)</span>
                 </div>
                 <div class="flex items-center gap-2">
                     @Icon.Inline("users", size: "20", stroke: "rgb(209 213 219)")

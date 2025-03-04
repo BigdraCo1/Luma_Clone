@@ -1,55 +1,55 @@
 @page
-@model alma.Pages.Events.CreateEventModel
+@model alma.Pages.Events.EditEventModel
 
 @{
-    ViewData["Title"] = "Create Event";
+    ViewData["Title"] = $"Edit - {Model.ExistingEvent.Name}";
 }
 
-<span id="question-count-limit-reached-text" class="hidden">@Localizer["QuestionCountLimitReached"]</span>
-<span id="question-placeholder" class="hidden">@Localizer["QuestionPlaceholder"]</span>
 <form method="POST" class="px-4 mx-auto sm:px-16 max-w-240">
     <h1 class="text-white">@Localizer["CreateEvent"]</h1>
+    <input type="text" id="id" asp-for="UpdatedEvent.Id" hidden />
     <div class="flex flex-wrap-reverse gap-x-16">
         <div class="flex flex-col flex-grow w-64 mb-4">
             <label for="name" class="mb-2 text-white">@Localizer["Name"]</label>
-            <input type="text" id="name" asp-for="Event.Name" required minlength="3" maxlength="255"
+            <input type="text" id="name" asp-for="UpdatedEvent.Name" required minlength="3" maxlength="255"
                 placeholder="@Localizer["EventNamePlaceholder"]"
                 class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
-            <span asp-validation-for="Event.Name" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            <span asp-validation-for="UpdatedEvent.Name" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <label for="tag" class="mb-2 text-white">@Localizer["Tag"]</label>
-            <select id="tag" asp-for="Event.TagId" asp-items="Model.Tags"
+            <select id="tag" asp-for="UpdatedEvent.TagId" asp-items="Model.Tags"
                 class="px-4 py-2 text-white transition-all bg-gray-900 border-2 border-gray-400 rounded-xl focus:border-gray-200"></select>
-            <span asp-validation-for="Event.TagId" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            <span asp-validation-for="UpdatedEvent.TagId" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <p class="mt-0 mb-2 text-white">@Localizer["EventDatetime"]</p>
             <div class="flex items-center gap-2">
                 @Icon.Inline("clock", stroke: "rgb(229 231 235)")
                 <span class="w-12 text-gray-200">@Localizer["EventStartAt"]</span>
-                <input type="datetime-local" asp-for="Event.StartAt" required
+                <input type="datetime-local" asp-for="UpdatedEvent.StartAt" required
                     class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
             </div>
-            <span asp-validation-for="Event.StartAt" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            <span asp-validation-for="UpdatedEvent.StartAt" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <div class="flex items-center gap-2">
                 @Icon.Inline("clock", stroke: "rgb(229 231 235)")
                 <span class="w-12 text-gray-200">@Localizer["EventEndAt"]</span>
-                <input type="datetime-local" asp-for="Event.EndAt" required
+                <input type="datetime-local" asp-for="UpdatedEvent.EndAt" required
                     class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
             </div>
-            <span asp-validation-for="Event.EndAt" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            <span asp-validation-for="UpdatedEvent.EndAt" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <p class="mt-0 mb-2 text-white">@Localizer["RegistrationDatetime"]</p>
             <div class="flex items-center gap-2">
                 @Icon.Inline("clock", stroke: "rgb(229 231 235)")
                 <span class="w-12 text-gray-200">@Localizer["RegistrationStartAt"]</span>
-                <input type="datetime-local" asp-for="Event.RegistrationStartAt" required
+                <input type="datetime-local" asp-for="UpdatedEvent.RegistrationStartAt" required
                     class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
             </div>
-            <span asp-validation-for="Event.RegistrationStartAt" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            <span asp-validation-for="UpdatedEvent.RegistrationStartAt"
+                class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <div class="flex items-center gap-2">
                 @Icon.Inline("clock", stroke: "rgb(229 231 235)")
                 <span class="w-12 text-gray-200">@Localizer["RegistrationEndAt"]</span>
-                <input type="datetime-local" asp-for="Event.RegistrationEndAt" required
+                <input type="datetime-local" asp-for="UpdatedEvent.RegistrationEndAt" required
                     class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
             </div>
-            <span asp-validation-for="Event.RegistrationEndAt" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            <span asp-validation-for="UpdatedEvent.RegistrationEndAt" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
         </div>
         <div class="flex flex-col flex-grow w-64 mb-4 sm:items-center">
             <div class="relative w-fit">
@@ -64,49 +64,50 @@
                 <input type="file" accept="@(Config.GetValue<string>("Public:AcceptImageTypes"))" id="image-file-input"
                     onchange="imageUpload()" class="hidden">
             </div>
-            <input type="text" asp-for="Event.Image" id="form-image-input" hidden />
-            <span asp-validation-for="Event.Image" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            <input type="text" asp-for="UpdatedEvent.Image" id="form-image-input" hidden />
+            <span asp-validation-for="UpdatedEvent.Image" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
         </div>
     </div>
     <div class="flex flex-wrap gap-x-16">
         <div class="flex flex-col flex-grow w-64">
             <label for="description" class="block mb-2 text-white">@Localizer["Description"]</label>
-            <textarea id="description" asp-for="Event.Description" required minlength="3" maxlength="65535"
+            <textarea id="description" asp-for="UpdatedEvent.Description" required minlength="3" maxlength="65535"
                 placeholder="@Localizer["EventDescriptionPlaceholder"]"
                 class="flex-grow h-auto px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 resize-none min-h-64 rounded-xl focus:border-gray-200"></textarea>
-            <span asp-validation-for="Event.Description" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            <span asp-validation-for="UpdatedEvent.Description" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
         </div>
         <div class="flex flex-col flex-grow w-64">
             <p class="font-bold text-white">@Localizer["Location"]</p>
             <label for="location-title" class="mb-2 text-white">@Localizer["LocationTitle"]</label>
-            <input type="text" id="location-title" asp-for="Event.LocationTitle" required maxlength="255"
+            <input type="text" id="location-title" asp-for="UpdatedEvent.LocationTitle" required maxlength="255"
                 placeholder="@Localizer["LocationTitlePlaceholder"]"
                 class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
-            <span asp-validation-for="Event.LocationTitle" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            <span asp-validation-for="UpdatedEvent.LocationTitle" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <lable for="location-subtitle" class="mb-2 text-white">@Localizer["LocationSubtitle"]</lable>
-            <input type="text" id="location-subtitle" asp-for="Event.LocationSubtitle" required maxlength="255"
+            <input type="text" id="location-subtitle" asp-for="UpdatedEvent.LocationSubtitle" required maxlength="255"
                 placeholder="@Localizer["LocationSubtitlePlaceholder"]"
                 class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
-            <span asp-validation-for="Event.LocationSubtitle" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            <span asp-validation-for="UpdatedEvent.LocationSubtitle" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <label for="location-description" class="mb-2 text-white">@Localizer["LocationDescription"]</label>
-            <textarea id="location-description" asp-for="Event.LocationDescription" required maxlength="65535"
+            <textarea id="location-description" asp-for="UpdatedEvent.LocationDescription" required maxlength="65535"
                 placeholder="@Localizer["LocationDescriptionPlaceholder"]"
                 class="h-16 px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 resize-none rounded-xl focus:border-gray-200"></textarea>
-            <span asp-validation-for="Event.LocationDescription" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            <span asp-validation-for="UpdatedEvent.LocationDescription"
+                class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
             <label for="location-gmap-url" class="mb-2 text-white">@Localizer["LocationGMapUrl"]</label>
-            <input type="text" id="location-gmap-url" asp-for="Event.LocationGMapUrl" required
+            <input type="text" id="location-gmap-url" asp-for="UpdatedEvent.LocationGMapUrl" required
                 pattern="<iframe src=&quot;https:\/\/www\.google\.com\/maps\/embed\?pb=[^&quot;]+&quot;.*?><\/iframe>"
                 title="@Localizer["LocationGMapUrlPattern"]" placeholder="@Localizer["LocationGMapUrlPlaceholder"]"
                 class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
-            <span asp-validation-for="Event.LocationGMapUrl" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            <span asp-validation-for="UpdatedEvent.LocationGMapUrl" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
         </div>
     </div>
     <div class="mb-4">
         <p class="text-white">@Localizer["Visibility"]</p>
         <div class="flex flex-wrap gap-4">
             <div class="flex-grow w-48">
-                <input type="radio" id="visibility-public" asp-for="Event.Visibility" value="public" required checked
-                    required checked hidden />
+                <input type="radio" id="visibility-public" asp-for="UpdatedEvent.Visibility" value="public" required
+                    checked required checked hidden />
                 <label for="visibility-public"
                     class="flex flex-col gap-2 p-4 transition-all bg-gray-900 cursor-pointer radio-selected:outline-2 radio-selected:outline-green-500 rounded-xl hover:bg-gray-800">
                     @Icon.Inline("globe", stroke: "rgb(229 231 235)")
@@ -115,7 +116,8 @@
                 </label>
             </div>
             <div class="flex-grow w-64">
-                <input type="radio" id="visibility-hidden" asp-for="Event.Visibility" value="hidden" required hidden />
+                <input type="radio" id="visibility-hidden" asp-for="UpdatedEvent.Visibility" value="hidden" required
+                    hidden />
                 <label for="visibility-hidden"
                     class="flex flex-col gap-2 p-4 transition-all bg-gray-900 cursor-pointer radio-selected:outline-2 radio-selected:outline-amber-500 rounded-xl hover:bg-gray-800">
                     @Icon.Inline("globe-lock", stroke: "rgb(229 231 235)")
@@ -124,8 +126,8 @@
                 </label>
             </div>
             <div class="flex-grow w-48">
-                <input type="radio" id="visibility-private" asp-for="Event.Visibility" value="private" required required
-                    hidden />
+                <input type="radio" id="visibility-private" asp-for="UpdatedEvent.Visibility" value="private" required
+                    required hidden />
                 <label for="visibility-private"
                     class="flex flex-col gap-2 p-4 transition-all bg-gray-900 cursor-pointer radio-selected:outline-2 radio-selected:outline-red-500 rounded-xl hover:bg-gray-800">
                     @Icon.Inline("octagon-x", stroke: "rgb(229 231 235)")
@@ -136,15 +138,15 @@
         </div>
     </div>
     <div class="flex flex-wrap mb-4 gap-x-16 gap-y-4">
-        <div class="flex-grow w-64">
-            <p class="mb-4 text-white">@Localizer["ApprovalType"]</label>
+        <div class="flex flex-col flex-grow w-64 mt-4">
+            <label class="mb-4 text-white">@Localizer["ApprovalType"]</label>
             <div class="flex bg-gray-900 w-fit rounded-xl">
-                <input type="radio" id="approval-type-automatic" asp-for="Event.ApprovalType" value="automatic" required
-                    checked hidden />
+                <input type="radio" id="approval-type-automatic" asp-for="UpdatedEvent.ApprovalType" value="automatic"
+                    required checked hidden />
                 <label for="approval-type-automatic"
                     class="px-4 py-3 text-white transition-all cursor-pointer radio-selected:bg-gray-700 rounded-xl">@Localizer["ApprovalTypeAutomatic"]</label>
-                <input type="radio" id="approval-type-manual" asp-for="Event.ApprovalType" value="manual" required
-                    hidden />
+                <input type="radio" id="approval-type-manual" asp-for="UpdatedEvent.ApprovalType" value="manual"
+                    required hidden />
                 <label for="approval-type-manual"
                     class="px-4 py-3 text-white transition-all cursor-pointer radio-selected:bg-gray-700 rounded-xl">@Localizer["ApprovalTypeManual"]</label>
             </div>
@@ -152,31 +154,59 @@
         <div class="flex flex-col flex-grow w-64">
             <label class="block my-4 text-white">@Localizer["MaxParticipants"]</label>
             <div class="flex items-center gap-2">
-                <input type="string" id="max-participants" asp-for="Event.MaxParticipants" required
+                <input type="string" id="max-participants" asp-for="UpdatedEvent.MaxParticipants" required
                     placeholder="@Localizer["MaxParticipantsPlaceholder"]" pattern="[0-9]{1,6}"
                     title="@Localizer["MaxParticipantsPattern"]"
                     class="block w-32 px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
                 <span class="text-white">@Localizer["MaxParticipantsUnit"]</span>
             </div>
-            <span asp-validation-for="Event.MaxParticipants" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            <span asp-validation-for="UpdatedEvent.MaxParticipants" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
         </div>
     </div>
     <div class="mb-8">
-        <div class="flex items-center gap-4 mb-2">
-            <p class="text-white">@Localizer["RegistrationQuestions"]</p>
-            <button
-                class="flex items-center gap-2 px-4 py-2 transition-all bg-gray-900 border-2 border-gray-400 rounded-xl hover:bg-gray-800 hover:scale-105"
-                onclick="addQuestion(event)">
-                @Icon.Inline("plus", stroke: "rgb(229 231 235)")
-                <span class="text-white">@Localizer["AddQuestion"]</span>
-            </button>
-        </div>
-        <ol id="event-registration-questions" class="flex flex-col gap-2 my-0 mb-4 text-gray-200 empty:mb-0"></ol>
+        <p class="mb-4 text-white">@Localizer["RegistrationQuestions"]</p>
+        <ol id="event-registration-questions" class="flex flex-col gap-2 my-0 mb-4 text-gray-200 empty:mb-0">
+            @foreach (var question in Model.ExistingEvent.Questions)
+            {
+                <li class="flex-grow">
+                    <div class="flex flex-grow">
+                        <input type="text" readonly value="@question.Text"
+                            class="flex-grow px-4 py-2 ml-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 max-w-160 rounded-xl focus:border-gray-200" />
+                    </div>
+                </li>
+            }
+        </ol>
         <span class="hidden mt-2 text-gray-400 prev-child-empty:block">@Localizer["NoQuestionAdded"]</span>
     </div>
+    <div class="flex flex-wrap gap-x-16 gap-y-4">
+        <div class="flex flex-col flex-grow w-0 mb-4">
+            <label class="mb-4 text-white">@Localizer["RegistrationStatus"]</label>
+            <div class="flex bg-gray-900 w-fit rounded-xl">
+                <input type="radio" id="registration-status-open" asp-for="UpdatedEvent.RegistrationOpen" value="true"
+                    required hidden />
+                <label for="registration-status-open"
+                    class="px-4 py-3 text-white transition-all cursor-pointer radio-selected:bg-gray-700 rounded-xl">@Localizer["RegistrationStatusOpen"]</label>
+                <input type="radio" id="registration-status-close" asp-for="UpdatedEvent.RegistrationOpen" value="false"
+                    required hidden />
+                <label for="registration-status-close"
+                    class="px-4 py-3 text-white transition-all cursor-pointer radio-selected:bg-gray-700 rounded-xl">@Localizer["RegistrationStatusClose"]</label>
+            </div>
+        </div>
+        <div class="flex flex-col flex-grow w-0">
+            <label for="participation-status-progress" class="mb-4 text-white">@Localizer["ParticipationStatus"]</label>
+            <div class="flex justify-between mb-4">
+                <p class="m-0 text-white">@Model.ExistingEvent.Participants.Count @Localizer["CurrentCount"]
+                </p>
+                <p class="m-0 text-white">@Model.ExistingEvent.MaxParticipants @Localizer["MaxCount"]</p>
+            </div>
+            <progress max=" @Model.ExistingEvent.MaxParticipants" value="@Model.ExistingEvent.Participants.Count"
+                id="participation-status-progress"
+                class="w-full h-2 text-gray-200 bg-gray-800 border-none rounded-full"></progress>
+        </div>
+    </div>
     <button type="submit"
-        class="flex items-center gap-2 px-4 py-2 mb-4 text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl">
-        @Icon.Inline("plus", stroke: "rgb(229 231 235)")
-        <span>@Localizer["CreateEvent"]</span>
+        class="flex items-center gap-2 px-4 py-2 mt-8 mb-4 text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl">
+        @Icon.Inline("save", stroke: "rgb(229 231 235)")
+        <span>@Localizer["UpdateEvent"]</span>
     </button>
 </form>

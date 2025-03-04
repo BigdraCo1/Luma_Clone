@@ -14,7 +14,7 @@
         <div class="flex flex-col w-48 mb-8 sm:ml-16">
             <p class="text-white">@Localizer["ProfilePicture"]</p>
             <div class="relative w-32 h-32">
-                <img src="@($"/users/avatar?id={Model.CurrentUser.Id}")" alt="Your avatar" width="128px" height="128px"
+                <img src="@($"/users/avatar?id={Model.ExistingUser.Id}")" alt="Your avatar" width="128px" height="128px"
                     class="object-cover rounded-full">
                 <button
                     class="absolute flex items-center justify-center w-10 h-10 transition-all bg-gray-300 border-none rounded-full top-24 left-24 hover:scale-105 hover:bg-white"
@@ -126,7 +126,7 @@
         <label for="Email" class="block mb-2 text-white">@Localizer["Email"]</label>
         <input type="email" id="Email" name="Email"
             class="block w-64 px-4 py-2 mb-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200"
-            value="@Model.CurrentUser.Email" readonly />
+            value="@Model.ExistingUser.Email" readonly />
         <span class="text-gray-300">@Localizer["AccountLinkedWithGoogle"]</span>
     </div>
     <button type="submit"
