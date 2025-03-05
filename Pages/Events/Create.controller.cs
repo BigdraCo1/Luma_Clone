@@ -89,12 +89,14 @@ public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer,
             HostId = currentUser.Id
         };
 
-        foreach (var question in Event.Questions) {
-            await _database.Question.AddAsync(new Question {
-                Id = Tuid.Generate(),
-                Text = question,
-                Event = newEvent
-            });
+        if (Event.Questions is not null) {
+            foreach (var question in Event.Questions) {
+                await _database.Question.AddAsync(new Question {
+                    Id = Tuid.Generate(),
+                    Text = question,
+                    Event = newEvent
+                });
+            }
         }
 
         await _database.Event.AddAsync(newEvent);
@@ -172,5 +174,5 @@ public class CreateEventDto() {
     public string TagId { get; set; } = default!;
 
     [Display(Name = "EventRegistrationQuestions")]
-    public string[] Questions { get; set; } = default!;
+    public string[]? Questions { get; set; } = default!;
 }
