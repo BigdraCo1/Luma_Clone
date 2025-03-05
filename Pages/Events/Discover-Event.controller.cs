@@ -5,6 +5,7 @@ using alma.Models;
 using alma.Services;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace alma.Pages.Events
@@ -26,42 +27,55 @@ namespace alma.Pages.Events
         {
             try
             {
+                // Base query for all event filtering
+                var eventsQuery = _database.Event
+                    .Include(e => e.Tag)
+                    .Include(e => e.Host)
+                    .Where(e => e.EndAt > DateTime.Now);
+
+                // Apply search filter if provided
                 if (!string.IsNullOrEmpty(search))
                 {
-                    Events = await _database.Event
-                        .Include(e => e.Tags)
-                        .Include(e => e.Host)
-                        .Include(e => e.Attendees.Where(u =>
-                            _database.UserAttendEvent.Any(uae =>
-                                uae.UserId == u.Id &&
-                                uae.EventId == e.Id &&
-                                uae.Status == "GOING")))
-                        .Where(e => e.EndAt > DateTime.Now)
-                        .Where(e => e.Name.Contains(search) || e.Description.Contains(search))
-                        .OrderByDescending(e => e.Attendees.Count)
-                        .Skip((page - 1) * pageSize)
-                        .Take(pageSize)
-                        .ToListAsync();
-                }
-                else
-                {
-                    Events = await _database.Event
-                        .Include(e => e.Tags)
-                        .Include(e => e.Host)
-                        .Include(e => e.Attendees.Where(u =>
-                            _database.UserAttendEvent.Any(uae =>
-                                uae.UserId == u.Id &&
-                                uae.EventId == e.Id &&
-                                uae.Status == "GOING")))
-                        .Where(e => e.EndAt > DateTime.Now)
-                        .OrderByDescending(e => e.Attendees.Count)
-                        .Skip((page - 1) * pageSize)
-                        .Take(pageSize)
-                        .ToListAsync();
+                    eventsQuery = eventsQuery.Where(e =>
+                        e.Name.Contains(search) ||
+                        e.Description.Contains(search));
                 }
 
+                // Get events for the main listing
+                Events = await eventsQuery
+                    .OrderByDescending(e => e.StartAt)
+                    .Skip((page - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToListAsync();
+
+                // Load participant counts for each event
+                foreach (var eventItem in Events)
+                {
+                    var goingCount = await _database.UserAttendEvent
+                        .CountAsync(uae => uae.EventId == eventItem.Id && uae.Status == "GOING");
+
+                    // Load a few participants for display
+                    var participants = await _database.UserAttendEvent
+                        .Where(uae => uae.EventId == eventItem.Id && uae.Status == "GOING")
+                        .Join(
+                            _database.User,
+                            uae => uae.UserId,
+                            user => user.Id,
+                            (uae, user) => user
+                        )
+                        .Take(6)
+                        .ToListAsync();
+
+                    // Add participants to collection
+                    foreach (var user in participants)
+                    {
+                        ((List<User>)eventItem.Participants).Add(user);
+                    }
+                }
+
+                // Get upcoming events sorted by start date
                 UpcomingEvents = await _database.Event
-                    .Include(e => e.Tags)
+                    .Include(e => e.Tag)
                     .Include(e => e.Host)
                     .Where(e => e.EndAt > DateTime.Now)
                     .OrderBy(e => e.StartAt)
@@ -69,14 +83,16 @@ namespace alma.Pages.Events
                     .Take(pageSize)
                     .ToListAsync();
 
-                Tags = await _database.Tag
-                    .Include(e => e.Events)
-                    .ToListAsync();
+                // Get all tags for filtering
+                Tags = await _database.Tag.ToListAsync();
 
                 return Page();
             }
             catch (Exception ex)
             {
+                // Log the exception
+                Console.WriteLine($"Error in DiscoveryEventModel: {ex.Message}");
+                Console.WriteLine($"Stack trace: {ex.StackTrace}");
                 return RedirectToPage("/Error");
             }
         }

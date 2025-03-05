@@ -12,6 +12,15 @@
     <data name="AlphanumericFormatError" xml:space="preserve">
         <value>{0}ต้องมีแค่ตัวอักษร A-Z, a-z, - และ _</value>
     </data>
+    <data name="RangeError" xml:space="preserve">
+        <value>{0}ต้องมีค่าระหว่าง {1} และ {2}</value>
+    </data>
+    <data name="ImageTypeFormatError" xml:space="preserve">
+        <value>{0}มีรูปแบบที่ไม่ถูกต้อง</value>
+    </data>
+    <data name="NumberFormatError" xml:space="preserve">
+        <value>{0}ต้องเป็นตัวเลข</value>
+    </data>
     <data name="DisplayName" xml:space="preserve">
         <value>ชื่อที่แสดง</value>
     </data>
@@ -20,5 +29,71 @@
     </data>
     <data name="Bio" xml:space="preserve">
         <value>ชีวประวัติ</value>
+    </data>
+    <data name="InstagramUsername" xml:space="preserve">
+        <value>ชื่อผู้ใช้ Instagram </value>
+    </data>
+    <data name="TwitterUsername" xml:space="preserve">
+        <value>ชื่อผู้ใช้  Twitter </value>
+    </data>
+    <data name="YoutubeUsername" xml:space="preserve">
+        <value>ชื่อผู้ใช้ YouTube </value>
+    </data>
+    <data name="TikTokUsername" xml:space="preserve">
+        <value>ชื่อผู้ใช้ TikTok </value>
+    </data>
+    <data name="LinkedinHandle" xml:space="preserve">
+        <value> LinkedIn handle </value>
+    </data>
+    <data name="WebsiteUrl" xml:space="preserve">
+        <value> Website URL </value>
+    </data>
+    <data name="EventName" xml:space="preserve">
+        <value>ชื่อกิจกรรม</value>
+    </data>
+    <data name="EventDescription" xml:space="preserve">
+        <value>รายละเอียดกิจกรรม</value>
+    </data>
+    <data name="EventStartAt" xml:space="preserve">
+        <value>วันเวลาเริ่มกิจกรรม</value>
+    </data>
+    <data name="EventEndAt" xml:space="preserve">
+        <value>วันเวลาจบกิจกรรม</value>
+    </data>
+    <data name="RegistrationStartAt" xml:space="preserve">
+        <value>วันเวลาเริ่มการรับการสมัคร</value>
+    </data>
+    <data name="RegistrationEndAt" xml:space="preserve">
+        <value>วันเวลาจบการรับการสมัคร</value>
+    </data>
+    <data name="MaxParticipants" xml:space="preserve">
+        <value>จำนวนผู้เข้าร่วมสูงสุด</value>
+    </data>
+    <data name="EventLocationTitle" xml:space="preserve">
+        <value>ชื่อสถานที่จัดกิจกรรม</value>
+    </data>
+    <data name="EventLocationSubtitle" xml:space="preserve">
+        <value>ชื่อเมืองที่จัดกิจกรรม</value>
+    </data>
+    <data name="EventLocationDescription" xml:space="preserve">
+        <value>รายละเอียดสถานที่การจัดกิจกรรม</value>
+    </data>
+    <data name="LocationGMapUrl" xml:space="preserve">
+        <value>Google Maps URL ของสถานที่จัดกิจกรรม</value>
+    </data>
+    <data name="GMapUrlFormatError" xml:space="preserve">
+        <value>{0}ต้องเป็น Embed URL ที่ถูกต้อง</value>
+    </data>
+    <data name="EventImage" xml:space="preserve">
+        <value>ภาพสำหรับกิจกรรม</value>
+    </data>
+    <data name="EventImageType" xml:space="preserve">
+        <value>ชนิดของภาพสำหรับกิจกรรม</value>
+    </data>
+    <data name="EventTag" xml:space="preserve">
+        <value>หมวดหมู่ของกิจกรรม</value>
+    </data>
+    <data name="EventRegistrationQuestions" xml:space="preserve">
+        <value>คำถามก่อนการลงทะเบียนกิจกรรม</value>
     </data>
 </root>

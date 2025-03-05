@@ -18,11 +18,11 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
 
         modelBuilder.Entity<User>()
             .HasMany(u => u.AttendingEvents)
-            .WithMany(e => e.Attendees)
+            .WithMany(e => e.Participants)
             .UsingEntity<UserAttendEvent>();
 
         modelBuilder.Entity<Event>()
-            .HasMany(e => e.Attendees)
+            .HasMany(e => e.Participants)
             .WithMany(u => u.AttendingEvents)
             .UsingEntity<UserAttendEvent>();
 
@@ -38,16 +38,13 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
             .HasForeignKey(e => e.HostId)
             .IsRequired();
 
-        // Many-to-Many: Event and Tag
+        // One-to-Many: Tag and Event
+        // One Tag can have many Events, but one Event has exactly one Tag
         modelBuilder.Entity<Event>()
-            .HasMany(e => e.Tags)
+            .HasOne(e => e.Tag)
             .WithMany(t => t.Events)
-            .UsingEntity<Dictionary<string, object>>(
-                "EventTag",
-                j => j.HasOne<Tag>().WithMany().HasForeignKey("TagsId"),
-                j => j.HasOne<Event>().WithMany().HasForeignKey("EventsId"),
-                j => j.HasKey("EventsId", "TagsId")
-            );
+            .HasForeignKey("TagId")
+            .IsRequired();
 
         // Many-to-Many: Tag and User (Followed Tags)
         modelBuilder.Entity<Tag>()

@@ -29,10 +29,7 @@ public class Event {
     public required DateTime EndAt { get; set; }
 
     [Required]
-    public required string Publicity { get; set; }
-
-    [Required]
-    public required string RegistrationStatus { get; set; }
+    public required bool RegistrationOpen { get; set; }
 
     [Required]
     public required DateTime RegistrationStartAt { get; set; }
@@ -41,27 +38,34 @@ public class Event {
     public required DateTime RegistrationEndAt { get; set; }
 
     [Required]
+    public required string Visibility { get; set; }
+
+    [Required]
     public required string ApprovalType { get; set; }
 
     public int? MaxParticipants { get; set; }
 
     [Required]
-    public required string LocationCity { get; set; }
+    public required string LocationTitle { get; set; }
 
     [Required]
-    public required string Location { get; set; }
+    public required string LocationSubtitle { get; set; }
 
     [Required]
-    public required string LocationGmapsUrl { get; set; }
+    public required string LocationDescription { get; set; }
+
+    [Required]
+    public required string LocationGMapUrl { get; set; }
+
+    [Required]
+    public required Tag Tag { get; set; }
 
     [Required]
     public required string HostId { get; set; }
 
     public required User Host { get; set; }
 
-    public ICollection<User> Attendees { get; } = [];
-
-    public ICollection<Tag> Tags { get; } = [];
+    public ICollection<User> Participants { get; } = [];
 
     public ICollection<Question> Questions { get; } = [];
 }

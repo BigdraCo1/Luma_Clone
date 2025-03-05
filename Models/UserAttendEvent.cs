@@ -11,4 +11,4 @@ public class UserAttendEvent {
 
     [Required]
     public required string Status { get; set; }
-    }
+}

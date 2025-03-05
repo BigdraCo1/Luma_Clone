@@ -64,20 +64,28 @@ namespace alma.Migrations
                     CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     StartAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     EndAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Publicity = table.Column<string>(type: "TEXT", nullable: false),
-                    RegistrationStatus = table.Column<string>(type: "TEXT", nullable: false),
+                    RegistrationOpen = table.Column<bool>(type: "INTEGER", nullable: false),
                     RegistrationStartAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     RegistrationEndAt = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Visibility = table.Column<string>(type: "TEXT", nullable: false),
                     ApprovalType = table.Column<string>(type: "TEXT", nullable: false),
                     MaxParticipants = table.Column<int>(type: "INTEGER", nullable: true),
-                    LocationCity = table.Column<string>(type: "TEXT", nullable: false),
-                    Location = table.Column<string>(type: "TEXT", nullable: false),
-                    LocationGmapsUrl = table.Column<string>(type: "TEXT", nullable: false),
+                    LocationTitle = table.Column<string>(type: "TEXT", nullable: false),
+                    LocationSubtitle = table.Column<string>(type: "TEXT", nullable: false),
+                    LocationDescription = table.Column<string>(type: "TEXT", nullable: false),
+                    LocationGMapUrl = table.Column<string>(type: "TEXT", nullable: false),
+                    TagId = table.Column<string>(type: "TEXT", nullable: false),
                     HostId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Event", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Event_Tag_TagId",
+                        column: x => x.TagId,
+                        principalTable: "Tag",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Event_User_HostId",
                         column: x => x.HostId,
@@ -155,36 +163,11 @@ namespace alma.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "EventTag",
-                columns: table => new
-                {
-                    EventsId = table.Column<string>(type: "TEXT", nullable: false),
-                    TagsId = table.Column<string>(type: "TEXT", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_EventTag", x => new { x.EventsId, x.TagsId });
-                    table.ForeignKey(
-                        name: "FK_EventTag_Event_EventsId",
-                        column: x => x.EventsId,
-                        principalTable: "Event",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_EventTag_Tag_TagsId",
-                        column: x => x.TagsId,
-                        principalTable: "Tag",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Question",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
                     Text = table.Column<string>(type: "TEXT", nullable: false),
-                    Required = table.Column<bool>(type: "INTEGER", nullable: false),
                     EventId = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
@@ -263,9 +246,9 @@ namespace alma.Migrations
                 column: "HostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EventTag_TagsId",
-                table: "EventTag",
-                column: "TagsId");
+                name: "IX_Event_TagId",
+                table: "Event",
+                column: "TagId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Question_EventId",
@@ -300,9 +283,6 @@ namespace alma.Migrations
                 name: "Answer");
 
             migrationBuilder.DropTable(
-                name: "EventTag");
-
-            migrationBuilder.DropTable(
                 name: "Session");
 
             migrationBuilder.DropTable(
@@ -318,10 +298,10 @@ namespace alma.Migrations
                 name: "Question");
 
             migrationBuilder.DropTable(
-                name: "Tag");
+                name: "Event");
 
             migrationBuilder.DropTable(
-                name: "Event");
+                name: "Tag");
 
             migrationBuilder.DropTable(
                 name: "User");

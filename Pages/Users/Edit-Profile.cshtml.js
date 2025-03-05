@@ -8,7 +8,11 @@ const updateAvatarSuccessText =
 const updateAvatarFailText =
     document.querySelector("#avatar-update-fail-text")?.textContent ?? "Failed to update avatar:";
 
-function avatarSelect() {
+/**
+ * @param {MouseEvent} event
+ */
+function avatarSelect(event) {
+    event.preventDefault();
     fileInput.click();
 }
 
@@ -21,7 +25,7 @@ async function avatarUpload() {
         AvatarDataUrl: dataUrl
     };
     try {
-        await ajaxFetch("/Users/Avatar?handler=UpdateAvatar", {
+        await ajaxFetch("/users/avatar", {
             method: "POST",
             body
         });

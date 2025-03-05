@@ -27,9 +27,9 @@ namespace alma.Pages.Events
         {
             // Load the event with related data
             currentEvent = await _database.Event
-                .Include(e => e.Tags)
+                .Include(e => e.Tag)
                 .Include(e => e.Host)
-                .Include(e => e.Attendees)
+                .Include(e => e.Participants)
                 .FirstOrDefaultAsync(i => i.Id == tuid);
 
             if (currentEvent == null)
@@ -46,21 +46,21 @@ namespace alma.Pages.Events
                     user => user.Id,
                     (uae, user) => user
                 )
-                .ToListAsync();
+.ToListAsync();
 
             DisplayAttendees = await _database.UserAttendEvent
-                .Where(uae => uae.EventId == tuid && uae.Status == "GOING")
-                .Join(
-                    _database.User,
-                    uae => uae.UserId,
-                    user => user.Id,
+    .Where(uae => uae.EventId == tuid && uae.Status == "GOING")
+    .Join(
+        _database.User,
+                uae => uae.UserId,
+        user => user.Id,
                     (uae, user) => user
-                )
-                .Take(6)
-                .ToListAsync();
+    )
+    .Take(6)
+    .ToListAsync();
 
-            return Page();
-        }
+                    return Page();
+                                                        }
 
         public async Task<IActionResult> OnGetImageAsync(string tuid)
         {

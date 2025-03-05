@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace alma.Utils;
 
 /// <summary>
@@ -29,5 +31,21 @@ public class Formatter {
         }
 
         return output;
+    }
+
+    public static string FormatDate(DateTime date) {
+        var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+        culture.DateTimeFormat.Calendar = new GregorianCalendar();
+        return date.ToString("d MMM yyyy", culture);
+    }
+
+    public static string FormatTime(DateTime date) {
+        return date.ToString("HH:mm", CultureInfo.CurrentCulture);
+    }
+
+    public static string FormatDateTime(DateTime date) {
+        var culture = (CultureInfo)CultureInfo.CurrentCulture.Clone();
+        culture.DateTimeFormat.Calendar = new GregorianCalendar();
+        return date.ToString("d MMM yyyy - HH:mm", culture);
     }
 }

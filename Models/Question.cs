@@ -10,9 +10,6 @@ public class Question {
     [Required]
     public required string Text { get; set; }
 
-    [Required]
-    public required bool Required { get; set; }
-
     public required Event Event { get; set; }
 
     public ICollection<Answer> Answers { get; } = [];

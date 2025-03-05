@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="JoinedAt" xml:space="preserve">
+        <value>Joined at</value>
+    </data>
+    <data name="FollowerCountPrefix" xml:space="preserve">
+        <value></value>
+    </data>
+    <data name="FollowerCountSuffix" xml:space="preserve">
+        <value>followers</value>
+    </data>
+    <data name="AttendingEventCountPrefix" xml:space="preserve">
+        <value>Joined</value>
+    </data>
+    <data name="AttendingEventCountSuffix" xml:space="preserve">
+        <value>Events</value>
+    </data>
+</root>
