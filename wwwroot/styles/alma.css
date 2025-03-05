@@ -92,6 +92,10 @@
     background-color: rgb(31 41 55);
 }
 
+.bg-gray-800::-webkit-progress-bar {
+    background-color: rgb(31 41 55);
+}
+
 .bg-gray-900 {
     background-color: rgb(17 24 39);
 }
@@ -300,16 +304,16 @@ textarea:focus {
     row-gap: 1rem;
 }
 
-.h-2 {
-    height: 0.5rem;
-}
-
 .h-10 {
     height: 2.5rem;
 }
 
 .h-16 {
     height: 4rem;
+}
+
+.h-2 {
+    height: 0.5rem;
 }
 
 .h-24 {
@@ -766,15 +770,6 @@ body {
     border-radius: 9999px;
 }
 
-.rounded-l-xl {
-    border-top-left-radius: 0.75rem;
-    border-bottom-left-radius: 0.75rem;
-}
-
-.rounded-lg {
-    border-radius: 0.5rem;
-}
-
 .rounded-full::-webkit-progress-bar {
     border-radius: 9999px;
 }
@@ -784,16 +779,13 @@ body {
     border-bottom-left-radius: 9999px;
 }
 
-.bg-gray-800::-webkit-progress-bar {
-    background-color: rgb(31 41 55);
+.rounded-l-xl {
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
 }
 
-.text-gray-200::-webkit-progress-value {
-    background-color: rgb(229 231 235);
-}
-
-.text-gray-200::-moz-progress-bar {
-    background-color: rgb(229 231 235);
+.rounded-lg {
+    border-radius: 0.5rem;
 }
 
 .rounded-r-xl {
@@ -892,6 +884,14 @@ body {
 
 .text-gray-200 {
     color: rgb(229 231 235);
+}
+
+.text-gray-200::-moz-progress-bar {
+    background-color: rgb(229 231 235);
+}
+
+.text-gray-200::-webkit-progress-value {
+    background-color: rgb(229 231 235);
 }
 
 .text-gray-300 {
