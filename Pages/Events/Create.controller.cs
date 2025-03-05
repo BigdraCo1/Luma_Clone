@@ -89,6 +89,8 @@ public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer,
             HostId = currentUser.Id
         };
 
+        if (Event.Questions != null && Event.Questions.Any())
+        {
         foreach (var question in Event.Questions) {
             await _database.Question.AddAsync(new Question {
                 Id = Tuid.Generate(),
@@ -96,11 +98,12 @@ public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer,
                 Event = newEvent
             });
         }
+        }
 
         await _database.Event.AddAsync(newEvent);
         await _database.SaveChangesAsync();
 
-        return Redirect(Toast.AppendQueryString($"/events/{newEvent.Id}", _localizer["CreateEventSuccessful"], null, "success"));
+        return Redirect(Toast.AppendQueryString($"/events/Index-Event?tuid={newEvent.Id}", _localizer["CreateEventSuccessful"], null, "success"));
     }
 }
 
@@ -172,5 +175,5 @@ public class CreateEventDto() {
     public string TagId { get; set; } = default!;
 
     [Display(Name = "EventRegistrationQuestions")]
-    public string[] Questions { get; set; } = default!;
+    public string[]? Questions { get; set; } = default!;
 }

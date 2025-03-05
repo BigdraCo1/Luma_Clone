@@ -19,20 +19,15 @@ public class Toast
     /// <param name="description">The description to display</param>
     /// <param name="type">Type of the toast, must be one of <see cref="ToastTypes"/></param>
     /// <returns>A new URL with the toast query strings appended</returns>
-    public static string AppendQueryString(string url, string message, string? description, string? type)
-    {
+    public static string AppendQueryString(string path, string message, string? description, string? type) {
         // TODO: Fix whatever this mess is
-        var uriBuilder = new UriBuilder
-        {
-            Path = url,
-            Scheme = "http",
-            Host = "localhost"
-        };
-        var query = HttpUtility.ParseQueryString(uriBuilder.Query);
+        if (!path.StartsWith('/')) path = "/" + path;
+        var url = new Uri($"http://localhost{path}", UriKind.Absolute);
+        var query = HttpUtility.ParseQueryString(url.Query);
         query.Set("toast-message", message);
         if (description is not null) query.Set("toast-description", description);
         if (type is not null) query.Set("toast-type", type);
-        uriBuilder.Query = query.ToString();
-        return uriBuilder.Path + uriBuilder.Query;
+        var queryString = query.ToString();
+        return url.AbsolutePath + "?" + queryString;
     }
 }

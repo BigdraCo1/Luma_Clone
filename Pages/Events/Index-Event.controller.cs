@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace alma.Pages.Events
 {
@@ -22,6 +23,7 @@ namespace alma.Pages.Events
         public Event currentEvent { get; set; }
         public IList<User> GoingAttendees { get; set; } = new List<User>();
         public IList<User> DisplayAttendees { get; set; } = new List<User>();
+        public string IFramSrc { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string tuid)
         {
@@ -60,7 +62,7 @@ namespace alma.Pages.Events
     .ToListAsync();
 
                     return Page();
-                                                        }
+        }
 
         public async Task<IActionResult> OnGetImageAsync(string tuid)
         {
