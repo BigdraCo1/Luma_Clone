@@ -70,7 +70,8 @@ public class SessionService(IConfiguration config, DatabaseContext database) : I
     /// <param name="token">The session token</param>
     /// <returns>The user associated with the session if it is valid, null otherwise</returns>
     public async Task<User?> GetUserAsync(string token) {
-        var session = await _database.Session.FindAsync(token);
+        var session = await _database.Session.Include(s => s.User).FirstOrDefaultAsync(s => s.Token == token);
+
         if (session is null) {
             return null;
         }
@@ -83,8 +84,6 @@ public class SessionService(IConfiguration config, DatabaseContext database) : I
 
         session.LastUsedAt = DateTime.Now;
         await _database.SaveChangesAsync();
-
-        await _database.Entry(session).Reference(s => s.User).LoadAsync();
 
         return session.User;
     }

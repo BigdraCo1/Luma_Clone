@@ -32,7 +32,12 @@ public class EditEventModel(IStringLocalizer<SharedResources> sharedLocalizer, I
             return Redirect(Toast.AppendQueryString($"/auth/sign-in?next=/events/edit?id={id}", _sharedLocalizer["YouMustSignIn"], _sharedLocalizer["YouMustSignInDescription"], ToastTypes.Error));
         }
 
-        var existingEvent = await _database.Event.FindAsync(id);
+        var existingEvent = await _database.Event
+            .Include(e => e.Questions)
+            .Include(e => e.Participants)
+            .Include(e => e.Tag)
+            .FirstOrDefaultAsync(e => e.Id == id);
+
         if (existingEvent is null) {
             return NotFound();
         }
@@ -41,10 +46,6 @@ public class EditEventModel(IStringLocalizer<SharedResources> sharedLocalizer, I
             Value = tag.Id,
             Text = CultureInfo.CurrentCulture.Name == "th" ? tag.NameTH : tag.NameEN
         }).ToListAsync();
-
-        await _database.Entry(existingEvent).Collection(e => e.Questions).LoadAsync();
-        await _database.Entry(existingEvent).Collection(e => e.Participants).LoadAsync();
-        await _database.Entry(existingEvent).Reference(e => e.Tag).LoadAsync();
 
         ExistingEvent = existingEvent;
 
