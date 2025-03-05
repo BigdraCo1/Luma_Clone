@@ -28,7 +28,7 @@
     top: -0.125rem;
 }
 
-*:not(:has(*)) + .prev-child-empty\:block {
+*:not(:has(*)) + .prev-child-no-child\:block {
     display: block !important;
 }
 
@@ -192,11 +192,11 @@
     cursor: pointer;
 }
 
-.empty\:mb-0:not(:has(*)) {
+.empty\:mb-0:empty {
     margin-bottom: 0px !important;
 }
 
-.empty\:mt-0:not(:has(*)) {
+.empty\:mt-0:empty {
     margin-top: 0px !important;
 }
 
