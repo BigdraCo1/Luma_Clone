@@ -9,10 +9,10 @@
     <data name="FollowerCountSuffix" xml:space="preserve">
         <value>คน</value>
     </data>
-    <data name="AttendingEventCountPrefix" xml:space="preserve">
+    <data name="ParticipatingEventCountPrefix" xml:space="preserve">
         <value>เข้าร่วมแล้ว</value>
     </data>
-    <data name="AttendingEventCountSuffix" xml:space="preserve">
+    <data name="ParticipatingEventCountSuffix" xml:space="preserve">
         <value>กิจกรรม</value>
     </data>
 </root>

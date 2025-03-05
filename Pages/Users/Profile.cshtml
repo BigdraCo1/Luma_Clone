@@ -39,9 +39,9 @@
                 </div>
                 <div class="flex items-center gap-2">
                     @Icon.Inline("ticket", size: "20", stroke: "rgb(209 213 219)")
-                    <span class="text-gray-300">@Localizer["AttendingEventCountPrefix"]
-                        @Model.DisplayedUser.AttendingEvents.Count
-                        @Localizer["AttendingEventCountSuffix"]</span>
+                    <span class="text-gray-300">@Localizer["ParticipatingEventCountPrefix"]
+                        @Model.DisplayedUser.ParticipatingEvents.Count
+                        @Localizer["ParticipatingEventCountSuffix"]</span>
                 </div>
             </div>
             @if (Model.CurrentUser != Model.DisplayedUser || true)

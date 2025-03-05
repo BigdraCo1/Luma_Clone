@@ -41,7 +41,7 @@ public class User {
 
     public ICollection<Event> HostedEvents { get; } = [];
 
-    public ICollection<Event> AttendingEvents { get; } = [];
+    public ICollection<Event> ParticipatingEvents { get; } = [];
 
     public ICollection<User> Following { get; } = [];
 

@@ -9,10 +9,10 @@
     <data name="FollowerCountSuffix" xml:space="preserve">
         <value>followers</value>
     </data>
-    <data name="AttendingEventCountPrefix" xml:space="preserve">
+    <data name="ParticipatingEventCountPrefix" xml:space="preserve">
         <value>Joined</value>
     </data>
-    <data name="AttendingEventCountSuffix" xml:space="preserve">
+    <data name="ParticipatingEventCountSuffix" xml:space="preserve">
         <value>Events</value>
     </data>
 </root>

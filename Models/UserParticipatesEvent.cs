@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace alma.Models;
 
-public class UserAttendEvent {
+public class UserParticipatesEvent {
     [Required]
     public required string UserId { get; set; }
 

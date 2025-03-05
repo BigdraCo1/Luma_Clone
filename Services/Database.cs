@@ -16,14 +16,14 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<User>()
-            .HasMany(u => u.AttendingEvents)
+            .HasMany(u => u.ParticipatingEvents)
             .WithMany(e => e.Participants)
-            .UsingEntity<UserAttendEvent>();
+            .UsingEntity<UserParticipatesEvent>();
 
         modelBuilder.Entity<Event>()
             .HasMany(e => e.Participants)
-            .WithMany(u => u.AttendingEvents)
-            .UsingEntity<UserAttendEvent>();
+            .WithMany(u => u.ParticipatingEvents)
+            .UsingEntity<UserParticipatesEvent>();
 
         modelBuilder.Entity<User>()
             .HasMany(u => u.HostedEvents)
