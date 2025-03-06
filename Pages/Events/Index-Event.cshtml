@@ -11,9 +11,11 @@
     var displayAttendees = Model.DisplayAttendees;
     var currentCulture = CultureInfo.CurrentCulture.Name;
     var currentUser = Model.currentUser;
+    var registered = Model.registered;
 }
 
 <input type="hidden" id="currentUser" value="@((currentUser != null) ? "loggedIn" : "loggedOut")" />
+<input type="hidden" id="registered" value="@((registered == true) ? "registered" : "not registered")" />
 
 <div class="main" style="max-width: 1300px; margin-top: 60px; padding: 10px; display: grid; gap: 20px;">
     <!-- Image section -->
@@ -182,10 +184,10 @@
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal for answering questions -->
 <div id="questionsModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
+        <span class="close" onclick="closeQuestionsModal()">&times;</span>
         <h2>@Localizer["AnswerQuestions"]</h2>
         <form id="questionsForm" method="post" asp-page-handler="Register">
             <input type="hidden" name="Register.EventId" value="@Event.Id" />
@@ -198,6 +200,15 @@
             }
             <button type="submit" class="button">@Localizer["SubmitAnswers"]</button>
         </form>
+    </div>
+</div>
+
+<!-- Modal for already registered -->
+<div id="registeredModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeRegisteredModal()">&times;</span>
+        <h2>@Localizer["AlreadyRegistered"]</h2>
+        <p>@Localizer["YouAreAlreadyRegisteredForThisEvent"]</p>
     </div>
 </div>
 
@@ -226,26 +237,43 @@
 
     function handleRegisterClick() {
         const currentUserStatus = document.getElementById('currentUser').value;
+        const registeredStatus = document.getElementById('registered').value;
+        console.log('Current User Status:', currentUserStatus);
+        console.log('Registered Status:', registeredStatus);
         if (currentUserStatus === 'loggedOut') {
             window.location.href = '/auth/sign-in?next=/Events/Index-Event?tuid=@Event.Id';
+        } else if (registeredStatus === 'registered') {
+            openRegisteredModal();
         } else {
-            openModal();
+            openQuestionsModal();
         }
     }
 
-    function openModal() {
+    function openQuestionsModal() {
         document.getElementById('questionsModal').style.display = 'block';
     }
 
-    function closeModal() {
+    function closeQuestionsModal() {
         document.getElementById('questionsModal').style.display = 'none';
+    }
+
+    function openRegisteredModal() {
+        document.getElementById('registeredModal').style.display = 'block';
+    }
+
+    function closeRegisteredModal() {
+        document.getElementById('registeredModal').style.display = 'none';
     }
 
     // Close the modal when clicking outside of it
     window.onclick = function(event) {
-        const modal = document.getElementById('questionsModal');
-        if (event.target == modal) {
-            modal.style.display = 'none';
+        const questionsModal = document.getElementById('questionsModal');
+        const registeredModal = document.getElementById('registeredModal');
+        if (event.target == questionsModal) {
+            questionsModal.style.display = 'none';
+        }
+        if (event.target == registeredModal) {
+            registeredModal.style.display = 'none';
         }
     }
 </script>

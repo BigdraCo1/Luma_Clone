@@ -31,6 +31,7 @@ namespace alma.Pages.Events
         public IList<User> DisplayAttendees { get; set; } = new List<User>();
         public string IFramSrc { get; set; }
         public User currentUser { get; set; }
+        public bool registered { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string tuid)
         {
@@ -56,6 +57,8 @@ namespace alma.Pages.Events
             {
                 return NotFound();
             }
+            
+            registered = currentEvent.Participants.Any(p => p.Id == currentUser.Id);
 
             GoingAttendees = await _database.UserAttendEvent
                 .Where(uae => uae.EventId == tuid && uae.Status == ParticipantStatus.Going)
