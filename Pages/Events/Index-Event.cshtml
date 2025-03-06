@@ -121,6 +121,11 @@
             @if (registered) {
                 <div class="top"
                     style="display: flex; color: #000480; justify-content: space-between; padding: 5px 20px; background-color: #eaeaea;">
+                    <div class="organizer-avatar"
+                    style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <img src="@Url.Page("/Users/Avatar", "Avatar", new { id = currentUser.Id })" alt="รูปโปรไฟล์"
+                        style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
                     <h4>@Localizer["ThankYouforJoining"]</h4>
                 </div>
                 <div class="bottom" style="padding: 10px;">
@@ -237,8 +242,6 @@
 
     function handleRegisterClick() {
         const currentUserStatus = document.getElementById('currentUser').value;
-        console.log('Current User Status:', currentUserStatus);
-        console.log('Registered Status:', registeredStatus);
         if (currentUserStatus === 'loggedOut') {
             window.location.href = '/auth/sign-in?next=/Events/Index-Event?tuid=@Event.Id';
         } else {
