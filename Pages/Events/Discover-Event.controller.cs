@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using alma.Models;
 using alma.Services;
+using alma.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ namespace alma.Pages.Events
             var eventsQuery = _database.Event
                 .Include(e => e.Tag)
                 .Include(e => e.Host)
-                .Where(e => e.EndAt > DateTime.Now);
+                .Where(e => e.RegistrationEndAt > DateTime.Now && e.Visibility == VisibilityStatus.PUBLIC);
 
             // Apply search filter if provided
             if (!string.IsNullOrEmpty(search))
@@ -37,73 +38,57 @@ namespace alma.Pages.Events
                 eventsQuery = eventsQuery.Where(e =>
                                         e.Name.Contains(search) ||
                                         e.Description.Contains(search));
-                }
-
-                // Get events for the main listing
-                Events = await eventsQuery
-.OrderByDescending(e => e.StartAt)
-.Skip((page - 1) * pageSize)
-.Take(pageSize)
-.ToListAsync();
-
-            // Load participant counts for each event
-            foreach (var eventItem in Events)
-            {
-                var goingCount = await _database.UserAttendEvent
-                    .CountAsync(uae => uae.EventId == eventItem.Id && uae.Status == "GOING");
-
-                // Load a few participants for display
-                var participants = await _database.UserAttendEvent
-                    .Where(uae => uae.EventId == eventItem.Id && uae.Status == "GOING")
-                    .Join(
-_database.User,
-uae => uae.UserId,
-                            user => user.Id,
-                            (uae, user) => user
-                        )
-                    .Take(6)
-                    .ToListAsync();
-
-                    // Add participants to collection
-                    foreach (var user in participants)
-                    {
-                    ((List<User>)eventItem.Participants).Add(user);
-                    }
             }
 
-            // Get upcoming events sorted by start date
-                UpcomingEvents = await _database.Event
-                    .Include(e => e.Tag)
-                    .Include(e => e.Host)
-                    .Where(e => e.EndAt > DateTime.Now)
-                    .OrderBy(e => e.StartAt)
-                    .Skip((page - 1) * pageSize)
-                    .Take(pageSize)
-.ToListAsync();
+            // Get events for the main listing
+            Events = await eventsQuery
+                .GroupJoin(
+                    _database.UserAttendEvent,
+                    e => e.Id,
+                    uae => uae.EventId,
+                    (e, uaeGroup) => new { Event = e, ParticipantCount = uaeGroup.Count() }
+                )
+                .OrderByDescending(e => e.ParticipantCount)
+                .ThenByDescending(e => e.Event.StartAt)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .Select(e => e.Event)
+                .ToListAsync();
 
-// Get all tags for filtering
+
+            // Get upcoming events sorted by start date
+            UpcomingEvents = await _database.Event
+                .Include(e => e.Tag)
+                .Include(e => e.Host)
+                .Where(e => e.EndAt > DateTime.Now && e.Visibility == VisibilityStatus.PUBLIC)
+                .OrderBy(e => e.StartAt)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            // Get all tags for filtering
             Tags = await _database.Tag.ToListAsync();
 
-                return Page();
-                
-    }
+            return Page();
 
-       public async Task<IActionResult> OnGetImageAsync(string tuid)
+        }
+
+        public async Task<IActionResult> OnGetImageAsync(string tuid)
         {
             if (string.IsNullOrEmpty(tuid))
             {
                 return BadRequest("Invalid event ID.");
             }
-                var eventItem = await _database.Event
-                    .FirstOrDefaultAsync(e => e.Id == tuid);
+            var eventItem = await _database.Event
+                .FirstOrDefaultAsync(e => e.Id == tuid);
 
-                if (eventItem == null || eventItem.Image == null || eventItem.ImageType == null)
-                {
+            if (eventItem == null || eventItem.Image == null || eventItem.ImageType == null)
+            {
                 return NotFound("Event or image not found.");
-                }
+            }
 
-return File(eventItem.Image, eventItem.ImageType);
+            return File(eventItem.Image, eventItem.ImageType);
 
         }
     }
-            }       
+}

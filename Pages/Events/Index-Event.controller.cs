@@ -57,9 +57,8 @@ namespace alma.Pages.Events
                 return NotFound();
             }
 
-            // Filter attendees with "GOING" status and limit to first 6
             GoingAttendees = await _database.UserAttendEvent
-                .Where(uae => uae.EventId == tuid && uae.Status == "GOING")
+                .Where(uae => uae.EventId == tuid && uae.Status == ParticipantStatus.Going)
                 .Join(
                     _database.User,
                     uae => uae.UserId,
@@ -69,7 +68,7 @@ namespace alma.Pages.Events
 .ToListAsync();
 
             DisplayAttendees = await _database.UserAttendEvent
-    .Where(uae => uae.EventId == tuid && uae.Status == "GOING")
+    .Where(uae => uae.EventId == tuid && uae.Status == ParticipantStatus.Going)
     .Join(
         _database.User,
                 uae => uae.UserId,
