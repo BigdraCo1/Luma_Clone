@@ -118,7 +118,16 @@
             </div>
         </div>
         <div class="register" style="border: solid #eaeaea 1px; border-radius: 20px; overflow: hidden;">
-            @if (Event.ApprovalType == "Required") {
+            @if (registered) {
+                <div class="top"
+                    style="display: flex; color: #000480; justify-content: space-between; padding: 5px 20px; background-color: #eaeaea;">
+                    <h4>@Localizer["ThankYouforJoining"]</h4>
+                </div>
+                <div class="bottom" style="padding: 10px;">
+                    <p style="padding: 0px 5px 10px 15px; color: #eaeaea;">@Localizer["EnjoyEvent"]</p>
+                </div>
+            }
+            else if (Event.ApprovalType == "Required") {
                 <!-- ต้องได้รับการยืนยัน -->
                 <div class="top"
                     style="display: flex; color: #000480; justify-content: space-between; padding: 5px 20px; background-color: #eaeaea;">
@@ -132,7 +141,7 @@
                             class="lucide lucide-user-round-check">
                             <path d="M2 21a8 8 0 0 1 13.292-6" />
                             <circle cx="10" cy="8" r="5" />
-                            <path d="m16 19 2 2 4-4" />
+                            <path d="m16 19  2 2 4-4" />
                         </svg>
                     </div>
                     <div class="info">
@@ -203,15 +212,6 @@
     </div>
 </div>
 
-<!-- Modal for already registered -->
-<div id="registeredModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeRegisteredModal()">&times;</span>
-        <h2>@Localizer["AlreadyRegistered"]</h2>
-        <p>@Localizer["YouAreAlreadyRegisteredForThisEvent"]</p>
-    </div>
-</div>
-
 <script>
     function autoResize(textarea) {
         textarea.style.height = 'auto';
@@ -237,13 +237,10 @@
 
     function handleRegisterClick() {
         const currentUserStatus = document.getElementById('currentUser').value;
-        const registeredStatus = document.getElementById('registered').value;
         console.log('Current User Status:', currentUserStatus);
         console.log('Registered Status:', registeredStatus);
         if (currentUserStatus === 'loggedOut') {
             window.location.href = '/auth/sign-in?next=/Events/Index-Event?tuid=@Event.Id';
-        } else if (registeredStatus === 'registered') {
-            openRegisteredModal();
         } else {
             openQuestionsModal();
         }
@@ -257,23 +254,11 @@
         document.getElementById('questionsModal').style.display = 'none';
     }
 
-    function openRegisteredModal() {
-        document.getElementById('registeredModal').style.display = 'block';
-    }
-
-    function closeRegisteredModal() {
-        document.getElementById('registeredModal').style.display = 'none';
-    }
-
     // Close the modal when clicking outside of it
     window.onclick = function(event) {
         const questionsModal = document.getElementById('questionsModal');
-        const registeredModal = document.getElementById('registeredModal');
         if (event.target == questionsModal) {
             questionsModal.style.display = 'none';
-        }
-        if (event.target == registeredModal) {
-            registeredModal.style.display = 'none';
         }
     }
 </script>

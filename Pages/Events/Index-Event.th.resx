@@ -25,4 +25,10 @@
     <data name="Approval-text" xml:space="preserve">
     <value>การลงทะเบียนของคุณต้องได้รับการอนุมัติจากผู้จัดงาน</value>
     </data>
+        <data name="ThankYouforJoining" xml:space="preserve">
+    <value>ขอบคุณที่เข้าร่วมอีเวนท์</value>
+    </data>
+            <data name="EnjoyEvent" xml:space="preserve">
+    <value>ทางเราหวังว่าคุณจะสนุกกับอีเว้นท์!</value>
+    </data>
 </root>
