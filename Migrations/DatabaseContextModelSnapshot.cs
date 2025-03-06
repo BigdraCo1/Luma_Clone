@@ -76,9 +76,8 @@ namespace alma.Migrations
                     b.Property<string>("Id")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("ApprovalType")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
+                    b.Property<bool>("AutomaticApproval")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
@@ -286,7 +285,7 @@ namespace alma.Migrations
                     b.ToTable("User");
                 });
 
-            modelBuilder.Entity("alma.Models.UserAttendEvent", b =>
+            modelBuilder.Entity("alma.Models.UserParticipatesEvent", b =>
                 {
                     b.Property<string>("EventId")
                         .HasColumnType("TEXT");
@@ -302,7 +301,7 @@ namespace alma.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("UserAttendEvent");
+                    b.ToTable("UserParticipatesEvent");
                 });
 
             modelBuilder.Entity("TagUser", b =>
@@ -389,7 +388,7 @@ namespace alma.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("alma.Models.UserAttendEvent", b =>
+            modelBuilder.Entity("alma.Models.UserParticipatesEvent", b =>
                 {
                     b.HasOne("alma.Models.Event", null)
                         .WithMany()

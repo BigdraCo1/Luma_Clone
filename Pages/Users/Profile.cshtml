@@ -5,20 +5,25 @@
     ViewData["Title"] = $"Profile - {@Model.DisplayedUser.Name}";
 }
 
+<span id="displayed-user-id" class="hidden">@Model.DisplayedUser.Id</span>
+<span id="follow-success-text" class="hidden">@Localizer["FollowSuccess"]</span>
+<span id="follow-fail-text" class="hidden">@Localizer["FollowFail"]</span>
+<span id="unfollow-success-text" class="hidden">@Localizer["UnfollowSuccess"]</span>
+<span id="unfollow-fail-text" class="hidden">@Localizer["UnfollowFail"]</span>
 <div class="px-4 mx-auto max-w-240 sm:px-16">
     <div class="flex gap-8 mb-8">
         <div class="flex flex-col items-center w-24 gap-4 sm:w-48">
             <img src="@($"/users/avatar?id={Model.DisplayedUser.Id}")" alt="Avatar" class="w-24 h-24 rounded-full sm:w-48 sm:h-48" />
-            @if (Model.CurrentUser != Model.DisplayedUser || true)
+            @if (Model.CurrentUser != Model.DisplayedUser)
             {
                 <div class="flex items-center sm:hidden">
                     @if (Model.CurrentUser.Following.Contains(Model.DisplayedUser))
                     {
-                        <button class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Unfollow"]</button>
+                        <button onclick="unfollow(event)" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Unfollow"]</button>
                     }
                     else
                     {
-                        <button class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Follow"]</button>
+                        <button onclick="follow(event)" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Follow"]</button>
                     }
                 </div>
             }
@@ -44,16 +49,16 @@
                         @Localizer["ParticipatingEventCountSuffix"]</span>
                 </div>
             </div>
-            @if (Model.CurrentUser != Model.DisplayedUser || true)
+            @if (Model.CurrentUser != Model.DisplayedUser)
             {
                 <div class="items-center hidden sm:flex">
                     @if (Model.CurrentUser.Following.Contains(Model.DisplayedUser))
                     {
-                        <button class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Unfollow"]</button>
+                        <button onclick="unfollow(event)" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Unfollow"]</button>
                     }
                     else
                     {
-                        <button class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Follow"]</button>
+                        <button onclick="follow(event)" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Follow"]</button>
                     }
                 </div>
             }

@@ -23,6 +23,17 @@
 		],
 		"description": "Add localizer"
 	},
+	"Add localizer root": {
+		"scope": "xml",
+		"prefix": "<root",
+		"body": [
+			"<?xml version=\"1.0\" encoding=\"utf-8\"?>",
+			"<root>",
+			"    $0",
+			"</root>"
+		],
+		"description": "Add localizer root element"
+	},
 	"Add localizer data": {
 		"scope": "xml",
 		"prefix": "<d",

@@ -57,10 +57,10 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment()) {
     app.UseDeveloperExceptionPage();
 } else {
+    app.UseStatusCodePagesWithRedirects("/error?code={0}");
     app.UseExceptionHandler("/error?code=500");
 }
 
-app.UseStatusCodePagesWithRedirects("/error?code={0}");
 
 var provider = new FileExtensionContentTypeProvider();
 provider.Mappings[".avif"] = "image/avif";

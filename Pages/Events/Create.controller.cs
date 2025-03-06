@@ -78,7 +78,7 @@ public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer,
             RegistrationStartAt = Event.RegistrationStartAt,
             RegistrationEndAt = Event.RegistrationEndAt,
             Visibility = Event.Visibility,
-            ApprovalType = Event.ApprovalType,
+            AutomaticApproval = Event.ApprovalType == "automatic",
             MaxParticipants = Event.MaxParticipants == "0" ? null : int.Parse(Event.MaxParticipants),
             LocationTitle = Event.LocationTitle,
             LocationSubtitle = Event.LocationSubtitle,
@@ -102,7 +102,7 @@ public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer,
         await _database.Event.AddAsync(newEvent);
         await _database.SaveChangesAsync();
 
-        return Redirect(Toast.AppendQueryString($"/events/{newEvent.Id}", _localizer["CreateEventSuccessful"], null, "success"));
+        return Redirect(Toast.AppendQueryString($"/events/view?id={newEvent.Id}", _localizer["CreateEventSuccessful"], null, "success"));
     }
 }
 

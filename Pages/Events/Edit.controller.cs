@@ -62,7 +62,7 @@ public class EditEventModel(IStringLocalizer<SharedResources> sharedLocalizer, I
             RegistrationStartAt = existingEvent.RegistrationStartAt,
             RegistrationEndAt = existingEvent.RegistrationEndAt,
             Visibility = existingEvent.Visibility,
-            ApprovalType = existingEvent.ApprovalType,
+            ApprovalType = existingEvent.AutomaticApproval ? "automatic" : "manual",
             MaxParticipants = existingEvent.MaxParticipants?.ToString() ?? "0",
             LocationTitle = existingEvent.LocationTitle,
             LocationSubtitle = existingEvent.LocationSubtitle,
@@ -115,7 +115,7 @@ public class EditEventModel(IStringLocalizer<SharedResources> sharedLocalizer, I
         existingEvent.RegistrationStartAt = UpdatedEvent.RegistrationStartAt;
         existingEvent.RegistrationEndAt = UpdatedEvent.RegistrationEndAt;
         existingEvent.Visibility = UpdatedEvent.Visibility;
-        existingEvent.ApprovalType = UpdatedEvent.ApprovalType;
+        existingEvent.AutomaticApproval = UpdatedEvent.ApprovalType == "automatic";
         existingEvent.MaxParticipants = UpdatedEvent.MaxParticipants == "0" ? null : int.Parse(UpdatedEvent.MaxParticipants);
         existingEvent.LocationTitle = UpdatedEvent.LocationTitle;
         existingEvent.LocationSubtitle = UpdatedEvent.LocationSubtitle;

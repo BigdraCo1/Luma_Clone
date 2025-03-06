@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="HostedBy" xml:space="preserve">
+        <value>จัดโดย </value>
+    </data>
+    <data name="JoinedCountPrefix" xml:space="preserve">
+        <value>เข้าร่วมแล้ว</value>
+    </data>
+    <data name="JoinedCountSuffix" xml:space="preserve">
+        <value>คน</value>
+    </data>
+    <data name="Date" xml:space="preserve">
+        <value>วันที่</value>
+    </data>
+    <data name="Time" xml:space="preserve">
+        <value>เวลา</value>
+    </data>
+    <data name="Registration" xml:space="preserve">
+        <value>การลงทะเบียน</value>
+    </data>
+    <data name="RegisteredPrefix" xml:space="preserve">
+        <value>ลงทะเบียนแล้ว</value>
+    </data>
+    <data name="RegisteredSuffix" xml:space="preserve">
+        <value>คน</value>
+    </data>
+    <data name="CapacityPrefix" xml:space="preserve">
+        <value>เหลือที่ว่าง</value>
+    </data>
+    <data name="CapacitySuffix" xml:space="preserve">
+        <value>คน</value>
+    </data>
+    <data name="RegistrationClosed" xml:space="preserve">
+        <value>ไม่สามารถลงทะเบียนได้ในตอนนี้</value>
+    </data>
+    <data name="RegistrationQuestions" xml:space="preserve">
+        <value>คำถามก่อนการลงทะเบียน</value>
+    </data>
+    <data name="YourAnswer" xml:space="preserve">
+        <value>คำตอบของคุณ</value>
+    </data>
+    <data name="AboutEvent" xml:space="preserve">
+        <value>เกี่ยวกับกิจกรรม</value>
+    </data>
+    <data name="Location" xml:space="preserve">
+        <value>สถานที่</value>
+    </data>
+</root>

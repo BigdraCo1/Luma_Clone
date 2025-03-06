@@ -41,7 +41,7 @@ public class Event {
     public required string Visibility { get; set; }
 
     [Required]
-    public required string ApprovalType { get; set; }
+    public required bool AutomaticApproval { get; set; }
 
     public int? MaxParticipants { get; set; }
 
@@ -65,7 +65,7 @@ public class Event {
 
     public required User Host { get; set; }
 
-    public ICollection<User> Participants { get; } = [];
-
     public ICollection<Question> Questions { get; } = [];
+
+    public ICollection<User> Participants { get; } = [];
 }

@@ -24,6 +24,10 @@
     margin-right: -2rem;
 }
 
+.-mr-4 {
+    margin-right: -1rem !important;
+}
+
 .-top-0\.5 {
     top: -0.125rem;
 }
@@ -163,6 +167,11 @@
     border-style: solid;
 }
 
+.border-4 {
+    border-width: 4px;
+    border-style: solid;
+}
+
 .border-b {
     border-bottom-width: 1px;
     border-bottom-style: solid;
@@ -178,6 +187,18 @@
 
 .border-gray-400 {
     border-color: rgb(156 163 175);
+}
+
+.border-gray-300 {
+    border-color: rgb(209 213 219);
+}
+
+.border-gray-900 {
+    border-color: rgb(17 24 39);
+}
+
+.border-transparent {
+    border-color: transparent;
 }
 
 .border-none {
@@ -205,6 +226,7 @@
 }
 
 textarea {
+    scrollbar-color: rgb(209 213 219) transparent;
     font-style: normal;
     font-weight: 400;
     font-family: "Roboto", "Noto Sans Thai", Arial, Helvetica, sans-serif;
@@ -214,6 +236,18 @@ textarea {
 
 textarea:focus {
     outline: none;
+}
+
+textarea::-webkit-scrollbar-track {
+    background-color: transparent;
+}
+
+textarea::-webkit-scrollbar-thumb {
+    background-color: rgb(209 213 219);
+}
+
+input::-webkit-calendar-picker-indicator {
+    filter: invert(1);
 }
 
 .flex {
@@ -649,6 +683,10 @@ body {
     padding-left: 0.25rem;
 }
 
+.pl-4 {
+    padding-left: 1rem;
+}
+
 .pl-16 {
     padding-left: 4rem;
 }
@@ -764,6 +802,11 @@ body {
 .rounded-b-3xl {
     border-bottom-right-radius: 1.5rem;
     border-bottom-left-radius: 1.5rem;
+}
+
+.rounded-b-xl {
+    border-bottom-right-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
 }
 
 .rounded-full {
@@ -1114,6 +1157,10 @@ button {
 
 .w-96 {
     width: 24rem;
+}
+
+.text-ellipsis {
+    text-overflow: ellipsis;
 }
 
 .w-auto {

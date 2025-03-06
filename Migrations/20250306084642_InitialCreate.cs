@@ -68,7 +68,7 @@ namespace alma.Migrations
                     RegistrationStartAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     RegistrationEndAt = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Visibility = table.Column<string>(type: "TEXT", nullable: false),
-                    ApprovalType = table.Column<string>(type: "TEXT", nullable: false),
+                    AutomaticApproval = table.Column<bool>(type: "INTEGER", nullable: false),
                     MaxParticipants = table.Column<int>(type: "INTEGER", nullable: true),
                     LocationTitle = table.Column<string>(type: "TEXT", nullable: false),
                     LocationSubtitle = table.Column<string>(type: "TEXT", nullable: false),
@@ -182,7 +182,7 @@ namespace alma.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserAttendEvent",
+                name: "UserParticipatesEvent",
                 columns: table => new
                 {
                     UserId = table.Column<string>(type: "TEXT", nullable: false),
@@ -191,15 +191,15 @@ namespace alma.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserAttendEvent", x => new { x.EventId, x.UserId });
+                    table.PrimaryKey("PK_UserParticipatesEvent", x => new { x.EventId, x.UserId });
                     table.ForeignKey(
-                        name: "FK_UserAttendEvent_Event_EventId",
+                        name: "FK_UserParticipatesEvent_Event_EventId",
                         column: x => x.EventId,
                         principalTable: "Event",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserAttendEvent_User_UserId",
+                        name: "FK_UserParticipatesEvent_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
@@ -266,8 +266,8 @@ namespace alma.Migrations
                 column: "FollowersId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserAttendEvent_UserId",
-                table: "UserAttendEvent",
+                name: "IX_UserParticipatesEvent_UserId",
+                table: "UserParticipatesEvent",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
@@ -289,7 +289,7 @@ namespace alma.Migrations
                 name: "TagUser");
 
             migrationBuilder.DropTable(
-                name: "UserAttendEvent");
+                name: "UserParticipatesEvent");
 
             migrationBuilder.DropTable(
                 name: "UserUser");
