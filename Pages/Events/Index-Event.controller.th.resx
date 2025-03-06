@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="EventPage" xml:space="preserve">
+        <value>หน้ากิจกรรม</value>
+    </data>
+        <data name="ThankYouForJoiningEvent" xml:space="preserve">
+        <value>ขอบคุณที่เข้าร่วมกับเรา! เตรียมตัวพบกับประสบการณ์สุดพิเศษและช่วงเวลาที่น่าจดจำไปด้วยกัน</value>
+    </data>
+                    <data name="WaitingForApproval" xml:space="preserve">
+        <value>ขอบคุณที่เข้าร่วมกับเรา! โปรดรอโฮสต์อนุมัติ</value>
+    </data>
+</root>

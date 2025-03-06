@@ -51,6 +51,7 @@ builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<ISessionService, SessionService>();
 builder.Services.AddScoped<IIconService, IconService>();
+builder.Services.AddScoped<EmailService>();
 
 var app = builder.Build();
 

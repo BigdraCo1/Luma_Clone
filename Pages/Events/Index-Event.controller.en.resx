@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="EventPage" xml:space="preserve">
+        <value>Event Page</value>
+    </data>
+        <data name="ThankYouForJoiningEvent" xml:space="preserve">
+        <value>Thank you for joining us! Get ready for a special experience and unforgettable moments together.</value>
+    </data>
+            <data name="WaitingForApproval" xml:space="preserve">
+        <value>Thank you for joining us! Please wait for the host's approval.</value>
+    </data>
+</root>
