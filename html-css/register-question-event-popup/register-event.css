@@ -1,0 +1,107 @@
+/* Google font import - using Poppins for a clean look */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(180deg, #000480 0%, #01004c 17%, #060212 65%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+.popup {
+    position: fixed;
+    width: 50%;
+    min-width: 350px;
+    max-width: 700px;
+    background: #1e1e1e;
+    border-radius: 24px;
+    padding: 30px;
+    margin: 10px;
+}
+
+.popup header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.popup header span {
+    font-size: 24px;
+    font-weight: 600;
+    color: #eaeaea;
+}
+
+.popup header .close {
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #eaeaea;
+}
+
+.popup .form-section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+}
+
+.popup .input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.popup .input-group label {
+    color: #eaeaea;
+}
+
+/* input text */
+.popup .input-group input[type="text"] {
+    max-width: 700px;
+    margin-top: 5px;
+    background-color: transparent;
+    width: 100%;
+    height: 40px;
+    padding-left: 20px;
+    border-radius: 20px;
+    border: 1px solid #8d8d8d;
+    color: #8d8d8d;
+    font-size: 14px;
+    outline: none;
+}
+.popup .input-group input:focus {
+    border: 1px solid #2cde47;
+}
+
+/* btn */
+.popup .submit-button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 20px;
+    background: linear-gradient(to right, #e91e63, #ff5722);
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 500px) {
+    .popup {
+        width: 100%;
+        min-width: 350px;
+        background: #1e1e1e;
+        border-radius: 24px;
+        padding: 30px;
+        margin: 10px;
+    }
+}
