@@ -31,4 +31,10 @@
             <data name="EnjoyEvent" xml:space="preserve">
     <value>ทางเราหวังว่าคุณจะสนุกกับอีเว้นท์!</value>
     </data>
+            <data name="PendingRequest" xml:space="preserve">
+    <value>กำลังรอโฮสต์อนุมัติคำขอของคุณ</value>
+    </data>
+            <data name="RejectResponse" xml:space="preserve">
+    <value>เสียใจด้วยโฮสต์ได้ปติเสษคำขอของคุณ</value>
+    </data>
 </root>

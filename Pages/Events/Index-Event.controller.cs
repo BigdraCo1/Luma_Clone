@@ -32,6 +32,7 @@ namespace alma.Pages.Events
         public string IFramSrc { get; set; }
         public User currentUser { get; set; }
         public bool registered { get; set; }
+        public string Status { get; set;}
 
         public async Task<IActionResult> OnGetAsync(string tuid)
         {
@@ -57,8 +58,11 @@ namespace alma.Pages.Events
             {
                 return NotFound();
             }
-            
+
             registered = currentEvent.Participants.Any(p => p.Id == currentUser.Id);
+
+            Status = (await _database.UserAttendEvent
+                .FirstOrDefaultAsync(uae => uae.UserId == currentUser.Id && uae.EventId == tuid))?.Status;
 
             GoingAttendees = await _database.UserAttendEvent
                 .Where(uae => uae.EventId == tuid && uae.Status == ParticipantStatus.Going)
@@ -82,31 +86,6 @@ namespace alma.Pages.Events
     .ToListAsync();
 
             return Page();
-        }
-
-        public async Task<IActionResult> OnGetImageAsync(string tuid)
-        {
-            if (string.IsNullOrEmpty(tuid))
-            {
-                return BadRequest("Invalid event ID.");
-            }
-
-            try
-            {
-                var eventItem = await _database.Event
-                    .FirstOrDefaultAsync(e => e.Id == tuid);
-
-                if (eventItem == null || eventItem.Image == null || eventItem.ImageType == null)
-                {
-                    return NotFound("Event or image not found.");
-                }
-
-                return File(eventItem.Image, eventItem.ImageType);
-            }
-            catch (Exception ex)
-            {
-                return RedirectToPage("/Error");
-            }
         }
 
         [BindProperty]

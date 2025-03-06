@@ -12,6 +12,7 @@
     var currentCulture = CultureInfo.CurrentCulture.Name;
     var currentUser = Model.currentUser;
     var registered = Model.registered;
+    var status = Model.Status;
 }
 
 <input type="hidden" id="currentUser" value="@((currentUser != null) ? "loggedIn" : "loggedOut")" />
@@ -20,7 +21,7 @@
 <div class="main" style="max-width: 1300px; margin-top: 60px; padding: 10px; display: grid; gap: 20px;">
     <!-- Image section -->
     <div class="image-section" style="grid-column: 1; grid-row: 1; overflow: hidden;">
-        <img src="@Url.Page("Index-Event", "Image", new { tuid = Event.Id })" alt="Event poster" class="event-image"
+        <img src="/events/image?id=@Event.Id" alt="Event image" class="event-image"
             style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 20px;">
     </div>
 
@@ -128,9 +129,19 @@
                 </div>
                     <h4>@Localizer["ThankYouforJoining"]</h4>
                 </div>
+                @if (status == "GOING") {
                 <div class="bottom" style="padding: 10px;">
                     <p style="padding: 0px 5px 10px 15px; color: #eaeaea;">@Localizer["EnjoyEvent"]</p>
                 </div>
+                } else if (status == "PENDING") {
+                <div class="bottom" style="padding: 10px;">
+                    <p style="padding: 0px 5px 10px 15px; color: #eaeaea;">@Localizer["PendingRequest"]</p>
+                </div>
+                } else {
+                <div class="bottom" style="padding: 10px;">
+                    <p style="padding: 0px 5px 10px 15px; color: #eaeaea;">@Localizer["RejectResponse"]</p>
+                </div>
+                }
             }
             else if (Event.ApprovalType == "Required") {
                 <!-- ต้องได้รับการยืนยัน -->

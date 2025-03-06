@@ -47,7 +47,7 @@
                 <a asp-page="Index-Event" asp-route-tuid="@eventItem.Id"
                     style="position: relative; top: 0; width: 200px; text-decoration: none; transition: top ease 0.3s;">
                     <div class="event-card" style="width: 100%; display: flex; flex-direction: column;">
-                        <img src="@Url.Page("Discover-Event", "Image", new { tuid = eventItem.Id })" alt="Event"
+                        <img src="/events/image?id=@eventItem.Id" alt="Event image"
                             style="width: 200px; height: 200px; border-radius: 20px; object-fit: cover;">
                         <div class="event-info"
                             style="display: flex; flex-direction: column; width: 100%; margin-top: 5px;">
@@ -80,7 +80,7 @@
                 <a asp-page="Index-Event" asp-route-tuid="@eventItem.Id"
                     style="position: relative; top: 0; width: 200px; text-decoration: none; transition: top ease 0.3s;">
                     <div class="event-card" style="width: 100%; display: flex; flex-direction: column;">
-                        <img src="@Url.Page("Discover-Event", "Image", new { tuid = eventItem.Id })" alt="Event"
+                        <img src="/events/image?id=@eventItem.Id" alt="Event image"
                             style="width: 200px; height: 200px; border-radius: 20px; object-fit: cover;">
                         <div class="event-info"
                             style="display: flex; flex-direction: column; width: 100%; margin-top: 5px;">
