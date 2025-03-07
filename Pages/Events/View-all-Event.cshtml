@@ -1,2 +1,61 @@
 @page
 @model alma.Pages.Events.ViewAllEventModel
+
+@{
+    ViewData["Title"] = "All Event";
+}
+<script src="https://unpkg.com/lucide@latest"></script>
+
+    <main class="main" style="margin-top: 20px; max-width: 1300px; padding: 10px;">
+        <section class="search-section" style="width: 100%;">
+        <h1 style="color: #ffff; font-size: 28px; font-weight: bold; margin-bottom: 15px;">@Localizer["Search-Event"]
+        </h1>
+        <div class="search-container" style="position: relative;">
+            <form method="get">
+                <input type="search" name="search" placeholder=@Localizer["Search-Event"]
+                    style="width: 100%; height: 40px; padding: 20px; background: transparent; border: 1px solid #8D8D8D; border-radius: 20px; font-size: 14px; color: #8D8D8D; font-weight: bold; outline: none;">
+                <button type="submit" class="search-icon"
+                    style="background-color: transparent; border: none; position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: #8D8D8D; cursor: pointer;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                        class="lucide lucide-search">
+                        <circle cx="11" cy="11" r="8" />
+                        <path d="m21 21-4.3-4.3" />
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </section>
+        <section class="events-section" style="margin-top: 40px; padding-bottom: 40px;">
+            <div class="section-header" style="margin-bottom: 25px; display: flex; justify-content: space-between;">
+                <div class="header-info">
+                    <h2 style="color: #ffff; font-size: 20px; font-weight: 500;">กิจกรรมยอดนิยม</h2>
+                    <p style="color: #8D8D8D;">Bangkok - กรุงเทพ</p>
+                </div>
+            </div>
+            <div class="event-grid"
+                style="display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: 1fr; gap: 40px;">
+                @foreach (var eventItem in Model.AllEvents)
+            {
+                <a asp-page="Index-Event" asp-route-tuid="@eventItem.Id"
+                    style="position: relative; top: 0; width: 200px; text-decoration: none; transition: top ease 0.3s;">
+                    <div class="event-card" style="width: 100%; display: flex; flex-direction: column;">
+                        <img src="/events/image?id=@eventItem.Id" alt="Event image"
+                            style="width: 200px; height: 200px; border-radius: 20px; object-fit: cover;">
+                        <div class="event-info"
+                            style="display: flex; flex-direction: column; width: 100%; margin-top: 5px;">
+                            <h3
+                                style="color: #EAEAEA; font-size: 16px; font-weight: 500; margin-top: 5px; margin-bottom: 5px;">
+                                @eventItem.Name</h3>
+                            <span style="color: #8D8D8D;">@eventItem.StartAt.ToString("ddd MMM dd, hh:mm tt")</span>
+                            <span style="color: #8D8D8D;">@eventItem.LocationSubtitle</span>
+                        </div>
+                    </div>
+                </a>
+            }
+            </div>
+        </section>
+    </main>
+    <script>
+        lucide.createIcons();
+    </script>

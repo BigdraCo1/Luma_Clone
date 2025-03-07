@@ -30,7 +30,8 @@ namespace alma.Pages.Events
             var eventsQuery = _database.Event
                 .Include(e => e.Tag)
                 .Include(e => e.Host)
-                .Where(e => e.RegistrationEndAt > DateTime.Now && e.Visibility == VisibilityStatus.PUBLIC);
+                .Include(e => e.Participants)
+                .Where(e => e.RegistrationEndAt > DateTime.Now && e.Visibility == VisibilityStatus.PUBLIC && e.Participants.Count < e.MaxParticipants );
 
             // Apply search filter if provided
             if (!string.IsNullOrEmpty(search))

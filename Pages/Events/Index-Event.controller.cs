@@ -37,6 +37,7 @@ namespace alma.Pages.Events
         public User currentUser { get; set; }
         public bool registered { get; set; }
         public string Status { get; set; }
+        public bool full { get; set; } = false;
 
         public async Task<IActionResult> OnGetAsync(string tuid)
         {
@@ -115,6 +116,12 @@ namespace alma.Pages.Events
                 .Include(e => e.Questions)
                 .FirstOrDefaultAsync(i => i.Id == Register.EventId);
 
+            if (currentEvent.Participants.Count >= currentEvent.MaxParticipants)
+            {
+                full = true;
+                return StatusCode(500);
+            }
+
             var participantStatus = ParticipantStatus.Pending;
 
             if (currentEvent.ApprovalType == "automatic")
@@ -154,12 +161,12 @@ namespace alma.Pages.Events
             var icsContent = _emailService.GenerateIcsContent(
                     currentEvent.Name,
                     currentEvent.Description,
-                    currentEvent.StartAt, 
-                    currentEvent.EndAt, 
-                    currentEvent.LocationDescription, 
-                    currentEvent.Host.Email, 
-                    currentUser.Email, 
-                    "ACCEPTED" 
+                    currentEvent.StartAt,
+                    currentEvent.EndAt,
+                    currentEvent.LocationDescription,
+                    currentEvent.Host.Email,
+                    currentUser.Email,
+                    "ACCEPTED"
                     );
 
             Status = (await _database.UserAttendEvent
@@ -337,7 +344,8 @@ namespace alma.Pages.Events
                 </html>";
 
                 await _emailService.SendEmailAsync(currentUser.Email, currentEvent.Name, htmlContent, icsContent);
-            } else
+            }
+            else
             {
                 htmlContent = $@"
                 <html>
