@@ -20,7 +20,6 @@ namespace alma.Pages.Events
             _database = database;
         }
 
-        public Event currentEvent { get; set; }
         public List<Event> AllEvents { get; set; }
 
         public async Task<IActionResult> OnGetAsync(string search = "")
