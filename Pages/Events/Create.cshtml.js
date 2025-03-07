@@ -47,6 +47,18 @@ async function imageUpload() {
 /**
  * @param {MouseEvent} event
  */
+function deleteQuestion(event) {
+    event.preventDefault();
+    currentQuestionCount--;
+    /** @type {HTMLButtonElement} */
+    // @ts-expect-error
+    let button = event.target;
+    button.closest("li")?.remove();
+}
+
+/**
+ * @param {MouseEvent} event
+ */
 function addQuestion(event) {
     event.preventDefault();
     if (currentQuestionCount >= 8) {
@@ -104,3 +116,5 @@ function addQuestion(event) {
 if (formImageInput.value) {
     imagePreviewElement.setAttribute("src", formImageInput.value);
 }
+
+currentQuestionCount = questionsContainer.childElementCount;

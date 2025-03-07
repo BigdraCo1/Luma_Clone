@@ -34,6 +34,7 @@
                     class="px-4 py-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" />
             </div>
             <span asp-validation-for="UpdatedEvent.EndAt" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
+            using System.Collections.Immutable;
             <p class="mt-0 mb-2 text-white">@Localizer["RegistrationDatetime"]</p>
             <div class="flex items-center gap-2">
                 @Icon.Inline("clock", stroke: "rgb(229 231 235)")
@@ -166,7 +167,7 @@
     <div class="mb-8">
         <p class="mb-4 text-white">@Localizer["RegistrationQuestions"]</p>
         <ol id="event-registration-questions" class="flex flex-col gap-2 my-0 mb-4 text-gray-200 empty:mb-0">
-            @foreach (var question in Model.ExistingEvent.Questions)
+            @foreach (var question in Model.ExistingEvent.Questions.OrderBy(q => q.Number))
             {
                 <li class="flex-grow">
                     <div class="flex flex-grow">
@@ -195,11 +196,11 @@
         <div class="flex flex-col flex-grow w-0">
             <label for="participation-status-progress" class="mb-4 text-white">@Localizer["ParticipationStatus"]</label>
             <div class="flex justify-between mb-4">
-                <p class="m-0 text-white">@Model.ExistingEvent.Participants.Count @Localizer["CurrentCount"]
+                <p class="m-0 text-white">@Model.AcceptedParticipants.Count @Localizer["CurrentCount"]
                 </p>
                 <p class="m-0 text-white">@Model.ExistingEvent.MaxParticipants @Localizer["MaxCount"]</p>
             </div>
-            <progress max=" @Model.ExistingEvent.MaxParticipants" value="@Model.ExistingEvent.Participants.Count"
+            <progress max="@Model.ExistingEvent.MaxParticipants" value="@Model.AcceptedParticipants.Count"
                 id="participation-status-progress"
                 class="w-full h-2 text-gray-200 bg-gray-800 border-none rounded-full"></progress>
         </div>

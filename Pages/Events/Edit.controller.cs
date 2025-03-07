@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Text.RegularExpressions;
 
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -21,14 +22,15 @@ public class EditEventModel(IStringLocalizer<SharedResources> sharedLocalizer, I
     private readonly ISessionService _sessionService = sessionService;
 
     public Event ExistingEvent { get; set; } = default!;
+    public ICollection<User> AcceptedParticipants { get; set; } = default!;
     public IEnumerable<SelectListItem> Tags { get; set; } = default!;
 
     [BindProperty]
     public EditEventDto UpdatedEvent { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(string id) {
-        var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
-        if (currentUser is null) {
+        var user = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
+        if (user is null) {
             return Redirect(Toast.AppendQueryString($"/auth/sign-in?next=/events/edit?id={id}", _sharedLocalizer["YouMustSignIn"], _sharedLocalizer["YouMustSignInDescription"], ToastTypes.Error));
         }
 
@@ -42,10 +44,18 @@ public class EditEventModel(IStringLocalizer<SharedResources> sharedLocalizer, I
             return NotFound();
         }
 
+        if (user != existingEvent.Host) {
+            return Unauthorized();
+        }
+
         Tags = await _database.Tag.Select(tag => new SelectListItem {
             Value = tag.Id,
             Text = CultureInfo.CurrentCulture.Name == "th" ? tag.NameTH : tag.NameEN
         }).ToListAsync();
+
+        AcceptedParticipants = [.. existingEvent.Participants
+            .Where(p => _database.UserParticipatesEvent
+                .Any(upe => upe.UserId == p.Id && upe.EventId == existingEvent.Id && upe.Status == ParticipationStatus.Accepted))];
 
         ExistingEvent = existingEvent;
 
@@ -75,8 +85,8 @@ public class EditEventModel(IStringLocalizer<SharedResources> sharedLocalizer, I
     }
 
     public async Task<IActionResult> OnPostAsync() {
-        var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
-        if (currentUser is null) {
+        var user = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
+        if (user is null) {
             return Redirect(Toast.AppendQueryString($"/auth/sign-in?next=/events/create", _sharedLocalizer["YouMustSignIn"], _sharedLocalizer["YouMustSignInDescription"], ToastTypes.Error));
         }
 
@@ -100,10 +110,14 @@ public class EditEventModel(IStringLocalizer<SharedResources> sharedLocalizer, I
             return NotFound();
         }
 
+        if (user != existingEvent.Host) {
+            return Unauthorized();
+        }
+
         var imageData = DataUrl.Parse(UpdatedEvent.Image);
 
         var googleMapEmbedUrlMatch = Regex.Match(UpdatedEvent.LocationGMapUrl, @"<iframe src=""(?<url>https://www.google.com/maps/embed\?pb=[^""]+)"".*?></iframe>");
-        var googleMapEmbedUrl = googleMapEmbedUrlMatch.Groups["url"].Value;
+        var googleMapEmbedUrl = HtmlEncoder.Decode(googleMapEmbedUrlMatch.Groups["url"].Value);
 
         existingEvent.Name = UpdatedEvent.Name;
         existingEvent.Description = UpdatedEvent.Description;

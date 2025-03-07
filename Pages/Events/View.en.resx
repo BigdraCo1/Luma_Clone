@@ -19,19 +19,10 @@
         <value>Registration</value>
     </data>
     <data name="RegisteredPrefix" xml:space="preserve">
-        <value>Registered:</value>
+        <value>Registered: </value>
     </data>
-    <data name="RegisteredSuffix" xml:space="preserve">
-        <value></value>
-    </data>
-    <data name="CapacityPrefix" xml:space="preserve">
-        <value>Capacity left:</value>
-    </data>
-    <data name="CapacitySuffix" xml:space="preserve">
-        <value></value>
-    </data>
-    <data name="RegistrationClosed" xml:space="preserve">
-        <value>Registration closed</value>
+    <data name="CannotRegister" xml:space="preserve">
+        <value>Cannot register</value>
     </data>
     <data name="RegistrationQuestions" xml:space="preserve">
         <value>Registration questions</value>
@@ -40,9 +31,48 @@
         <value>Your answer</value>
     </data>
     <data name="AboutEvent" xml:space="preserve">
-        <value>About event</value>
+        <value>About the event</value>
     </data>
     <data name="Location" xml:space="preserve">
         <value>Location</value>
+    </data>
+    <data name="Register" xml:space="preserve">
+        <value>Register</value>
+    </data>
+    <data name="SignInToRegister" xml:space="preserve">
+        <value>Sign in to register</value>
+    </data>
+    <data name="HostCannotRegister" xml:space="preserve">
+        <value>Host cannot register</value>
+    </data>
+    <data name="RegistrationAccepted" xml:space="preserve">
+        <value>Registration accepted</value>
+    </data>
+    <data name="RegistrationPending" xml:space="preserve">
+        <value>Waiting for approval from host</value>
+    </data>
+    <data name="RegistrationRejected" xml:space="preserve">
+        <value>Registration Rejected</value>
+    </data>
+    <data name="RegistrationIsClosed" xml:space="preserve">
+        <value>This event is not accepting registration</value>
+    </data>
+    <data name="EventIsFull" xml:space="preserve">
+        <value>This event is already full</value>
+    </data>
+    <data name="TooEarlyToRegister" xml:space="preserve">
+        <value>The registration period have not yet started</value>
+    </data>
+    <data name="TooLateToRegister" xml:space="preserve">
+        <value>The registration period have already passed</value>
+    </data>
+    <data name="PendingRegistrations" xml:space="preserve">
+        <value>Pending registrations</value>
+    </data>
+    <data name="Accept" xml:space="preserve">
+        <value>Accept</value>
+    </data>
+    <data name="Reject" xml:space="preserve">
+        <value>Reject</value>
     </data>
 </root>

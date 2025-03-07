@@ -19,19 +19,10 @@
         <value>การลงทะเบียน</value>
     </data>
     <data name="RegisteredPrefix" xml:space="preserve">
-        <value>ลงทะเบียนแล้ว</value>
+        <value>จำนวนผู้เข้าร่วม</value>
     </data>
-    <data name="RegisteredSuffix" xml:space="preserve">
-        <value>คน</value>
-    </data>
-    <data name="CapacityPrefix" xml:space="preserve">
-        <value>เหลือที่ว่าง</value>
-    </data>
-    <data name="CapacitySuffix" xml:space="preserve">
-        <value>คน</value>
-    </data>
-    <data name="RegistrationClosed" xml:space="preserve">
-        <value>ไม่สามารถลงทะเบียนได้ในตอนนี้</value>
+    <data name="CannotRegister" xml:space="preserve">
+        <value>ไม่สามารถลงทะเบียนได้</value>
     </data>
     <data name="RegistrationQuestions" xml:space="preserve">
         <value>คำถามก่อนการลงทะเบียน</value>
@@ -44,5 +35,44 @@
     </data>
     <data name="Location" xml:space="preserve">
         <value>สถานที่</value>
+    </data>
+    <data name="Register" xml:space="preserve">
+        <value>ลงทะเบียน</value>
+    </data>
+    <data name="SignInToRegister" xml:space="preserve">
+        <value>เข้าสู่ระบบเพื่อลงทะเบียน</value>
+    </data>
+    <data name="HostCannotRegister" xml:space="preserve">
+        <value>ผู้จัดกิจกรรมไม่สามารถลงทะเบียนได้</value>
+    </data>
+    <data name="RegistrationAccepted" xml:space="preserve">
+        <value>ได้รับการอนุมัติแล้ว</value>
+    </data>
+    <data name="RegistrationPending" xml:space="preserve">
+        <value>รอการอนุมัติจากผู้จัดกิจกรรม</value>
+    </data>
+    <data name="RegistrationRejected" xml:space="preserve">
+        <value>การลงทะเบียนถูกปฏิเสธ</value>
+    </data>
+    <data name="RegistrationIsClosed" xml:space="preserve">
+        <value>กิจกรรมนี้ไม่ได้เปิดรับการลงทะเบียนในขณะนี้</value>
+    </data>
+    <data name="EventIsFull" xml:space="preserve">
+        <value>กิจกรรมนี้เต็มแล้ว</value>
+    </data>
+    <data name="TooEarlyToRegister" xml:space="preserve">
+        <value>ยังไม่ถึงเวลาการลงทะเบียน</value>
+    </data>
+    <data name="TooLateToRegister" xml:space="preserve">
+        <value>เลยเวลาการลงทะเบียนไปแล้ว</value>
+    </data>
+    <data name="PendingRegistrations" xml:space="preserve">
+        <value>การลงทะเบียนรอการอนุมัติ</value>
+    </data>
+    <data name="Accept" xml:space="preserve">
+        <value>อนุมัติ</value>
+    </data>
+    <data name="Reject" xml:space="preserve">
+        <value>ปฏิเสธ</value>
     </data>
 </root>

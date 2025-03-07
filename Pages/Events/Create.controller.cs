@@ -63,7 +63,7 @@ public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer,
         var imageData = DataUrl.Parse(Event.Image);
 
         var googleMapEmbedUrlMatch = Regex.Match(Event.LocationGMapUrl, @"<iframe src=""(?<url>https://www.google.com/maps/embed\?pb=[^""]+)"".*?></iframe>");
-        var googleMapEmbedUrl = googleMapEmbedUrlMatch.Groups["url"].Value;
+        var googleMapEmbedUrl = HtmlEncoder.Decode(googleMapEmbedUrlMatch.Groups["url"].Value);
 
         var newEvent = new Event {
             Id = Tuid.Generate(),
@@ -71,7 +71,7 @@ public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer,
             Description = Event.Description,
             Image = imageData.Bytes,
             ImageType = imageData.Type,
-            CreatedAt = DateTime.Now,
+            CreatedAt = ThDateTime.Now(),
             StartAt = Event.StartAt,
             EndAt = Event.EndAt,
             RegistrationOpen = true,
@@ -90,12 +90,15 @@ public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer,
         };
 
         if (Event.Questions is not null) {
+            var i = 0;
             foreach (var question in Event.Questions) {
                 await _database.Question.AddAsync(new Question {
                     Id = Tuid.Generate(),
+                    Number = i,
                     Text = question,
                     Event = newEvent
                 });
+                i++;
             }
         }
 

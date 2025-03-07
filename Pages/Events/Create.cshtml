@@ -171,7 +171,26 @@
                 <span class="text-white">@Localizer["AddQuestion"]</span>
             </button>
         </div>
-        <ol id="event-registration-questions" class="flex flex-col gap-2 my-0 mb-4 text-gray-200 empty:mb-0"></ol>
+        <ol id="event-registration-questions" class="flex flex-col gap-2 my-0 mb-4 text-gray-200 empty:mb-0">
+            @if (Model.Event is not null && Model.Event.Questions is not null)
+            {
+                @foreach (var question in Model.Event.Questions)
+                {
+                    <li class="flex-grow">
+                        <div class="flex items-center flex-grow gap-2">
+                            <input type="text" name="Event.Questions" value="@question"
+                                placeholder="@Localizer["QuestionPlaceholder"]"
+                                class="flex-grow px-4 py-2 ml-2 text-sm text-gray-200 transition-all bg-transparent border-2 border-gray-400 max-w-160 focus:border-gray-200 rounded-xl"
+                                required>
+                            <button onclick="deleteQuestion(event)"
+                                class="flex items-center justify-center w-8 h-8 p-0 m-0 bg-transparent border-none">
+                                @Icon.Inline("trash-2", stroke: "rgb(220 38 38)")
+                            </button>
+                        </div>
+                    </li>
+                }
+            }
+        </ol>
         <span class="hidden mt-2 text-gray-400 prev-child-no-child:block">@Localizer["NoQuestionAdded"]</span>
     </div>
     <button type="submit"

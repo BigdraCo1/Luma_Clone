@@ -11,6 +11,7 @@ public class DatabaseContext(DbContextOptions<DatabaseContext> options) : DbCont
     public DbSet<Session> Session { get; set; }
     public DbSet<Tag> Tag { get; set; }
     public DbSet<User> User { get; set; }
+    public DbSet<UserParticipatesEvent> UserParticipatesEvent { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         base.OnModelCreating(modelBuilder);

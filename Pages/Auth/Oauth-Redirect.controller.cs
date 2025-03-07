@@ -70,7 +70,7 @@ public class OauthRedirectModel(IConfiguration config, IStringLocalizer<OauthRed
                 Avatar = avatar,
                 AvatarType = avatarType,
                 Bio = "",
-                CreatedAt = DateTime.Now
+                CreatedAt = ThDateTime.Now()
             };
 
             await _database.User.AddAsync(newUser);

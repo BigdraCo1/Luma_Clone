@@ -176,3 +176,27 @@ public class DataUrl {
         return $"data:{type};base64,{Base64.Encode(data)}";
     }
 }
+
+/// <summary>
+/// A utility class for encoding and decoding HTML.
+/// </summary>
+public class HtmlEncoder {
+
+    /// <summary>
+    /// Encodes a string to an HTML encoded string.
+    /// </summary>
+    /// <param name="input">String to encode</param>
+    /// <returns>HTML encoded string</returns>
+    public static string Encode(string input) {
+        return System.Web.HttpUtility.HtmlEncode(input);
+    }
+
+    /// <summary>
+    /// Decodes an HTML encoded string to a string.
+    /// </summary>
+    /// <param name="input">HTML encoded string to decode</param>
+    /// <returns>Decoded string</returns>
+    public static string Decode(string input) {
+        return System.Web.HttpUtility.HtmlDecode(input);
+    }
+}
