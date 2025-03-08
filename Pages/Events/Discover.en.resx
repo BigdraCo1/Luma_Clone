@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="SearchEvents" xml:space="preserve">
+        <value>Search events</value>
+    </data>
+    <data name="QueryPlaceholder" xml:space="preserve">
+        <value>Search for event name, location or tag</value>
+    </data>
+    <data name="NoEventsFound" xml:space="preserve">
+        <value>No event found</value>
+    </data>
+    <data name="FilterEvents" xml:space="preserve">
+        <value>Search result</value>
+    </data>
+    <data name="PopularEvents" xml:space="preserve">
+        <value>Popular</value>
+    </data>
+    <data name="ComingSoonEvents" xml:space="preserve">
+        <value>Coming soon</value>
+    </data>
+</root>

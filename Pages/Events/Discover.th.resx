@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="SearchEvents" xml:space="preserve">
+        <value>ค้นหากิจกรรม</value>
+    </data>
+    <data name="QueryPlaceholder" xml:space="preserve">
+        <value>ค้นหาด้วยชื่อ สถานที่ หรือหมวดหมู่</value>
+    </data>
+    <data name="NoEventsFound" xml:space="preserve">
+        <value>ไม่พบกิจกรรมตามที่ค้นหา</value>
+    </data>
+    <data name="FilterEvents" xml:space="preserve">
+        <value>ผลการค้นหา</value>
+    </data>
+    <data name="PopularEvents" xml:space="preserve">
+        <value>ยอดนิยม</value>
+    </data>
+    <data name="ComingSoonEvents" xml:space="preserve">
+        <value>เร็ว ๆ นี้</value>
+    </data>
+</root>

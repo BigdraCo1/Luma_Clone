@@ -1,0 +1,64 @@
+@page
+@model alma.Pages.Events.DiscoverEventsModel
+
+@{
+    ViewData["Title"] = "Discover Events";
+}
+
+<div class="px-4 mx-auto max-w-320 sm:px-16">
+    <h2 class="mt-0 mb-2 text-white">@Localizer["SearchEvents"]</h2>
+    <form method="GET">
+        <div class="relative">
+            <input type="text" name="query"
+                class="w-full px-4 py-2 text-base text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200"
+                placeholder="@Localizer["QueryPlaceholder"]" value="@Model.Query" />
+            <button type="submit" style="right: -1.75rem; top: 0.15rem;"
+                class="absolute flex items-center justify-center w-10 h-10 transition-all bg-transparent border-none hover:scale-105">
+                @Icon.Inline("search", stroke: "rgb(229 231 235)")
+            </button>
+        </div>
+    </form>
+    @if (Model.Query is not null)
+    {
+        @if (Model.FilteredEvents.Count == 0)
+        {
+            <p class="text-gray-200">@Localizer["NoEventsFound"]</p>
+        }
+        else
+        {
+            <h3 class="text-gray-200">@Localizer["FilterEvents"]</h3>
+            <div class="flex gap-8 pb-4 overflow-x-scroll">
+                @foreach (var evnt in Model.FilteredEvents.OrderBy(e => e.StartAt).Take(10))
+                {
+                    <div class="flex-shrink-0 w-56">
+                        <img src="/events/image?id=@evnt.Id" alt="Event Image"
+                            class="object-cover w-full h-auto aspect-square rounded-xl" />
+                    </div>
+                }
+            </div>
+        }
+        <hr>
+    }
+    <h3 class="text-gray-200">@Localizer["PopularEvents"]</h3>
+    <div class="flex gap-8 pb-4 overflow-x-scroll">
+        @foreach (var evnt in Model.Events.OrderBy(e => Database.UserParticipatesEvent.Count(upe
+                => upe.EventId == e.Id && upe.Status == ParticipationStatus.Accepted)).Take(10))
+        {
+            <div class="flex-shrink-0 w-56">
+                <img src="/events/image?id=@evnt.Id" alt="Event Image"
+                    class="object-cover w-full h-auto aspect-square rounded-xl" />
+            </div>
+        }
+    </div>
+    <hr>
+    <h3 class="text-gray-200">@Localizer["ComingSoonEvents"]</h3>
+    <div class="flex gap-8 pb-4 overflow-x-scroll">
+        @foreach (var evnt in Model.Events.OrderBy(e => e.StartAt).Take(10))
+        {
+            <div class="flex-shrink-0 w-56">
+                <img src="/events/image?id=@evnt.Id" alt="Event Image"
+                    class="object-cover w-full h-auto aspect-square rounded-xl" />
+            </div>
+        }
+    </div>
+</div>

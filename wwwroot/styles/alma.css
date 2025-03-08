@@ -262,7 +262,6 @@
 }
 
 textarea {
-    scrollbar-color: rgb(209 213 219) transparent;
     font-style: normal;
     font-weight: 400;
     font-family: "Roboto", "Noto Sans Thai", Arial, Helvetica, sans-serif;
@@ -274,11 +273,15 @@ textarea:focus {
     outline: none;
 }
 
-textarea::-webkit-scrollbar-track {
+* {
+    scrollbar-color: rgb(209 213 219) transparent;
+}
+
+*::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-textarea::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
     background-color: rgb(209 213 219);
 }
 
@@ -742,6 +745,10 @@ body {
 
 .overflow-hidden {
     overflow: hidden;
+}
+
+.overflow-x-scroll {
+    overflow-x: scroll;
 }
 
 .z-50 {
