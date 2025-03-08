@@ -24,16 +24,19 @@
     <data name="Approval-text" xml:space="preserve">
     <value>Your registration is subject to approval by the host.</value>
     </data> 
-    <data name="ThankYouforJoining" xml:space="preserve">
-    <value>Thank You for Joining</value>
+    <data name="Joining" xml:space="preserve">
+    <value>Already joined</value>
     </data>
         <data name="EnjoyEvent" xml:space="preserve">
-    <value>We hope you enjoyed the event!</value>
+    <value>Thank You for Joining , We hope you enjoyed the event!</value>
     </data>
             <data name="PendingRequest" xml:space="preserve">
     <value>Waiting for host approves your request</value>
     </data>
             <data name="RejectResponse" xml:space="preserve">
+    <value>Request rejected</value>
+    </data>
+    <data name="RejectText" xml:space="preserve">
     <value>Sorry, Host rejected your request</value>
     </data>
 </root>

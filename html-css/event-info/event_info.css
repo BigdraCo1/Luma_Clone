@@ -295,7 +295,7 @@ iframe {
 
 /* Desktop Layout */
 @media (min-width: 1000px) {
-    .container {
+    .main{
         grid-template-columns: 320px 1fr;
         grid-template-rows: auto auto 1fr;
     }

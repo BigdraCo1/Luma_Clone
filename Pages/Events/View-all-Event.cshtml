@@ -33,15 +33,12 @@
                     <p style="color: #8D8D8D;">Bangkok - กรุงเทพ</p>
                 </div>
             </div>
-            <div class="event-grid"
-                style="display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: 1fr; gap: 40px;">
+            <div class="event-grid">
                 @foreach (var eventItem in Model.AllEvents)
             {
-                <a asp-page="Index-Event" asp-route-tuid="@eventItem.Id"
-                    style="position: relative; top: 0; width: 200px; text-decoration: none; transition: top ease 0.3s;">
-                    <div class="event-card" style="width: 100%; display: flex; flex-direction: column;">
-                        <img src="/events/image?id=@eventItem.Id" alt="Event image"
-                            style="width: 200px; height: 200px; border-radius: 20px; object-fit: cover;">
+                <a asp-page="Index-Event" asp-route-tuid="@eventItem.Id">
+                    <div class="event-card" >
+                        <img src="/events/image?id=@eventItem.Id" alt="Event image">
                         <div class="event-info"
                             style="display: flex; flex-direction: column; width: 100%; margin-top: 5px;">
                             <h3

@@ -272,3 +272,17 @@ async function bytesToBase64DataUrl(bytes, type = "application/octet-stream") {
         reader.readAsDataURL(new File([bytes], "", { type }));
     });
 }
+
+
+
+
+// navbar scroll
+
+window.addEventListener("scroll", function () {
+    const navbar = document.querySelector(".navbar");
+    if (window.scrollY > 0) {
+        navbar.classList.add("scrolled");
+    } else {
+        navbar.classList.remove("scrolled");
+    }
+});

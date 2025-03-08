@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <link rel="stylesheet" href="register-event.css" />
+    </head>
+    <body>
+        <div class="popup">
+                <header>
+                    <span>กรอกข้อมูลผู้สมัคร</span>
+                    <div class="close">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="24"
+                            height="24"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            stroke-width="3"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            class="lucide lucide-x">
+                            <path d="M18 6 6 18" />
+                            <path d="m6 6 12 12" />
+                        </svg>
+                    </div>
+                </header>
+                <div class="content">
+                    <div class="form-section">
+                        <section class="form-section">
+                            <!-- อันนี้คำถามบังคับ -->
+                            <div class="input-group">
+                                <label>Email</label>
+                                <!-- set defalt เป็น email ของ user เเก้ไม่ได้ -->
+                                <input type="text" value="siasa18037@gmail.com" disabled />
+                            </div>
+                            <div class="input-group">
+                                <label>ชื่อ</label>
+                                <!-- set defalt เป็นชื่อของ user เเต่เเก้ได้ -->
+                                <input type="text" value="" placeholder="ชื่อ" />
+                            </div>
+
+                            <!-- อันนี้เป็นคำถามเพิ่ม ที่เพิ่มใส่เอง -->
+                            <div class="input-group">
+                                <label>เบอร์โทร</label>
+                                <input type="text" value="" placeholder="เบอร์โทร" />
+                            </div>
+                            
+                        </section>
+                        <button type="submit" class="submit-button">ลงทะเบียน</button>
+                    </div>
+                </div>
+        </div>
+    </body>
+</html>

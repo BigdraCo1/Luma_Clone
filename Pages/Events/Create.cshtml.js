@@ -101,6 +101,7 @@ function addQuestion(event) {
     questionsContainer.appendChild(questionListElement);
 }
 
+
 if (formImageInput.value) {
     imagePreviewElement.setAttribute("src", formImageInput.value);
 }

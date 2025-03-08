@@ -25,16 +25,19 @@
     <data name="Approval-text" xml:space="preserve">
     <value>การลงทะเบียนของคุณต้องได้รับการอนุมัติจากผู้จัดงาน</value>
     </data>
-        <data name="ThankYouforJoining" xml:space="preserve">
-    <value>ขอบคุณที่เข้าร่วมอีเวนท์</value>
+        <data name="Joining" xml:space="preserve">
+    <value>ลงทะเบียนเข้าร่วมอีเวนท์เเล้ว</value>
     </data>
             <data name="EnjoyEvent" xml:space="preserve">
-    <value>ทางเราหวังว่าคุณจะสนุกกับอีเว้นท์!</value>
+    <value>ขอบคุณที่เข้าร่วมอีเวนท์ ทางเราหวังว่าคุณจะสนุกกับอีเว้นท์!</value>
     </data>
             <data name="PendingRequest" xml:space="preserve">
     <value>กำลังรอโฮสต์อนุมัติคำขอของคุณ</value>
     </data>
             <data name="RejectResponse" xml:space="preserve">
-    <value>เสียใจด้วยโฮสต์ได้ปติเสษคำขอของคุณ</value>
+    <value>คำขอของคุณถูกปฏิเสธ</value>
+    </data>
+    <data name="RejectText" xml:space="preserve">
+    <value>เสียใจด้วยโฮสต์ได้ปฏิเสธคำขอของคุณ</value>
     </data>
 </root>

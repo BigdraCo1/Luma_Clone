@@ -8,7 +8,6 @@
     var currentCulture = CultureInfo.CurrentCulture.Name;
 }
 
-<main class="main" style="margin-top: 20px; max-width: 1300px; padding: 10px;">
     <section class="search-section" style="width: 100%;">
         <h1 style="color: #ffff; font-size: 28px; font-weight: bold; margin-bottom: 15px;">@Localizer["Search-Event"]
         </h1>
@@ -33,22 +32,18 @@
         <div class="section-header" style="margin-bottom: 25px; display: flex; justify-content: space-between;">
             <div class="header-info">
                 <h2 style="color: #ffff; font-size: 20px; font-weight: 500;">@Localizer["Popular-Event"]</h2>
-                <p style="color: #8D8D8D;">@Localizer["Bangkok"]</p>
             </div>
             <div class="header-btn" style="align-self: flex-end;">
                 <a href="/events/View-all-Event" class="btn-seemore"
                     style="background-color: transparent; border-radius: 20px; border: 1px solid #8D8D8D; padding: 5px 10px; color: #8D8D8D; font-size: 14px; text-decoration: none;">@Localizer["View-all"]</a>
             </div>
         </div>
-        <div class="event-grid"
-            style="display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: 1fr; gap: 40px;">
+        <div class="event-grid">
             @foreach (var eventItem in Model.Events)
             {
-                <a asp-page="Index-Event" asp-route-tuid="@eventItem.Id"
-                    style="position: relative; top: 0; width: 200px; text-decoration: none; transition: top ease 0.3s;">
-                    <div class="event-card" style="width: 100%; display: flex; flex-direction: column;">
-                        <img src="/events/image?id=@eventItem.Id" alt="Event image"
-                            style="width: 200px; height: 200px; border-radius: 20px; object-fit: cover;">
+                <a asp-page="Index-Event" asp-route-tuid="@eventItem.Id">
+                    <div class="event-card" >
+                        <img src="/events/image?id=@eventItem.Id" alt="Event image">
                         <div class="event-info"
                             style="display: flex; flex-direction: column; width: 100%; margin-top: 5px;">
                             <h3
@@ -73,15 +68,12 @@
                     style="background-color: transparent; border-radius: 20px; border: 1px solid #8D8D8D; padding: 5px 10px; color: #8D8D8D; font-size: 14px; text-decoration: none;">@Localizer["View-all"]</a>
             </div>
         </div>
-        <div class="event-grid"
-            style="display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: 1fr; gap: 40px;">
+        <div class="event-grid">
             @foreach (var eventItem in Model.UpcomingEvents)
             {
-                <a asp-page="Index-Event" asp-route-tuid="@eventItem.Id"
-                    style="position: relative; top: 0; width: 200px; text-decoration: none; transition: top ease 0.3s;">
-                    <div class="event-card" style="width: 100%; display: flex; flex-direction: column;">
-                        <img src="/events/image?id=@eventItem.Id" alt="Event image"
-                            style="width: 200px; height: 200px; border-radius: 20px; object-fit: cover;">
+                <a asp-page="Index-Event" asp-route-tuid="@eventItem.Id">
+                    <div class="event-card" >
+                        <img src="/events/image?id=@eventItem.Id" alt="Event image">
                         <div class="event-info"
                             style="display: flex; flex-direction: column; width: 100%; margin-top: 5px;">
                             <h3
@@ -97,24 +89,23 @@
     </section>
     <section class="categories-section" style="margin-top: 40px;">
         <h2 style="color: #ffff; font-size: 20px; font-weight: 500; margin-bottom: 20px;">เลือกตามหมวดหมู่</h2>
-        <div class="category-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+        <div class="category-grid" >
             @foreach (var Tag in Model.Tags)
             {
                 <a href="#" style="text-decoration: none;">
-                    <div class="category-card"
-                        style="height: 100%; background: linear-gradient(45deg, #000480,#A8007B ); padding: 1.5rem; border-radius: 20px; cursor: pointer; transition: 0.3s;">
-                        <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem; color: #8D8D8D;">
+                    <div class="category-card">
+                        <div class="icon" style="font-size: 2rem;  color: #8D8D8D;">
                             <img src="@Url.Page("/Tags/Tag-Event", "Image", new { tuid = Tag.Id })" alt="Tag"
                                 style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
                         </div>
                         @if (currentCulture == "th")
                         {
-                            <h3 style="color: #EAEAEA; font-size: 16px; font-weight: 500; margin-bottom: 0.25rem;">
+                            <h3 style="color: #EAEAEA; font-size: 16px; font-weight: 500; margin: 0px;">
                                 @Tag.NameTH</h3>
                         }
                         else
                         {
-                            <h3 style="color: #EAEAEA; font-size: 16px; font-weight: 500; margin-bottom: 0.25rem;">
+                            <h3 style="color: #EAEAEA; font-size: 16px; font-weight: 500; margin: 0px;">
                                 @Tag.NameEN</h3>
                         }
                         <p style="color: #8D8D8D; font-size: 14px;">@Tag.Events.Count Event</p>
@@ -123,4 +114,3 @@
             }
         </div>
     </section>
-</main>

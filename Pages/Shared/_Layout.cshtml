@@ -42,6 +42,9 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+
+    <link rel="stylesheet" asp-append-version="true" href="/styles/styles.css" />
+
     <script asp-append-version="true" src="/scripts/alma.js" defer></script>
     <script asp-append-version="true" src="/scripts/ajax-fetch.js" defer></script>
     <script asp-append-version="true" asp-src-include="@(ViewContext.View.Path).js" defer></script>
@@ -51,7 +54,7 @@
 </head>
 
 <body>
-    <nav class="flex items-center justify-between pt-3 pb-4 mx-4 mt-0 sm:mx-8 sm:py-6">
+    <nav class="navbar" >
         <a href="/" class="block">
             <img src="/images/banner/banner-272x99.avif" width="75" height="27" alt="alma">
         </a>
@@ -126,8 +129,9 @@
             </div>
         }
     </nav>
-    @RenderBody()
+    <div style=" width: 100%; padding: 60px 10px; min-height: 100vh; max-width: 1300px; ">
+        @RenderBody()
+    </div>
     <div id="toast-container"></div>
 </body>
-
 </html>
