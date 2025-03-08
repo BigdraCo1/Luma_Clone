@@ -21,16 +21,4 @@
     <data name="Unfollow" xml:space="preserve">
         <value>เลิกติดตาม</value>
     </data>
-    <data name="FollowSuccess" xml:space="preserve">
-        <value>ติดตามสำเร็จแล้ว</value>
-    </data>
-    <data name="FollowFail" xml:space="preserve">
-        <value>การติดตามไม่สำเร็จ</value>
-    </data>
-    <data name="UnfollowSuccess" xml:space="preserve">
-        <value>เลิดติดตามสำเร็จแล้ว</value>
-    </data>
-    <data name="UnfollowFail" xml:space="preserve">
-        <value>การเลิกติดตามไม่สำเร็จ</value>
-    </data>
 </root>

@@ -1,5 +1,4 @@
 @page
-@using System.Web
 @model alma.Pages.Events.ViewEventModel
 
 @{
@@ -69,7 +68,7 @@
             </div>
         </div>
         <h2 class="text-lg text-white">@Localizer["AboutEvent"]</h2>
-        <pre class="mb-8 text-gray-200 text-wrap">@Model.Event.Description</pre>
+        <pre class="mb-8 text-gray-200 break-all text-wrap">@Model.Event.Description</pre>
         <h2 class="text-lg text-white">@Localizer["Location"]</h2>
         <p class="text-gray-200">@Model.Event.LocationTitle, @Model.Event.LocationSubtitle</p>
         <p class="text-gray-200">@Model.Event.LocationDescription</p>
@@ -123,7 +122,7 @@
             } else if (Model.Event.RegistrationStartAt > ThDateTime.Now()) {
                 <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
                     @Icon.Inline("clock-alert", stroke: "rgb(229 231 235)")
-                    <p class="text-gray-200">@Localizer["TooEarlyToRegister"]</p>
+                    <p class="text-gray-200">@Localizer["TooEarlyToRegister"] : @Formatter.FormatDateTime(Model.Event.RegistrationStartAt)</p>
                 </div>
             } else if (Model.Event.RegistrationEndAt < ThDateTime.Now()) {
                 <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
@@ -134,10 +133,10 @@
                 <div class="border-2 border-gray-300 rounded-b-xl">
                     <div class="flex items-center justify-center gap-2">
                         @if (Model.Event.AutomaticApproval) {
-                            @Icon.Inline("lock-open", stroke: "rgb(229 231 235)")
+                            @Icon.Inline("circle-check", stroke: "rgb(229 231 235)")
                             <p class="text-gray-200">@Localizer["NoApprovalRequired"]</p>
                         } else {
-                            @Icon.Inline("lock", stroke: "rgb(229 231 235)")
+                            @Icon.Inline("user-check", stroke: "rgb(229 231 235)")
                             <p class="text-gray-200">@Localizer["ApprovalRequired"]</p>
                         }
                     </div>
@@ -155,7 +154,10 @@
                                 }
                             </ol>
                         } 
-                        <button type="submit" class="flex items-center px-16 py-2 mx-auto text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl">@Localizer["Register"]</button>
+                        <button type="submit" class="flex items-center gap-2 px-16 py-2 mx-auto text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl">
+                            @Icon.Inline("notebook-pen", stroke: "rgb(229 231 235)")
+                            @Localizer["Register"]
+                        </button>
                     </form>
                 </div>
             }
@@ -164,7 +166,7 @@
 </div>
 @if (Model.User == Model.Event.Host && Model.PendingRegistrations.Count > 0) {
     <div class="px-4 mx-auto sm:px-16 max-w-320">
-        <h2 class="mb-4 text-lg text-white">@Localizer["PendingRegistrations"]</h2>
+        <h2 class="mb-4 text-lg text-white last-child:hidden">@Localizer["PendingRegistrations"]</h2>
         @if (Model.Event.Questions.Count == 0) {
             <div id="registration-cards-container" class="flex flex-col gap-4">
                 @foreach (var registration in Model.PendingRegistrations) {

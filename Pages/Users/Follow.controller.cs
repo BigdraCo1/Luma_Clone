@@ -9,8 +9,9 @@ using alma.Utils;
 namespace alma.Pages.Users;
 
 [IgnoreAntiforgeryToken(Order = 2000)]
-public class FollowModel(IStringLocalizer<SharedResources> sharedLocalizer, DatabaseContext database, ISessionService sessionService) : PageModel {
+public class FollowModel(IStringLocalizer<SharedResources> sharedLocalizer, IStringLocalizer<FollowModel> localizer, DatabaseContext database, ISessionService sessionService) : PageModel {
     private readonly IStringLocalizer _sharedLocalizer = sharedLocalizer;
+    private readonly IStringLocalizer _localizer = localizer;
     private readonly DatabaseContext _database = database;
     private readonly ISessionService _sessionService = sessionService;
 
@@ -29,6 +30,6 @@ public class FollowModel(IStringLocalizer<SharedResources> sharedLocalizer, Data
         user.Following.Add(target);
         await _database.SaveChangesAsync();
 
-        return new EmptyResult();
+        return Redirect(Toast.AppendQueryString($"/users/profile?id={id}", _localizer["FollowSuccess"], null, ToastTypes.Success));
     }
 }

@@ -118,11 +118,14 @@
             <div class="flex items-center gap-4 sm:gap-8">
                 <a href="/events/discover"
                     class="flex items-center gap-1 text-sm font-medium text-white no-underline transition-all hover:scale-105">
-                    @Localizer["Discover"]
                     @Icon.Inline("arrow-up-right")
+                    @Localizer["Discover"]
                 </a>
-                <a href="/auth/sign-in?next=@UrlEncoder.Encode(ContextAccessor.HttpContext.Request.Path)"
-                    class="px-4 py-2 text-sm font-medium text-white no-underline transition-all rounded-full hover:scale-105 bg-bright-red">@Localizer["SignIn"]</a>
+                <a href="/auth/sign-in?next=@UrlEncoder.Encode(ContextAccessor.HttpContext.Request.Path + ContextAccessor.HttpContext.Request.QueryString)"
+                    class="flex items-center gap-1 px-4 py-2 text-sm font-medium text-white no-underline transition-all rounded-full hover:scale-105 bg-bright-red">
+                    @Icon.Inline("log-in", size: "20", strokeWidth: "2.5")
+                    @Localizer["SignIn"]
+                </a>
             </div>
         }
     </nav>

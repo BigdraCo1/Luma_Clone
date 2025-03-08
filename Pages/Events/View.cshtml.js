@@ -73,8 +73,6 @@ function removeCard(userId) {
     if (card === null || card === undefined) {
         return;
     }
-    // card.remove();
-    // return;
     const cardRect = card.getBoundingClientRect();
     const cardX = cardRect.x;
     const cardY = cardRect.y;
@@ -90,6 +88,12 @@ function removeCard(userId) {
     card.addEventListener("animationend", () => {
         card.remove();
     });
+    const cardsLeft = document.querySelectorAll(
+        "#registration-cards-container > .registration-card"
+    ).length;
+    if (cardsLeft === 0) {
+        registrationCardsContainer.remove();
+    }
 }
 
 /**

@@ -36,6 +36,10 @@
     display: block !important;
 }
 
+.last-child\:hidden:last-child {
+    display: none;
+}
+
 .no-child\:mt-0:not(:has(*)) {
     margin-top: 0px !important;
 }
@@ -62,6 +66,10 @@
 
 .aspect-square {
     aspect-ratio: 1 / 1;
+}
+
+.break-all {
+    word-break: break-all;
 }
 
 .bg-black {
@@ -122,6 +130,14 @@
 
 .bg-gray-900 {
     background-color: rgb(17 24 39);
+}
+
+.bg-gray-950 {
+    background-color: rgb(3 7 18);
+}
+
+.bg-gray-900\/75 {
+    background-color: rgba(17 24 39 / 0.75);
 }
 
 .bg-green-600 {

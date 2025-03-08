@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
 
 using alma.Enums;
@@ -16,6 +17,7 @@ public class ProfileModel(IStringLocalizer<SharedResources> sharedLocalizer, Dat
 
     public User CurrentUser { get; set; } = default!;
     public User DisplayedUser { get; set; } = default!;
+    public int EventParticipationCount { get; set; }
 
     public async Task<IActionResult> OnGetAsync(string id) {
         var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
@@ -23,7 +25,7 @@ public class ProfileModel(IStringLocalizer<SharedResources> sharedLocalizer, Dat
             return Redirect(Toast.AppendQueryString("/auth/sign-in", _sharedLocalizer["YouMustSignIn"], _sharedLocalizer["YouMustSignInDescription"], ToastTypes.Error));
         }
 
-        await _database.Entry(currentUser).Collection(u => u.Followers).LoadAsync();
+        await _database.Entry(currentUser).Collection(u => u.Following).LoadAsync();
 
         CurrentUser = currentUser;
 
@@ -33,6 +35,7 @@ public class ProfileModel(IStringLocalizer<SharedResources> sharedLocalizer, Dat
         }
 
         DisplayedUser = displayedUser;
+        EventParticipationCount = await _database.UserParticipatesEvent.CountAsync(upe => upe.UserId == displayedUser.Id && upe.Status == ParticipationStatus.Accepted);
 
         return Page();
     }

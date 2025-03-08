@@ -21,16 +21,4 @@
     <data name="Unollow" xml:space="preserve">
         <value>Unfollow</value>
     </data>
-    <data name="FollowSuccess" xml:space="preserve">
-        <value>Followed successfully</value>
-    </data>
-    <data name="FollowFail" xml:space="preserve">
-        <value>Failed to follow</value>
-    </data>
-    <data name="UnfollowSuccess" xml:space="preserve">
-        <value>Unfollowed successfully</value>
-    </data>
-    <data name="UnfollowFail" xml:space="preserve">
-        <value>Failed to unfollow</value>
-    </data>
 </root>

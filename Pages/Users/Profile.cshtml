@@ -19,11 +19,15 @@
                 <div class="flex items-center sm:hidden">
                     @if (Model.CurrentUser.Following.Contains(Model.DisplayedUser))
                     {
-                        <button onclick="unfollow(event)" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Unfollow"]</button>
+                        <form action="/users/unfollow?id=@Model.DisplayedUser.Id" method="POST">
+                            <button type="submit" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Unfollow"]</button>
+                        </form>
                     }
                     else
                     {
-                        <button onclick="follow(event)" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Follow"]</button>
+                        <form action="/users/follow?id=@Model.DisplayedUser.Id" method="POST">
+                            <button type="submit" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Follow"]</button>
+                        </form>
                     }
                 </div>
             }
@@ -45,7 +49,7 @@
                 <div class="flex items-center gap-2">
                     @Icon.Inline("ticket", size: "20", stroke: "rgb(209 213 219)")
                     <span class="text-gray-300">@Localizer["ParticipatingEventCountPrefix"]
-                        @Model.DisplayedUser.ParticipatingEvents.Count
+                        @Model.EventParticipationCount
                         @Localizer["ParticipatingEventCountSuffix"]</span>
                 </div>
             </div>
@@ -54,11 +58,15 @@
                 <div class="items-center hidden sm:flex">
                     @if (Model.CurrentUser.Following.Contains(Model.DisplayedUser))
                     {
-                        <button onclick="unfollow(event)" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Unfollow"]</button>
+                        <form action="/users/unfollow?id=@Model.DisplayedUser.Id" method="POST">
+                            <button type="submit" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Unfollow"]</button>
+                        </form>
                     }
                     else
                     {
-                        <button onclick="follow(event)" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Follow"]</button>
+                        <form action="/users/follow?id=@Model.DisplayedUser.Id" method="POST">
+                            <button type="submit" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Follow"]</button>
+                        </form>
                     }
                 </div>
             }
