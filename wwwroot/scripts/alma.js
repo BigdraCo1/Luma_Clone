@@ -5,7 +5,7 @@
 /**
  * @type Record<string, string>
  */
-const messages = {
+const languageSwitchMessages = {
     en: "Language set to English",
     th: "เปลี่ยนเป็นภาษาไทยเรียบร้อยแล้ว"
 };
@@ -17,7 +17,7 @@ const messages = {
 function setLanguage(language) {
     document.cookie = `lang=${language};path=/;max-age=31536000;SameSite=Lax`;
     const url = new URL(window.location.href);
-    url.searchParams.set("toast-message", messages[language]);
+    url.searchParams.set("toast-message", languageSwitchMessages[language]);
     url.searchParams.set("toast-type", "success");
     location.replace(url);
 }
@@ -26,11 +26,11 @@ function setLanguage(language) {
 //               Toasts              //
 ///////////////////////////////////////
 
-const infoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`;
-const successIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>`;
-const warningIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`;
-const errorIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>`;
-const closeIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`;
+const toastInfoIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-info"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>`;
+const toastSuccessIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>`;
+const toastWarningIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-triangle-alert"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>`;
+const toastErrorIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-x"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>`;
+const toastCloseIcon = `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`;
 
 let toastContainerInit = document.querySelector("#toast-container");
 
@@ -49,43 +49,40 @@ const toastContainer = toastContainerInit;
 const toasts = [];
 
 /**
- * @type Record<string, { start?: DOMRect, end?: DOMRect }>
+ * @type {Record<string, { start?: DOMRect, end?: DOMRect }>}
  */
-let rects = {};
+let toastRects = {};
 
 /**
  * Start recording the initial position of the toasts
  */
-function flipStart() {
-    rects = {};
+function toastFlipStart() {
+    toastRects = {};
     for (const toast of toasts) {
         const rect = toast.getBoundingClientRect();
-        if (!rects[toast.id]) {
-            rects[toast.id] = {};
-        }
-        rects[toast.id].start = rect;
+        toastRects[toast.id] = { start: rect };
     }
 }
 
 /**
  * End recording the final position of the toasts
  */
-function flipEnd() {
+function toastFlipEnd() {
     for (const toast of toasts) {
         const rect = toast.getBoundingClientRect();
-        if (!rects[toast.id]) {
+        if (!toastRects[toast.id]) {
             continue;
         }
-        rects[toast.id].end = rect;
+        toastRects[toast.id].end = rect;
     }
 }
 
 /**
  * Play the flip animation
  */
-function flipPlay() {
+function toastFlipPlay() {
     for (const toast of toasts) {
-        const rect = rects[toast.id];
+        const rect = toastRects[toast.id];
         if (!rect || !rect.start || !rect.end) {
             continue;
         }
@@ -146,14 +143,14 @@ function removeToast(id, onclick = false) {
     const toastRect = toast.getBoundingClientRect();
     const toastX = toastRect.x;
     const toastY = toastRect.y;
-    flipStart();
+    toastFlipStart();
     toastContainer.removeChild(toast);
     toast.style.position = "fixed";
     toast.style.left = `${toastX}px`;
     toast.style.top = `${toastY}px`;
     body.appendChild(toast);
-    flipEnd();
-    flipPlay();
+    toastFlipEnd();
+    toastFlipPlay();
     toast.classList.add("removing");
     toast.addEventListener("animationend", () => {
         toast.remove();
@@ -183,18 +180,21 @@ function showToast(message, description, type) {
     toast.id = id;
     const icon =
         type === "info"
-            ? infoIcon
+            ? toastInfoIcon
             : type === "success"
-            ? successIcon
+            ? toastSuccessIcon
             : type === "warning"
-            ? warningIcon
+            ? toastWarningIcon
             : type === "error"
-            ? errorIcon
-            : infoIcon;
+            ? toastErrorIcon
+            : toastInfoIcon;
 
     const parser = new DOMParser();
     const typeIconElement = parser.parseFromString(icon, "image/svg+xml").documentElement;
-    const closeIconElement = parser.parseFromString(closeIcon, "image/svg+xml").documentElement;
+    const closeIconElement = parser.parseFromString(
+        toastCloseIcon,
+        "image/svg+xml"
+    ).documentElement;
 
     const header = document.createElement("div");
     header.classList.add("toast-header");
@@ -218,11 +218,11 @@ function showToast(message, description, type) {
         toast.appendChild(descriptionDiv);
     }
 
-    flipStart();
+    toastFlipStart();
     toasts.push(toast);
     toastContainer.appendChild(toast);
-    flipEnd();
-    flipPlay();
+    toastFlipEnd();
+    toastFlipPlay();
     setTimeout(() => {
         removeToast(id);
     }, 5000);

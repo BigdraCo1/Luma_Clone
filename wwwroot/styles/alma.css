@@ -36,6 +36,10 @@
     display: block !important;
 }
 
+.no-child\:mt-0:not(:has(*)) {
+    margin-top: 0px !important;
+}
+
 .\-bottom-4 {
     bottom: -1rem;
 }
@@ -278,6 +282,10 @@ input::-webkit-calendar-picker-indicator {
     flex-grow: 1;
 }
 
+.flex-shrink-999 {
+    flex-shrink: 999;
+}
+
 .flex-shrink {
     flex-shrink: 1;
 }
@@ -368,6 +376,10 @@ input::-webkit-calendar-picker-indicator {
 
 .h-2 {
     height: 0.5rem;
+}
+
+.h-4 {
+    height: 1rem;
 }
 
 .h-24 {
@@ -486,6 +498,14 @@ input::-webkit-calendar-picker-indicator {
     margin: 2rem;
 }
 
+.max-w-64 {
+    max-width: 16rem;
+}
+
+.max-w-96 {
+    max-width: 24rem;
+}
+
 .max-w-120 {
     max-width: 30rem;
 }
@@ -560,6 +580,14 @@ input::-webkit-calendar-picker-indicator {
 
 .ml-8 {
     margin-left: 2rem;
+}
+
+.ml-4 {
+    margin-left: 1rem;
+}
+
+.ml-6 {
+    margin-left: 1.5rem;
 }
 
 .ml-2 {
@@ -702,6 +730,10 @@ body {
 
 .z-50 {
     z-index: 50;
+}
+
+.z-10 {
+    z-index: 10;
 }
 
 .p-0 {
@@ -1139,6 +1171,11 @@ pre {
     animation: scale-fade-out 0.25s ease;
 }
 
+.registration-card.removing {
+    z-index: 9;
+    animation: scale-fade-out 0.25s ease;
+}
+
 .top-24 {
     top: 6rem;
 }
@@ -1375,8 +1412,20 @@ button {
         align-items: center;
     }
 
+    .sm\:flex-grow {
+        flex-grow: 1;
+    }
+
+    .sm\:flex-row {
+        flex-direction: row;
+    }
+
     .sm\:flex-row-reverse {
         flex-direction: row-reverse;
+    }
+
+    .sm\:justify-start {
+        justify-content: flex-start;
     }
 
     .sm\:hidden {

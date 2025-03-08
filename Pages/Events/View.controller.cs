@@ -99,17 +99,19 @@ public class ViewEventModel(IStringLocalizer<SharedResources> sharedLocalizer, I
             Status = evnt.AutomaticApproval ? ParticipationStatus.Accepted : ParticipationStatus.Pending
         });
 
-        foreach (var (questionId, answer) in RegistrationData.Answers) {
-            var question = await _database.Question.FindAsync(questionId);
-            if (question is null) {
-                continue;
+        if (RegistrationData.Answers is not null) {
+            foreach (var (questionId, answer) in RegistrationData.Answers) {
+                var question = await _database.Question.FindAsync(questionId);
+                if (question is null) {
+                    continue;
+                }
+                await _database.Answer.AddAsync(new Answer {
+                    Id = Tuid.Generate(),
+                    Text = answer,
+                    Question = question,
+                    User = user
+                });
             }
-            await _database.Answer.AddAsync(new Answer {
-                Id = Tuid.Generate(),
-                Text = answer,
-                Question = question,
-                User = user
-            });
         }
 
         await _database.SaveChangesAsync();
@@ -119,7 +121,7 @@ public class ViewEventModel(IStringLocalizer<SharedResources> sharedLocalizer, I
 }
 
 public class RegisterEventDto {
-    public Dictionary<string, string> Answers { get; set; } = default!;
+    public Dictionary<string, string>? Answers { get; set; } = default!;
 }
 
 public class Registration {

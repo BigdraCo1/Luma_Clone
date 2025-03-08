@@ -75,4 +75,25 @@
     <data name="Reject" xml:space="preserve">
         <value>ปฏิเสธ</value>
     </data>
+    <data name="RegistrationAcceptSuccessText" xml:space="preserve">
+        <value>อนุมัติการลงทะเบียนเรียบร้อยแล้ว</value>
+    </data>
+    <data name="RegistrationAcceptFailText" xml:space="preserve">
+        <value>ไม่สามารถอนุมัติการลงทะเบียนได้</value>
+    </data>
+    <data name="RegistrationRejectSuccessText" xml:space="preserve">
+        <value>ปฏิเสธการลงทะเบียนเรียบร้อยแล้ว</value>
+    </data>
+    <data name="RegistrationRejectFailText" xml:space="preserve">
+        <value>ไม่สามารถปฏิเสธการลงทะเบียนได้</value>
+    </data>
+    <data name="Others" xml:space="preserve">
+        <value>คน</value>
+    </data>
+    <data name="NoApprovalRequired" xml:space="preserve">
+        <value>การลงทะเบียนแบบเปิด ไม่ต้องได้รับการอนุมัติ</value>
+    </data>
+    <data name="ApprovalRequired" xml:space="preserve">
+        <value>ต้องได้รับการอนุมัติโดยผู้จัดกิจกรรมจึงจะสามารถเข้าร่วมกิจกรรมได้</value>
+    </data>
 </root>

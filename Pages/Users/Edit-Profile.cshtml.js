@@ -6,7 +6,7 @@ const updateAvatarSuccessText =
     document.querySelector("#avatar-update-success-text")?.textContent ??
     "Avatar updated successfully";
 const updateAvatarFailText =
-    document.querySelector("#avatar-update-fail-text")?.textContent ?? "Failed to update avatar:";
+    document.querySelector("#avatar-update-fail-text")?.textContent ?? "Failed to update avatar";
 
 /**
  * @param {MouseEvent} event

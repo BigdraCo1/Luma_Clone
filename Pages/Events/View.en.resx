@@ -52,7 +52,7 @@
         <value>Waiting for approval from host</value>
     </data>
     <data name="RegistrationRejected" xml:space="preserve">
-        <value>Registration Rejected</value>
+        <value>Registration rejected</value>
     </data>
     <data name="RegistrationIsClosed" xml:space="preserve">
         <value>This event is not accepting registration</value>
@@ -74,5 +74,26 @@
     </data>
     <data name="Reject" xml:space="preserve">
         <value>Reject</value>
+    </data>
+    <data name="RegistrationAcceptSuccessText" xml:space="preserve">
+        <value>Registration accepted</value>
+    </data>
+    <data name="RegistrationAcceptFailText" xml:space="preserve">
+        <value>Failed to accept registration</value>
+    </data>
+    <data name="RegistrationRejectSuccessText" xml:space="preserve">
+        <value>Registraion rejected</value>
+    </data>
+    <data name="RegistrationRejectFailText" xml:space="preserve">
+        <value>Failed to reject registration</value>
+    </data>
+    <data name="Others" xml:space="preserve">
+        <value>Others</value>
+    </data>
+    <data name="NoApprovalRequired" xml:space="preserve">
+        <value>Open registration, no approval required</value>
+    </data>
+    <data name="ApprovalRequired" xml:space="preserve">
+        <value>Approval required, your registration is subject to approval by the host</value>
     </data>
 </root>

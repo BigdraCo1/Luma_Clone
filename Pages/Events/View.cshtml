@@ -6,9 +6,13 @@
     ViewData["Title"] = Model.Event.Name;
 }
 
+<span id="registration-accept-success-text" class="hidden">@Localizer["RegistrationAcceptSuccessText"]</span>
+<span id="registration-accept-fail-text" class="hidden">@Localizer["RegistrationAcceptFailText"]</span>
+<span id="registration-reject-success-text" class="hidden">@Localizer["RegistrationRejectSuccessText"]</span>
+<span id="registration-reject-fail-text" class="hidden">@Localizer["RegistrationRejectFailText"]</span>
 <div class="flex flex-wrap px-4 mx-auto mb-12 sm:px-16 max-w-320 gap-x-16 gap-y-4">
-    <div class="w-96">
-        <img src="/events/image?id=@Model.Event.Id" alt="Event image" class="object-cover w-64 h-64 sm:w-96 sm:h-96 rounded-xl">
+    <div class="mx-auto w-96 sm:mx-4">
+        <img src="/events/image?id=@Model.Event.Id" alt="Event image" class="object-cover w-full h-auto sm:w-96 sm:h-96 rounded-xl aspect-square">
         <p class="text-white">@Localizer["HostedBy"]</p>
         <a href="/users/profile?id=@Model.Event.Host.Id" class="flex items-center gap-2 no-underline">
             <img src="/users/avatar?id=@Model.Event.Host.Id" alt="Host avatar" width="24px" height="24px"
@@ -33,20 +37,23 @@
                 <a href="https://@Model.Event.Host.WebsiteUrl" class="transition-all hover:scale-110">@Icon.Inline("globe", stroke: "rgb(209 213 219)")</a>
             }
         </a>
-        <p class="text-white">@Localizer["JoinedCountPrefix"] @Model.AcceptedParticipants.Count @Localizer["JoinedCountSuffix"]</p>
-        <div class="flex items-center">
-        @foreach (var participant in Model.AcceptedParticipants.Take(5)) {
-            <a href="/users/profile?id=@participant.Id" class="p-0 m-0 -mr-4">
-                <img src="/users/avatar?id=@participant.Id" alt="Participant avatar" width="24px" height="24px"
-                    class="object-cover border-4 border-gray-900 rounded-full">
-            </a>
-        }
+        <p class="mb-0 text-white">@Localizer["JoinedCountPrefix"] @Model.AcceptedParticipants.Count @Localizer["JoinedCountSuffix"]</p>
+        <div class="flex items-center mt-4 mb-4 no-child:mt-0">
+            @foreach (var participant in Model.AcceptedParticipants.Take(5)) {
+                <a href="/users/profile?id=@participant.Id" class="w-8 h-8 p-0 m-0 -mr-4">
+                    <img src="/users/avatar?id=@participant.Id" alt="Participant avatar" width="24px" height="24px"
+                        class="object-cover border-4 border-gray-900 rounded-full">
+                </a>
+            }
+            @if (Model.AcceptedParticipants.Count > 5) {
+                <span class="ml-6 text-gray-200">+ @(Model.AcceptedParticipants.Count - 5) @Localizer["Others"]</span>
+            }
         </div>
     </div>
     <div class="flex-grow w-96">
-        <h1 class="text-white">@Model.Event.Name</h1>
+        <h1 class="mt-0 text-white">@Model.Event.Name</h1>
         <div class="flex flex-wrap mb-8 gap-x-16 gap-y-4">
-            <div class="flex items-center w-48 gap-2">
+            <div class="flex items-center flex-grow w-48 gap-2 max-w-96">
                 @Icon.Inline("calendar-clock", size: "48", stroke: "rgb(229 231 235)")
                 <div>
                     <span class="block mb-1 font-semibold text-gray-200">@Localizer["Date"] @Formatter.FormatDate(Model.Event.StartAt)</span>
@@ -124,22 +131,33 @@
                     <p class="text-gray-200">@Localizer["TooLateToRegister"]</p>
                 </div>
             } else {
-                <form method="POST" class="gap-2 p-4 border-2 border-gray-300 rounded-b-xl">
-                    @if (Model.Event.Questions.Count > 0) {
-                    <p class="mt-0 text-white">@Localizer["RegistrationQuestions"]</p>
-                    <ol class="text-gray-200">
-                        @foreach (var question in Model.Event.Questions.OrderBy(q => q.Number)) {
-                            <li>
-                                <div class="flex flex-col flex-grow mb-4">
-                                    <label for="@question.Id" class="mb-2 text-gray-200">@question.Text</label>
-                                    <input type="text" id="@question.Id" asp-for="RegistrationData.Answers[question.Id]" placeholder="@Localizer["YourAnswer"]" required class="px-4 py-2 text-base text-gray-200 bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200">
-                                </div>
-                            </li>
+                <div class="border-2 border-gray-300 rounded-b-xl">
+                    <div class="flex items-center justify-center gap-2">
+                        @if (Model.Event.AutomaticApproval) {
+                            @Icon.Inline("lock-open", stroke: "rgb(229 231 235)")
+                            <p class="text-gray-200">@Localizer["NoApprovalRequired"]</p>
+                        } else {
+                            @Icon.Inline("lock", stroke: "rgb(229 231 235)")
+                            <p class="text-gray-200">@Localizer["ApprovalRequired"]</p>
                         }
-                    </ol>
-                    } 
-                    <button type="submit" class="flex items-center px-16 py-2 mx-auto text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl">@Localizer["Register"]</button>
-                </form>
+                    </div>
+                    <form method="POST" class="gap-2 p-4 pt-1">
+                        @if (Model.Event.Questions.Count > 0) {
+                            <p class="mt-0 text-white">@Localizer["RegistrationQuestions"]</p>
+                            <ol class="text-gray-200">
+                                @foreach (var question in Model.Event.Questions.OrderBy(q => q.Number)) {
+                                    <li>
+                                        <div class="flex flex-col flex-grow mb-4">
+                                            <label for="@question.Id" class="mb-2 text-gray-200">@question.Text</label>
+                                            <input type="text" id="@question.Id" asp-for="RegistrationData.Answers![question.Id]" placeholder="@Localizer["YourAnswer"]" required class="px-4 py-2 text-base text-gray-200 bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200">
+                                        </div>
+                                    </li>
+                                }
+                            </ol>
+                        } 
+                        <button type="submit" class="flex items-center px-16 py-2 mx-auto text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl">@Localizer["Register"]</button>
+                    </form>
+                </div>
             }
         </div>
     </div>
@@ -147,39 +165,63 @@
 @if (Model.User == Model.Event.Host && Model.PendingRegistrations.Count > 0) {
     <div class="px-4 mx-auto sm:px-16 max-w-320">
         <h2 class="mb-4 text-lg text-white">@Localizer["PendingRegistrations"]</h2>
-        <div class="flex flex-col gap-8">
-            @foreach (var registration in Model.PendingRegistrations) {
-                <div id="registration-@registration.User.Id" class="px-4 py-4 bg-gray-900 sm:px-8 rounded-xl">
-                    <a href="/users/profile?id=@registration.User.Id" class="flex items-center gap-2 font-semibold text-gray-200 no-underline">
-                        <img src="/users/avatar?id=@registration.User.Id" alt="Participant avatar" width="24px" height="24px"
-                            class="object-cover rounded-full">
-                        @registration.User.Name
-                    </a>
-                    <ol class="mt-2 text-gray-200">
-                        @foreach (var questionAnswer in registration.QuestionAnswers) {
-                            <li>
-                                <div class="flex flex-col">
-                                    <p class="text-gray-200">@questionAnswer.Question.Text</p>
-                                    <div class="flex">
-                                        <input type="text" value="@questionAnswer.Answer.Text" class="flex-grow w-0 px-4 py-2 text-base text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" readonly>
-                                    </div>
-                                </div>
-                            </li>
-                        }
-                    </ol>
-                    <div class="flex items-center justify-end gap-4">
-                        <button class="flex items-center gap-2 px-4 py-2 text-base text-gray-200 transition-all bg-red-700 border-none hover:scale-105 rounded-xl" onclick="rejectRegistration('@registration.User.Id')">
-                            @Icon.Inline("circle-x", stroke: "rgb(229 231 235)")
-                            @Localizer["Reject"]
-                        </button>
-                        <button class="flex items-center gap-2 px-4 py-2 text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl" onclick="acceptRegistration('@registration.User.Id')">
-                            @Icon.Inline("circle-check", stroke: "rgb(229 231 235)")
-                            @Localizer["Accept"]
-                        </button>
+        @if (Model.Event.Questions.Count == 0) {
+            <div id="registration-cards-container" class="flex flex-col gap-4">
+                @foreach (var registration in Model.PendingRegistrations) {
+                    <div id="registration-@registration.User.Id" class="z-10 flex flex-col justify-between gap-4 px-4 py-4 bg-gray-900 sm:items-center sm:flex-row registration-card sm:px-8 rounded-xl">
+                        <a href="/users/profile?id=@registration.User.Id" class="flex items-center w-full gap-2 font-semibold text-gray-200 no-underline sm:flex-grow sm:w-0">
+                            <img src="/users/avatar?id=@registration.User.Id" alt="Participant avatar" width="24px" height="24px"
+                                class="flex-shrink-0 object-cover rounded-full">
+                            <span class="flex-grow w-0 overflow-hidden text-ellipsis text-nowrap">@registration.User.Name</span>
+                        </a>
+                        <div class="flex items-center justify-end gap-4">
+                            <button class="flex items-center gap-2 px-4 py-2 text-base text-gray-200 transition-all bg-red-700 border-none hover:scale-105 rounded-xl" onclick="rejectRegistration(event, '@Model.Event.Id', '@registration.User.Id')">
+                                @Icon.Inline("circle-x", stroke: "rgb(229 231 235)")
+                                @Localizer["Reject"]
+                            </button>
+                            <button class="flex items-center gap-2 px-4 py-2 text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl" onclick="acceptRegistration(event, '@Model.Event.Id', '@registration.User.Id')">
+                                @Icon.Inline("circle-check", stroke: "rgb(229 231 235)")
+                                @Localizer["Accept"]
+                            </button>
+                        </div>
                     </div>
-                </div>
-            }
-        </div>
+                }
+            </div>
+        } else {
+            <div id="registration-cards-container" class="flex flex-col gap-4">
+                @foreach (var registration in Model.PendingRegistrations) {
+                    <div id="registration-@registration.User.Id" class="z-10 px-4 py-4 bg-gray-900 registration-card sm:px-8 rounded-xl">
+                        <a href="/users/profile?id=@registration.User.Id" class="flex items-center gap-2 font-semibold text-gray-200 no-underline">
+                            <img src="/users/avatar?id=@registration.User.Id" alt="Participant avatar" width="24px" height="24px"
+                                class="object-cover rounded-full">
+                            @registration.User.Name
+                        </a>
+                        <ol class="mt-2 text-gray-200">
+                            @foreach (var questionAnswer in registration.QuestionAnswers) {
+                                <li>
+                                    <div class="flex flex-col">
+                                        <p class="text-gray-200">@questionAnswer.Question.Text</p>
+                                        <div class="flex">
+                                            <input type="text" value="@questionAnswer.Answer.Text" class="flex-grow w-0 px-4 py-2 text-base text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" readonly>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ol>
+                        <div class="flex items-center justify-end gap-4">
+                            <button class="flex items-center gap-2 px-4 py-2 text-base text-gray-200 transition-all bg-red-700 border-none hover:scale-105 rounded-xl" onclick="rejectRegistration(event, '@Model.Event.Id', '@registration.User.Id')">
+                                @Icon.Inline("circle-x", stroke: "rgb(229 231 235)")
+                                @Localizer["Reject"]
+                            </button>
+                            <button class="flex items-center gap-2 px-4 py-2 text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl" onclick="acceptRegistration(event, '@Model.Event.Id', '@registration.User.Id')">
+                                @Icon.Inline("circle-check", stroke: "rgb(229 231 235)")
+                                @Localizer["Accept"]
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
     </div>
 }
 @if (Model.User == Model.Event.Host) {
