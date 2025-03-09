@@ -15,4 +15,10 @@
     <data name="PastEvents" xml:space="preserve">
         <value>Past events</value>
     </data>
+    <data name="Subscribe" xml:space="preserve">
+        <value>Subscribe</value>
+    </data>
+    <data name="Unsubscribe" xml:space="preserve">
+        <value>Unsubscribe</value>
+    </data>
 </root>

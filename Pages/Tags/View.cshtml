@@ -23,6 +23,20 @@
             </div>
             <hr>
             <p class="text-gray-200">@tagDescription</p>
+            @if (Model.User is not null && Model.User.FollowedTags.Contains(Model.Tag))
+            {
+                <form action="/tags/unsubscribe?id=@Model.Tag.Id" method="POST">
+                    <button type="submit"
+                        class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Unsubscribe"]</button>
+                </form>
+            }
+            else
+            {
+                <form action="/tags/subscribe?id=@Model.Tag.Id" method="POST">
+                    <button type="submit"
+                        class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Subscribe"]</button>
+                </form>
+            }
         </div>
         <img src="/tags/image?id=@Model.Tag.Id" alt="Tag Image"
             class="object-cover w-full h-auto sm:w-96 sm:h-96 max-w-96 rounded-xl">

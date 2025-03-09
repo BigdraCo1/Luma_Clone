@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="UnsubscribeSuccess" xml:space="preserve">
+        <value>Unsubcribed successfully</value>
+    </data>
+</root>
