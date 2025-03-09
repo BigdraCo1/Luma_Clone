@@ -100,7 +100,7 @@
         <div class="category-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
             @foreach (var Tag in Model.Tags)
             {
-                <a href="#" style="text-decoration: none;">
+                <a href="/tags/Index-Tag?tuid=@Tag.Id" style="text-decoration: none;">
                     <div class="category-card"
                         style="height: 100%; background: linear-gradient(45deg, #000480,#A8007B ); padding: 1.5rem; border-radius: 20px; cursor: pointer; transition: 0.3s;">
                         <div class="icon" style="font-size: 2rem; margin-bottom: 0.5rem; color: #8D8D8D;">

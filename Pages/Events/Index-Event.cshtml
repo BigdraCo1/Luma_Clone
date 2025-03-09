@@ -198,8 +198,11 @@
                     style="padding-bottom: 5px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px;">
                     <p style="color: #EAEAEA;">@Localizer["Location"]</p>
                 </div>
-                <textarea id="eventLocation" class="info-text"
-                    style="width: 100%; min-height: 50px; resize: none; overflow-y: hidden; background-color: transparent; color: #eaeaea; border: none; padding: 10px; outline: none; pointer-events: none; font-size: 14px;">@Event.LocationDescription</textarea>
+<div id="eventLocation" class="info-text"
+    style="width: 100%; min-height: 50px; background-color: transparent; color: #eaeaea; border: none; padding: 10px; outline: none; pointer-events: none; font-size: 14px;">
+    <p><b>@Event.LocationTitle</b></p>
+    <p>@Event.LocationDescription</p>
+</div>
                 <iframe
                     src="@Event.LocationGMapUrl"
                     width="600" height="450" style="border:0; margin-bottom: 10px; border-radius: 20px;"

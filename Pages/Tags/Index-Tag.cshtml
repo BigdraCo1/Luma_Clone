@@ -1,0 +1,74 @@
+@page
+@model alma.Pages.Tags.IndexTagModel
+
+@using System.Globalization;
+
+@{
+    ViewData["Title"] = "Tag";
+    var currentCulture = CultureInfo.CurrentCulture.Name;
+}
+
+<div style="max-width: 1300px; margin: 60px auto 0 auto; padding: 10px; display: grid; gap: 20px;">
+    <section style="max-width: 1300px; padding: 20px; display: flex; justify-content: space-between; gap: 40px;">
+        <div style="display: flex; flex-direction: column; justify-content: center; max-width: 600px;">
+            @if (currentCulture == "th"){
+                <h1 style="color: #ffff; font-size: 48px; font-weight: bold; margin-bottom: 20px; margin-top: 20px;">
+                    <img src="@Url.Page("/Tags/Tag-Event", "Image", new { tuid = @Model.currentTag.Id })" alt="Tag"
+                        style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; vertical-align: middle;">
+                    @Model.currentTag.NameTH
+                </h1>
+            } else {
+                <h1 style="color: #ffff; font-size: 48px; font-weight: bold; margin-bottom: 20px; margin-top: 20px;">
+                    <img src="@Url.Page("/Tags/Tag-Event", "Image", new { tuid = @Model.currentTag.Id })" alt="Tag"
+                        style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover; vertical-align: middle;">
+                    @Model.currentTag.NameEN
+                </h1>
+            }
+            <div style="display: flex; gap: 24px; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); color: #8d8d8d; font-size: 16px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" style="width: 16px; height: 16px;"><path fill="currentColor" fill-rule="evenodd" d="M4.129.5c.4 0 .726.325.726.726v.75c.618-.024 1.324-.024 2.124-.024h2.042c.8 0 1.506 0 2.124.024v-.75a.726.726 0 0 1 1.452 0v.894c.72.136 1.337.391 1.84.895.583.582.833 1.315.95 2.187.113.839.113 1.905.113 3.229v.59c0 1.323 0 2.39-.113 3.229-.117.871-.367 1.605-.95 2.187-.582.583-1.316.833-2.187.95-.839.113-1.906.113-3.23.113H6.98c-1.323 0-2.39 0-3.23-.113-.87-.117-1.604-.367-2.186-.95-.583-.582-.833-1.316-.95-2.187C.5 11.411.5 10.344.5 9.02v-.589c0-1.324 0-2.39.113-3.23.117-.87.367-1.604.95-2.186.503-.504 1.12-.76 1.84-.895v-.894c0-.401.325-.726.726-.726m-1.54 3.541c.268-.268.644-.442 1.354-.538.731-.098 1.7-.1 3.09-.1h1.935c1.389 0 2.358.002 3.089.1.71.096 1.086.27 1.354.538s.442.644.538 1.354q.053.402.073.911H1.978c.014-.342.037-.642.073-.911.096-.71.27-1.086.538-1.354m-.637 3.717v1.21c0 1.389.001 2.358.1 3.089.095.71.27 1.086.537 1.354.268.267.644.442 1.354.538.731.098 1.7.1 3.09.1h1.935c1.389 0 2.358-.002 3.089-.1.71-.096 1.086-.27 1.354-.538s.442-.644.538-1.354c.098-.731.1-1.7.1-3.09v-.483l-.001-.726z"></path></svg>
+                    <span>@Model.currentTag.Events.Count @Localizer["Events"]</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" style="width: 16px; height: 16px;"><path fill="currentColor" fill-rule="evenodd" d="M9.75 1a.75.75 0 1 0 0 1.5c1.112 0 1.942.826 1.942 1.989 0 .561-.193.895-.431 1.218l-.107.14-.32.442a1.74 1.74 0 0 0-.296.939c0 .769.366 1.297.847 1.65.38.279.86.467 1.236.614h.001l.121.048c.444.176.756.318.969.506.168.149.288.338.288.704a.75.75 0 1 0 1.5 0c0-.808-.313-1.402-.794-1.827-.437-.387-.99-.611-1.411-.778l-.09-.036c-.427-.169-.719-.284-.931-.44-.168-.124-.235-.232-.235-.441 0-.003 0-.009.006-.027a.6.6 0 0 1 .058-.111c.054-.086.107-.154.181-.25l.185-.244c.339-.46.723-1.104.723-2.108C13.192 2.522 11.715 1 9.75 1m-3.429.75c-2.129 0-3.75 1.622-3.75 3.75 0 1.083.42 1.775.793 2.271l.203.263.208.282c.081.126.082.171.082.184 0 .25-.086.388-.292.537-.246.178-.582.308-1.052.491l-.106.041c-.47.183-1.072.424-1.546.836-.519.451-.86 1.083-.86 1.952 0 .681.31 1.224.765 1.622.435.38 1.004.634 1.591.81 1.176.353 2.655.46 3.966.46s2.789-.107 3.965-.46c.587-.176 1.156-.43 1.591-.81.455-.398.765-.942.765-1.622 0-.868-.342-1.5-.86-1.952-.474-.413-1.077-.654-1.546-.836l-.106-.041c-.47-.182-.806-.313-1.052-.491-.206-.149-.292-.287-.292-.537 0-.013.001-.057.082-.184a4 4 0 0 1 .208-.282l.203-.263c.373-.497.793-1.189.793-2.271 0-2.128-1.621-3.75-3.75-3.75zM4.071 5.5c0-1.3.95-2.25 2.25-2.25s2.25.95 2.25 2.25c0 .632-.223 1.011-.493 1.371l-.123.159-.35.475c-.16.249-.32.579-.32.995 0 .821.396 1.379.914 1.753.413.298.937.5 1.357.661l.137.053c.494.192.856.353 1.105.57.205.178.345.403.345.82 0 .177-.065.329-.253.494-.208.182-.549.357-1.034.502-.967.29-2.273.397-3.534.397s-2.568-.107-3.534-.397c-.485-.146-.826-.32-1.034-.502-.188-.164-.253-.317-.253-.494 0-.417.141-.642.345-.82.249-.217.611-.378 1.105-.57l.137-.053c.42-.161.944-.363 1.357-.661.517-.374.914-.932.914-1.753 0-.416-.16-.746-.32-.995a7 7 0 0 0-.35-.475l-.123-.159c-.27-.36-.493-.74-.493-1.371z"></path></svg>
+                    <span>@Model.currentTag.Followers.Count @Localizer["Subscribers"]</span>
+                </div>
+            </div>
+            @if (currentCulture == "th") {
+                <p style="font-size: 16px; line-height: 1.8; margin-bottom: 32px; color: #eaeaea;">
+                @Model.currentTag.DescriptionTH
+                </p>
+            } else {
+                <p style="font-size: 16px; line-height: 1.8; margin-bottom: 32px; color: #eaeaea;">
+                @Model.currentTag.DescriptionEN
+                </p>
+            }
+            <a href="#" style="display: flex; justify-content: center; align-items: center; background-color: #ffffff; color: #000000; padding: 12px 24px; border-radius: 24px; text-decoration: none; font-weight: 500; transition: all 0.3s ease;">@Localizer["Subscribe"]</a>
+        </div>
+        <div style="width: 100%; max-width: 400px; border-radius: 20px; aspect-ratio: 1 / 1; object-fit: cover;">
+            <img src="unnamed.jpg" alt="Crypto illustration" style="width: 100%; max-width: 400px; border-radius: 20px; aspect-ratio: 1 / 1; object-fit: cover;">
+        </div>
+    </section>
+    <section style="padding-bottom: 40px;">
+        <div style="display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: 1fr; gap: 40px;">
+            @foreach (var eventItem in Model.currentTag.Events.OrderBy(e => e.StartAt))
+            {
+                <a asp-page="/Events/Index-Event" asp-route-tuid="@eventItem.Id"
+                    style="position: relative; top: 0; width: 200px; text-decoration: none; transition: top ease 0.3s;">
+                    <div class="event-card" style="width: 100%; display: flex; flex-direction: column;">
+                        <img src="/events/image?id=@eventItem.Id" alt="Event image"
+                            style="width: 200px; height: 200px; border-radius: 20px; object-fit: cover;">
+                        <div class="event-info"
+                            style="display: flex; flex-direction: column; width: 100%; margin-top: 5px;">
+                            <h3
+                                style="color: #EAEAEA; font-size: 16px; font-weight: 500; margin-top: 5px; margin-bottom: 5px;">
+                                @eventItem.Name</h3>
+                            <span style="color: #8D8D8D;">@eventItem.StartAt.ToString("ddd MMM dd, hh:mm tt")</span>
+                            <span style="color: #8D8D8D;">@eventItem.LocationSubtitle</span>
+                        </div>
+                    </div>
+                </a>
+            }
+        </div>
+    </section>
+</div>

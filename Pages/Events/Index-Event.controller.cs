@@ -41,7 +41,6 @@ namespace alma.Pages.Events
 
         public async Task<IActionResult> OnGetAsync(string tuid)
         {
-
             var user = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
             if (user is null)
             {
@@ -64,10 +63,12 @@ namespace alma.Pages.Events
                 return NotFound();
             }
 
-            registered = currentEvent.Participants.Any(p => p.Id == currentUser.Id);
-
-            Status = (await _database.UserAttendEvent
-                .FirstOrDefaultAsync(uae => uae.UserId == currentUser.Id && uae.EventId == tuid))?.Status;
+            if (currentUser != null)
+            {
+                registered = currentEvent.Participants.Any(p => p.Id == currentUser.Id);
+                Status = (await _database.UserAttendEvent
+                    .FirstOrDefaultAsync(uae => uae.UserId == currentUser.Id && uae.EventId == tuid))?.Status;
+            }
 
             GoingAttendees = await _database.UserAttendEvent
                 .Where(uae => uae.EventId == tuid && uae.Status == ParticipantStatus.Going)
@@ -77,18 +78,18 @@ namespace alma.Pages.Events
                     user => user.Id,
                     (uae, user) => user
                 )
-.ToListAsync();
+                .ToListAsync();
 
             DisplayAttendees = await _database.UserAttendEvent
-    .Where(uae => uae.EventId == tuid && uae.Status == ParticipantStatus.Going)
-    .Join(
-        _database.User,
-                uae => uae.UserId,
-        user => user.Id,
+                .Where(uae => uae.EventId == tuid && uae.Status == ParticipantStatus.Going)
+                .Join(
+                    _database.User,
+                    uae => uae.UserId,
+                    user => user.Id,
                     (uae, user) => user
-    )
-    .Take(6)
-    .ToListAsync();
+                )
+                .Take(6)
+                .ToListAsync();
 
             return Page();
         }
@@ -99,15 +100,6 @@ namespace alma.Pages.Events
         public async Task<IActionResult> OnPostAsync()
         {
             var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
-            if (currentUser is null)
-            {
-                return Redirect(Toast.AppendQueryString("/auth/sign-in?next=/events/create", _sharedLocalizer["YouMustSignIn"], _sharedLocalizer["YouMustSignInDescription"], ToastTypes.Error));
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
             currentEvent = await _database.Event
                 .Include(e => e.Tag)
@@ -115,6 +107,16 @@ namespace alma.Pages.Events
                 .Include(e => e.Participants)
                 .Include(e => e.Questions)
                 .FirstOrDefaultAsync(i => i.Id == Register.EventId);
+
+            if (currentUser is null)
+            {
+                return Redirect(Toast.AppendQueryString($"/auth/sign-in?next=/Events/Index-Event?tuid={currentEvent.Id}", _sharedLocalizer["YouMustSignIn"], _sharedLocalizer["YouMustSignInDescription"], ToastTypes.Error));
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return Page();
+            }
 
             if (currentEvent.Participants.Count >= currentEvent.MaxParticipants)
             {
