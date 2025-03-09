@@ -26,6 +26,7 @@ public class ProfileModel(IStringLocalizer<SharedResources> sharedLocalizer, Dat
         }
 
         await _database.Entry(currentUser).Collection(u => u.Following).LoadAsync();
+        await _database.Entry(currentUser).Collection(u => u.Followers).LoadAsync();
 
         CurrentUser = currentUser;
 

@@ -1,0 +1,103 @@
+@page
+@model alma.Pages.Tags.ViewTagModel
+
+
+@{
+    ViewData["Title"] = $"Category - {Model.Tag.NameEN}";
+
+    var culture = CultureInfo.CurrentCulture.Name;
+    var tagName = culture == "th" ? Model.Tag.NameTH : Model.Tag.NameEN;
+    var tagDescription = culture == "th" ? Model.Tag.DescriptionTH : Model.Tag.DescriptionEN;
+}
+
+<div class="px-4 mx-auto sm:px-16 max-w-320">
+    <div class="flex flex-wrap-reverse items-center justify-center mb-4 gap-x-16 gap-y-4">
+        <div class="flex-grow w-96">
+            <div class="flex items-center gap-4 mb-4">
+                @Icon.Inline(Model.Tag.Icon, size: "48", stroke: "white")
+                <h1 class="my-0 text-5xl text-white">@tagName</h1>
+            </div>
+            <div class="flex items-baseline gap-8">
+                <span class="text-gray-200">@Model.Tag.Events.Count @Localizer["Events"]</span>
+                <span class="text-gray-200">@Model.Tag.Followers.Count @Localizer["Subscribers"]</span>
+            </div>
+            <hr>
+            <p class="text-gray-200">@tagDescription</p>
+        </div>
+        <img src="/tags/image?id=@Model.Tag.Id" alt="Tag Image"
+            class="object-cover w-full h-auto sm:w-96 sm:h-96 max-w-96 rounded-xl">
+    </div>
+    <h3 class="mb-0 text-gray-200">@Localizer["ComingSoon"]</h3>
+    <div class="flex flex-col flex-wrap pt-2 mb-4 sm:mb-0 sm:pb-4 gap-x-8 gap-y-4 sm:flex-row">
+        @foreach (var evnt in Model.Tag.Events.Where(e => e.Visibility == Visibility.Public && e.RegistrationEndAt >
+                ThDateTime.Now()).OrderBy(e => e.StartAt))
+        {
+        <a href="/events/view?id=@evnt.Id"
+            class="flex flex-row flex-shrink-0 w-full gap-4 overflow-y-visible no-underline transition-all sm:w-56 sm:flex-col sm:hover:-translate-y-2">
+            <img src="/events/image?id=@evnt.Id" alt="Event Image"
+                class="object-cover w-24 h-24 sm:h-auto sm:w-full aspect-square rounded-xl" />
+            <div class="flex flex-col flex-grow gap-1 overflow-hidden">
+                <span class="h-6 mx-2 overflow-hidden text-gray-200 text-nowrap text-ellipsis">@evnt.Name</span>
+                <div class="flex items-center h-6 gap-2 mx-2 text-gray-400">
+                    @Icon.Inline("calendar-clock", size: "20", stroke: "rgb(156 163 175)", classes: "flex-shrink-0")
+                    <span class="flex-grow w-0 overflow-hidden text-nowrap text-ellipsis">
+                        @Formatter.FormatDateTime(evnt.StartAt)
+                    </span>
+                </div>
+                <div class="flex items-center h-6 gap-2 mx-2 text-gray-400">
+                    @Icon.Inline("map-pinned", size: "20", stroke: "rgb(156 163 175)", classes: "flex-shrink-0")
+                    <span class="flex-grow w-0 overflow-hidden text-nowrap text-ellipsis">
+                        @evnt.LocationTitle, @evnt.LocationSubtitle
+                    </span>
+                </div>
+                <div class="flex items-center h-6 gap-2 mx-2 text-gray-400">
+                    @Icon.Inline("users", size: "20", stroke: "rgb(156 163 175)", classes: "flex-shrink-0")
+                    <span class="flex-grow w-0 overflow-hidden text-nowrap text-ellipsis">
+                        @Database.UserParticipatesEvent.Count(upe
+                                                => upe.EventId == evnt.Id && upe.Status == ParticipationStatus.Accepted)
+                        / @(evnt.MaxParticipants is null ? "∞" : evnt.MaxParticipants)
+                    </span>
+                </div>
+            </div>
+        </a>
+                }
+    </div>
+    <p class="hidden mt-0 mb-4 text-gray-300 prev-child-no-child:block">@Localizer["NoEvents"]</p>
+    <hr>
+    <h3 class="mb-0 text-gray-200">@Localizer["PastEvents"]</h3>
+    <div class="flex flex-col flex-wrap pt-2 mb-4 sm:mb-0 sm:pb-4 gap-x-8 gap-y-4 sm:flex-row">
+        @foreach (var evnt in Model.Tag.Events.Where(e => e.Visibility == Visibility.Public && e.RegistrationEndAt <=
+                ThDateTime.Now()).OrderByDescending(e => e.StartAt))
+        {
+        <a href="/events/view?id=@evnt.Id"
+            class="flex flex-row flex-shrink-0 w-full gap-4 overflow-y-visible no-underline transition-all sm:w-56 sm:flex-col sm:hover:-translate-y-2">
+            <img src="/events/image?id=@evnt.Id" alt="Event Image"
+                class="object-cover w-24 h-24 sm:h-auto sm:w-full aspect-square rounded-xl" />
+            <div class="flex flex-col flex-grow gap-1 overflow-hidden">
+                <span class="h-6 mx-2 overflow-hidden text-gray-200 text-nowrap text-ellipsis">@evnt.Name</span>
+                <div class="flex items-center h-6 gap-2 mx-2 text-gray-400">
+                    @Icon.Inline("calendar-clock", size: "20", stroke: "rgb(156 163 175)", classes: "flex-shrink-0")
+                    <span class="flex-grow w-0 overflow-hidden text-nowrap text-ellipsis">
+                        @Formatter.FormatDateTime(evnt.StartAt)
+                    </span>
+                </div>
+                <div class="flex items-center h-6 gap-2 mx-2 text-gray-400">
+                    @Icon.Inline("map-pinned", size: "20", stroke: "rgb(156 163 175)", classes: "flex-shrink-0")
+                    <span class="flex-grow w-0 overflow-hidden text-nowrap text-ellipsis">
+                        @evnt.LocationTitle, @evnt.LocationSubtitle
+                    </span>
+                </div>
+                <div class="flex items-center h-6 gap-2 mx-2 text-gray-400">
+                    @Icon.Inline("users", size: "20", stroke: "rgb(156 163 175)", classes: "flex-shrink-0")
+                    <span class="flex-grow w-0 overflow-hidden text-nowrap text-ellipsis">
+                        @Database.UserParticipatesEvent.Count(upe
+                                                => upe.EventId == evnt.Id && upe.Status == ParticipationStatus.Accepted)
+                        / @(evnt.MaxParticipants is null ? "∞" : evnt.MaxParticipants)
+                    </span>
+                </div>
+            </div>
+        </a>
+                }
+    </div>
+    <p class="hidden mt-0 mb-4 text-gray-300 prev-child-no-child:block">@Localizer["NoEvents"]</p>
+</div>

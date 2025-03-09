@@ -21,4 +21,13 @@
     <data name="BrowseByCategory" xml:space="preserve">
         <value>ดูตามหมวดหมู่</value>
     </data>
+    <data name="Events" xml:space="preserve">
+        <value>กิจกรรม</value>
+    </data>
+    <data name="NoEvents" xml:space="preserve">
+        <value>ไม่มีกิจกรรม</value>
+    </data>
+    <data name="PastEvents" xml:space="preserve">
+        <value>ผ่านไปแล้ว</value>
+    </data>
 </root>

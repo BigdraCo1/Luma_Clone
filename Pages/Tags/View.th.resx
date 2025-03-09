@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="Events" xml:space="preserve">
+        <value>กิจกรรม</value>
+    </data>
+    <data name="Subscribers" xml:space="preserve">
+        <value>ผู้ติดตาม</value>
+    </data>
+    <data name="ComingSoon" xml:space="preserve">
+        <value>เร็ว ๆ นี้</value>
+    </data>
+    <data name="NoEvents" xml:space="preserve">
+        <value>ไม่มีกิจกรรม</value>
+    </data>
+    <data name="PastEvents" xml:space="preserve">
+        <value>ผ่านไปแล้ว</value>
+    </data>
+</root>

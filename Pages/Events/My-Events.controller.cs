@@ -24,8 +24,8 @@ public class MyEventsModel(IStringLocalizer<SharedResources> sharedLocalizer, Da
         }
 
         Events = await _database.Event
-            .Where(e => e.Host == user && e.StartAt > ThDateTime.Now())
-            .OrderBy(e => e.StartAt)
+            .Where(e => e.Host == user)
+            .OrderByDescending(e => e.StartAt)
             .ToListAsync();
 
         return Page();

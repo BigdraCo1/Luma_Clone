@@ -18,14 +18,14 @@ public class DiscoverEventsModel(DatabaseContext database) : PageModel {
     public string? Query { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync(string? query) {
-        Events = await _database.Event.Where(e => true || e.Visibility == Visibility.Public && e.EndAt > ThDateTime.Now()).ToListAsync();
+        Events = await _database.Event.Where(e => e.Visibility == Visibility.Public).ToListAsync();
 
-        Tags = await _database.Tag.ToListAsync();
+        Tags = await _database.Tag.Include(t => t.Events).ToListAsync();
 
         if (query is not null && query != "") {
             Query = query;
             query = query.ToLower();
-            FilteredEvents = await _database.Event.Where(e => true || e.Visibility == Visibility.Public && e.EndAt > ThDateTime.Now() && (e.Name.ToLower().Contains(query) || e.LocationTitle.ToLower().Contains(query) || e.LocationSubtitle.ToLower().Contains(query) || e.Tag.NameEN.ToLower().Contains(query) || e.Tag.NameTH.ToLower().Contains(query))).ToListAsync();
+            FilteredEvents = await _database.Event.Where(e => e.Visibility == Visibility.Public && (e.Name.ToLower().Contains(query) || e.LocationTitle.ToLower().Contains(query) || e.LocationSubtitle.ToLower().Contains(query) || e.Tag.NameEN.ToLower().Contains(query) || e.Tag.NameTH.ToLower().Contains(query))).ToListAsync();
         }
         return Page();
     }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="Events" xml:space="preserve">
+        <value>Events</value>
+    </data>
+    <data name="Subscribers" xml:space="preserve">
+        <value>Subscribers</value>
+    </data>
+    <data name="ComingSoon" xml:space="preserve">
+        <value>Coming soon</value>
+    </data>
+    <data name="NoEvents" xml:space="preserve">
+        <value>No events</value>
+    </data>
+    <data name="PastEvents" xml:space="preserve">
+        <value>Past events</value>
+    </data>
+</root>
