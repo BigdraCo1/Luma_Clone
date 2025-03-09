@@ -70,7 +70,7 @@ public class OauthRedirectModel(IConfiguration config, IStringLocalizer<OauthRed
                 Avatar = avatar,
                 AvatarType = avatarType,
                 Bio = "",
-                CreatedAt = DateTime.Now
+                CreatedAt = ThDateTime.Now()
             };
 
             await _database.User.AddAsync(newUser);
@@ -91,8 +91,6 @@ public class OauthRedirectModel(IConfiguration config, IStringLocalizer<OauthRed
                                                     // Even after the session expired on the server side
         });
 
-        var url = Toast.AppendQueryString(redirectTo, _localizer["SignInSuccess"], null, ToastTypes.Success);
-
-        return Redirect(url);
+        return Redirect(Toast.AppendQueryString(redirectTo, _localizer["SignInSuccess"], null, ToastTypes.Success));
     }
 }
