@@ -20,6 +20,9 @@ public class Tag {
     public required string DescriptionTH { get; set; }
 
     [Required]
+    public required string Icon { get; set; }
+
+    [Required]
     public required byte[] Image { get; set; }
 
     [Required]

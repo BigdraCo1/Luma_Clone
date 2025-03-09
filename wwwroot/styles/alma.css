@@ -365,6 +365,10 @@ textarea:focus {
     column-gap: 4rem;
 }
 
+.gap-x-8 {
+    column-gap: 2rem;
+}
+
 .gap-y-4 {
     row-gap: 1rem;
 }
@@ -405,6 +409,10 @@ textarea:focus {
     height: 16rem;
 }
 
+.h-6 {
+    height: 1.5rem;
+}
+
 .h-8 {
     height: 2rem;
 }
@@ -415,6 +423,10 @@ textarea:focus {
 
 .h-96 {
     height: 24rem;
+}
+
+.h-128 {
+    height: 32rem;
 }
 
 .h-auto {
@@ -451,6 +463,10 @@ textarea:focus {
 
 .hover\:scale-110:hover {
     transform: scale(1.1);
+}
+
+.hover\:-translate-y-2:hover {
+    transform: translateY(-0.5rem);
 }
 
 .inline {
@@ -641,6 +657,11 @@ textarea:focus {
     margin-top: 2rem;
 }
 
+.mx-2 {
+    margin-right: 0.5rem;
+    margin-left: 0.5rem;
+}
+
 .mx-4 {
     margin-right: 1rem;
     margin-left: 1rem;
@@ -749,6 +770,14 @@ body {
 
 .overflow-x-scroll {
     overflow-x: scroll;
+}
+
+.overflow-y-visible {
+    overflow-y: visible;
+}
+
+.overflow-y-scroll {
+    overflow-y: scroll;
 }
 
 .p-0 {
@@ -1439,6 +1468,10 @@ button {
         flex-grow: 1;
     }
 
+    .sm\:flex-col {
+        flex-direction: column;
+    }
+
     .sm\:flex-row {
         flex-direction: row;
     }
@@ -1455,12 +1488,24 @@ button {
         display: none;
     }
 
+    .sm\:h-auto {
+        height: auto;
+    }
+
+    .sm\:w-full {
+        width: 100%;
+    }
+
     .sm\:w-0 {
         width: 0px;
     }
 
     .sm\:w-48 {
         width: 12rem;
+    }
+
+    .sm\:w-56 {
+        width: 14rem;
     }
 
     .sm\:h-48 {
@@ -1481,6 +1526,14 @@ button {
 
     .sm\:pb-12 {
         padding-bottom: 3rem;
+    }
+
+    .sm\:pb-2 {
+        padding-bottom: 0.5rem;
+    }
+
+    .sm\:pb-4 {
+        padding-bottom: 1rem;
     }
 
     .sm\:p-8 {
@@ -1525,6 +1578,18 @@ button {
 
     .sm\:mb-4 {
         margin-bottom: 1rem;
+    }
+
+    .sm\:mb-0 {
+        margin-bottom: 0px;
+    }
+
+    .sm\:overflow-x-scroll {
+        overflow-x: scroll;
+    }
+
+    .sm\:hover\:-translate-y-2:hover {
+        transform: translateY(-0.5rem);
     }
 
     .user-action-content {

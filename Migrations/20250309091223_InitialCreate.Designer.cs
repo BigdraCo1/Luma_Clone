@@ -11,8 +11,8 @@ using alma.Services;
 namespace alma.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20250307153429_AddNumberToQuestionForSorting")]
-    partial class AddNumberToQuestionForSorting
+    [Migration("20250309091223_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -213,6 +213,10 @@ namespace alma.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("DescriptionTH")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Icon")
                         .IsRequired()
                         .HasColumnType("TEXT");
 

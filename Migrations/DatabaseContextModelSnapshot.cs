@@ -213,6 +213,10 @@ namespace alma.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Icon")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<byte[]>("Image")
                         .IsRequired()
                         .HasColumnType("BLOB");

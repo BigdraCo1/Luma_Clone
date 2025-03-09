@@ -20,6 +20,7 @@ namespace alma.Migrations
                     NameTH = table.Column<string>(type: "TEXT", nullable: false),
                     DescriptionEN = table.Column<string>(type: "TEXT", nullable: false),
                     DescriptionTH = table.Column<string>(type: "TEXT", nullable: false),
+                    Icon = table.Column<string>(type: "TEXT", nullable: false),
                     Image = table.Column<byte[]>(type: "BLOB", nullable: false),
                     ImageType = table.Column<string>(type: "TEXT", nullable: false)
                 },
@@ -167,6 +168,7 @@ namespace alma.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
+                    Number = table.Column<int>(type: "INTEGER", nullable: false),
                     Text = table.Column<string>(type: "TEXT", nullable: false),
                     EventId = table.Column<string>(type: "TEXT", nullable: false)
                 },

@@ -37,7 +37,7 @@
                         <span
                             class="flex-grow w-0 overflow-hidden text-gray-200 text-nowrap text-ellipsis">@Database.UserParticipatesEvent.Count(upe
                                                         => upe.EventId == evnt.Id && upe.Status == ParticipationStatus.Accepted)
-                            / @evnt.MaxParticipants</span>
+                            / @(evnt.MaxParticipants is null ? "∞" : evnt.MaxParticipants)</span>
                     </div>
                     <div class="hidden gap-4 mt-2 sm:flex">
                         <a href="/events/view?id=@evnt.Id"

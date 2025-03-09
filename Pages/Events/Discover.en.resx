@@ -18,4 +18,7 @@
     <data name="ComingSoonEvents" xml:space="preserve">
         <value>Coming soon</value>
     </data>
+    <data name="BrowseByCategory" xml:space="preserve">
+        <value>Browse by category</value>
+    </data>
 </root>

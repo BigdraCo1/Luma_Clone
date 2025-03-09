@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 
 using alma.Services;
+using alma.Utils;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -53,6 +54,8 @@ builder.Services.AddScoped<ISessionService, SessionService>();
 builder.Services.AddScoped<IIconService, IconService>();
 
 var app = builder.Build();
+
+DatabaseInitilaizer.Seed(app);
 
 if (app.Environment.IsDevelopment()) {
     app.UseDeveloperExceptionPage();
