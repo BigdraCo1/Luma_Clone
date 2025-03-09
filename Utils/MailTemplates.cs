@@ -312,7 +312,6 @@ public class MailTemplates {
                             overflow: hidden;
                             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
                         ">
-                        <!-- Header -->
                         <tr>
                             <td style="padding: 20px; background-color: #000480; color: white">
                                 <h1 style="margin: 0; font-size: 20px; font-weight: 500">
@@ -324,8 +323,6 @@ public class MailTemplates {
                                 </h2>
                             </td>
                         </tr>
-
-                        <!-- Date and Location -->
                         <tr>
                             <td style="padding: 20px">
                                 <table
@@ -411,8 +408,6 @@ public class MailTemplates {
                                 </table>
                             </td>
                         </tr>
-
-                        <!-- Event Description -->
                         <tr>
                             <td style="padding: 0 20px 20px">
                                 <pre
@@ -426,8 +421,6 @@ public class MailTemplates {
                                 >
                             </td>
                         </tr>
-
-                        <!-- CTA Button -->
                         <tr>
                             <td style="padding: 0 20px 30px; text-align: center">
                                 <a
@@ -446,8 +439,6 @@ public class MailTemplates {
                                 </a>
                             </td>
                         </tr>
-
-                        <!-- Footer -->
                         <tr>
                             <td
                                 style="
