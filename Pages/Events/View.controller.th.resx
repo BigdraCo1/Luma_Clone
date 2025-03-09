@@ -3,4 +3,16 @@
     <data name="RegistrationSuccessful" xml:space="preserve">
         <value>ลงทะเบียนเข้ากิจกรรมสำเร็จแล้ว</value>
     </data>
+    <data name="RegistrationAccepted" xml:space="preserve">
+        <value>การลงทะเบียนได้รับการอนุมัติแล้ว</value>
+    </data>
+    <data name="YouHaveBeenAccepted" xml:space="preserve">
+        <value>คุณได้รับการอนุมัติแล้ว</value>
+    </data>
+    <data name="WelcomeMessage" xml:space="preserve">
+        <value>ยินดีต้อนรับสู่กิจกรรม! เตรียมตัวพบกับประสบการณ์สุดพิเศษและช่วงเวลาที่น่าจดจำไปด้วยกัน </value>
+    </data>
+    <data name="EventPage" xml:space="preserve">
+        <value>หน้ากิจกรรม</value>
+    </data>
 </root>

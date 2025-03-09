@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <data name="CreateEvent" xml:space="preserve">
-        <value>Create Event</value>
+    <data name="EditEvent" xml:space="preserve">
+        <value>Edit Event</value>
     </data>
     <data name="EventImage" xml:space="preserve">
         <value>Event cover image</value>

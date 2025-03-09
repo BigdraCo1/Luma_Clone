@@ -15,19 +15,21 @@ using alma.Utils;
 
 namespace alma.Pages.Events;
 
-public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer, IStringLocalizer<CreateEventModel> localizer, DatabaseContext database, ISessionService sessionService) : PageModel {
+public class CreateEventModel(IConfiguration config, IStringLocalizer<SharedResources> sharedLocalizer, IStringLocalizer<CreateEventModel> localizer, DatabaseContext database, ISessionService sessionService, IMailService mailService) : PageModel {
+    private readonly IConfiguration _config = config;
     private readonly IStringLocalizer _sharedLocalizer = sharedLocalizer;
     private readonly IStringLocalizer _localizer = localizer;
     private readonly DatabaseContext _database = database;
     private readonly ISessionService _sessionService = sessionService;
+    private readonly IMailService _mailService = mailService;
 
     [BindProperty]
     public CreateEventDto Event { get; set; } = default!;
     public IEnumerable<SelectListItem> Tags { get; set; } = default!;
 
     public async Task<IActionResult> OnGetAsync() {
-        var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
-        if (currentUser is null) {
+        var user = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
+        if (user is null) {
             return Redirect(Toast.AppendQueryString("/auth/sign-in?next=/events/create", _sharedLocalizer["YouMustSignIn"], _sharedLocalizer["YouMustSignInDescription"], ToastTypes.Error));
         }
 
@@ -40,8 +42,8 @@ public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer,
     }
 
     public async Task<IActionResult> OnPostAsync() {
-        var currentUser = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
-        if (currentUser is null) {
+        var user = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
+        if (user is null) {
             return Redirect(Toast.AppendQueryString("/auth/sign-in?next=/events/create", _sharedLocalizer["YouMustSignIn"], _sharedLocalizer["YouMustSignInDescription"], ToastTypes.Error));
         }
 
@@ -65,7 +67,7 @@ public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer,
         var googleMapEmbedUrlMatch = Regex.Match(Event.LocationGMapUrl, @"<iframe src=""(?<url>https://www.google.com/maps/embed\?pb=[^""]+)"".*?></iframe>");
         var googleMapEmbedUrl = HtmlEncoder.Decode(googleMapEmbedUrlMatch.Groups["url"].Value);
 
-        var newEvent = new Event {
+        var evnt = new Event {
             Id = Tuid.Generate(),
             Name = Event.Name,
             Description = Event.Description,
@@ -85,8 +87,8 @@ public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer,
             LocationDescription = Event.LocationDescription,
             LocationGMapUrl = googleMapEmbedUrl,
             Tag = tag,
-            Host = currentUser,
-            HostId = currentUser.Id
+            Host = user,
+            HostId = user.Id
         };
 
         if (Event.Questions is not null) {
@@ -96,16 +98,41 @@ public class CreateEventModel(IStringLocalizer<SharedResources> sharedLocalizer,
                     Id = Tuid.Generate(),
                     Number = i,
                     Text = question,
-                    Event = newEvent
+                    Event = evnt
                 });
                 i++;
             }
         }
 
-        await _database.Event.AddAsync(newEvent);
+        await _database.Event.AddAsync(evnt);
         await _database.SaveChangesAsync();
 
-        return Redirect(Toast.AppendQueryString($"/events/view?id={newEvent.Id}", _localizer["CreateEventSuccessful"], null, "success"));
+        if (evnt.Visibility == Visibility.Public) {
+            List<User> usersToNotify = await _database.User
+                .Where(u => u.Id != user.Id && (u.FollowedTags.Any(t => t == tag) || u.Following.Any(f => f == user)))
+                .ToListAsync();
+
+            string[] addresses = [.. usersToNotify.Select(u => u.Email)];
+
+            _ = Task.Run(() => _mailService.SendEmailAsync(addresses, _localizer["NewEvent"], MailTemplates.subscription, new Dictionary<string, string> {
+                    {"newEvent", _localizer["NewEvent"]},
+                    {"by", _localizer["By"]},
+                    {"from", user.Name},
+                    {"name", evnt.Name},
+                    {"startAtDate", Formatter.FormatDate(evnt.StartAt)},
+                    {"startAtTime", Formatter.FormatTime(evnt.StartAt)},
+                    {"endAtTime", Formatter.FormatTime(evnt.EndAt)},
+                    {"locationTitle", evnt.LocationTitle},
+                    {"locationSubtitle", evnt.LocationSubtitle},
+                    {"description", evnt.Description},
+                    {"eventUrl", $"{_config.GetValue<string>("Public:Origin")}/events/view?id={evnt.Id}"},
+                    {"viewEvent", _localizer["ViewEvent"]}
+                }
+            ));
+        }
+
+
+        return Redirect(Toast.AppendQueryString($"/events/view?id={evnt.Id}", _localizer["CreateEventSuccessful"], null, "success"));
     }
 }
 

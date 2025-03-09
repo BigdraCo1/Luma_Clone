@@ -10,11 +10,13 @@ using alma.Utils;
 
 namespace alma.Pages.Events;
 
-public class ViewEventModel(IStringLocalizer<SharedResources> sharedLocalizer, IStringLocalizer<ViewEventModel> localizer, DatabaseContext database, ISessionService sessionService) : PageModel {
+public class ViewEventModel(IConfiguration config, IStringLocalizer<SharedResources> sharedLocalizer, IStringLocalizer<ViewEventModel> localizer, DatabaseContext database, ISessionService sessionService, IMailService mailService) : PageModel {
+    private readonly IConfiguration _config = config;
     private readonly IStringLocalizer _sharedLocalizer = sharedLocalizer;
     private readonly IStringLocalizer _localizer = localizer;
     private readonly DatabaseContext _database = database;
     private readonly ISessionService _sessionService = sessionService;
+    private readonly IMailService _mailService = mailService;
 
     public new User? User { get; set; }
     public Event Event { get; set; } = default!;
@@ -88,7 +90,7 @@ public class ViewEventModel(IStringLocalizer<SharedResources> sharedLocalizer, I
             return Redirect(Toast.AppendQueryString($"/auth/sign-in?next=/events/view?id={id}", _sharedLocalizer["YouMustSignIn"], _sharedLocalizer["YouMustSignInDescription"], ToastTypes.Error));
         }
 
-        var evnt = await _database.Event.FindAsync(id);
+        var evnt = await _database.Event.Include(e => e.Host).FirstOrDefaultAsync(e => e.Id == id);
         if (evnt is null) {
             return NotFound();
         }
@@ -115,6 +117,23 @@ public class ViewEventModel(IStringLocalizer<SharedResources> sharedLocalizer, I
         }
 
         await _database.SaveChangesAsync();
+
+        if (evnt.AutomaticApproval) {
+            _ = Task.Run(() => _mailService.SendEmailAsync([user.Email], _localizer["RegistrationAccepted"], MailTemplates.accepted, new Dictionary<string, string> {
+                { "accepted", _localizer["YouHaveBeenAccepted"] },
+                { "name", evnt.Name },
+                { "startAtDate", Formatter.FormatDate(evnt.StartAt) },
+                { "startAtTime", Formatter.FormatTime(evnt.StartAt) },
+                { "endAtTime", Formatter.FormatTime(evnt.EndAt) },
+                { "locationTitle", evnt.LocationTitle },
+                { "locationSubtitle", evnt.LocationSubtitle },
+                { "welcomeMessage", _localizer["WelcomeMessage"] },
+                { "eventUrl", $"{_config.GetValue<string>("Public:Origin")}/events/view?id={evnt.Id}" },
+                { "eventPage", _localizer["EventPage"] }
+            },
+            icsContent: Ics.GenerateIcsString(evnt.Name, evnt.Description, evnt.StartAt, evnt.EndAt, evnt.LocationTitle, evnt.Host.Email, user.Email)
+            ));
+        }
 
         return Redirect(Toast.AppendQueryString($"/events/view?id={id}", _localizer["RegistrationSuccessful"], null, ToastTypes.Success));
     }

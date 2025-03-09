@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <data name="CreateEvent" xml:space="preserve">
-        <value>สร้างกิจกรรม</value>
+    <data name="EditEvent" xml:space="preserve">
+        <value>แก้ไขกิจกรรม</value>
     </data>
     <data name="EventImage" xml:space="preserve">
         <value>ภาพกิจกรรม</value>

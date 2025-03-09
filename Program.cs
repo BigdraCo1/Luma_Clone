@@ -50,6 +50,7 @@ localizationOptions.RequestCultureProviders.Insert(0, new CustomRequestCulturePr
 builder.Services.AddHttpClient();
 builder.Services.AddHttpContextAccessor();
 
+builder.Services.AddScoped<IMailService, MailService>();
 builder.Services.AddScoped<ISessionService, SessionService>();
 builder.Services.AddScoped<IIconService, IconService>();
 

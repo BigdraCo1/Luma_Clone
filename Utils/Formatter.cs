@@ -48,4 +48,12 @@ public class Formatter {
         culture.DateTimeFormat.Calendar = new GregorianCalendar();
         return date.ToString("d MMM yyyy - HH:mm", culture);
     }
+
+    public static string FormatString(string input, Dictionary<string, string> data) {
+        var output = input;
+        foreach (var key in data.Keys) {
+            output = output.Replace($"{{{key}}}", data[key]);
+        }
+        return output;
+    }
 }

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="RegistrationRejected" xml:space="preserve">
+        <value>Registration Rejected</value>
+    </data>
+    <data name="YouHaveBeenRejected" xml:space="preserve">
+        <value>You have been rejected</value>
+    </data>
+    <data name="RejectMessage" xml:space="preserve">
+        <value>We regret to inform you that your registration has been rejected. Please contact the event organizer for more information.</value>
+    </data>
+</root>

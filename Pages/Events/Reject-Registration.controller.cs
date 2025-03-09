@@ -10,10 +10,13 @@ using alma.Utils;
 namespace alma.Pages.Events;
 
 [IgnoreAntiforgeryToken(Order = 2000)]
-public class RejectRegistrationModel(IStringLocalizer<SharedResources> sharedLocalizer, DatabaseContext database, ISessionService sessionService) : PageModel {
+public class RejectRegistrationModel(IConfiguration config, IStringLocalizer<SharedResources> sharedLocalizer, IStringLocalizer<RejectRegistrationModel> localizer, DatabaseContext database, ISessionService sessionService, IMailService mailService) : PageModel {
+    private readonly IConfiguration _config = config;
     private readonly IStringLocalizer _sharedLocalizer = sharedLocalizer;
+    private readonly IStringLocalizer _localizer = localizer;
     private readonly DatabaseContext _database = database;
     private readonly ISessionService _sessionService = sessionService;
+    private readonly IMailService _mailService = mailService;
 
     public async Task<IActionResult> OnPostAsync(string eventId, string userId) {
         var user = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
@@ -46,6 +49,12 @@ public class RejectRegistrationModel(IStringLocalizer<SharedResources> sharedLoc
 
         participation.Status = ParticipationStatus.Rejected;
         await _database.SaveChangesAsync();
+
+        _ = Task.Run(() => _mailService.SendEmailAsync([user.Email], _localizer["RegistrationRejected"], MailTemplates.accepted, new Dictionary<string, string> {
+                { "rejected", _localizer["YouHaveBeenRejected"] },
+                { "name", evnt.Name },
+                { "rejectMessage", _localizer["RejectMessage"] },
+            }));
 
         return new EmptyResult();
     }

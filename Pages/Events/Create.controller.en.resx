@@ -3,4 +3,13 @@
     <data name="CreateEventSuccessful" xml:space="preserve">
         <value>Event created successfully</value>
     </data>
+    <data name="NewEvent" xml:space="preserve">
+        <value>New Event</value>
+    </data>
+    <data name="By" xml:space="preserve">
+        <value>By</value>
+    </data>
+    <data name="ViewEvent" xml:space="preserve">
+        <value>View event</value>
+    </data>
 </root>

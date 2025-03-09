@@ -10,10 +10,13 @@ using alma.Utils;
 namespace alma.Pages.Events;
 
 [IgnoreAntiforgeryToken(Order = 2000)]
-public class AcceptRegistrationModel(IStringLocalizer<SharedResources> sharedLocalizer, DatabaseContext database, ISessionService sessionService) : PageModel {
+public class AcceptRegistrationModel(IConfiguration config, IStringLocalizer<SharedResources> sharedLocalizer, IStringLocalizer<AcceptRegistrationModel> localizer, DatabaseContext database, ISessionService sessionService, IMailService mailService) : PageModel {
+    private readonly IConfiguration _config = config;
     private readonly IStringLocalizer _sharedLocalizer = sharedLocalizer;
+    private readonly IStringLocalizer _localizer = localizer;
     private readonly DatabaseContext _database = database;
     private readonly ISessionService _sessionService = sessionService;
+    private readonly IMailService _mailService = mailService;
 
     public async Task<IActionResult> OnPostAsync(string eventId, string userId) {
         var user = await _sessionService.GetUserAsync(HttpContext.Request.Cookies["session"] ?? "");
@@ -46,6 +49,21 @@ public class AcceptRegistrationModel(IStringLocalizer<SharedResources> sharedLoc
 
         participation.Status = ParticipationStatus.Accepted;
         await _database.SaveChangesAsync();
+
+        _ = Task.Run(() => _mailService.SendEmailAsync([user.Email], _localizer["RegistrationAccepted"], MailTemplates.accepted, new Dictionary<string, string> {
+                { "accepted", _localizer["YouHaveBeenAccepted"] },
+                { "name", evnt.Name },
+                { "startAtDate", Formatter.FormatDate(evnt.StartAt) },
+                { "startAtTime", Formatter.FormatTime(evnt.StartAt) },
+                { "endAtTime", Formatter.FormatTime(evnt.EndAt) },
+                { "locationTitle", evnt.LocationTitle },
+                { "locationSubtitle", evnt.LocationSubtitle },
+                { "welcomeMessage", _localizer["WelcomeMessage"] },
+                { "eventUrl", $"{_config.GetValue<string>("Public:Origin")}/events/view?id={evnt.Id}" },
+                { "eventPage", _localizer["EventPage"] }
+            },
+            icsContent: Ics.GenerateIcsString(evnt.Name, evnt.Description, evnt.StartAt, evnt.EndAt, evnt.LocationTitle, user.Email, target.Email)
+            ));
 
         return new EmptyResult();
     }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="RegistrationAccepted" xml:space="preserve">
+        <value>Registration Accepted</value>
+    </data>
+    <data name="YouHaveBeenAccepted" xml:space="preserve">
+        <value>You have been accepted</value>
+    </data>
+    <data name="WelcomeMessage" xml:space="preserve">
+        <value>Welcome to the event! Prepare to have a special experience that will last a lifetime.</value>
+    </data>
+    <data name="EventPage" xml:space="preserve">
+        <value>Event page</value>
+    </data>
+</root>
