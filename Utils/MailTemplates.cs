@@ -286,7 +286,7 @@ public class MailTemplates {
 """;
 
     public const string subscription = """
-< !DOCTYPE html>
+<!DOCTYPE html>
 <html lang="th">
     <head>
         <meta charset="UTF-8" />
@@ -421,6 +421,7 @@ public class MailTemplates {
                                         color: #333;
                                         font-size: 16px;
                                         line-height: 1.6;
+                                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
                                     ">{description}</pre
                                 >
                             </td>
