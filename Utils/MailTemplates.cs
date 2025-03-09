@@ -319,7 +319,7 @@ public class MailTemplates {
                                     {newEvent}
                                 </h1>
                                 <p style="margin: 0; color: #a3a3a3">{by} {from}</p>
-                                <h2 style="margin: 10px 0 0; font-size: 28px; font-weight: 700">
+                                <h2 style="margin: 10px 0 0; font-size: 28px; font-weight: 700; color: white">
                                     {name}
                                 </h2>
                             </td>
