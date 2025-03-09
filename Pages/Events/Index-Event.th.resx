@@ -36,5 +36,11 @@
     </data>
             <data name="RejectResponse" xml:space="preserve">
     <value>เสียใจด้วยโฮสต์ได้ปติเสษคำขอของคุณ</value>
+        </data>
+                <data name="AnswerQuestions" xml:space="preserve">
+    <value>ตอบคำถาม</value>
+    </data>
+            <data name="SubmitAnswers" xml:space="preserve">
+    <value>ส่งคำตอบ</value>
     </data>
 </root>

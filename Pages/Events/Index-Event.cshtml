@@ -18,25 +18,27 @@
 <input type="hidden" id="currentUser" value="@((currentUser != null) ? "loggedIn" : "loggedOut")" />
 <input type="hidden" id="registered" value="@((registered == true) ? "registered" : "not registered")" />
 
-<div class="main" style="max-width: 1300px; margin-top: 60px; padding: 10px; display: grid; gap: 20px;">
+<link rel="stylesheet" asp-append-version="true" href="/styles/styles.css" />
+
+<div class="Index-Event" >
     <!-- Image section -->
-    <div class="image-section" style="grid-column: 1; grid-row: 1; overflow: hidden;">
+    <div class="image-section">
         <img src="/events/image?id=@Event.Id" alt="Event image" class="event-image"
             style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 20px;">
     </div>
 
     <!-- amount of people section -->
-    <div class="amount-people-section" style="grid-column: 1; grid-row: 2; border-radius: 12px;">
+    <div class="amount-people-section" >
         <div class="Host"
-            style="padding-bottom: 5px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px;">
-            <p style="color: #EAEAEA;">@Localizer["Hosted-By"]</p>
+            style=" border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px;">
+            <p style="margin: 5px 0px; color: #8d8d8d;">@Localizer["Hosted-By"]</p>
         </div>
-        <div class="organizer" style="padding: 10px;">
-            <div class="profile" style="display: flex; align-items: center; justify-content: center; gap: 10px;">
+        <div class="organizer" style="padding: 10px; display: flex; align-items: center; justify-content: space-between; ">
+            <div class="profile" style="display: flex; align-items: center; gap: 10px;">
                 <div class="organizer-avatar"
-                    style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    style="width: 40px; height: 40px; border-radius: 50%; aspect-ratio: 1/1; overflow: hidden; display: flex; align-items: center; justify-content: center;">
                     <img src="@Url.Page("/Users/Avatar", "Avatar", new { id = host.Id })" alt="รูปโปรไฟล์"
-                        style="width: 100%; height: 100%; object-fit: cover;">
+                        style="width: 100%; height: 100%; object-fit: cover; ">
                 </div>
                 <p style="color: #EAEAEA;">@host.Username</p>
             </div>
@@ -45,14 +47,14 @@
         </div>
         <div class="registration-status">
             <div class="Host"
-                style="padding-bottom: 5px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px;">
+                style="border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px;">
                 @if (currentCulture == "th")
                 {
-                    <p style="color:#EAEAEA;">ลงทะเบียนแล้ว <strong>@goingAttendees.Count คน</strong></p>
+                    <p style="margin: 5px 0px; color: #8d8d8d;">ลงทะเบียนแล้ว <strong>@goingAttendees.Count คน</strong></p>
                 }
                 else
                 {
-                    <p style="color:#EAEAEA;"><strong>@goingAttendees.Count </strong>going</p>
+                    <p style="margin: 5px 0px; color: #8d8d8d;"><strong>@goingAttendees.Count </strong>going</p>
                 }
             </div>
             <div class="attendees" style="display: flex; align-items: center; gap: 12px;">
@@ -78,13 +80,13 @@
     </div>
 
     <!-- Right column -->
-    <div class="right-column" style="grid-column: 2; grid-row: 1 / span 3; border-radius: 12px; padding: 10px;">
+    <div class="right-column" >
         <div class="title">
-            <h1 class="event-title" style="font-size: 48px; color: #EAEAEA;">@Event.Name</h1>
+            <h1 class="event-title" >@Event.Name</h1>
         </div>
-        <div class="event-details-header" style="display: flex; justify-content: space-between;">
+        <div class="event-details-header" >
             <div class="date"
-                style="display: flex; padding: 10px; justify-content: start; align-items: center; width: 50%;">
+                style="display: flex; padding: 10px; justify-content: start; align-items: center; width: 100%;">
                 <div class="icon" style="padding: 15px; color: #8d8d8d;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -97,12 +99,12 @@
                     </svg>
                 </div>
                 <div class="info">
-                    <p style="color: #EAEAEA;">@Event.StartAt.ToString("dddd, MMMM dd")</p>
-                    <p style="color: #EAEAEA;">@Event.StartAt.ToString("HH:mm") - @Event.EndAt.ToString("HH:mm")</p>
+                    <p style="margin:2.5px; color: #EAEAEA;">@Event.StartAt.ToString("dddd dd MMMM yyyy")</p>
+                    <p style="margin:2.5px; color: #8d8d8d;">@Event.StartAt.ToString("HH:mm") - @Event.EndAt.ToString("HH:mm")</p>
                 </div>
             </div>
             <div class="place"
-                style="display: flex; padding: 10px; justify-content: start; align-items: center; width: 50%;">
+                style="display: flex; padding: 10px; justify-content: start; align-items: center; width: 100%;">
                 <div class="icon" style="padding: 15px; color: #8d8d8d;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
@@ -113,81 +115,105 @@
                     </svg>
                 </div>
                 <div class="info">
-                    <p style="color: #EAEAEA;">@Event.LocationTitle</p>
-                    <p style="color: #EAEAEA;">@Event.LocationSubtitle</p>
+                    <p style="margin:2.5px; color: #EAEAEA;">@Event.LocationTitle</p>
+                    <p style="margin:2.5px; color: #8d8d8d;">@Event.LocationSubtitle</p>
                 </div>
             </div>
         </div>
-        <div class="register" style="border: solid #eaeaea 1px; border-radius: 20px; overflow: hidden;">
+        <div class="">
+        
             @if (registered) {
-                <div class="top"
-                    style="display: flex; color: #000480; justify-content: space-between; padding: 5px 20px; background-color: #eaeaea;">
-                    <div class="organizer-avatar"
-                    style="width: 40px; height: 40px; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center;">
-                    <img src="@Url.Page("/Users/Avatar", "Avatar", new { id = currentUser.Id })" alt="รูปโปรไฟล์"
-                        style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                    <h4>@Localizer["ThankYouforJoining"]</h4>
-                </div>
                 @if (status == "GOING") {
-                <div class="bottom" style="padding: 10px;">
-                    <p style="padding: 0px 5px 10px 15px; color: #eaeaea;">@Localizer["EnjoyEvent"]</p>
-                </div>
+                    <div class="register" style="background: rgba(255,255,255,0.1); padding:20px; border-radius: 20px; overflow: hidden; color: rgb(34 197 94);">
+                        <div style="margin:10px 10px; display :flex; align-items: center; gap:10px" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+                            <h3 style="margin:0px; ">@Localizer["Joining"]</h3>
+                        </div>
+                        <p style="margin:10px; color: #eaeaea;">@Localizer["EnjoyEvent"]</p>    
+                    </div>
                 } else if (status == "PENDING") {
-                <div class="bottom" style="padding: 10px;">
-                    <p style="padding: 0px 5px 10px 15px; color: #eaeaea;">@Localizer["PendingRequest"]</p>
-                </div>
+                    <div class="register" style="background: rgba(255,255,255,0.1); padding:20px; border-radius: 20px; overflow: hidden; color: rgb(245 158 11);">
+                        <div style="margin:10px 10px; display :flex; align-items: center; gap:10px" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-loader"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></svg>
+                            <h3 style="margin:0px; ">@Localizer["PendingRequest"]</h3>
+                        </div>
+                        <p style="margin:10px; color: #eaeaea;"></p>    
+                    </div>
                 } else {
-                <div class="bottom" style="padding: 10px;">
-                    <p style="padding: 0px 5px 10px 15px; color: #eaeaea;">@Localizer["RejectResponse"]</p>
-                </div>
+                    <div class="register" style="background: rgba(255,255,255,0.1); padding:20px; border-radius: 20px; overflow: hidden; color: rgb(239, 68, 68);">
+                        <div style="margin:10px 10px; display :flex; align-items: center; gap:10px" >
+                            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-octagon-x"><path d="m15 9-6 6"/><path d="M2.586 16.726A2 2 0 0 1 2 15.312V8.688a2 2 0 0 1 .586-1.414l4.688-4.688A2 2 0 0 1 8.688 2h6.624a2 2 0 0 1 1.414.586l4.688 4.688A2 2 0 0 1 22 8.688v6.624a2 2 0 0 1-.586 1.414l-4.688 4.688a2 2 0 0 1-1.414.586H8.688a2 2 0 0 1-1.414-.586z"/><path d="m9 9 6 6"/></svg>
+                            <h3 style="margin:0px; ">@Localizer["RejectResponse"]</h3>
+                        </div>
+                        <p style="margin:10px; color: #eaeaea;">@Localizer["RejectText"]</p>    
+                    </div> 
                 }
             }
-            else if (Event.ApprovalType == "Required") {
+            else if (Event.ApprovalType == "manual") {
                 <!-- ต้องได้รับการยืนยัน -->
-                <div class="top"
-                    style="display: flex; color: #000480; justify-content: space-between; padding: 5px 20px; background-color: #eaeaea;">
-                    <h4>@Localizer["Registration"]</h4>
-                </div>
-                <div class="mid"
-                    style="display: flex; justify-content: start; align-items: center; padding: 10px; border-bottom: solid #eaeaea 1px;">
-                    <div class="icon" style="margin: 0px 20px;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-                            class="lucide lucide-user-round-check">
-                            <path d="M2 21a8 8 0 0 1 13.292-6" />
-                            <circle cx="10" cy="8" r="5" />
-                            <path d="m16 19  2 2 4-4" />
-                        </svg>
+                <div class="register" style="border: solid #eaeaea 1px; border-radius: 20px; overflow: hidden;">
+                    <div class="top"
+                        style="display: flex; color: #000480; ; justify-content: space-between; padding: 10px 20px; background-color: #eaeaea;">
+                        <p style="margin:0px;">@Localizer["Registration"]</p>
+                        @if (currentCulture == "th")
+                        {
+                            <p style="margin:0px;">ลงทะเบียนแล้ว <strong>@goingAttendees.Count คน</strong> | ว่าง <strong>@(Event.MaxParticipants - goingAttendees.Count) คน</strong></p> 
+                        }
+                        else
+                        {
+                            <p style="margin:0px;"><strong>@goingAttendees.Count </strong>going | <strong>@(Event.MaxParticipants - goingAttendees.Count)</strong> Free</p> 
+                        }
                     </div>
-                    <div class="info">
-                        <h3 style="color: #eaeaea;">@Localizer["Approval-Required"]</h3>
-                        <p style="color: #eaeaea;">@Localizer["Approval-text"]</p>
+                    <div class="mid"
+                        style="display: flex; justify-content: start; align-items: center; border-bottom: solid #eaeaea 1px;">
+                        <div class="icon" style="margin: 20px 40px; color:#eaeaea ;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                class="lucide lucide-user-round-check">
+                                <path d="M2 21a8 8 0 0 1 13.292-6" />
+                                <circle cx="10" cy="8" r="5" />
+                                <path d="m16 19  2 2 4-4" />
+                            </svg>
+                        </div>
+                        <div class="info">
+                            <h3 style="color: #eaeaea; margin: 0px;">@Localizer["Approval-Required"]</h3>
+                            <p style="color: #eaeaea; margin: 0px;">@Localizer["Approval-text"]</p>
+                        </div>
                     </div>
-                </div>
-                <div class="bottom" style="padding: 10px;">
-                    <p style="padding: 0px 5px 10px 15px; color: #eaeaea;">@Localizer["Welcome!"]</p>
-                    <button class="button"
-                        style="background: linear-gradient(to right, #a8007b, #ff2525); background-size: 200% auto; color: #eaeaea; padding: 12px; border-radius: 15px; text-align: center; cursor: pointer; border: none; width: 100%; font-size: 16px; transition: background-position 0.3s ease-in-out;" onclick="handleRegisterClick()">@Localizer["Register"]</button>
+                    <div class="bottom" style="padding: 10px;">
+                        <p style="padding: 0px 5px 10px 15px; color: #eaeaea;">@Localizer["Welcome!"]</p>
+                        <button class="button"
+                            style="background: linear-gradient(to right, #a8007b, #ff2525); background-size: 200% auto; color: #eaeaea; padding: 12px; border-radius: 15px; text-align: center; cursor: pointer; border: none; width: 100%; font-size: 16px; transition: background-position 0.3s ease-in-out;" onclick="handleRegisterClick()">@Localizer["Register"]</button>
+                    </div>
                 </div>
             }
             else
             {
-                <div class="top"
-                    style="display: flex; color: #000480; justify-content: space-between; padding: 5px 20px; background-color: #eaeaea;">
-                    <h4>@Localizer["Registration"]</h4>
-                </div>
-                <div class="bottom" style="padding: 10px;">
-                    <p style="padding: 0px 5px 10px 15px; color: #eaeaea;">@Localizer["Welcome!"]</p>
-                    <button class="button"
-                        style="background: linear-gradient(to right, #a8007b, #ff2525); background-size: 200% auto; color: #eaeaea; padding: 12px; border-radius: 15px; text-align: center; cursor: pointer; border: none; width: 100%; font-size: 16px; transition: background-position 0.3s ease-in-out;" onclick="handleRegisterClick()">@Localizer["Register"]</button>
+                <div class="register" style="border: solid #eaeaea 1px; border-radius: 20px; overflow: hidden;">
+                    <div class="top"
+                        style="display: flex; color: #000480; ; justify-content: space-between; padding: 10px 20px; background-color: #eaeaea;">
+                        <p style="margin:0px;">@Localizer["Registration"]</p>
+                        @if (currentCulture == "th")
+                        {
+                            <p style="margin:0px;">ลงทะเบียนแล้ว <strong>@goingAttendees.Count คน</strong> | ว่าง <strong>@(Event.MaxParticipants - goingAttendees.Count) คน</strong></p> 
+                        }
+                        else
+                        {
+                            <p style="margin:0px;"><strong>@goingAttendees.Count </strong>going | <strong>@(Event.MaxParticipants - goingAttendees.Count)</strong> Free</p> 
+                        }
+                    </div>
+                    <div class="bottom" style="padding: 10px;">
+                        <p style="padding: 0px 5px 10px 15px; color: #eaeaea;">@Localizer["Welcome!"]</p>
+                        <button class="button"
+                            style="background: linear-gradient(to right, #a8007b, #ff2525); background-size: 200% auto; color: #eaeaea; padding: 12px; border-radius: 15px; text-align: center; cursor: pointer; border: none; width: 100%; font-size: 16px; transition: background-position 0.3s ease-in-out;" onclick="handleRegisterClick()">@Localizer["Register"]</button>
+                    </div>
                 </div>
             }
         </div>
         <div class="map-container" style="width: 100%; border-radius: 8px; margin-top: 30px;">
             <div class="aboutevent"
-                style="padding-bottom: 5px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px;">
-                <p style="color: #EAEAEA;">@Localizer["About-Event"]</p>
+                style=" border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px;">
+                <p style="margin: 5px 0px; color: #8d8d8d;">@Localizer["About-Event"]</p>
             </div>
             <div class="details">
                 <textarea id="eventDetails" class="info-text"
@@ -195,14 +221,11 @@
             </div>
             <div class="event-place">
                 <div class="aboutevent"
-                    style="padding-bottom: 5px; border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px;">
-                    <p style="color: #EAEAEA;">@Localizer["Location"]</p>
+                    style=" border-bottom: 1px solid rgba(255, 255, 255, 0.2); font-size: 14px;">
+                    <p style="margin: 5px 0px; color: #8d8d8d;">@Localizer["Location"]</p>
                 </div>
-<div id="eventLocation" class="info-text"
-    style="width: 100%; min-height: 50px; background-color: transparent; color: #eaeaea; border: none; padding: 10px; outline: none; pointer-events: none; font-size: 14px;">
-    <p><b>@Event.LocationTitle</b></p>
-    <p>@Event.LocationDescription</p>
-</div>
+                <textarea id="eventLocation" class="info-text"
+                    style="width: 100%; min-height: 50px; resize: none; overflow-y: hidden; background-color: transparent; color: #eaeaea; border: none; padding: 10px; outline: none; pointer-events: none; font-size: 14px;">@Event.LocationDescription</textarea>
                 <iframe
                     src="@Event.LocationGMapUrl"
                     width="600" height="450" style="border:0; margin-bottom: 10px; border-radius: 20px;"
@@ -213,20 +236,24 @@
 </div>
 
 <!-- Modal for answering questions -->
-<div id="questionsModal" class="modal">
-    <div class="modal-content">
-        <span class="close" onclick="closeQuestionsModal()">&times;</span>
-        <h2>@Localizer["AnswerQuestions"]</h2>
+<div id="questionsModal" class="questionsModal" style="display: none;position: fixed;z-index: 1;left: 0;top: 0;width: 100%;height: 100%;overflow: auto;background-color: rgba(0,0,0,0.8);padding-top: 60px;">
+    <div class="modal-content" style="background: #1e1e1e;margin: 5% auto;padding: 30px;width: 50%;border-radius: 24px;min-width: 300px;max-width: 700px;">
+        <div class="modal-head" style="display: flex;width: 100%;justify-content: space-between;align-items: center;margin-bottom: 20px;">
+            <h2 style="margin: 0px; color:#EAEAEA; ">@Localizer["AnswerQuestions"]</h2>
+            <span class="close" onclick="closeQuestionsModal()" style="color:#EAEAEA; float: right;font-size: 28px;font-weight: bold;cursor: pointer;">&times;</span>
+        </div>
         <form id="questionsForm" method="post" asp-page-handler="Register">
             <input type="hidden" name="Register.EventId" value="@Event.Id" />
             @foreach (var question in Event.Questions)
             {
-                <div class="question">
-                    <label for="question_@question.Id">@question.Text</label>
-                    <input type="text" id="question_@question.Id" name="Register.Answers[@question.Id]" required />
+                <div class="question" style="width: 100%;display: flex;flex-direction: column; margin-bottom: 10px;">
+                    <label style="color: #eaeaea;" for="question_@question.Id">@question.Text</label>
+                    <input type="text" id="question_@question.Id" name="Register.Answers[@question.Id]" required 
+                        style="margin-top: 10px;padding-left: 10px;background-color: transparent;height: 40px;border-radius: 20px;border: 1px solid #8d8d8d;color: #8d8d8d;font-size: 14px;outline: none;"
+                    />
                 </div>
             }
-            <button type="submit" class="button">@Localizer["SubmitAnswers"]</button>
+            <button type="submit" style="margin-top:10px; background: linear-gradient(to right, #a8007b, #ff2525); background-size: 200% auto; color: #eaeaea; padding: 12px; border-radius: 15px; text-align: center; cursor: pointer; border: none; width: 100%; font-size: 16px; transition: background-position 0.3s ease-in-out;" class="button">@Localizer["SubmitAnswers"]</button>
         </form>
     </div>
 </div>
@@ -279,42 +306,3 @@
         }
     }
 </script>
-
-<style>
-    .modal {
-        display: none;
-        position: fixed;
-        z-index: 1;
-        left: 0;
-        top: 0;
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: rgb(0,0,0);
-        background-color: rgba(0,0,0,0.4);
-        padding-top: 60px;
-    }
-
-    .modal-content {
-        background-color: #fefefe;
-        margin: 5% auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        border-radius: 10px;
-    }
-
-    .close {
-        color: #aaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-        color: black;
-        text-decoration: none;
-        cursor: pointer;
-    }
-</style>

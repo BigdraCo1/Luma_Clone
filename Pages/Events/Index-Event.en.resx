@@ -36,4 +36,10 @@
             <data name="RejectResponse" xml:space="preserve">
     <value>Sorry, Host rejected your request</value>
     </data>
+            <data name="AnswerQuestions" xml:space="preserve">
+    <value>Answer Questions</value>
+    </data>
+            <data name="SubmitAnswers" xml:space="preserve">
+    <value>Submit Answers</value>
+    </data>
 </root>
