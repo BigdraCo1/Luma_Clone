@@ -8,8 +8,7 @@ obj/
 *.sln
 
 # Ignore database files
-Databases/*
-!Databases/.gitkeep
+Databases/database.sqlite*
 
 # Ignore .env files
 .env

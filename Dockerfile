@@ -14,7 +14,6 @@ RUN apk add --update --no-cache icu-libs
 WORKDIR /App
 
 COPY --from=build /App/out .
-COPY ./Databases/template.sqlite ./Databases/database.sqlite
 
 ENV ASPNETCORE_ENVIRONMENT=Production
 CMD ["dotnet", "alma.dll"]

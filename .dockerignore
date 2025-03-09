@@ -17,7 +17,7 @@ obj/
 alma.sln
 
 # Ignore database files
-Databases/*
+Databases/
 
 # Ignore .env files
 .env
