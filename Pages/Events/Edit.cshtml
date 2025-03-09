@@ -9,7 +9,7 @@
     <h1 class="text-white">@Localizer["EditEvent"]</h1>
     <input type="text" id="id" asp-for="UpdatedEvent.Id" hidden />
     <div class="flex flex-wrap-reverse gap-x-16">
-        <div class="flex flex-col flex-grow w-64 mb-4">
+        <div class="flex flex-col flex-grow mb-4 w-72">
             <label for="name" class="mb-2 text-white">@Localizer["Name"]</label>
             <input type="text" id="name" asp-for="UpdatedEvent.Name" required minlength="3" maxlength="255"
                 placeholder="@Localizer["EventNamePlaceholder"]"
@@ -51,7 +51,7 @@
             </div>
             <span asp-validation-for="UpdatedEvent.RegistrationEndAt" class="mt-2 mb-4 text-red-500 empty:mt-0"></span>
         </div>
-        <div class="flex flex-col flex-grow w-64 mb-4 sm:items-center">
+        <div class="flex flex-col items-center flex-grow w-64 mb-4">
             <div class="relative w-fit">
                 <p class="mt-0 text-white">@Localizer["EventImage"]</p>
                 <img src="/images/others/image-unavailable.png" alt="Event Image" width="256px" height="256px"

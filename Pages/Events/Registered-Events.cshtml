@@ -1,5 +1,5 @@
 @page
-@model alma.Pages.Events.MyEventsModel
+@model alma.Pages.Events.RegisteredEventsModel
 
 @{
     ViewData["Title"] = "My Events";
@@ -7,9 +7,9 @@
 
 <div class="px-4 mx-auto max-w-240 sm:px-16">
     <div class="flex items-center justify-between">
-        <h1 class="text-white">@Localizer["MyEvents"]</h1>
-        <a href="/events/registered-events"
-            class="px-4 py-2 text-gray-200 no-underline transition-all bg-transparent border-2 border-gray-400 rounded-full hover:scale-105">@Localizer["RegisteredEvents"]</a>
+        <h1 class="text-white">@Localizer["RegisteredEvents"]</h1>
+        <a href="/events/my-events"
+            class="px-4 py-2 text-gray-200 no-underline transition-all bg-transparent border-2 border-gray-400 rounded-full hover:scale-105">@Localizer["MyEvents"]</a>
     </div>
     <div class="flex flex-col gap-4">
         @foreach (var evnt in Model.Events)
@@ -49,11 +49,6 @@
                             @Icon.Inline("external-link", stroke: "rgb(229 231 235)")
                             @Localizer["View"]
                         </a>
-                        <a href="/events/edit?id=@evnt.Id"
-                            class="flex items-center justify-center w-full gap-2 px-4 py-2 text-sm text-gray-200 no-underline transition-all bg-transparent border-2 border-gray-400 rounded-full hover:scale-105 sm:w-48">
-                            @Icon.Inline("pencil", stroke: "rgb(229 231 235)")
-                            @Localizer["Edit"]
-                        </a>
                     </div>
                 </div>
             </div>
@@ -62,11 +57,6 @@
                     class="flex items-center justify-center w-full gap-2 px-4 py-2 text-sm text-gray-200 no-underline transition-all bg-transparent border-2 border-gray-400 rounded-full hover:scale-105 sm:w-48">
                     @Icon.Inline("external-link", stroke: "rgb(229 231 235)")
                     @Localizer["View"]
-                </a>
-                <a href="/events/edit?id=@evnt.Id"
-                    class="flex items-center justify-center w-full gap-2 px-4 py-2 text-sm text-gray-200 no-underline transition-all bg-transparent border-2 border-gray-400 rounded-full hover:scale-105 sm:w-48">
-                    @Icon.Inline("pencil", stroke: "rgb(229 231 235)")
-                    @Localizer["Edit"]
                 </a>
             </div>
         </div>

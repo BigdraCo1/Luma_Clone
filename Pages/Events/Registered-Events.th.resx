@@ -9,9 +9,6 @@
     <data name="View" xml:space="preserve">
         <value>ดูกิจกรรม</value>
     </data>
-    <data name="Edit" xml:space="preserve">
-        <value>แก้ไขกิจกรรม</value>
-    </data>
     <data name="NoEvents" xml:space="preserve">
         <value>ไม่มีกิจกรรม</value>
     </data>

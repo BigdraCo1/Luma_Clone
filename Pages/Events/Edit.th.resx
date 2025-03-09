@@ -138,4 +138,7 @@
     <data name="MaxCount" xml:space="preserve">
         <value>จำกัด</value>
     </data>
+    <data name="NoQuestionAdded" xml:space="preserve">
+        <value>ไม่มีคำถาม</value>
+    </data>
 </root>
