@@ -80,7 +80,7 @@ provider.Mappings[".avif"] = "image/avif";
 app.UseStaticFiles(new StaticFileOptions {
     ContentTypeProvider = provider,
     OnPrepareResponse = ctx => {
-        ctx.Context.Response.Headers.Append("Cache-Control", "public,max-age=31536000,immutable");
+        ctx.Context.Response.Headers.Append("Cache-Control", "public, max-age=31536000, immutable");
     }
 });
 
