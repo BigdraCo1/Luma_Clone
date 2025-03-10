@@ -78,7 +78,10 @@ if (app.Environment.IsDevelopment()) {
 var provider = new FileExtensionContentTypeProvider();
 provider.Mappings[".avif"] = "image/avif";
 app.UseStaticFiles(new StaticFileOptions {
-    ContentTypeProvider = provider
+    ContentTypeProvider = provider,
+    OnPrepareResponse = ctx => {
+        ctx.Context.Response.Headers.Append("Cache-Control", "public, max-age=31536000");
+    }
 });
 
 app.UseRouting();

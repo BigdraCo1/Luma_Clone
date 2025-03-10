@@ -17,6 +17,14 @@ public class AvatarModel(DatabaseContext database, ISessionService sessionServic
             return NotFound();
         }
 
+        var eTag = Etag.Generate(user.Avatar);
+        Response.Headers.ETag = eTag;
+        Response.Headers.CacheControl = "no-cache";
+
+        if (Request.Headers.IfNoneMatch == eTag) {
+            return StatusCode(304);
+        }
+
         return File(user.Avatar, user.AvatarType);
     }
 
