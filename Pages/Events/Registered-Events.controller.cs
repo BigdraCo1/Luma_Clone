@@ -23,7 +23,7 @@ public class RegisteredEventsModel(IStringLocalizer<SharedResources> sharedLocal
         }
 
         await _database.Entry(user).Collection(u => u.ParticipatingEvents).LoadAsync();
-        Events = [.. user.ParticipatingEvents.Where(e => e.EndAt > ThDateTime.Now()).OrderBy(e => e.StartAt)];
+        Events = [.. user.ParticipatingEvents.Where(e => e.EndAt > ThDateTime.Now() && e.Visibility != Visibility.Private).OrderBy(e => e.StartAt)];
 
         return Page();
     }
