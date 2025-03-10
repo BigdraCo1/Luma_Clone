@@ -96,4 +96,7 @@
     <data name="ApprovalRequired" xml:space="preserve">
         <value>ต้องได้รับการอนุมัติโดยผู้จัดกิจกรรมจึงจะสามารถเข้าร่วมกิจกรรมได้</value>
     </data>
+    <data name="Participants" xml:space="preserve">
+        <value>ผู้เข้าร่วมกิจกรรม</value>
+    </data>
 </root>

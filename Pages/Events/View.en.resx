@@ -96,4 +96,7 @@
     <data name="ApprovalRequired" xml:space="preserve">
         <value>Approval required, your registration is subject to approval by the host</value>
     </data>
+    <data name="Participants" xml:space="preserve">
+        <value>Participants</value>
+    </data>
 </root>

@@ -3,6 +3,8 @@
 
 @{
     ViewData["Title"] = Model.Event.Name;
+
+    var tagName = CultureInfo.CurrentCulture.Name == "th" ? Model.Event.Tag.NameTH : Model.Event.Tag.NameEN;
 }
 
 <span id="registration-accept-success-text" class="hidden">@Localizer["RegistrationAcceptSuccessText"]</span>
@@ -67,7 +69,10 @@
                 </div>
             </div>
         </div>
-        <h2 class="text-lg text-white">@Localizer["AboutEvent"]</h2>
+        <div class="flex items-center gap-6">
+            <h2 class="text-lg text-white">@Localizer["AboutEvent"]</h2>
+            <a href="/tags/view?id=@Model.Event.Tag.Id" class="px-3 py-1 text-gray-400 no-underline transition-all bg-transparent border border-gray-400 rounded-full hover:scale-105">#@tagName</a>
+        </div>
         <pre class="mb-8 text-gray-200 break-all text-wrap">@Model.Event.Description</pre>
         <h2 class="text-lg text-white">@Localizer["Location"]</h2>
         <p class="text-gray-200 break-all">@Model.Event.LocationTitle, @Model.Event.LocationSubtitle</p>
@@ -172,9 +177,9 @@
         @if (Model.Event.Questions.Count == 0) {
             <div id="registration-cards-container" class="flex flex-col gap-4">
                 @foreach (var registration in Model.PendingRegistrations) {
-                    <div id="registration-@registration.User.Id" class="z-10 flex flex-col justify-between gap-4 px-4 py-4 bg-gray-900 sm:items-center sm:flex-row registration-card sm:px-8 rounded-xl">
+                    <div id="registration-@registration.User.Id" class="z-10 flex flex-col justify-between gap-4 p-4 bg-gray-900 sm:items-center sm:flex-row registration-card sm:px-8 rounded-xl">
                         <a href="/users/profile?id=@registration.User.Id" class="flex items-center w-full gap-2 font-semibold text-gray-200 no-underline sm:flex-grow sm:w-0">
-                            <img src="/users/avatar?id=@registration.User.Id" alt="Participant avatar" width="24px" height="24px"
+                            <img src="/users/avatar?id=@registration.User.Id" alt="Participant avatar" width="32px" height="32px"
                                 class="flex-shrink-0 object-cover rounded-full">
                             <span class="flex-grow w-0 overflow-hidden text-ellipsis text-nowrap">@registration.User.Name</span>
                         </a>
@@ -194,9 +199,9 @@
         } else {
             <div id="registration-cards-container" class="flex flex-col gap-4">
                 @foreach (var registration in Model.PendingRegistrations) {
-                    <div id="registration-@registration.User.Id" class="z-10 px-4 py-4 bg-gray-900 registration-card sm:px-8 rounded-xl">
+                    <div id="registration-@registration.User.Id" class="z-10 p-4 bg-gray-900 registration-card sm:px-8 rounded-xl">
                         <a href="/users/profile?id=@registration.User.Id" class="flex items-center gap-2 font-semibold text-gray-200 no-underline">
-                            <img src="/users/avatar?id=@registration.User.Id" alt="Participant avatar" width="24px" height="24px"
+                            <img src="/users/avatar?id=@registration.User.Id" alt="Participant avatar" width="32px" height="32px"
                                 class="object-cover rounded-full">
                             @registration.User.Name
                         </a>
@@ -226,6 +231,20 @@
                 }
             </div>
         }
+    </div>
+}
+@if (Model.User == Model.Event.Host && Model.AcceptedParticipants.Count > 0) {
+    <div class="px-4 mx-auto sm:px-16 max-w-320">
+        <h2 class="mb-4 text-lg text-white">@Localizer["Participants"]</h2>
+        <div class="flex flex-wrap gap-4">
+            @foreach (var participant in Model.AcceptedParticipants) {
+                <a href="/users/profile?id=@participant.Id" class="flex items-center w-64 gap-2 p-4 text-gray-200 no-underline transition-all bg-gray-900 hover:scale-105 rounded-xl">
+                    <img src="/users/avatar?id=@participant.Id" alt="Participant avatar" width="24px" height="24px"
+                        class="flex-shrink-0 object-cover rounded-full">
+                    <span class="flex-grow w-0 overflow-hidden text-ellipsis text-nowrap">@participant.Name</span>
+                </a>
+            }
+            </div>
     </div>
 }
 @if (Model.User == Model.Event.Host) {
