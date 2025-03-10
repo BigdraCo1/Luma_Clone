@@ -18,7 +18,8 @@
                 <h1 class="my-0 text-5xl text-white">@tagName</h1>
             </div>
             <div class="flex items-baseline gap-8">
-                <span class="text-gray-200">@Model.Tag.Events.Count @Localizer["Events"]</span>
+                <span class="text-gray-200">@Model.Tag.Events.Count(e => e.Visibility == Visibility.Public)
+                    @Localizer["Events"]</span>
                 <span class="text-gray-200">@Model.Tag.Followers.Count @Localizer["Subscribers"]</span>
             </div>
             <hr>
