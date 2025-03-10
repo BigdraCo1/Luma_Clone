@@ -56,6 +56,16 @@ builder.Services.AddScoped<IIconService, IconService>();
 
 var app = builder.Build();
 
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try {
+    var context = services.GetRequiredService<DatabaseContext>();
+    context.Database.Migrate();
+} catch (Exception ex) {
+
+    Console.WriteLine(ex.Message);
+}
+
 DatabaseInitilaizer.Seed(app);
 
 if (app.Environment.IsDevelopment()) {
@@ -64,7 +74,6 @@ if (app.Environment.IsDevelopment()) {
     app.UseStatusCodePagesWithRedirects("/error?code={0}");
     app.UseExceptionHandler("/error?code=500");
 }
-
 
 var provider = new FileExtensionContentTypeProvider();
 provider.Mappings[".avif"] = "image/avif";

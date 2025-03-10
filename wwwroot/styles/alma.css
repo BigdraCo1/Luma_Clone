@@ -597,6 +597,10 @@ textarea:focus {
     min-width: 0px;
 }
 
+.min-w-56 {
+    min-width: 14rem;
+}
+
 .ml-16 {
     margin-left: 4rem;
 }

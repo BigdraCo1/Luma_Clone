@@ -85,58 +85,58 @@
             @if (Model.User is null) {
                 <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
                     <a href="/auth/sign-in?next=/events/view?id=@Model.Event.Id" class="flex items-center gap-2 px-4 py-2 m-4 text-white no-underline transition-all bg-gray-800 hover:scale-105 rounded-xl">
-                        @Icon.Inline("log-in", stroke: "rgb(229 231 235)")
+                        @Icon.Inline("log-in", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
                         <span>@Localizer["SignInToRegister"]</span>
                     </a>
                 </div>
             } else if (Model.User == Model.Event.Host) {
                 <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
-                    @Icon.Inline("circle-x", stroke: "rgb(229 231 235)")
+                    @Icon.Inline("circle-x", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
                     <p class="text-gray-200">@Localizer["HostCannotRegister"]</p>
                 </div>
             } else if (Model.RegistrationStatus is not null && Model.RegistrationStatus == ParticipationStatus.Accepted) {
                 <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
-                    @Icon.Inline("circle-check", stroke: "rgb(229 231 235)")
+                    @Icon.Inline("circle-check", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
                     <p class="text-gray-200">@Localizer["RegistrationAccepted"]</p>
                 </div>
             } else if (Model.RegistrationStatus is not null && Model.RegistrationStatus == ParticipationStatus.Pending) {
                 <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
-                    @Icon.Inline("hourglass", stroke: "rgb(229 231 235)")
+                    @Icon.Inline("hourglass", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
                     <p class="text-gray-200">@Localizer["RegistrationPending"]</p>
                 </div>
             } else if (Model.RegistrationStatus is not null && Model.RegistrationStatus == ParticipationStatus.Rejected) {
                 <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
-                    @Icon.Inline("circle-x", stroke: "rgb(229 231 235)")
+                    @Icon.Inline("circle-x", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
                     <p class="text-gray-200">@Localizer["RegistrationRejected"]</p>
                 </div>
             } else if (!Model.Event.RegistrationOpen) {
                 <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
-                    @Icon.Inline("circle-x", stroke: "rgb(229 231 235)")
+                    @Icon.Inline("circle-x", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
                     <p class="text-gray-200">@Localizer["RegistrationIsClosed"]</p>
                 </div>
             } else if (Model.AcceptedParticipants.Count >= Model.Event.MaxParticipants) {
                 <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
-                    @Icon.Inline("circle-x", stroke: "rgb(229 231 235)")
+                    @Icon.Inline("circle-x", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
                     <p class="text-gray-200">@Localizer["EventIsFull"]</p>
                 </div>
             } else if (Model.Event.RegistrationStartAt > ThDateTime.Now()) {
                 <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
-                    @Icon.Inline("clock-alert", stroke: "rgb(229 231 235)")
+                    @Icon.Inline("clock-alert", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
                     <p class="text-gray-200">@Localizer["TooEarlyToRegister"] : @Formatter.FormatDateTime(Model.Event.RegistrationStartAt)</p>
                 </div>
             } else if (Model.Event.RegistrationEndAt < ThDateTime.Now()) {
                 <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
-                    @Icon.Inline("clock-alert", stroke: "rgb(229 231 235)")
+                    @Icon.Inline("clock-alert", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
                     <p class="text-gray-200">@Localizer["TooLateToRegister"]</p>
                 </div>
             } else {
-                <div class="border-2 border-gray-300 rounded-b-xl">
+                <div class="px-4 border-2 border-gray-300 rounded-b-xl">
                     <div class="flex items-center justify-center gap-2">
                         @if (Model.Event.AutomaticApproval) {
-                            @Icon.Inline("circle-check", stroke: "rgb(229 231 235)")
+                            @Icon.Inline("circle-check", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
                             <p class="text-gray-200">@Localizer["NoApprovalRequired"]</p>
                         } else {
-                            @Icon.Inline("user-check", stroke: "rgb(229 231 235)")
+                            @Icon.Inline("user-check", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
                             <p class="text-gray-200">@Localizer["ApprovalRequired"]</p>
                         }
                     </div>
@@ -154,10 +154,12 @@
                                 }
                             </ol>
                         } 
-                        <button type="submit" class="flex items-center gap-2 px-16 py-2 mx-auto text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl">
-                            @Icon.Inline("notebook-pen", stroke: "rgb(229 231 235)")
-                            @Localizer["Register"]
-                        </button>
+                        <div class="flex">
+                            <button type="submit" class="flex items-center justify-center flex-grow w-0 gap-2 px-4 py-2 mx-auto text-base text-white transition-all bg-green-700 border-none max-w-64 hover:scale-105 rounded-xl">
+                                @Icon.Inline("notebook-pen", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                                @Localizer["Register"]
+                            </button>
+                        </div>
                     </form>
                 </div>
             }
