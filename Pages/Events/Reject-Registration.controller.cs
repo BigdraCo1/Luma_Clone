@@ -50,7 +50,7 @@ public class RejectRegistrationModel(IConfiguration config, IStringLocalizer<Sha
         participation.Status = ParticipationStatus.Rejected;
         await _database.SaveChangesAsync();
 
-        _ = Task.Run(() => _mailService.SendEmailAsync([user.Email], _localizer["RegistrationRejected"], MailTemplates.accepted, new Dictionary<string, string> {
+        _ = Task.Run(() => _mailService.SendEmailAsync([target.Email], _localizer["RegistrationRejected"], MailTemplates.accepted, new Dictionary<string, string> {
                 { "rejected", _localizer["YouHaveBeenRejected"] },
                 { "name", evnt.Name },
                 { "rejectMessage", _localizer["RejectMessage"] },

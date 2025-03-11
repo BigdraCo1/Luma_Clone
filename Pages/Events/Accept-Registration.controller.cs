@@ -50,7 +50,7 @@ public class AcceptRegistrationModel(IConfiguration config, IStringLocalizer<Sha
         participation.Status = ParticipationStatus.Accepted;
         await _database.SaveChangesAsync();
 
-        _ = Task.Run(() => _mailService.SendEmailAsync([user.Email], _localizer["RegistrationAccepted"], MailTemplates.accepted, new Dictionary<string, string> {
+        _ = Task.Run(() => _mailService.SendEmailAsync([target.Email], _localizer["RegistrationAccepted"], MailTemplates.accepted, new Dictionary<string, string> {
                 { "accepted", _localizer["YouHaveBeenAccepted"] },
                 { "name", evnt.Name },
                 { "startAtDate", Formatter.FormatDate(evnt.StartAt) },
