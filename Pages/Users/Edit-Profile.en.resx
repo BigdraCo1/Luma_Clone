@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="YourProfile" xml:space="preserve">
+        <value>Your Profile</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+        <value>Choose how you are displayed as a host or guest.</value>
+    </data>
+    <data name="ProfilePicture" xml:space="preserve">
+        <value>Profile Picture</value>
+    </data>
+    <data name="Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="Username" xml:space="preserve">
+        <value>Username</value>
+    </data>
+    <data name="Bio" xml:space="preserve">
+        <value>Bio</value>
+    </data>
+    <data name="BioPlaceholder" xml:space="preserve">
+        <value>Share a little about your background and interests.</value>
+    </data>
+    <data name="SocialLinks" xml:space="preserve">
+        <value>Socials</value>
+    </data>
+    <data name="Email" xml:space="preserve">
+        <value>Email</value>
+    </data>
+    <data name="AccountLinkedWithGoogle" xml:space="preserve">
+        <value>This email is linked to your Google account</value>
+    </data>
+    <data name="SaveChanges" xml:space="preserve">
+        <value>Save Changes</value>
+    </data>
+    <data name="DeleteAccount" xml:space="preserve">
+        <value>Delete Account</value>
+    </data>
+    <data name="DeleteAccountDescription" xml:space="preserve">
+        <value>If you no longer wish to use alma, you can permanently delete your account.</value>
+    </data>
+    <data name="DeleteAccountCta" xml:space="preserve">
+        <value>Delete My Account</value>
+    </data>
+    <data name="AvatarUpdateSuccess" xml:space="preserve">
+        <value>Avatar updated successfully</value>
+    </data>
+    <data name="AvatarUpdateFail" xml:space="preserve">
+        <value>Failed to update avatar</value>
+    </data>
+</root>

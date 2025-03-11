@@ -1,9 +1,18 @@
-﻿@using alma
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.Extensions.Configuration
+@using System.Globalization;
+
+@using alma.Enums
+@using alma.Services
+@using alma.Utils
+
 @namespace alma.Pages
+
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-@using Microsoft.Extensions.Configuration
-@inject IConfiguration Configuration
-
-@using Microsoft.AspNetCore.Mvc.Localization
+@inject IConfiguration Config
+@inject IHttpContextAccessor ContextAccessor
 @inject IViewLocalizer Localizer
+@inject DatabaseContext Database
+@inject ISessionService Session
+@inject IIconService Icon

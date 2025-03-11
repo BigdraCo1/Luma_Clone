@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="YouMustSignIn" xml:space="preserve">
+        <value>Unauthorized</value>
+    </data>
+    <data name="YouMustSignInDescription" xml:space="preserve">
+        <value>You have to sign in before accessing this page</value>
+    </data>
+</root>

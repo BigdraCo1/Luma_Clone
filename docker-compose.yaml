@@ -1,9 +1,9 @@
 name: alma
 
 services:
-    api:
+    server:
         build: .
-        container_name: alma-api
+        container_name: alma-server
         volumes:
             - ./Databases:/App/Databases
             - ./DataProtection-Keys:/root/.aspnet/DataProtection-Keys

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="Title-1" xml:space="preserve">
+        <value>งานที่น่ารื่นรมย์</value>
+    </data>
+    <data name="Title-2" xml:space="preserve">
+        <value>เริ่มต้นที่นี่</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+        <value>ตั้งค่าหน้าอีเวนต์ เชิญเพื่อน และขายบัตร จัดงานที่น่าจดจำวันนี้</value>
+    </data>
+    <data name="Cta" xml:space="preserve">
+        <value>สร้างกิจกรรมแรกของคุณ</value>
+    </data>
+    <data name="Discover" xml:space="preserve">
+        <value>สำรวจกิจกรรม</value>
+    </data>
+</root>

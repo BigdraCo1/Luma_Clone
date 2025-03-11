@@ -8,10 +8,10 @@ public class Question {
     public required string Id { get; set; }
 
     [Required]
-    public required string Text { get; set; }
+    public required int Number { get; set; }
 
     [Required]
-    public required bool Required { get; set; }
+    public required string Text { get; set; }
 
     public required Event Event { get; set; }
 

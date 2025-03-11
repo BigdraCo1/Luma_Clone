@@ -1,10 +1,11 @@
 # Ignore personal files such as todo lists, notes, etc.
 Personal/
+.DS_Store
 
 # Ignore binary and build related files
 bin/
 obj/
-alma.sln
+*.sln
 
 # Ignore database files
 Databases/*

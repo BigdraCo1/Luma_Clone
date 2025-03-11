@@ -1,0 +1,96 @@
+@page
+@model alma.Pages.Users.ProfileModel
+
+@{
+    ViewData["Title"] = $"Profile - {@Model.DisplayedUser.Name}";
+}
+
+<span id="displayed-user-id" class="hidden">@Model.DisplayedUser.Id</span>
+<span id="follow-success-text" class="hidden">@Localizer["FollowSuccess"]</span>
+<span id="follow-fail-text" class="hidden">@Localizer["FollowFail"]</span>
+<span id="unfollow-success-text" class="hidden">@Localizer["UnfollowSuccess"]</span>
+<span id="unfollow-fail-text" class="hidden">@Localizer["UnfollowFail"]</span>
+<div class="px-4 mx-auto max-w-240 sm:px-16">
+    <div class="flex gap-8 mb-8">
+        <div class="flex flex-col items-center w-24 gap-4 sm:w-48">
+            <img src="@($"/users/avatar?id={Model.DisplayedUser.Id}")" alt="Avatar" class="w-24 h-24 rounded-full sm:w-48 sm:h-48" />
+            @if (Model.CurrentUser != Model.DisplayedUser)
+            {
+                <div class="flex items-center sm:hidden">
+                    @if (Model.CurrentUser.Following.Contains(Model.DisplayedUser))
+                    {
+                        <form action="/users/unfollow?id=@Model.DisplayedUser.Id" method="POST">
+                            <button type="submit" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Unfollow"]</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form action="/users/follow?id=@Model.DisplayedUser.Id" method="POST">
+                            <button type="submit" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Follow"]</button>
+                        </form>
+                    }
+                </div>
+            }
+        </div>
+        <div class="flex flex-wrap flex-grow w-40 gap-8">
+            <div class="flex flex-col flex-grow w-64 gap-3 overflow-hidden">
+                <h1 class="mt-0 mb-1 text-lg text-white sm:text-2xl">@Model.DisplayedUser.Name</h1>
+                <span class="text-gray-300 break-all">@@@Model.DisplayedUser.Username</span>
+                <div class="flex items-center gap-2">
+                    @Icon.Inline("calendar-arrow-down", size: "20", stroke: "rgb(209 213 219)")
+                    <span class="text-gray-300">@Localizer["JoinedAt"]
+                        @Formatter.FormatDate(Model.DisplayedUser.CreatedAt)</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    @Icon.Inline("users", size: "20", stroke: "rgb(209 213 219)")
+                    <span class="text-gray-300">@Localizer["FollowerCountPrefix"] @Model.DisplayedUser.Followers.Count
+                        @Localizer["FollowerCountSuffix"]</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    @Icon.Inline("ticket", size: "20", stroke: "rgb(209 213 219)")
+                    <span class="text-gray-300">@Localizer["ParticipatingEventCountPrefix"]
+                        @Model.EventParticipationCount
+                        @Localizer["ParticipatingEventCountSuffix"]</span>
+                </div>
+            </div>
+            @if (Model.CurrentUser != Model.DisplayedUser)
+            {
+                <div class="items-center hidden sm:flex">
+                    @if (Model.CurrentUser.Following.Contains(Model.DisplayedUser))
+                    {
+                        <form action="/users/unfollow?id=@Model.DisplayedUser.Id" method="POST">
+                            <button type="submit" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Unfollow"]</button>
+                        </form>
+                    }
+                    else
+                    {
+                        <form action="/users/follow?id=@Model.DisplayedUser.Id" method="POST">
+                            <button type="submit" class="px-4 py-2 text-gray-300 transition-all bg-transparent border-2 border-gray-400 hover:scale-105 rounded-xl">@Localizer["Follow"]</button>
+                        </form>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+    <div class="flex items-center gap-2">
+        @if (Model.DisplayedUser.InstagramUsername is not null) {
+            <a href="https://instagram.com/@Model.DisplayedUser.InstagramUsername" class="transition-all hover:scale-110">@Icon.Inline("instagram", stroke: "rgb(209 213 219)")</a>
+        }
+        @if (Model.DisplayedUser.TwitterUsername is not null) {
+            <a href="https://x.com/@Model.DisplayedUser.TwitterUsername" class="transition-all hover:scale-110">@Icon.Inline("twitter", lib: "external", size: "24", fill: "rgb(209 213 219)")</a>
+        }
+        @if (Model.DisplayedUser.YoutubeUsername is not null) {
+            <a href="https://youtube.com/@@@Model.DisplayedUser.YoutubeUsername" class="transition-all hover:scale-110">@Icon.Inline("youtube", size: "28", stroke: "rgb(209 213 219)")</a>
+        }
+        @if (Model.DisplayedUser.TikTokUsername is not null) {
+            <a href="https://tiktok.com/@@@Model.DisplayedUser.TikTokUsername" class="transition-all hover:scale-110">@Icon.Inline("tiktok", lib: "external", size: "22", fill: "rgb(209 213 219)")</a>
+        }
+        @if (Model.DisplayedUser.LinkedinHandle is not null) {
+            <a href="https://linkedin.com/in/@Model.DisplayedUser.LinkedinHandle" class="transition-all hover:scale-110">@Icon.Inline("linkedin", stroke: "rgb(209 213 219)")</a>
+        }
+        @if (Model.DisplayedUser.WebsiteUrl is not null) {
+            <a href="https://@Model.DisplayedUser.WebsiteUrl" class="transition-all hover:scale-110">@Icon.Inline("globe", stroke: "rgb(209 213 219)")</a>
+        }
+    </div>
+    <hr>
+</div>

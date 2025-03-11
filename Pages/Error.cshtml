@@ -1,0 +1,12 @@
+@page
+@model alma.Pages.ErrorModel
+
+@{
+    ViewData["Title"] = $"{Model.Code} - {Model.Message}";
+}
+
+<div style="min-height: calc(100vh - 12rem);" class="flex flex-col items-center justify-center w-full gap-2 m-0">
+    @Icon.Inline("triangle-alert", size: "240px", stroke: "white")
+    <h1 class="m-0 mb-2 text-6xl text-white">@Model.Code</h1>
+    <h2 class="m-0 text-4xl text-white">@Model.Message</h2>
+</div>

@@ -11,9 +11,25 @@
     "[json]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
+    "[xml]": {
+        "editor.tabSize": 4
+    },
     "editor.codeActionsOnSave": {
         "source.organizeImports": "explicit"
     },
     "editor.formatOnSave": true,
-    "js/ts.implicitProjectConfig.checkJs": true
+    "js/ts.implicitProjectConfig.checkJs": true,
+    "explorer.fileNesting.enabled": true,
+    "explorer.fileNesting.patterns": {
+        "*.cshtml": "${capture}.controller.cs, ${capture}.cshtml.css, ${capture}.cshtml.js, ${capture}.*.resx",
+        "*.cs": "${capture}.*.resx",
+        "*.sqlite": "${capture}.${extname}-*"
+    },
+    "files.associations": {
+        "*.css": "css",
+        "*.resx": "xml"
+    },
+    "headwind.classRegex": {
+        "aspnetcorerazor": "class=\"([^\"]+)\""
+    }
 }

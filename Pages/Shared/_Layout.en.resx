@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="Discover" xml:space="preserve">
+        <value>Discover</value>
+    </data>
+    <data name="CreateEvent" xml:space="preserve">
+        <value>Create Event</value>
+    </data>
+    <data name="Create" xml:space="preserve">
+        <value>Create</value>
+    </data>
+    <data name="MyEvents" xml:space="preserve">
+        <value>My Events</value>
+    </data>
+    <data name="Profile" xml:space="preserve">
+        <value>Profile</value>
+    </data>
+    <data name="SignOut" xml:space="preserve">
+        <value>Sign out</value>
+    </data>
+    <data name="SignOutAll" xml:space="preserve">
+        <value>Sign out on all devices</value>
+    </data>
+    <data name="SignIn" xml:space="preserve">
+        <value>Sign In</value>
+    </data>
+</root>

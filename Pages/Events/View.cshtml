@@ -1,0 +1,279 @@
+@page
+@model alma.Pages.Events.ViewEventModel
+
+@{
+    ViewData["Title"] = Model.Event.Name;
+
+    var tagName = CultureInfo.CurrentCulture.Name == "th" ? Model.Event.Tag.NameTH : Model.Event.Tag.NameEN;
+}
+
+<span id="registration-accept-success-text" class="hidden">@Localizer["RegistrationAcceptSuccessText"]</span>
+<span id="registration-accept-fail-text" class="hidden">@Localizer["RegistrationAcceptFailText"]</span>
+<span id="registration-reject-success-text" class="hidden">@Localizer["RegistrationRejectSuccessText"]</span>
+<span id="registration-reject-fail-text" class="hidden">@Localizer["RegistrationRejectFailText"]</span>
+<div class="flex flex-wrap px-4 mx-auto mb-12 sm:px-16 max-w-320 gap-x-16 gap-y-4">
+    <div class="mx-auto w-96 sm:mx-4">
+        <img src="/events/image?id=@Model.Event.Id" alt="Event image" class="object-cover w-full h-auto sm:w-96 sm:h-96 rounded-xl aspect-square">
+        <p class="text-white">@Localizer["HostedBy"]</p>
+        <a href="/users/profile?id=@Model.Event.Host.Id" class="flex items-center gap-2 no-underline">
+            <img src="/users/avatar?id=@Model.Event.Host.Id" alt="Host avatar" width="24px" height="24px"
+                class="object-cover rounded-full">
+            <span class="flex-grow w-0 overflow-hidden text-gray-200 text-ellipsis text-nowrap">@Model.Event.Host.Name</span>
+            @if (Model.Event.Host.InstagramUsername is not null) {
+            <a href="https://instagram.com/@Model.Event.Host.InstagramUsername" class="transition-all hover:scale-110">@Icon.Inline("instagram", stroke: "rgb(209 213 219)")</a>
+            }
+            @if (Model.Event.Host.TwitterUsername is not null) {
+                <a href="https://x.com/@Model.Event.Host.TwitterUsername" class="transition-all hover:scale-110">@Icon.Inline("twitter", lib: "external", size: "24", fill: "rgb(209 213 219)")</a>
+            }
+            @if (Model.Event.Host.YoutubeUsername is not null) {
+                <a href="https://youtube.com/@@@Model.Event.Host.YoutubeUsername" class="transition-all hover:scale-110">@Icon.Inline("youtube", size: "28", stroke: "rgb(209 213 219)")</a>
+            }
+            @if (Model.Event.Host.TikTokUsername is not null) {
+                <a href="https://tiktok.com/@@@Model.Event.Host.TikTokUsername" class="transition-all hover:scale-110">@Icon.Inline("tiktok", lib: "external", size: "22", fill: "rgb(209 213 219)")</a>
+            }
+            @if (Model.Event.Host.LinkedinHandle is not null) {
+                <a href="https://linkedin.com/in/@Model.Event.Host.LinkedinHandle" class="transition-all hover:scale-110">@Icon.Inline("linkedin", stroke: "rgb(209 213 219)")</a>
+            }
+            @if (Model.Event.Host.WebsiteUrl is not null) {
+                <a href="https://@Model.Event.Host.WebsiteUrl" class="transition-all hover:scale-110">@Icon.Inline("globe", stroke: "rgb(209 213 219)")</a>
+            }
+        </a>
+        <p class="mb-0 text-white">@Localizer["JoinedCountPrefix"] @Model.AcceptedParticipants.Count @Localizer["JoinedCountSuffix"]</p>
+        <div class="flex items-center mt-4 mb-4 no-child:mt-0">
+            @foreach (var participant in Model.AcceptedParticipants.Take(5)) {
+                <a href="/users/profile?id=@participant.Id" class="w-8 h-8 p-0 m-0 -mr-4">
+                    <img src="/users/avatar?id=@participant.Id" alt="Participant avatar" width="24px" height="24px"
+                        class="object-cover border-4 border-gray-900 rounded-full">
+                </a>
+            }
+            @if (Model.AcceptedParticipants.Count > 5) {
+                <span class="ml-6 text-gray-200">+ @(Model.AcceptedParticipants.Count - 5) @Localizer["Others"]</span>
+            }
+        </div>
+    </div>
+    <div class="flex-grow w-96">
+        <h1 class="mt-0 text-white break-all">@Model.Event.Name</h1>
+        <div class="flex flex-wrap mb-8 gap-x-16 gap-y-4">
+            <div class="flex items-center w-full gap-2 sm:w-48 sm:flex-grow max-w-96">
+                @Icon.Inline("calendar-clock", size: "48", stroke: "rgb(229 231 235)")
+                <div>
+                    <span class="block mb-1 font-semibold text-gray-200">@Localizer["Date"] @Formatter.FormatDate(Model.Event.StartAt)</span>
+                    <span class="block text-gray-200">@Localizer["Time"] @Formatter.FormatTime(Model.Event.StartAt) - @Formatter.FormatTime(Model.Event.EndAt)</span>
+                </div>
+            </div>
+            <div class="flex items-center w-full gap-2 sm:w-48 sm:flex-grow max-w-96">
+                @Icon.Inline("map-pinned", size: "48", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                <div class="flex flex-col flex-grow w-0">
+                    <span class="block mb-1 overflow-hidden font-semibold text-gray-200 text-ellipsis text-nowrap">@Model.Event.LocationTitle</span>
+                    <span class="block overflow-hidden text-gray-200 text-ellipsis text-nowrap">@Model.Event.LocationSubtitle</span>
+                </div>
+            </div>
+        </div>
+        <div class="flex items-center gap-6">
+            <h2 class="text-lg text-white">@Localizer["AboutEvent"]</h2>
+            <a href="/tags/view?id=@Model.Event.Tag.Id" class="px-3 py-1 text-gray-400 no-underline transition-all bg-transparent border border-gray-400 rounded-full hover:scale-105">#@tagName</a>
+        </div>
+        <pre class="mb-8 text-gray-200 break-all text-wrap">@Model.Event.Description</pre>
+        <h2 class="text-lg text-white">@Localizer["Location"]</h2>
+        <p class="text-gray-200 break-all">@Model.Event.LocationTitle, @Model.Event.LocationSubtitle</p>
+        <p class="text-gray-200 break-all">@Model.Event.LocationDescription</p>
+        <iframe src="@Model.Event.LocationGMapUrl" style="filter: invert(95%) hue-rotate(180deg);" class="w-full h-48 mb-8 border-none rounded-xl" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        <div>
+            <div class="flex items-center justify-between px-4 pt-2 pb-1 bg-gray-300 rounded-t-xl">
+                <span class="text-black">
+                    @Localizer["Registration"]
+                </span>
+                <span class="text-black">
+                    @Localizer["RegisteredPrefix"] @Model.AcceptedParticipants.Count / @(Model.Event.MaxParticipants is null ? "∞" : Model.Event.MaxParticipants)
+                </span>
+            </div>
+            @if (Model.User is null) {
+                <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
+                    <a href="/auth/sign-in?next=/events/view?id=@Model.Event.Id" class="flex items-center gap-2 px-4 py-2 m-4 text-white no-underline transition-all bg-gray-800 hover:scale-105 rounded-xl">
+                        @Icon.Inline("log-in", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                        <span>@Localizer["SignInToRegister"]</span>
+                    </a>
+                </div>
+            } else if (Model.User == Model.Event.Host) {
+                <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
+                    @Icon.Inline("circle-x", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                    <p class="text-gray-200">@Localizer["HostCannotRegister"]</p>
+                </div>
+            } else if (Model.RegistrationStatus is not null && Model.RegistrationStatus == ParticipationStatus.Accepted) {
+                <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
+                    @Icon.Inline("circle-check", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                    <p class="text-gray-200">@Localizer["RegistrationAccepted"]</p>
+                </div>
+            } else if (Model.RegistrationStatus is not null && Model.RegistrationStatus == ParticipationStatus.Pending) {
+                <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
+                    @Icon.Inline("hourglass", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                    <p class="text-gray-200">@Localizer["RegistrationPending"]</p>
+                </div>
+            } else if (Model.RegistrationStatus is not null && Model.RegistrationStatus == ParticipationStatus.Rejected) {
+                <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
+                    @Icon.Inline("circle-x", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                    <p class="text-gray-200">@Localizer["RegistrationRejected"]</p>
+                </div>
+            } else if (!Model.Event.RegistrationOpen) {
+                <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
+                    @Icon.Inline("circle-x", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                    <p class="text-gray-200">@Localizer["RegistrationIsClosed"]</p>
+                </div>
+            } else if (Model.AcceptedParticipants.Count >= Model.Event.MaxParticipants) {
+                <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
+                    @Icon.Inline("circle-x", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                    <p class="text-gray-200">@Localizer["EventIsFull"]</p>
+                </div>
+            } else if (Model.Event.RegistrationStartAt > ThDateTime.Now()) {
+                <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
+                    @Icon.Inline("clock-alert", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                    <p class="text-gray-200">@Localizer["TooEarlyToRegister"] : @Formatter.FormatDateTime(Model.Event.RegistrationStartAt)</p>
+                </div>
+            } else if (Model.Event.RegistrationEndAt < ThDateTime.Now()) {
+                <div class="flex items-center justify-center gap-2 px-4 border-2 border-gray-300 rounded-b-xl">
+                    @Icon.Inline("clock-alert", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                    <p class="text-gray-200">@Localizer["TooLateToRegister"]</p>
+                </div>
+            } else {
+                <div class="px-4 border-2 border-gray-300 rounded-b-xl">
+                    <div class="flex items-center justify-center gap-2">
+                        @if (Model.Event.AutomaticApproval) {
+                            @Icon.Inline("circle-check", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                            <p class="text-gray-200">@Localizer["NoApprovalRequired"]</p>
+                        } else {
+                            @Icon.Inline("user-check", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                            <p class="text-gray-200">@Localizer["ApprovalRequired"]</p>
+                        }
+                    </div>
+                    <form method="POST" class="gap-2 p-4 pt-1">
+                        @if (Model.Event.Questions.Count > 0) {
+                            <p class="mt-0 text-white">@Localizer["RegistrationQuestions"]</p>
+                            <ol class="text-gray-200">
+                                @foreach (var question in Model.Event.Questions.OrderBy(q => q.Number)) {
+                                    <li>
+                                        <div class="flex flex-col flex-grow mb-4">
+                                            <label for="@question.Id" class="mb-2 text-gray-200">@question.Text</label>
+                                            <input type="text" id="@question.Id" asp-for="RegistrationData.Answers![question.Id]" placeholder="@Localizer["YourAnswer"]" required class="px-4 py-2 text-base text-gray-200 bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200">
+                                        </div>
+                                    </li>
+                                }
+                            </ol>
+                        } 
+                        <div class="flex">
+                            <button type="submit" class="flex items-center justify-center flex-grow w-0 gap-2 px-4 py-2 mx-auto text-base text-white transition-all bg-green-700 border-none max-w-64 hover:scale-105 rounded-xl">
+                                @Icon.Inline("notebook-pen", stroke: "rgb(229 231 235)", classes: "flex-shrink-0")
+                                @Localizer["Register"]
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@if (Model.User == Model.Event.Host && Model.PendingRegistrations.Count > 0) {
+    <div class="px-4 mx-auto sm:px-16 max-w-320">
+        <h2 class="mb-4 text-lg text-white last-child:hidden">@Localizer["PendingRegistrations"]</h2>
+        @if (Model.Event.Questions.Count == 0) {
+            <div id="registration-cards-container" class="flex flex-col gap-4">
+                @foreach (var registration in Model.PendingRegistrations) {
+                    <div id="registration-@registration.User.Id" class="z-10 flex flex-col justify-between gap-4 p-4 bg-gray-900 sm:items-center sm:flex-row registration-card sm:px-8 rounded-xl">
+                        <a href="/users/profile?id=@registration.User.Id" class="flex items-center w-full gap-2 font-semibold text-gray-200 no-underline sm:flex-grow sm:w-0">
+                            <img src="/users/avatar?id=@registration.User.Id" alt="Participant avatar" width="32px" height="32px"
+                                class="flex-shrink-0 object-cover rounded-full">
+                            <span class="flex-grow w-0 overflow-hidden text-ellipsis text-nowrap">@registration.User.Name</span>
+                        </a>
+                        <div class="flex items-center justify-end gap-4">
+                            <button class="flex items-center gap-2 px-4 py-2 text-base text-gray-200 transition-all bg-red-700 border-none hover:scale-105 rounded-xl" onclick="rejectRegistration(event, '@Model.Event.Id', '@registration.User.Id')">
+                                @Icon.Inline("circle-x", stroke: "rgb(229 231 235)")
+                                @Localizer["Reject"]
+                            </button>
+                            <button class="flex items-center gap-2 px-4 py-2 text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl" onclick="acceptRegistration(event, '@Model.Event.Id', '@registration.User.Id')">
+                                @Icon.Inline("circle-check", stroke: "rgb(229 231 235)")
+                                @Localizer["Accept"]
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        } else {
+            <div id="registration-cards-container" class="flex flex-col gap-4">
+                @foreach (var registration in Model.PendingRegistrations) {
+                    <div id="registration-@registration.User.Id" class="z-10 p-4 bg-gray-900 registration-card sm:px-8 rounded-xl">
+                        <a href="/users/profile?id=@registration.User.Id" class="flex items-center gap-2 font-semibold text-gray-200 no-underline">
+                            <img src="/users/avatar?id=@registration.User.Id" alt="Participant avatar" width="32px" height="32px"
+                                class="object-cover rounded-full">
+                            @registration.User.Name
+                        </a>
+                        <ol class="mt-2 text-gray-200">
+                            @foreach (var questionAnswer in registration.QuestionAnswers) {
+                                <li>
+                                    <div class="flex flex-col">
+                                        <p class="text-gray-200">@questionAnswer.Question.Text</p>
+                                        <div class="flex">
+                                            <input type="text" value="@questionAnswer.Answer.Text" class="flex-grow w-0 px-4 py-2 text-base text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" readonly>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ol>
+                        <div class="flex items-center justify-end gap-4">
+                            <button class="flex items-center gap-2 px-4 py-2 text-base text-gray-200 transition-all bg-red-700 border-none hover:scale-105 rounded-xl" onclick="rejectRegistration(event, '@Model.Event.Id', '@registration.User.Id')">
+                                @Icon.Inline("circle-x", stroke: "rgb(229 231 235)")
+                                @Localizer["Reject"]
+                            </button>
+                            <button class="flex items-center gap-2 px-4 py-2 text-base text-white transition-all bg-green-700 border-none hover:scale-105 rounded-xl" onclick="acceptRegistration(event, '@Model.Event.Id', '@registration.User.Id')">
+                                @Icon.Inline("circle-check", stroke: "rgb(229 231 235)")
+                                @Localizer["Accept"]
+                            </button>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}
+@if (Model.User == Model.Event.Host && Model.AcceptedParticipants.Count > 0) {
+    <div class="px-4 mx-auto sm:px-16 max-w-320">
+        <div class="flex items-center w-full gap-6">
+            <h2 class="mb-4 text-lg text-white">@Localizer["Participants"]</h2>
+            @if (Model.Event.Questions.Count > 0) 
+            {
+                <button id="participants-expand-button" class="px-4 py-1 text-base text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl hover:scale-105" onclick="expand()">@Localizer["Expand"]</button>
+                <button id="participants-contract-button" class="hidden px-4 py-1 text-base text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl hover:scale-105" onclick="contract()">@Localizer["Contract"]</button>
+            }
+        </div>
+        <div id="participants-card-container" class="flex gap-4">
+            @foreach (var participant in Model.AcceptedParticipants) {
+                <div class="flex-grow p-4 transition-all bg-gray-900 rounded-xl">
+                    <a href="/users/profile?id=@participant.Id" class="flex items-center gap-2 text-gray-200 no-underline">
+                        <img src="/users/avatar?id=@participant.Id" alt="Participant avatar" width="32px" height="32px"
+                            class="flex-shrink-0 object-cover rounded-full">
+                        <span class="flex-grow w-0 overflow-hidden text-ellipsis text-nowrap">@participant.Name</span>
+                    </a>
+                    <ol class="my-2 text-gray-200">
+                        @foreach (var question in Model.Event.Questions) {
+                            <li>
+                                <div class="flex flex-col">
+                                    <p class="text-gray-200">@question.Text</p>
+                                    <div class="flex">
+                                        <input type="text" value="@(Database.Answer.Where(a => a.User == participant && a.Question == question).FirstOrDefault()!.Text)" class="flex-grow w-0 px-4 py-2 text-base text-gray-200 transition-all bg-transparent border-2 border-gray-400 rounded-xl focus:border-gray-200" readonly>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    </ol>
+                </div>
+            }
+            @for (var i = 0; i < 7; i++) {
+                <div class="flex-grow w-56 h-0 px-4"></div>
+            }
+            </div>
+    </div>
+}
+@if (Model.User == Model.Event.Host) {
+<a href="/events/edit?id=@Model.Event.Id" class="fixed z-50 flex items-center justify-center w-16 h-16 p-0 m-0 transition-all bg-gray-200 rounded-full bottom-4 right-4 hover:scale-105">
+    @Icon.Inline("pencil", size: "32px", stroke: "black")
+</a>
+<div class="h-24"></div>
+}

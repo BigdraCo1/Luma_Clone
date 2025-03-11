@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="CreateEventSuccessful" xml:space="preserve">
+        <value>สร้างกิจกรรมสำเร็จแล้ว</value>
+    </data>
+    <data name="NewEvent" xml:space="preserve">
+        <value>กิจกรรมใหม่</value>
+    </data>
+    <data name="By" xml:space="preserve">
+        <value>โดย</value>
+    </data>
+    <data name="ViewEvent" xml:space="preserve">
+        <value>ดูกิจกรรม</value>
+    </data>
+</root>

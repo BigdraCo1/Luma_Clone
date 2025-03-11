@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="EditEvent" xml:space="preserve">
+        <value>Edit Event</value>
+    </data>
+    <data name="EventImage" xml:space="preserve">
+        <value>Event cover image</value>
+    </data>
+    <data name="Name" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="Tag" xml:space="preserve">
+        <value>Category</value>
+    </data>
+    <data name="EventDatetime" xml:space="preserve">
+        <value>Event date time</value>
+    </data>
+    <data name="EventStartAt" xml:space="preserve">
+        <value>Start</value>
+    </data>
+    <data name="EventEndAt" xml:space="preserve">
+        <value>End</value>
+    </data>
+    <data name="RegistrationDatetime" xml:space="preserve">
+        <value>Registration date time</value>
+    </data>
+    <data name="RegistrationStartAt" xml:space="preserve">
+        <value>Start</value>
+    </data>
+    <data name="RegistrationEndAt" xml:space="preserve">
+        <value>End</value>
+    </data>
+    <data name="Description" xml:space="preserve">
+        <value>Description</value>
+    </data>
+    <data name="Location" xml:space="preserve">
+        <value>Location</value>
+    </data>
+    <data name="LocationTitle" xml:space="preserve">
+        <value>Name</value>
+    </data>
+    <data name="LocationSubtitle" xml:space="preserve">
+        <value>City</value>
+    </data>
+    <data name="LocationDescription" xml:space="preserve">
+        <value>Details</value>
+    </data>
+    <data name="LocationGMapUrl" xml:space="preserve">
+        <value>Google Maps embed URL</value>
+    </data>
+    <data name="Visibility" xml:space="preserve">
+        <value>Visibility</value>
+    </data>
+    <data name="VisibilityPublic" xml:space="preserve">
+        <value>Public</value>
+    </data>
+    <data name="VisibilityPublicDescription" xml:space="preserve">
+        <value>Event is displayed publically and can searched and filtered</value>
+    </data>
+    <data name="VisibilityHidden" xml:space="preserve">
+        <value>Hidden</value>
+    </data>
+    <data name="VisibilityHiddenDescription" xml:space="preserve">
+        <value>Event is not displayed publically and cannot be searched but can be access via the URL</value>
+    </data>
+    <data name="VisibilityPrivate" xml:space="preserve">
+        <value>Private</value>
+    </data>
+    <data name="VisibilityPrivateDescription" xml:space="preserve">
+        <value>Event is only visible to the owner of the event (you)</value>
+    </data>
+    <data name="ApprovalType" xml:space="preserve">
+        <value>Approval mode</value>
+    </data>
+    <data name="ApprovalTypeAutomatic" xml:space="preserve">
+        <value>Automatic approval</value>
+    </data>
+    <data name="ApprovalTypeManual" xml:space="preserve">
+        <value>Manual approval</value>
+    </data>
+    <data name="MaxParticipants" xml:space="preserve">
+        <value>Max pariticipants</value>
+    </data>
+    <data name="MaxParticipantsUnit" xml:space="preserve">
+        <value>people</value>
+    </data>
+    <data name="RegistrationQuestions" xml:space="preserve">
+        <value>Registration questions</value>
+    </data>
+    <data name="EventNamePlaceholder" xml:space="preserve">
+        <value>The best hackaton event of the 20th century</value>
+    </data>
+    <data name="EventDescriptionPlaceholder" xml:space="preserve">
+        <value>What does the event includes, the schedule, any requirements, how should participants prepare, etc.</value>
+    </data>
+    <data name="LocationTitlePlaceholder" xml:space="preserve">
+        <value>Hall A @ Megabangna</value>
+    </data>
+    <data name="LocationSubtitlePlaceholder" xml:space="preserve">
+        <value>Bangkok</value>
+    </data>
+    <data name="LocationDescriptionPlaceholder" xml:space="preserve">
+        <value>Bang Na-Trat Frontage Road, Bang Kaeo, Bang Phli District, Samut Prakan, Thailand</value>
+    </data>
+    <data name="LocationGMapUrlPlaceholder" xml:space="preserve">
+        <value>&lt;iframe...</value>
+    </data>
+    <data name="MaxParticipantsPlaceholder" xml:space="preserve">
+        <value>0 for unlimited</value>
+    </data>
+    <data name="MaxParticipantsPattern" xml:space="preserve">
+        <value>Input must be a number between 0 - 999999</value>
+    </data>
+    <data name="NoQuestions" xml:space="preserve">
+        <value>No questions</value>
+    </data>
+    <data name="LocationGMapUrlPattern" xml:space="preserve">
+        <value>Input must be a Google Maps embed URL</value>
+    </data>
+    <data name="UpdateEvent" xml:space="preserve">
+        <value>Save Changes</value>
+    </data>
+    <data name="RegistrationStatus" xml:space="preserve">
+        <value>Registration</value>
+    </data>
+    <data name="RegistrationStatusOpen" xml:space="preserve">
+        <value>Open</value>
+    </data>
+    <data name="RegistrationStatusClose" xml:space="preserve">
+        <value>Close</value>
+    </data>
+    <data name="ParticipationStatus" xml:space="preserve">
+        <value>Participants count</value>
+    </data>
+    <data name="CurrentCount" xml:space="preserve">
+        <value>Joined</value>
+    </data>
+    <data name="MaxCount" xml:space="preserve">
+        <value>Max</value>
+    </data>
+    <data name="NoQuestionAdded" xml:space="preserve">
+        <value>No question added</value>
+    </data>
+</root>

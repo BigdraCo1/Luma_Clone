@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="Welcome" xml:space="preserve">
+        <value>Welcome to alma</value>
+    </data>
+    <data name="Prompt" xml:space="preserve">
+        <value>เข้าสู่ระบบหรือลงทะเบียน</value>
+    </data>
+    <data name="Cta" xml:space="preserve">
+        <value>ไปต่อด้วย Google</value>
+    </data>
+</root>

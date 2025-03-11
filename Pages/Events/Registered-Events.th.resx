@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="MyEvents" xml:space="preserve">
+        <value>กิจกรรมของฉัน</value>
+    </data>
+    <data name="RegisteredEvents" xml:space="preserve">
+        <value>กิจกรรมที่เข้าร่วม</value>
+    </data>
+    <data name="View" xml:space="preserve">
+        <value>ดูกิจกรรม</value>
+    </data>
+    <data name="NoEvents" xml:space="preserve">
+        <value>ไม่มีกิจกรรม</value>
+    </data>
+</root>

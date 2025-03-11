@@ -1,0 +1,27 @@
+@page
+@model alma.Pages.Auth.SignInModel
+
+@{
+    ViewData["Title"] = "Sign In";
+}
+
+<div style="height: calc(100vh - 12rem);" class="flex flex-col justify-center mx-auto w-fit">
+    <div class="relative w-fit h-fit">
+        <img asp-append-version="true" src="/images/logo/logo-256x256.avif" class="sign-in-offset-logo" />
+        <h1 class="px-8 py-4 mb-0 text-xl text-white sm:p-12 sm:text-3xl bg-rainbow rounded-t-3xl">@Localizer["Welcome"]
+        </h1>
+        <div class="p-4 pb-8 bg-gray-900 sm:p-8 sm:pb-12 rounded-b-3xl">
+            <p class="m-0 text-xl font-medium text-center text-white">@Localizer["Prompt"]</p>
+            <a href="https://accounts.google.com/o/oauth2/v2/auth
+?client_id=@(Config.GetValue<string>("GoogleOAuth:ClientID"))
+&redirect_uri=@UrlEncoder.Encode(Config.GetValue<string>("GoogleOAuth:RedirectUri")!)
+&scope=@UrlEncoder.Encode(Config.GetValue<string>("GoogleOAuth:Scope")!)
+&state=@Model.State
+&access_type=offline
+&response_type=code"
+                class="flex items-center justify-center gap-2 px-12 py-2 mx-auto mt-4 text-base font-medium text-center text-black no-underline transition-all border-none sm:mt-8 w-fit bg-rainbow rounded-xl hover:scale-105">
+                @Icon.Inline("google", lib: "external", size: "24")
+                @Localizer["Cta"]</a>
+        </div>
+    </div>
+</div>

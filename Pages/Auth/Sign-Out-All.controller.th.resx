@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="NotLoggedIn" xml:space="preserve">
+      <value>ไม่สามารถออกจากระบบได้</value>
+    </data>
+    <data name="NotLoggedInDescription" xml:space="preserve">
+      <value>คุณอาจไม่ได้เข้าสู่ระบบไว้, สิทธิ์การเข้าถึงหมดอายุ หรือออกจากระบบไปแล้ว</value>
+    </data>
+    <data name="LoggedOut" xml:space="preserve">
+      <value>ออกจากระบบบนทุกเครื่องเรียบร้อยแล้ว</value>
+    </data>
+</root>

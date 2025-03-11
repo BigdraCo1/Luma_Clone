@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="MyEvents" xml:space="preserve">
+        <value>My events</value>
+    </data>
+    <data name="RegisteredEvents" xml:space="preserve">
+        <value>Registered events</value>
+    </data>
+    <data name="View" xml:space="preserve">
+        <value>View</value>
+    </data>
+    <data name="Edit" xml:space="preserve">
+        <value>Edit</value>
+    </data>
+    <data name="NoEvents" xml:space="preserve">
+        <value>No events</value>
+    </data>
+</root>

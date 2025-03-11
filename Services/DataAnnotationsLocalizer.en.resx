@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="RequiredError" xml:space="preserve">
+        <value>{0} is required</value>
+    </data>
+    <data name="MinLengthError" xml:space="preserve">
+        <value>{0} must be at least {1} characters long</value>
+    </data>
+    <data name="MaxLengthError" xml:space="preserve">
+        <value>{0} must be at most {1} characters long</value>
+    </data>
+    <data name="AlphanumericFormatError" xml:space="preserve">
+        <value>{0} must only contains alphanumeric characters, hyphen and underscore</value>
+    </data>
+    <data name="RangeError" xml:space="preserve">
+        <value>{0} must be between {1} and {2}</value>
+    </data>
+    <data name="ImageTypeFormatError" xml:space="preserve">
+        <value>{0} have invalid format</value>
+    </data>
+    <data name="NumberFormatError" xml:space="preserve">
+        <value>{0} must be a number</value>
+    </data>
+    <data name="DisplayName" xml:space="preserve">
+        <value>Display name</value>
+    </data>
+    <data name="Username" xml:space="preserve">
+        <value>Username</value>
+    </data>
+    <data name="Bio" xml:space="preserve">
+        <value>Bio</value>
+    </data>
+    <data name="InstagramUsername" xml:space="preserve">
+        <value>Instagram username</value>
+    </data>
+    <data name="TwitterUsername" xml:space="preserve">
+        <value>Twitter username</value>
+    </data>
+    <data name="YoutubeUsername" xml:space="preserve">
+        <value>YouTube username</value>
+    </data>
+    <data name="TikTokUsername" xml:space="preserve">
+        <value>TikTok username</value>
+    </data>
+    <data name="LinkedinHandle" xml:space="preserve">
+        <value>LinkedIn handle</value>
+    </data>
+    <data name="WebsiteUrl" xml:space="preserve">
+        <value>Website URL</value>
+    </data>
+    <data name="EventName" xml:space="preserve">
+        <value>Event name</value>
+    </data>
+    <data name="EventDescription" xml:space="preserve">
+        <value>Event description</value>
+    </data>
+    <data name="EventStartAt" xml:space="preserve">
+        <value>Event start datetime</value>
+    </data>
+    <data name="EventEndAt" xml:space="preserve">
+        <value>Event end datetime</value>
+    </data>
+    <data name="RegistrationStartAt" xml:space="preserve">
+        <value>Registration start datetime</value>
+    </data>
+    <data name="RegistrationEndAt" xml:space="preserve">
+        <value>Registration end datetime</value>
+    </data>
+    <data name="MaxParticipants" xml:space="preserve">
+        <value>Max pariticipants</value>
+    </data>
+    <data name="EventLocationTitle" xml:space="preserve">
+        <value>Event location name</value>
+    </data>
+    <data name="EventLocationSubtitle" xml:space="preserve">
+        <value>Event location city</value>
+    </data>
+    <data name="EventLocationDescription" xml:space="preserve">
+        <value>Event location details</value>
+    </data>
+    <data name="LocationGMapUrl" xml:space="preserve">
+        <value>Location Google Maps URL</value>
+    </data>
+    <data name="GMapUrlFormatError" xml:space="preserve">
+        <value>{0} must be a valid embed URL</value>
+    </data>
+    <data name="EventImage" xml:space="preserve">
+        <value>Event image</value>
+    </data>
+    <data name="EventImageType" xml:space="preserve">
+        <value>Event image MIME type</value>
+    </data>
+    <data name="EventTag" xml:space="preserve">
+        <value>Event category</value>
+    </data>
+    <data name="EventRegistrationQuestions" xml:space="preserve">
+        <value>Event registration questions</value>
+    </data>
+</root>

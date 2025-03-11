@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="RegistrationRejected" xml:space="preserve">
+        <value>การลงทะเบียนถูกปฏิเสธ</value>
+    </data>
+    <data name="YouHaveBeenRejected" xml:space="preserve">
+        <value>คุณถูกปฏิเสธ</value>
+    </data>
+    <data name="RejectMessage" xml:space="preserve">
+        <value>เราเสียใจที่ต้องแจ้งให้ทราบว่าการลงทะเบียนของคุณถูกปฏิเสธ กรุณาติดต่อผู้จัดงานกิจกรรมเพื่อขอข้อมูลเพิ่มเติม</value>
+    </data>
+</root>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <data name="HostedBy" xml:space="preserve">
+        <value>Hosted by</value>
+    </data>
+    <data name="JoinedCountPrefix" xml:space="preserve">
+        <value></value>
+    </data>
+    <data name="JoinedCountSuffix" xml:space="preserve">
+        <value>Joined</value>
+    </data>
+    <data name="Date" xml:space="preserve">
+        <value>Date</value>
+    </data>
+    <data name="Time" xml:space="preserve">
+        <value>Time</value>
+    </data>
+    <data name="Registration" xml:space="preserve">
+        <value>Registration</value>
+    </data>
+    <data name="RegisteredPrefix" xml:space="preserve">
+        <value>Registered: </value>
+    </data>
+    <data name="CannotRegister" xml:space="preserve">
+        <value>Cannot register</value>
+    </data>
+    <data name="RegistrationQuestions" xml:space="preserve">
+        <value>Registration questions</value>
+    </data>
+    <data name="YourAnswer" xml:space="preserve">
+        <value>Your answer</value>
+    </data>
+    <data name="AboutEvent" xml:space="preserve">
+        <value>About the event</value>
+    </data>
+    <data name="Location" xml:space="preserve">
+        <value>Location</value>
+    </data>
+    <data name="Register" xml:space="preserve">
+        <value>Register</value>
+    </data>
+    <data name="SignInToRegister" xml:space="preserve">
+        <value>Sign in to register</value>
+    </data>
+    <data name="HostCannotRegister" xml:space="preserve">
+        <value>Host cannot register</value>
+    </data>
+    <data name="RegistrationAccepted" xml:space="preserve">
+        <value>Registration accepted</value>
+    </data>
+    <data name="RegistrationPending" xml:space="preserve">
+        <value>Waiting for approval from host</value>
+    </data>
+    <data name="RegistrationRejected" xml:space="preserve">
+        <value>Registration rejected</value>
+    </data>
+    <data name="RegistrationIsClosed" xml:space="preserve">
+        <value>This event is not accepting registration</value>
+    </data>
+    <data name="EventIsFull" xml:space="preserve">
+        <value>This event is already full</value>
+    </data>
+    <data name="TooEarlyToRegister" xml:space="preserve">
+        <value>The registration period have not yet started</value>
+    </data>
+    <data name="TooLateToRegister" xml:space="preserve">
+        <value>The registration period have already passed</value>
+    </data>
+    <data name="PendingRegistrations" xml:space="preserve">
+        <value>Pending registrations</value>
+    </data>
+    <data name="Accept" xml:space="preserve">
+        <value>Accept</value>
+    </data>
+    <data name="Reject" xml:space="preserve">
+        <value>Reject</value>
+    </data>
+    <data name="RegistrationAcceptSuccessText" xml:space="preserve">
+        <value>Registration accepted</value>
+    </data>
+    <data name="RegistrationAcceptFailText" xml:space="preserve">
+        <value>Failed to accept registration</value>
+    </data>
+    <data name="RegistrationRejectSuccessText" xml:space="preserve">
+        <value>Registraion rejected</value>
+    </data>
+    <data name="RegistrationRejectFailText" xml:space="preserve">
+        <value>Failed to reject registration</value>
+    </data>
+    <data name="Others" xml:space="preserve">
+        <value>Others</value>
+    </data>
+    <data name="NoApprovalRequired" xml:space="preserve">
+        <value>Open registration, no approval required</value>
+    </data>
+    <data name="ApprovalRequired" xml:space="preserve">
+        <value>Approval required, your registration is subject to approval by the host</value>
+    </data>
+    <data name="Participants" xml:space="preserve">
+        <value>Participants</value>
+    </data>
+    <data name="Expand" xml:space="preserve">
+        <value>Expand</value>
+    </data>
+    <data name="Contract" xml:space="preserve">
+        <value>Contract</value>
+    </data>
+</root>
