@@ -99,4 +99,10 @@
     <data name="Participants" xml:space="preserve">
         <value>ผู้เข้าร่วมกิจกรรม</value>
     </data>
+    <data name="Expand" xml:space="preserve">
+        <value>ขยาย</value>
+    </data>
+    <data name="Contract" xml:space="preserve">
+        <value>ย่อ</value>
+    </data>
 </root>

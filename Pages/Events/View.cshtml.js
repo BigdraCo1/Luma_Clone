@@ -26,6 +26,18 @@ const registrationRejectFailText = document.querySelector(
 // @ts-expect-error
 const registrationCardsContainer = document.querySelector("#registration-cards-container");
 
+/** @type {HTMLElement} */
+// @ts-expect-error
+const participantsCardContainer = document.querySelector("#participants-card-container");
+
+/** @type {HTMLElement} */
+// @ts-expect-error
+const participantsExpandButton = document.querySelector("#participants-expand-button");
+
+/** @type {HTMLElement} */
+// @ts-expect-error
+const participantsContractButton = document.querySelector("#participants-contract-button");
+
 /** @type {Record<string, { start?: DOMRect, end?: DOMRect }>} */
 let rects = {};
 
@@ -130,4 +142,16 @@ function rejectRegistration(event, eventId, userId) {
     } catch (err) {
         showToast(registrationRejectFailText, String(err), "error");
     }
+}
+
+function expand() {
+    participantsCardContainer.classList.add("expanded");
+    participantsExpandButton.classList.add("hidden");
+    participantsContractButton.classList.remove("hidden");
+}
+
+function contract() {
+    participantsCardContainer.classList.remove("expanded");
+    participantsExpandButton.classList.remove("hidden");
+    participantsContractButton.classList.add("hidden");
 }

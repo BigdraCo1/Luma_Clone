@@ -184,11 +184,15 @@
         @foreach (var tag in Model.Tags)
         {
             <a href="/tags/view?id=@tag.Id"
-                class="flex flex-col w-48 h-24 gap-2 p-4 text-gray-200 no-underline transition-all bg-gray-900 hover:scale-105 rounded-xl">
+                class="flex flex-col flex-grow w-48 h-24 gap-2 p-4 text-gray-200 no-underline transition-all bg-gray-900 hover:scale-105 rounded-xl">
                 @Icon.Inline(tag.Icon, size: "32", stroke: "rgb(229 231 235)")
                 <span class="h-6">@(CultureInfo.CurrentCulture.Name == "th" ? tag.NameTH : tag.NameEN)</span>
                 <span class="h-6">@tag.Events.Count(e => e.Visibility == Visibility.Public) @Localizer["Events"]</span>
             </a>
+        }
+        @for (var i = 0; i < 7; i++)
+        {
+            <div class="flex-grow w-48 h-0 px-4"></div>
         }
     </div>
 </div>

@@ -297,6 +297,10 @@ textarea:focus {
     row-gap: 1rem;
 }
 
+.h-0 {
+    height: 0px;
+}
+
 .h-10 {
     height: 2.5rem;
 }
@@ -550,6 +554,11 @@ textarea:focus {
     margin-bottom: 0px;
 }
 
+.my-2 {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
 .my-4 {
     margin-top: 1rem;
     margin-bottom: 1rem;
@@ -669,6 +678,38 @@ body {
 
 .p-8 {
     padding: 2rem;
+}
+
+#participants-card-container {
+    flex-wrap: wrap;
+}
+
+#participants-card-container > div {
+    width: 15rem;
+}
+
+#participants-card-container > div:hover {
+    transform: scale(1.05);
+}
+
+#participants-card-container ol {
+    display: none;
+}
+
+#participants-card-container.expanded {
+    flex-direction: column;
+}
+
+#participants-card-container.expanded > div {
+    width: auto;
+}
+
+#participants-card-container.expanded > div:hover {
+    transform: none;
+}
+
+#participants-card-container.expanded ol {
+    display: block;
 }
 
 .pb-1 {
@@ -1211,6 +1252,11 @@ button {
 }
 
 @media (width >= 40rem) {
+    #participants-card-container.expanded > div {
+        padding-right: 2rem;
+        padding-left: 2rem;
+    }
+
     .sign-in-offset-logo {
         position: absolute;
         top: -4rem;
